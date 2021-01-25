@@ -1,8 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-
 from django.views import View
-from django import template
+from django.template.defaulttags import register
 import os
 import time
 
@@ -57,7 +56,13 @@ def callesson(request):
     return render(request, "common/lesson.html", context)
 
 
-# 課程頁
+# 登入頁面
 def callogin(request):
     context = {}
     return render(request, "account/login.html", context)
+
+
+# Django's range
+@register.filter
+def d_range(v):
+    return range(v)
