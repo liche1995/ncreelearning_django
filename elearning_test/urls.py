@@ -15,17 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from elearning_test import views
+from elearning_test import views as main_view
+from lesson_app import views as lesson_view
 
-core = views.WebCore
-time_core = views.Clockview
-attest = views.Attri
+core = main_view.WebCore
+time_core = main_view.Clockview
+attest = main_view.Attri
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.callindex),
-    path('lesson', views.callesson),
-    path('login', views.callogin),
+    path('', main_view.callindex),
+    path('lesson', lesson_view.callesson),
+    path('login', main_view.callogin),
     #path('', core.as_view()),
     #path('time', time_core.as_view()),
     #path('test', attest.as_view()),
