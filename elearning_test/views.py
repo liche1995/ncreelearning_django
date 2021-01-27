@@ -62,6 +62,12 @@ def callogin(request):
     return render(request, "account/login.html", context)
 
 
+# 404錯誤
+def handler404(request):
+    response = render(request, "commom/404error.html")
+    response.status_code = 404
+    return response
+
 # Django's range
 @register.filter
 def d_range(v):

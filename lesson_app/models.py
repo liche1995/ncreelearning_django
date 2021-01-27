@@ -8,7 +8,7 @@
 from django.db import models
 
 
-# 資料庫讀取
+# get Lesson table data
 class Lesson(models.Model):
     lseeonid = models.AutoField(primary_key=True)
     name = models.CharField(max_length=45)
@@ -18,6 +18,7 @@ class Lesson(models.Model):
     annouce_time = models.DateTimeField()
     start_time = models.DateTimeField()
     finish_time = models.DateTimeField(blank=True, null=True)
+    lessoninfo = models.CharField(max_length=300)
 
     class Meta:
         managed = False

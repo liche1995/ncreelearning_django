@@ -27,6 +27,7 @@ urlpatterns = [
     path('', main_view.callindex),
     path('lesson', lesson_view.callesson),
     path('login', main_view.callogin),
+    path('404', main_view.handler404)
     #path('', core.as_view()),
     #path('time', time_core.as_view()),
     #path('test', attest.as_view()),
