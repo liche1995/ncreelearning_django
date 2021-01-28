@@ -63,10 +63,16 @@ def callogin(request):
 
 
 # 404錯誤
-def handler404(request):
-    response = render(request, "commom/404error.html")
-    response.status_code = 404
+def situation_404(request, exception):
+    response = render(request, "common/404error.html", status=404)
     return response
+
+
+# 500錯誤
+def situation_500(request):
+    response = render(request, "common/500error.html", status=500)
+    return response
+
 
 # Django's range
 @register.filter
