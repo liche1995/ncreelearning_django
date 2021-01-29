@@ -25,6 +25,10 @@ SECRET_KEY = 'zq+kh_(&1+&g0z(lwt3$lwa1c)htgt54_#oc6yeaknl1u37=d4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+if DEBUG:
+    print("The web is at DEBUG mode")
+else:
+    print("The web is at release mode")
 
 ALLOWED_HOSTS = ["127.0.0.1"]
 
@@ -127,6 +131,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/templates/static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "templates/static")]
 STATIC_ROOT = os.path.join(BASE_DIR, "templates/staticfiles")

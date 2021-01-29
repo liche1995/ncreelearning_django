@@ -1,6 +1,14 @@
 {% extends 'MasterPage.html'%}
+{% block addition_style%}
+.container.display-container-style{
+    max-width: 600px;
+}
+{% endblock %}
 
 {% block content %}
-Oops!
-500錯誤
+{%load static%}
+<div class="container display-container-style">
+    <div class="row"><img class="img-responsive" src="{% static 'element/undraw_Taken_re_yn20.png'%}"></div>
+    <div class="row"><center>Oops!500出錯了</center></div>
+</div>
 {% endblock%}

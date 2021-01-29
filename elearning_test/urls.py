@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import handler404, handler500
+from django.views.static import serve
+from django.conf import settings
+from django.conf.urls import handler404, handler500, url
 from elearning_test import views as main_view
 from lesson_app import views as lesson_view
 
@@ -24,14 +26,21 @@ time_core = main_view.Clockview
 attest = main_view.Attri
 
 urlpatterns = [
+    # 基本連結設定
     path('admin/', admin.site.urls),
     path('', main_view.callindex),
     path('lesson', lesson_view.callesson),
     path('login', main_view.callogin),
+    # 多媒體設定
+    url('static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
+
+    # 錯誤觸發
+    path('test_500', main_view.test_500),
     #path('', core.as_view()),
     #path('time', time_core.as_view()),
     #path('test', attest.as_view()),
 ]
 
+# 錯誤頁面指定
 handler404 = main_view.situation_404
 handler500 = main_view.situation_500
