@@ -1,4 +1,29 @@
 {% extends 'MasterPage.html'%}
+
+{%block addition_style%}
+.container.account-input{
+max-width:300px;
+}
+{%endblock%}
+
 {%block content%}
-<center><h1>登入</h1></center>
+<section class="py-5 text-xenter conatinar">
+    <div class="row py-lg-5">
+        <center><h1>登入</h1></center>
+    </div>
+</section>
+
+<form action="login" method="post" class="container account-input">
+    {% csrf_token %}
+    <div class="input-group flex-nowrap p-2">
+        <input type="text" class="form-control" placeholder="帳號" aria-label="帳號欄位" name="account">
+    </div>
+    <div class="input-group flex-nowrap p-2">
+        <input type="password" class="form-control" placeholder="密碼" aria-label="密碼欄位" name="password">
+    </div>
+    <div class="text-center p-2">
+        <input type="submit" class="btn btn-primary" value="登入"/>
+        <input type="submit" class="btn btn-outline-primary" value="註冊"/>
+    </div>
+</form>
 {%endblock%}

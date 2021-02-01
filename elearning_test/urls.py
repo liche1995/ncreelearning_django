@@ -30,9 +30,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', main_view.callindex),
     path('lesson', lesson_view.callesson),
-    path('login', main_view.callogin),
+    path('lesson_more?more=TURE', lesson_view.callesson),
+    path('login_page', main_view.callogin),
     # 多媒體設定
     url('static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
+
+    # 登入登出控制
+    path('login', main_view.login),
 
     # 錯誤觸發
     path('test_500', main_view.test_500),

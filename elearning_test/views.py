@@ -1,6 +1,7 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.views import View
+from django.contrib import auth
 from django.template.defaulttags import register
 import os
 import time
@@ -60,6 +61,23 @@ def callesson(request):
 def callogin(request):
     context = {}
     return render(request, "account/login.html", context)
+
+
+# 嘗試登入
+def login(request):
+    if request.user.is_authenticated:
+        return HttpResponseRedirect('account/login.html')
+    # 抓取帳號與密碼
+    username = request.POST.get('account', "")
+    password = request.POST.get('password', "")
+    # 啟動驗證
+    user = auth.authenticate(username=username, password=password)
+    if user is not None and user.is_active:
+        auth.login(request, user)
+        return HttpResponseRedirect('account/login.html')
+    else:
+        context = {}
+        return render(request, "common/index.html", context)
 
 
 # 404錯誤
