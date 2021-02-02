@@ -37,6 +37,7 @@ urlpatterns = [
 
     # 登入登出控制
     path('login', main_view.login),
+    path('logout', main_view.logout),
 
     # 錯誤觸發
     path('test_500', main_view.test_500),

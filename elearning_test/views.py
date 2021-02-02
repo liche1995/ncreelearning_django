@@ -66,18 +66,26 @@ def callogin(request):
 # 嘗試登入
 def login(request):
     if request.user.is_authenticated:
-        return HttpResponseRedirect('account/login.html')
+        return render(request, 'account/login.html')
     # 抓取帳號與密碼
     username = request.POST.get('account', "")
     password = request.POST.get('password', "")
     # 啟動驗證
+    context = {}
     user = auth.authenticate(username=username, password=password)
     if user is not None and user.is_active:
         auth.login(request, user)
-        return HttpResponseRedirect('account/login.html')
+        return HttpResponseRedirect("/", context)
     else:
-        context = {}
-        return render(request, "common/index.html", context)
+        context["logfail"] = True
+        return render(request, "account/login.html", context)
+
+
+# 登出
+def logout(request):
+    auth.logout(request)
+    context = {}
+    return HttpResponseRedirect("/", context)
 
 
 # 404錯誤
