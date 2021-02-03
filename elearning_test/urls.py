@@ -35,9 +35,10 @@ urlpatterns = [
     # 多媒體設定
     url('static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
 
-    # 登入登出控制
+    # 帳號控制
     path('login', main_view.login),
     path('logout', main_view.logout),
+    path('sign_up', main_view.callsignupform),
 
     # 錯誤觸發
     path('test_500', main_view.test_500),

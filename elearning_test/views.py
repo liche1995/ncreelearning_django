@@ -81,6 +81,16 @@ def login(request):
         return render(request, "account/login.html", context)
 
 
+# 註冊
+def callsignupform(request):
+    # 抓取帳號與密碼
+    username = request.POST.get('account', "")
+    password = request.POST.get('password', "")
+
+    context = {'username': username, 'password': password}
+    return render(request, "account/sign_up.html", context)
+
+
 # 登出
 def logout(request):
     auth.logout(request)
