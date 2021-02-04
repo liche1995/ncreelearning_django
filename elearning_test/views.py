@@ -81,14 +81,32 @@ def login(request):
         return render(request, "account/login.html", context)
 
 
-# 註冊
+# 註冊表單
 def callsignupform(request):
+    context = {}
     # 抓取帳號與密碼
-    username = request.POST.get('account', "")
+    username = request.POST.get('username', "")
     password = request.POST.get('password', "")
+    context["username"] = username
+    context["password"] = password
 
-    context = {'username': username, 'password': password}
+    # 抓取使用條款文本
+    privacy_clause_path = os.getcwd() + "\\templates\\staticfiles\\clause\\privacy_clause.txt"
+    data = open(privacy_clause_path, "r")
+    context["privacy_clause"] = data.read()
+    data.close()
     return render(request, "account/sign_up.html", context)
+
+
+# 建立使用者
+def creat_user(request):
+    username = request.POST.get('username', "")
+    password = request.POST.get('password', "")
+    last_name = request.POST.get('last_name', "")
+    first_name = request.POST.get('first_name', "")
+    address= request.POST.get('address', "")
+    # auth.models.User.objects.create(username=)
+    return render(request, "account/successed_create_account")
 
 
 # 登出
@@ -120,6 +138,7 @@ def situation_500(request):
 # 測試使用
 def test_500(request):
     return 0
+
 
 # Django's range
 @register.filter
