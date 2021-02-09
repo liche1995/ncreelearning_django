@@ -104,7 +104,10 @@ def creat_user(request):
     password = request.POST.get('password', "")
     last_name = request.POST.get('last_name', "")
     first_name = request.POST.get('first_name', "")
-    address= request.POST.get('address', "")
+    address = request.POST.get('address', "")
+    email = request.POST.get('email', "")
+    telephone = request.POST.get('telephone', "")
+    region = request.POST.get('telephone', "")
     # auth.models.User.objects.create(username=)
     return render(request, "account/successed_create_account")
 

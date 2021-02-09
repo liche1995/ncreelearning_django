@@ -43,7 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'lesson_app',
+    'users',
 ]
+
+AUTH_USER_MODEL = 'users.UesrInfoExtend'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
