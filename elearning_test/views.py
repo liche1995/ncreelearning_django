@@ -2,6 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.views import View
 from django.contrib import auth
+from users.models import UesrInfo
 from django.template.defaulttags import register
 import os
 import time
@@ -68,7 +69,7 @@ def login(request):
     if request.user.is_authenticated:
         return render(request, 'account/login.html')
     # 抓取帳號與密碼
-    username = request.POST.get('account', "")
+    username = request.POST.get('username', "")
     password = request.POST.get('password', "")
     # 啟動驗證
     context = {}
@@ -108,8 +109,17 @@ def creat_user(request):
     email = request.POST.get('email', "")
     telephone = request.POST.get('telephone', "")
     region = request.POST.get('telephone', "")
-    # auth.models.User.objects.create(username=)
-    return render(request, "account/successed_create_account")
+
+    # auth models
+    auth.models.User.objects.create_user(username=username, password=password,
+                                         first_name=first_name, last_name=last_name,
+                                         email=email)
+    # users info
+    UesrInfo.objects.creat(username=username, address=address, telephone=telephone,
+                           first_name=first_name, last_name=last_name,region=region,
+                           email=email)
+
+    return render(request, "account/successed_create_account.html")
 
 
 # 登出

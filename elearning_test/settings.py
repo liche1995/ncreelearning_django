@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     'users',
 ]
 
-AUTH_USER_MODEL = 'users.UesrInfoExtend'
+#AUTH_USER_MODEL = 'users.UesrInfoExtend'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -90,10 +90,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'django_db',
-        'USER': 'py_spam',
-        'PASSWORD': 'Rich021499',
-        #'USER': 'lcchueh',
-        #'PASSWORD': 'Chueh021499',
+        #'USER': 'py_spam',
+        #'PASSWORD': 'Rich021499',
+        'USER': 'lcchueh',
+        'PASSWORD': 'Chueh021499',
         'HOST': 'localhost',
         'PORT': '3306',
     },
