@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'zq+kh_(&1+&g0z(lwt3$lwa1c)htgt54_#oc6yeaknl1u37=d4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 if DEBUG:
     print("The web is at DEBUG mode")
 else:

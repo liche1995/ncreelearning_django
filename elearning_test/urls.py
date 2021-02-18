@@ -38,8 +38,7 @@ urlpatterns = [
     # 帳號控制
     path('login', main_view.login),
     path('logout', main_view.logout),
-    path('sign_up', main_view.callsignupform),
-    path('send_sign_up', main_view.creat_user),
+    path('sign_up', main_view.create_user, name='sign_up'),
 
     # 錯誤觸發
     path('test_500', main_view.test_500),

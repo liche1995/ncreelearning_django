@@ -25,7 +25,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10">
-        <schema name="django_db" object-types="table, view" />
+        <schema name="django_db" object-types="procedure, view, column, dataset trigger, index, constraint, table, function" />
       </connection>
     </loaded-nodes>
   </component>
@@ -44,6 +44,9 @@
     <filter-actions connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10" dataset="django_db.django_session" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10" dataset="django_db.lesson" active-filter-id="db997236-cf4a-400d-a27a-2af507806b58">
       <filter id="db997236-cf4a-400d-a27a-2af507806b58" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />
+    </filter-actions>
+    <filter-actions connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10" dataset="django_db.auth_user" active-filter-id="1fd68b3d-1306-40b7-8bb5-d777a84c023f">
+      <filter id="1fd68b3d-1306-40b7-8bb5-d777a84c023f" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />
     </filter-actions>
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
