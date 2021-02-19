@@ -1,5 +1,5 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.views import View
 from django.contrib import auth
 from users.models import UesrInfo
@@ -98,7 +98,7 @@ def create_user(request):
         address = request.POST.get('address', "")
         email = request.POST.get('email', "")
         telephone = request.POST.get('telephone', "")
-        region = request.POST.get('telephone', "")
+        region = request.POST.get('region', "")
 
         try:
             # auth models
@@ -111,7 +111,7 @@ def create_user(request):
             UesrInfo.objects.create(id=userid, username=username, address=address, telephone=telephone,
                                     first_name=first_name, last_name=last_name, region=region,
                                     email=email)
-            return render(request, "account/successed_create_account.html")
+            return render(request, "account/successed_create_account.html", context)
         except Exception as e:
             # 帳號已被建立
             if e.args[0] == 1062:
@@ -131,7 +131,7 @@ def create_user_form(request):
     address = request.POST.get('address', "")
     email = request.POST.get('email', "")
     telephone = request.POST.get('telephone', "")
-    region = request.POST.get('telephone', "")
+    region = request.POST.get('region', "")
 
     context["username"] = username
     context["password"] = password

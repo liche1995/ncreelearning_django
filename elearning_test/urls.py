@@ -40,7 +40,7 @@ urlpatterns = [
     path('logout', main_view.logout),
     path('sign_up', main_view.create_user, name='sign_up'),
 
-    # 錯誤觸發
+    # 測試觸發
     path('test_500', main_view.test_500),
     #path('', core.as_view()),
     #path('time', time_core.as_view()),
