@@ -20,6 +20,7 @@ from django.conf import settings
 from django.conf.urls import handler404, handler500, url
 from elearning_test import views as main_view
 from lesson_app import views as lesson_view
+from users import views as user_view
 
 core = main_view.WebCore
 time_core = main_view.Clockview
@@ -31,14 +32,19 @@ urlpatterns = [
     path('', main_view.callindex),
     path('lesson', lesson_view.callesson),
     path('lesson_more?more=TURE', lesson_view.callesson),
-    path('login_page', main_view.callogin),
+    path('login_page', user_view.callogin),
+
     # 多媒體設定
     url('static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
 
     # 帳號控制
-    path('login', main_view.login),
-    path('logout', main_view.logout),
-    path('sign_up', main_view.create_user, name='sign_up'),
+    path('login', user_view.login),
+    path('logout', user_view.logout),
+    path('sign_up', user_view.create_user, name='sign_up'),
+
+    # 登入後操作項目
+    path('profileset', user_view.profileset),
+    path('my_lesson', lesson_view.callesson),
 
     # 測試觸發
     path('test_500', main_view.test_500),
