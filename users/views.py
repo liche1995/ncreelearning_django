@@ -58,8 +58,8 @@ def create_user(request):
             userid = user.id
             # users info
             models.UesrInfo.objects.create(id=userid, username=username, address=address, telephone=telephone,
-                                    first_name=first_name, last_name=last_name, region=region,
-                                    email=email)
+                                           first_name=first_name, last_name=last_name, region=region,
+                                           email=email)
             return render(request, "account/successed_create_account.html", context)
         except Exception as e:
             # 帳號已被建立
@@ -109,13 +109,36 @@ def logout(request):
 # 帳號設定頁面
 def profileset(request):
     context = {}
+    # 取得資料
+    auth_info = request.user
+    user_info = models.UesrInfo.objects.get(id=auth_info.id)
 
-    # 初始化
     if request.method == "GET":
-
+        context["last_name"] = auth_info.last_name
+        context["first_name"] = auth_info.first_name
+        context["address"] = user_info.address
+        context["email"] = auth_info.email
+        context["telephone"] = user_info.telephone
+        context["region"] = user_info.region.alpha3
         return render(request, "account/profilesetting.html", context)
     # 處理
     elif request.method == "POST":
+        # 取得資料
+        user = auth.models.User.objects.get(username=auth_info.username)
+
+        # 修改auth資料
+        user.last_name = request.POST.get("last_name")
+        user.first_name = request.POST.get("first_name")
+        user.email = request.POST.get("email")
+        user.save()
+
+        # 修改user_info資料
+        user_info.update(telephone=request.POST.get("telephone"))
+        user_info.update(address=request.POST.get("address"))
+        user_info.update(region=request.POST.get("region"))
+        user_info.update(last_name=request.POST.get("last_name"))
+        user_info.update(first_name=request.POST.get("first_name"))
+        user_info.update(email=request.POST.get("email"))
 
         return render(request, "account/profilesetting.html", context)
 

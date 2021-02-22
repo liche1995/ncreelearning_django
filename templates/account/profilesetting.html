@@ -7,8 +7,10 @@ textarea{
 resize:none;
 }
 {%endblock%}
+
 {%block script%}
 {%endblock%}
+
 {%block content%}
 <section class="py-5 text-xenter conatinar">
     <div class="row py-lg-5">
@@ -30,18 +32,6 @@ resize:none;
         </div>
         <div class="row p-1">
             <div class="col p-1">
-                <label>帳號：</label>
-                <input type="text" value="{{username}}" name="username">
-            </div>
-        </div>
-        <div class="row p-1">
-            <div class="col p-1">
-                <label>密碼：</label>
-                <input type="password" value="{{password}}" name="password">
-            </div>
-        </div>
-        <div class="row p-1">
-            <div class="col p-1">
                 <label>地址：</label>
                 <input type="text" value="{{address}}" name="address"><br>
             </div>
@@ -49,13 +39,12 @@ resize:none;
         <div class="row p-1">
             <label>地區：</label>
             <!-- 建議未來模組化 -->
-            <select class="form-select" name="region">
-                <option value>選擇...</option>
+            <select class="form-select" name="region" id="region">
                 <option value="TWN">臺灣(中華民國)</option>
                 <option value="CHN">中國大陸(中華人民共和國)</option>
                 <option value="HKG">香港</option>
                 <option value="MAC">澳門</option>
-                <option value="XXX">其他</option>
+                <option value="XXX" selected>其他</option>
             </select>
         </div>
         <div class="row p-1">
@@ -74,4 +63,15 @@ resize:none;
         <input type="submit" class="btn btn-danger" value="放棄修改" id="signup" formaction="javascript:history.back()" >
     </center>
 </form>
+
+
+
+<script>
+var region = document.getElementById("region");
+for (i = 0; i < region.options.length; i++){
+    if (region.options[i].value == "{{region}}"){
+        region.selectedIndex = i;
+    }
+}
+</script>
 {%endblock%}
