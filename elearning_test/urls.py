@@ -18,13 +18,17 @@ from django.urls import path
 from django.views.static import serve
 from django.conf import settings
 from django.conf.urls import handler404, handler500, url
+# 模組引入
 from elearning_test import views as main_view
 from lesson_app import views as lesson_view
 from users import views as user_view
+from schedule_work.models import runtask
 
 core = main_view.WebCore
 time_core = main_view.Clockview
 attest = main_view.Attri
+# 定時排程啟動
+runtask()
 
 urlpatterns = [
     # 基本連結設定

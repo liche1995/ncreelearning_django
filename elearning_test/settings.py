@@ -42,11 +42,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_apscheduler',
+    'schedule_work',
     'lesson_app',
     'users',
 ]
 
-#AUTH_USER_MODEL = 'users.UesrInfoExtend'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -57,6 +58,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# Session setting
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
 
 ROOT_URLCONF = 'elearning_test.urls'
 
@@ -130,7 +135,8 @@ USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+# 啟動後時區強制變成UTC
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)
