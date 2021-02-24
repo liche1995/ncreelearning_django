@@ -61,6 +61,14 @@ MIDDLEWARE = [
 
 # Session setting
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+SESSION_SAVE_EVERY_REQUEST = True
+if DEBUG:
+    SESSION_COOKIE_AGE = 600
+else:
+    SESSION_COOKIE_AGE = 60 * 60 * 8
+
+# Login setting
+LOGIN_URL = '/login_page'
 
 
 ROOT_URLCONF = 'elearning_test.urls'

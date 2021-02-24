@@ -45,6 +45,7 @@ urlpatterns = [
     path('login', user_view.login),
     path('logout', user_view.logout),
     path('sign_up', user_view.create_user, name='sign_up'),
+    path('change_password', user_view.change_password),
 
     # 登入後操作項目
     path('profileset', user_view.profileset),

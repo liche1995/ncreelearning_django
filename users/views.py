@@ -1,15 +1,21 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.contrib import auth
-import os
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.hashers import check_password
 from django.template.defaulttags import register
 from django_pandas.io import read_frame
 from users import models
+import os
 
 
 # 登入頁面
 def callogin(request):
     context = {}
+    # 檢查是否為硬闖入或是Session過期
+    if len(request.GET) > 0:
+        context["illegal"] = True
+
     return render(request, "account/login.html", context)
 
 
@@ -100,6 +106,7 @@ def create_user_form(request):
 
 
 # 登出
+@login_required
 def logout(request):
     auth.logout(request)
     context = {}
@@ -107,6 +114,7 @@ def logout(request):
 
 
 # 帳號設定頁面
+@login_required
 def profileset(request):
     context = {}
     # 取得資料
@@ -142,3 +150,26 @@ def profileset(request):
 
         return render(request, "account/profilesetting.html", context)
 
+
+# 修改密碼
+@login_required
+def change_password(request):
+    context = {}
+    if request.method == "GET":
+        return render(request, 'account/change_password.html', context)
+    elif request.method == "POST":
+        # 檢查舊密碼
+        now_password = request.user.password
+        old_password = request.POST.get("oldpw")
+        if check_password(old_password, now_password):
+            return render(request, 'account/change_password.html', context)
+            # 檢查新密碼
+        else:
+
+            return render(request, 'account/change_password.html', context)
+
+
+# 權限再確認
+def _recheck_password(requese):
+
+    pass

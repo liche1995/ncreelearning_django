@@ -21,10 +21,9 @@ def runtask():
     scheduler = BackgroundScheduler()
     scheduler.add_jobstore(DjangoJobStore(), "default")
     try:
-        # 先行淨空既有工作
-        scheduler.remove_all_jobs()
         # 註冊每月初執行清理失效對話
-        scheduler.add_job(clean_expired_session, 'cron', month='1-12', day='1', id='clean_expired_session')
+        scheduler.add_job(clean_expired_session, 'cron', month='1-12', day='1', id='clean_expired_session',
+                          replace_existing=True)
 
         scheduler.start()
     except Exception as e:
