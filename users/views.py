@@ -7,6 +7,7 @@ from django.template.defaulttags import register
 from django_pandas.io import read_frame
 from users import models
 import os
+import re
 
 
 # 登入頁面
@@ -106,10 +107,10 @@ def create_user_form(request):
 
 
 # 登出
-@login_required
 def logout(request):
-    auth.logout(request)
     context = {}
+    if request.user.is_authenticated:
+        auth.logout(request)
     return HttpResponseRedirect("/", context)
 
 
@@ -135,19 +136,20 @@ def profileset(request):
         user = auth.models.User.objects.get(username=auth_info.username)
 
         # 修改auth資料
-        user.last_name = request.POST.get("last_name")
-        user.first_name = request.POST.get("first_name")
-        user.email = request.POST.get("email")
+        user.last_name = request.POST.get("last_name", "")
+        user.first_name = request.POST.get("first_name", "")
+        user.email = request.POST.get("email", "")
         user.save()
 
         # 修改user_info資料
-        user_info.update(telephone=request.POST.get("telephone"))
-        user_info.update(address=request.POST.get("address"))
-        user_info.update(region=request.POST.get("region"))
-        user_info.update(last_name=request.POST.get("last_name"))
-        user_info.update(first_name=request.POST.get("first_name"))
-        user_info.update(email=request.POST.get("email"))
-
+        user_info.telephone = request.POST.get("telephone", "")
+        user_info.address = request.POST.get("address", "")
+        user_info.region = request.POST.get("region", "")
+        user_info.last_name = request.POST.get("last_name", "")
+        user_info.first_name = request.POST.get("first_name", "")
+        user_info.email = request.POST.get("email", "")
+        user_info.save()
+        context["change_success"] = True
         return render(request, "account/profilesetting.html", context)
 
 
@@ -162,11 +164,31 @@ def change_password(request):
         now_password = request.user.password
         old_password = request.POST.get("oldpw")
         if check_password(old_password, now_password):
-            return render(request, 'account/change_password.html', context)
             # 檢查新密碼
+            new_password = request.POST.get("newpw")
+            new_password2 = request.POST.get("newpw_check")
+            # 檢查格式
+            if re.match("^(?=.*[a-zA-Z])(?=.*\d)[0-9a-zA-Z]{1,}$", new_password) is not None:
+                # 檢查是否相符
+                if new_password == new_password2:
+                    auth_info = request.user
+                    user = auth.models.User.objects.get(username=auth_info.username)
+                    # 修改密碼
+                    user.set_password(new_password)
+                    user.save()
+                    context["change_success"] = True
+                else:
+                    context["change_success"] = False
+                    context["fail_resion"] = 'new_password_not_same'
+            else:
+                context["change_success"] = False
+                context["fail_resion"] = 'new_password_format_error'
         else:
-
-            return render(request, 'account/change_password.html', context)
+            # 舊密碼錯誤
+            context["change_success"] = False
+            context["fail_resion"] = 'old_password_wrong'
+        # 重新渲染頁面
+        return render(request, 'account/change_password.html', context)
 
 
 # 權限再確認
