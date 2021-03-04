@@ -71,6 +71,24 @@
                             </button>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="/my_lesson">訂閱課程</a>
+
+                                {%if perms.lesson_app%}
+                                <hr class="dropdown-divider">
+                                {%endif%}
+                                {%if perms.lesson_app.add_lesson%}
+                                <a class="dropdown-item" href="/">新增課程</a>
+                                {%endif%}
+                                {%if perms.lesson_app.change_lesson%}
+                                <a class="dropdown-item" href="/">修改課程</a>
+                                {%endif%}
+                                {%if perms.lesson_app.delete_lesson%}
+                                <a class="dropdown-item" href="/">刪除課程</a>
+                                {%endif%}
+                                {%if perms.lesson_app.view_lesson%}
+                                <a class="dropdown-item" href="/">開課清單</a>
+                                {%endif%}
+
+                                <!-- 帳號設定區 -->
                                 <hr class="dropdown-divider">
                                 <a class="dropdown-item" href="/profileset">個人資料設定</a>
                                 <a class="dropdown-item" href="/change_password">修改密碼</a>

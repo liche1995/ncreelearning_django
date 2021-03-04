@@ -12,5 +12,4 @@ class UesrInfo(models.Model):
     email = models.CharField(max_length=150, unique=False, verbose_name='email')
     telephone = models.CharField(max_length=150, unique=False, verbose_name='telephone')
     region = CountryField(max_length=3, unique=False, verbose_name='region')
-    #region = models.CharField(max_length=3, unique=False, verbose_name='region')
 

@@ -2,9 +2,10 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.views import View
 from django.contrib import auth
-from users.models import UesrInfo
 from django.template.defaulttags import register
 from django_pandas.io import read_frame
+from users.models import UesrInfo
+from lesson_app.views import for_index_page
 import os
 import time
 
@@ -50,6 +51,8 @@ class Attri(View):
 # 啟動首頁
 def callindex(request):
     context = {}
+    newest_lesson_info = for_index_page()
+    context['newest_lesson_info'] = newest_lesson_info
     return render(request, "common/index.html", context)
 
 

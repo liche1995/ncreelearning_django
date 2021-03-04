@@ -8,18 +8,19 @@ from django_pandas.io import read_frame
 
 # 課程頁
 def callesson(request):
-    # 查詢最新5筆資料
-    lesson_result = models.Lesson.objects.all().order_by('-annouce_time')[:5]
+    # 查詢最新10筆資料
+    lesson_result = models.Lesson.objects.all().order_by('-annouce_time')[:10]
     result_table = read_frame(lesson_result)
 
     context = {'result_table': result_table}
     return render(request, "common/lesson.html", context)
 
 
-# 資料庫存取
-def querydb():
-
-    return
+# 首頁存取
+def for_index_page():
+    lesson_result = models.Lesson.objects.all().order_by('-annouce_time')[:9]
+    result_table = read_frame(lesson_result)
+    return result_table
 
 
 # Django's range

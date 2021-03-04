@@ -23,3 +23,12 @@ class Lesson(models.Model):
     class Meta:
         managed = False
         db_table = 'lesson'
+
+
+# 學生清單
+class Studentlist(models.Model):
+    student_id = models.IntegerField(verbose_name='id')
+    lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name='lesson_id')
+    first_name = models.CharField(max_length=150, verbose_name='first_name')
+    last_name = models.CharField(max_length=150, verbose_name='last_name')
+
