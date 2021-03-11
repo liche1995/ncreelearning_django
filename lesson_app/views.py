@@ -25,8 +25,19 @@ def for_index_page():
 
 # 詳細資料
 def lesson_info(request):
-    content = {}
-    return render(request, "lesson/lesson_info.html", content)
+    context = {}
+    # 取得id資料
+    lesson_id = int(request.GET.get("lessonid"))
+
+    # 調閱lesson table
+    db_resule = models.Lesson.objects.get(lessonid=lesson_id)
+
+    # 整理輸出
+    context['result'] = db_resule
+
+    return render(request, "lesson/lesson_info.html", context)
+
+#
 
 
 # Django's range

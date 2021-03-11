@@ -10,7 +10,7 @@ from django.db import models
 
 # get Lesson table data
 class Lesson(models.Model):
-    lseeonid = models.AutoField(primary_key=True)
+    lessonid = models.AutoField(primary_key=True)
     name = models.CharField(max_length=45)
     lessontype = models.CharField(max_length=45)
     auth = models.IntegerField()
@@ -31,4 +31,13 @@ class Studentlist(models.Model):
     lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name='lesson_id')
     first_name = models.CharField(max_length=150, verbose_name='first_name')
     last_name = models.CharField(max_length=150, verbose_name='last_name')
+
+
+# 多媒體資料
+class Multimedia(models.Model):
+    media_id = models.AutoField(primary_key=True, verbose_name="id")
+    media_type = models.IntegerField(verbose_name="media_type")
+    lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name="lesson_id")
+    filename = models.CharField(max_length=150, verbose_name='filename')
+
 
