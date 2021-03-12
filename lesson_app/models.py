@@ -36,8 +36,9 @@ class Studentlist(models.Model):
 # 多媒體資料
 class Multimedia(models.Model):
     media_id = models.AutoField(primary_key=True, verbose_name="id")
-    media_type = models.IntegerField(verbose_name="media_type")
     lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name="lesson_id")
+    cover = models.BooleanField(verbose_name='cover', default=False)
+    media_type = models.IntegerField(verbose_name="media_type")
     filename = models.CharField(max_length=150, verbose_name='filename')
 
 

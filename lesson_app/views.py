@@ -18,9 +18,16 @@ def callesson(request):
 
 # 首頁存取
 def for_index_page():
-    lesson_result = models.Lesson.objects.all().order_by('-annouce_time')[:9]
-    result_table = read_frame(lesson_result)
-    return result_table
+    # 取得資最新課程資料
+    lesson_result = models.Lesson.objects.all().order_by('-annouce_time')[:6]
+    lesson_result_table = read_frame(lesson_result)
+
+    # 找尋對應多媒體資料
+    # inner join
+    media_result = models.Multimedia.objects.select_related('lesson')
+    media_result_table = read_frame(media_result)
+
+    return lesson_result_table
 
 
 # 詳細資料
