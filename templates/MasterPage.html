@@ -76,16 +76,16 @@
                                 <hr class="dropdown-divider">
                                 {%endif%}
                                 {%if perms.lesson_app.add_lesson%}
-                                <a class="dropdown-item" href="/">新增課程</a>
+                                <a class="dropdown-item" href="/new_lesson">新增課程</a>
                                 {%endif%}
                                 {%if perms.lesson_app.change_lesson%}
-                                <a class="dropdown-item" href="/">修改課程</a>
+                                <a class="dropdown-item" href="/edit_lesson">修改課程</a>
                                 {%endif%}
                                 {%if perms.lesson_app.delete_lesson%}
-                                <a class="dropdown-item" href="/">刪除課程</a>
+                                <a class="dropdown-item" href="/delete_lesson">刪除課程</a>
                                 {%endif%}
                                 {%if perms.lesson_app.view_lesson%}
-                                <a class="dropdown-item" href="/">開課清單</a>
+                                <a class="dropdown-item" href="/lesson_list">開課清單</a>
                                 {%endif%}
 
                                 <!-- 帳號設定區 -->

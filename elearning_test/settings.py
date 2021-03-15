@@ -153,3 +153,4 @@ USE_TZ = False
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "templates/static")]
 STATIC_ROOT = os.path.join(BASE_DIR, "templates/staticfiles")
+MEDIA_ROOT = os.path.join(BASE_DIR, 'fileinfo')

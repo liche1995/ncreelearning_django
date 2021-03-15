@@ -51,8 +51,19 @@ urlpatterns = [
     path('lesson_info', lesson_view.lesson_info),
 
     # 登入後操作項目
+    # 共通項目
     path('profileset', user_view.profileset),
     path('my_lesson', lesson_view.callesson),
+
+    # 教師項目
+    path('new_lesson', lesson_view.new_lesson),
+    path('edit_lesson', lesson_view.edit_lesson),
+    path('delete_lesson', lesson_view.delete_lesson),
+    path('lesson_list', lesson_view.lesson_list),
+
+    # 學生項目
+
+    # 系統管理項目
 
     # 測試觸發
     path('test_500', main_view.test_500),

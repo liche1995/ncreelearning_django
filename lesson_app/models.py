@@ -10,11 +10,11 @@ from django.db import models
 
 # get Lesson table data
 class Lesson(models.Model):
-    lessonid = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=45)
-    lessontype = models.CharField(max_length=45)
-    auth = models.IntegerField()
-    situation = models.IntegerField()
+    lessonid = models.AutoField(primary_key=True, help_text='課程ID編號，自動產生')
+    name = models.CharField(max_length=45, help_text='課程名稱')
+    lessontype = models.CharField(max_length=45, help_text='課程種類')
+    auth = models.IntegerField(help_text='建立者')
+    situation = models.IntegerField(help_text='實體、線上或兩者皆有')
     annouce_time = models.DateTimeField()
     start_time = models.DateTimeField()
     finish_time = models.DateTimeField(blank=True, null=True)
@@ -39,6 +39,7 @@ class Multimedia(models.Model):
     lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name="lesson_id")
     cover = models.BooleanField(verbose_name='cover', default=False)
     media_type = models.IntegerField(verbose_name="media_type")
+    file = models.FileField(verbose_name='file', upload_to='fileinfo/lesson_info', null=True)
     filename = models.CharField(max_length=150, verbose_name='filename')
 
 

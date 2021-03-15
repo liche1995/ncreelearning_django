@@ -52,8 +52,9 @@ class Attri(View):
 def callindex(request):
     context = {}
     # 讀取最新開課資訊
-    newest_lesson_info = for_index_page()
+    newest_lesson_info, newest_lesson_cover = for_index_page()
     context['newest_lesson_info'] = newest_lesson_info
+    context['newest_lesson_cover'] = newest_lesson_cover
     return render(request, "common/index.html", context)
 
 
