@@ -1,5 +1,41 @@
 {% extends 'MasterPage.html'%}
 
+{%block addition_style%}
+.container.signup_form{
+max-width:500px;
+}
+textarea{
+resize:none;
+}
+td > input {
+  width:100%;
+}
+{%endblock%}
+
+{%block script%}
+<script>
+    var count = 0;
+    function add(){
+        count += 1;
+        var item = count.toString();
+        var del_order= "del('L" + item + "')";
+        var tab = document.getElementById('class_list');
+        tab.innerHTML+="\
+        <tr id='L"+item+"'>\
+        <td><input type='text' name='ch"+item+"'></td>\
+        <td><input type='text' name='sb"+item+"'></td>\
+        <td><input type='text' name='title"+item+"'></td>\
+        <td><button class='btn btn-danger' onclick="+ del_order +">刪除</button></td>\
+        </tr>\
+        "
+    };
+    function del(eleid){
+        var tab = document.getElementById(eleid);
+        tab.remove();
+        };
+</script>
+{%endblock%}
+
 {%block content%}
 <section class="py-5 text-center container">
     <div class="row py-lg-5">
@@ -8,8 +44,81 @@
 </section>
 
 <!-- 建立表單 -->
-
-
-
-
+<form action="" method="post" class="container signup_form">
+    {% csrf_token %}
+    <div class="container">
+        <div class="row p-1">
+            <label>課程名稱：</label>
+            <input type="text" class="form-control" name="lessoname" required>
+        </div>
+        <div class="row p-1">
+            <label>授課模式：</label>
+                <div class="form-check">
+                    <input class="form-check-input mt-0" type="radio" value="online" name="lesson_mode" checked required>
+                    <label>線上課程</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input mt-0" type="radio" value="entity" name="lesson_mode" required>
+                    <label>實體課程</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input mt-0" type="radio" value="both" name="lesson_mode" required>
+                    <label>線上、實體並行</label>
+                </div>
+        </div>
+        <div class="row p-1">
+            <div class="col">
+                <label>參加身分：</label>
+                <div class="form-check">
+                    <input class="form-check-input mt-0" type="radio" value="review" name="statue" checked required>
+                    <label>審核</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input mt-0" type="radio" value="free" name="statue" required>
+                    <label>自由開放</label>
+                </div>
+            </div>
+            <div class="col">
+                <label>授課證書與否：</label>
+                <div class="form-check">
+                    <input class="form-check-input mt-0" type="radio" value="True" name="sing_licnese" checked required>
+                    <label>是</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input mt-0" type="radio" value="False" name="sing_licnese" required>
+                    <label>否</label>
+                </div>
+            </div>
+        </div>
+        <div class="row p-1">
+            <label>說明：</label>
+            <textarea class="container" rows="5" name="lessoninfo"></textarea>
+        </div>
+        <div class="row p-1 ">
+            <label>課綱：</label>
+            <table class="table table-hover" id="class_list">
+                <thead>
+                    <tr>
+                        <th width="12%">章</th>
+                        <th width="12%">節</th>
+                        <th>標題</th>
+                        <th>刪除</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id='L0'>
+                        <td><input type="text" name="ch0"></td>
+                        <td><input type="text" name="sb0"></td>
+                        <td><input type="text" name="title0"></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <center>
+                <button class="btn btn-primary" onclick="add()">新增章節</button>
+            </center>
+        </div>
+        <center><input type="submit" class="btn btn-primary" value="送出"></center>
+    </div>
+</form>
 {%endblock%}

@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.template.defaulttags import register
 from lesson_app import models
+from django.contrib.auth.decorators import login_required
 from django_pandas.io import read_frame
 
 
@@ -43,12 +44,17 @@ def lesson_info(request):
 
 
 # 新增課程
+@login_required
 def new_lesson(request):
     context = {}
     if request.method.lower() == 'get':
         pass
     else:
-        pass
+        name = request.POST.get('lessoname', '')
+        lesson_mode = request.POST.get('lesson_mode', '')
+        statue = request.POST.get('statue', '')
+        sing_licnese = request.POST.get('sing_licnese', '')
+        lessoninfo = request.POST.get('lessoninfo', '')
     return render(request, "lesson/new_lesson.html", context)
 
 

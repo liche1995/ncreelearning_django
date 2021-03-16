@@ -19,6 +19,7 @@ class Lesson(models.Model):
     start_time = models.DateTimeField()
     finish_time = models.DateTimeField(blank=True, null=True)
     lessoninfo = models.CharField(max_length=300)
+    certificate = models.BooleanField(default=False)
 
     class Meta:
         managed = False
