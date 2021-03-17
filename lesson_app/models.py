@@ -14,7 +14,8 @@ class Lesson(models.Model):
     name = models.CharField(max_length=45, help_text='課程名稱')
     lessontype = models.CharField(max_length=45, help_text='課程種類')
     auth = models.IntegerField(help_text='建立者')
-    situation = models.IntegerField(help_text='實體、線上或兩者皆有')
+    situation = models.CharField(max_length=15, help_text='實體、線上或兩者皆有')
+    statue = models.BooleanField(default=False)
     annouce_time = models.DateTimeField()
     start_time = models.DateTimeField()
     finish_time = models.DateTimeField(blank=True, null=True)
@@ -42,5 +43,17 @@ class Multimedia(models.Model):
     media_type = models.IntegerField(verbose_name="media_type")
     file = models.FileField(verbose_name='file', upload_to='fileinfo/lesson_info', null=True)
     filename = models.CharField(max_length=150, verbose_name='filename')
+
+
+class LessonTable(models.Model):
+    lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name='lesson_id')
+    ch = models.IntegerField()
+    sb = models.IntegerField(null=True)
+    title = models.CharField(max_length=150, null=True)
+
+    class Meta:
+        db_table = 'lesson_table'
+
+
 
 

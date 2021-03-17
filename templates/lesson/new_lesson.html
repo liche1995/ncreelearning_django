@@ -15,23 +15,43 @@ td > input {
 {%block script%}
 <script>
     var count = 0;
+    var lesson_count = 1;
     function add(){
+        /* 計數器 */
         count += 1;
+        lesson_count += 1;
         var item = count.toString();
+
+        /* 刪除指令建立 */
         var del_order= "del('L" + item + "')";
+
+        /* 操作元素 */
         var tab = document.getElementById('class_list');
         tab.innerHTML+="\
         <tr id='L"+item+"'>\
         <td><input type='text' name='ch"+item+"'></td>\
         <td><input type='text' name='sb"+item+"'></td>\
         <td><input type='text' name='title"+item+"'></td>\
-        <td><button class='btn btn-danger' onclick="+ del_order +">刪除</button></td>\
+        <td><button type='button' class='btn btn-danger' onclick="+ del_order +">刪除</button></td>\
         </tr>\
-        "
+        ";
+
+        /* 輸入隱藏變數 */
+        var hidden = document.getElementById('lesson_count');
+        hidden.value = lesson_count.toString();
+        var hidden = document.getElementById('lesson_id_count');
+        hidden.value = count.toString();
+
     };
     function del(eleid){
         var tab = document.getElementById(eleid);
         tab.remove();
+        lesson_count -= 1;
+
+        /* 輸入隱藏變數 */
+        var hidden = document.getElementById('lesson_count');
+        hidden.value = lesson_count.toString();
+
         };
 </script>
 {%endblock%}
@@ -44,8 +64,12 @@ td > input {
 </section>
 
 <!-- 建立表單 -->
-<form action="" method="post" class="container signup_form">
+<form action="" class="container signup_form" method="post">
     {% csrf_token %}
+    <div id="background_value">
+        <input type="hidden" value="1" name="lesson_count" id="lesson_count">
+        <input type="hidden" value="0" name="lesson_id_count" id="lesson_id_count">
+    </div>
     <div class="container">
         <div class="row p-1">
             <label>課程名稱：</label>
@@ -68,14 +92,14 @@ td > input {
         </div>
         <div class="row p-1">
             <div class="col">
-                <label>參加身分：</label>
+                <label>參加身分審核：</label>
                 <div class="form-check">
-                    <input class="form-check-input mt-0" type="radio" value="review" name="statue" checked required>
-                    <label>審核</label>
+                    <input class="form-check-input mt-0" type="radio" value="False" name="statue" checked required>
+                    <label>自由開放</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input mt-0" type="radio" value="free" name="statue" required>
-                    <label>自由開放</label>
+                    <input class="form-check-input mt-0" type="radio" value="True" name="statue" required>
+                    <label>審核</label>
                 </div>
             </div>
             <div class="col">
@@ -90,13 +114,23 @@ td > input {
                 </div>
             </div>
         </div>
+        <label>公告日：</label>
+        <div class="row p-1 input-group date">
+            <input type="text" class="form-control" data-provide="datepicker">
+            <span class="input-group-addon">
+                <i class="glyphicon glyphicon-th"></i>
+            </span>
+        </div>
+        <label>上課日：</label>
+        <input data-provide="datepicker">
+        <label>結束日：</label>
         <div class="row p-1">
             <label>說明：</label>
             <textarea class="container" rows="5" name="lessoninfo"></textarea>
         </div>
         <div class="row p-1 ">
             <label>課綱：</label>
-            <table class="table table-hover" id="class_list">
+            <table class="table table-hover">
                 <thead>
                     <tr>
                         <th width="12%">章</th>
@@ -105,7 +139,7 @@ td > input {
                         <th>刪除</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="class_list">
                     <tr id='L0'>
                         <td><input type="text" name="ch0"></td>
                         <td><input type="text" name="sb0"></td>
@@ -115,7 +149,7 @@ td > input {
                 </tbody>
             </table>
             <center>
-                <button class="btn btn-primary" onclick="add()">新增章節</button>
+                <button type="button" class="btn btn-primary" onclick="add()">新增章節</button>
             </center>
         </div>
         <center><input type="submit" class="btn btn-primary" value="送出"></center>
