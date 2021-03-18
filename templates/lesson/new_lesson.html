@@ -1,4 +1,7 @@
 {% extends 'MasterPage.html'%}
+{%block addition_script%}
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js" integrity="sha256-TAzGN4WNZQPLqSYvi+dXQMKehTYFoVOnveRqbi42frA=" crossorigin="anonymous"></script>
+{%endblock%}
 
 {%block addition_style%}
 .container.signup_form{
@@ -7,6 +10,7 @@ max-width:500px;
 textarea{
 resize:none;
 }
+
 td > input {
   width:100%;
 }
@@ -51,8 +55,35 @@ td > input {
         /* 輸入隱藏變數 */
         var hidden = document.getElementById('lesson_count');
         hidden.value = lesson_count.toString();
+    };
+    $(function(){
+        $('form').validate({
+            submitHandler:
+            function(form){
+                var annouce_time = document.getElementById("annouce_time").value;
+                var start_time = document.getElementById("start_time").value;
+                var finish_time = document.getElementById("finish_time").value;
+                /* 檢查日期合理性 */
 
-        };
+                const a_time = new Date(annouce_time);
+                const s_time = new Date(start_time);
+                const f_time = new Date(finish_time);
+
+                if(a_time>s_time){
+                    alert("公告日不可晚於上課日");
+                    return false;
+                }
+                else if(a_time>f_time){
+                    alert("公告日不可早於結束日");
+                    return false;
+                }
+                else if(s_time>f_time){
+                    alert("上課日不可晚於結束日");
+                    return false;
+                };
+            }
+        });
+    });
 </script>
 {%endblock%}
 
@@ -72,23 +103,27 @@ td > input {
     </div>
     <div class="container">
         <div class="row p-1">
-            <label>課程名稱：</label>
-            <input type="text" class="form-control" name="lessoname" required>
+            <div class="col">
+                <label>課程名稱：</label>
+                <input type="text" class="form-control" name="lessoname" required>
+            </div>
         </div>
         <div class="row p-1">
-            <label>授課模式：</label>
-                <div class="form-check">
-                    <input class="form-check-input mt-0" type="radio" value="online" name="lesson_mode" checked required>
-                    <label>線上課程</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input mt-0" type="radio" value="entity" name="lesson_mode" required>
-                    <label>實體課程</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input mt-0" type="radio" value="both" name="lesson_mode" required>
-                    <label>線上、實體並行</label>
-                </div>
+            <div class="col">
+                <label>授課模式：</label>
+                    <div class="form-check">
+                        <input class="form-check-input mt-0" type="radio" value="online" name="lesson_mode" checked required>
+                        <label>線上課程</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input mt-0" type="radio" value="entity" name="lesson_mode" required>
+                        <label>實體課程</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input mt-0" type="radio" value="both" name="lesson_mode" required>
+                        <label>線上、實體並行</label>
+                    </div>
+            </div>
         </div>
         <div class="row p-1">
             <div class="col">
@@ -114,45 +149,56 @@ td > input {
                 </div>
             </div>
         </div>
-        <label>公告日：</label>
-        <div class="row p-1 input-group date">
-            <input type="text" class="form-control" data-provide="datepicker">
-            <span class="input-group-addon">
-                <i class="glyphicon glyphicon-th"></i>
-            </span>
+        <div class="row p-1">
+            <div class="col">
+                <label>公告日：</label>
+                <input type="date" class="form-control" name="annouce_time" id="annouce_time"
+                       value="{{today.year|stringformat:'04d'}}-{{today.month|stringformat:'02d'}}-{{today.day|stringformat:'02d'}}"
+                       min="{{today.year|stringformat:'04d'}}-{{today.month|stringformat:'02d'}}-{{today.day|stringformat:'02d'}}">
+            </div>
         </div>
-        <label>上課日：</label>
-        <input data-provide="datepicker">
-        <label>結束日：</label>
+        <div class="row p-1">
+            <div class="col">
+                <label>上課日：</label>
+                <input type="date" class="form-control" name="start_time" id="start_time" value="{{today.year|stringformat:'04d'}}-{{today.month|stringformat:'02d'}}-{{today.day|stringformat:'02d'}}">
+            </div>
+            <div class="col">
+                <label>結束日：</label>
+                <input type="date" class="form-control" name="finish_time" id="finish_time" required>
+            </div>
+        </div>
+
         <div class="row p-1">
             <label>說明：</label>
             <textarea class="container" rows="5" name="lessoninfo"></textarea>
         </div>
         <div class="row p-1 ">
+            <div class="col">
             <label>課綱：</label>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th width="12%">章</th>
-                        <th width="12%">節</th>
-                        <th>標題</th>
-                        <th>刪除</th>
-                    </tr>
-                </thead>
-                <tbody id="class_list">
-                    <tr id='L0'>
-                        <td><input type="text" name="ch0"></td>
-                        <td><input type="text" name="sb0"></td>
-                        <td><input type="text" name="title0"></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th width="12%">章</th>
+                            <th width="12%">節</th>
+                            <th>標題</th>
+                            <th>刪除</th>
+                        </tr>
+                    </thead>
+                    <tbody id="class_list">
+                        <tr id='L0'>
+                            <td><input type="text" name="ch0"></td>
+                            <td><input type="text" name="sb0"></td>
+                            <td><input type="text" name="title0"></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <center>
                 <button type="button" class="btn btn-primary" onclick="add()">新增章節</button>
             </center>
         </div>
-        <center><input type="submit" class="btn btn-primary" value="送出"></center>
+        <center><input type="submit" class="btn btn-primary" value="送出" id="submit"></center>
     </div>
 </form>
 {%endblock%}

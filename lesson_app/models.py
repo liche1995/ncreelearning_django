@@ -47,8 +47,8 @@ class Multimedia(models.Model):
 
 class LessonTable(models.Model):
     lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name='lesson_id')
-    ch = models.IntegerField()
-    sb = models.IntegerField(null=True)
+    ch = models.IntegerField(default=0)
+    sb = models.IntegerField(default=0)
     title = models.CharField(max_length=150, null=True)
 
     class Meta:

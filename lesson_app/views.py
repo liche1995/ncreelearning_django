@@ -4,6 +4,8 @@ from lesson_app import models
 from django.contrib.auth.decorators import login_required
 from django_pandas.io import read_frame
 import pandas as pd
+from distutils.util import strtobool
+from datetime import datetime
 
 
 # 課程表
@@ -49,6 +51,7 @@ def lesson_info(request):
 def new_lesson(request):
     context = {}
     if request.method.lower() == 'get':
+        context["today"] = datetime.today()
         return render(request, "lesson/new_lesson.html", context)
     else:
         # 固定資料
@@ -56,16 +59,12 @@ def new_lesson(request):
         lessontype = request.POST.get('lessontype', '')
         auth = request.user.id
         situation = request.POST.get('lesson_mode', '')
-        statue = request.POST.get('statue', '')
-
-        annouce_time = request.POST.get('statue', '')
-        start_time = request.POST.get('statue', '')
-        finish_time = request.POST.get('statue', '')
-
+        statue = strtobool(request.POST.get('statue', ''))
+        annouce_time = request.POST.get('annouce_time', '')
+        start_time = request.POST.get('start_time', '')
+        finish_time = request.POST.get('finish_time', '')
         lessoninfo = request.POST.get('lessoninfo', '')
-        certificate = request.POST.get('sing_licnese', '')
-
-
+        certificate = strtobool(request.POST.get('sing_licnese', ''))
 
         # 動態變化資料
         lesson_count = int(request.POST.get("lesson_count", ""))
