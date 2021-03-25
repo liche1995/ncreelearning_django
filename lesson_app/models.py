@@ -46,6 +46,7 @@ class Multimedia(models.Model):
 
 
 class LessonTable(models.Model):
+    inner_id = models.AutoField(primary_key=True, verbose_name='inner_id')
     lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name='lesson_id')
     ch = models.IntegerField(default=0)
     sb = models.IntegerField(default=0)

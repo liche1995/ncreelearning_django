@@ -1,0 +1,29 @@
+{% extends 'MasterPage.html'%}
+{% block addition_style%}
+.container.display-container-style{
+    max-width: 600px;
+}
+{% endblock %}
+
+
+{%block content%}
+{%load static%}
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <center><h1>課程已被建立</h1></center>
+    </div>
+</section>
+<div class="container display-container-style">
+    <div class="row"><img class="img-responsive" src="{% static 'element/undraw_Completed_re_cisp.png'%}"></div>
+    <div class="row">
+        <blockquote class="blockquote text-center">
+            <p class="mb-0">課程已經成功建立了</p>
+            <p class="mb-0">你可以...</p>
+            <a type="button" class="btn btn-outline-primary" href="/">回首頁</a>
+            <a type="button" class="btn btn-outline-primary" href="lesson_info?lessonid={{lessonid}}">觀看課程資料</a>
+        </blockquote>
+    </div>
+</div>
+
+
+{%endblock%}

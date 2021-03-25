@@ -72,7 +72,18 @@ def new_lesson(request):
         # 課程表
         lesson_table = _creat_lesson_table(request, lesson_count, lesson_id_count)
 
-        return render(request, "lesson/lesson_info.html", context)
+        # 輸入資料庫
+        new = models.Lesson.objects.create(name=name, lessontype=lessontype, auth=auth, situation=situation, statue=statue,
+                                           annouce_time=annouce_time, start_time=start_time, finish_time=finish_time,
+                                           lessoninfo=lessoninfo, certificate=certificate)
+        new.save()
+        for i in range(lesson_table.shape[0]):
+            models.LessonTable.objects.create(lesson_id_id=new.lessonid,
+                                              ch=int(lesson_table["chapter"][i]),
+                                              sb=int(lesson_table["submit"][i]),
+                                              title=lesson_table["title"][i])
+        context["lessonid"] = new.lessonid
+        return render(request, "lesson/created_lesson.html", context)
 
 
 # 修改課程
@@ -135,8 +146,15 @@ def _creat_lesson_table(requese, size, count_str):
         title_index = 'title' + str(i)
 
         if requese.POST.get(ch_index) is not None:
-            ch = requese.POST.get(ch_index)
-            sb = requese.POST.get(sb_index)
+            if requese.POST.get(ch_index) == "":
+                ch = 0
+            else:
+                ch = requese.POST.get(ch_index)
+            if requese.POST.get(sb_index) == "":
+                sb = 0
+            else:
+                sb = requese.POST.get(sb_index)
+
             title = requese.POST.get(title_index)
             df = df.append({'chapter': ch, 'submit': sb, 'title': title}, ignore_index=True)
 

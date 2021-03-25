@@ -28,6 +28,7 @@ td > input {
         /* 輸入隱藏變數 */
         var hidden = document.getElementById('lesson_count');
         hidden.value = lesson_count.toString();
+
     };
     $(function(){
         $('form').validate({
@@ -100,14 +101,20 @@ td > input {
 
             var row = $("\
             <tr id='L"+item+"'>\
-            <td><input type='text' name='ch"+item+"'></td>\
-            <td><input type='text' name='sb"+item+"'></td>\
+            <td><input type='number' name='ch"+item+"' min='0'></td>\
+            <td><input type='number' name='sb"+item+"' min='0'></td>\
             <td><input type='text' name='title"+item+"'></td>\
             <td><button type='button' class='btn btn-danger' onclick="+ del_order +">刪除</button></td>\
             </tr>\
             ");
 
             $("#lesson_table > tbody").append(row);
+
+            /* 輸入隱藏變數 */
+            var hidden = document.getElementById('lesson_count');
+            hidden.value = lesson_count.toString();
+            var hidden = document.getElementById('lesson_id_count');
+            hidden.value = count.toString();
         }
         )
     });
@@ -215,8 +222,8 @@ td > input {
                     </thead>
                     <tbody id="class_list">
                         <tr id='L0'>
-                            <td><input type="text" name="ch0"></td>
-                            <td><input type="text" name="sb0"></td>
+                            <td><input type="number" name="ch0" min="0"></td>
+                            <td><input type="number" name="sb0" min="0"></td>
                             <td><input type="text" name="title0"></td>
                             <td></td>
                         </tr>
