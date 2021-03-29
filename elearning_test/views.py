@@ -6,6 +6,8 @@ from django.template.defaulttags import register
 from django_pandas.io import read_frame
 from users.models import UesrInfo
 from lesson_app.views import for_index_page
+import pandas as pd
+
 import os
 import time
 
@@ -55,6 +57,7 @@ def callindex(request):
     newest_lesson_info, newest_lesson_cover = for_index_page()
     context['newest_lesson_info'] = newest_lesson_info
     context['newest_lesson_cover'] = newest_lesson_cover
+
     return render(request, "common/index.html", context)
 
 

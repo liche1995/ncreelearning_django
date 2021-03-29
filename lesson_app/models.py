@@ -40,8 +40,9 @@ class Multimedia(models.Model):
     media_id = models.AutoField(primary_key=True, verbose_name="id")
     lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name="lesson_id")
     cover = models.BooleanField(verbose_name='cover', default=False)
-    media_type = models.IntegerField(verbose_name="media_type")
+    media_type = models.IntegerField(verbose_name="media_type", help_text="file:0 picture:1 vided:2")
     file = models.FileField(verbose_name='file', upload_to='fileinfo/lesson_info', null=True)
+    image = models.ImageField(verbose_name='image', upload_to='fileinfo/lesson_info', null=True)
     filename = models.CharField(max_length=150, verbose_name='filename')
 
 
@@ -54,7 +55,4 @@ class LessonTable(models.Model):
 
     class Meta:
         db_table = 'lesson_table'
-
-
-
 

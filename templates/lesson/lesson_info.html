@@ -1,4 +1,27 @@
 {% extends 'MasterPage.html'%}
 
 {%block content%}
+<section class="py-5 text-center container">
+    <div class="row py-lg-5">
+        <center><h1>{{info.name}}</h1></center>
+    </div>
+</section>
+<div class="container">
+
+
+
+        lessonid = models.AutoField(primary_key=True, help_text='課程ID編號，自動產生')
+    name = models.CharField(max_length=45, help_text='課程名稱')
+    lessontype = models.CharField(max_length=45, help_text='課程種類')
+    auth = models.IntegerField(help_text='建立者')
+    situation = models.CharField(max_length=15, help_text='實體、線上或兩者皆有')
+    statue = models.BooleanField(default=False)
+    annouce_time = models.DateTimeField()
+    start_time = models.DateTimeField()
+    finish_time = models.DateTimeField(blank=True, null=True)
+    lessoninfo = models.CharField(max_length=300)
+    certificate = models.BooleanField(default=False)
+
+</div>
+
 {%endblock%}

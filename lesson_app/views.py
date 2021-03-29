@@ -4,6 +4,7 @@ from lesson_app import models
 from django.contrib.auth.decorators import login_required
 from django_pandas.io import read_frame
 import pandas as pd
+import re
 from distutils.util import strtobool
 from datetime import datetime
 
@@ -38,10 +39,14 @@ def lesson_info(request):
     lesson_id = int(request.GET.get("lessonid"))
 
     # 調閱lesson table
-    db_resule = models.Lesson.objects.get(lessonid=lesson_id)
+    info = models.Lesson.objects.get(lessonid=lesson_id)
+    table = read_frame(models.LessonTable.objects.filter(lesson_id_id=lesson_id))
+    media = read_frame(models.Multimedia.objects.filter(lesson_id_id=lesson_id))
 
     # 整理輸出
-    context['result'] = db_resule
+    context['info'] = info
+    context['table'] = table
+    context['media'] = media
 
     return render(request, "lesson/lesson_info.html", context)
 
@@ -73,15 +78,21 @@ def new_lesson(request):
         lesson_table = _creat_lesson_table(request, lesson_count, lesson_id_count)
 
         # 輸入資料庫
+        # 基本資料輸入
         new = models.Lesson.objects.create(name=name, lessontype=lessontype, auth=auth, situation=situation, statue=statue,
                                            annouce_time=annouce_time, start_time=start_time, finish_time=finish_time,
                                            lessoninfo=lessoninfo, certificate=certificate)
         new.save()
+        # 課程表資料輸入
         for i in range(lesson_table.shape[0]):
             models.LessonTable.objects.create(lesson_id_id=new.lessonid,
                                               ch=int(lesson_table["chapter"][i]),
                                               sb=int(lesson_table["submit"][i]),
                                               title=lesson_table["title"][i])
+        # 課程封面輸入
+        models.Multimedia.objects.create(lesson_id_id=new.lessonid, cover=1,
+                                         media_type=1, image=request.FILES['cover'], filename=request.FILES['cover'].name)
+
         context["lessonid"] = new.lessonid
         return render(request, "lesson/created_lesson.html", context)
 
