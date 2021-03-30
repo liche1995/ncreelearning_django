@@ -26,7 +26,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10">
-        <schema name="django_db" object-types="view, table" />
+        <schema name="django_db" object-types="function, column, constraint, dataset trigger, index, view, procedure, table" />
       </connection>
     </loaded-nodes>
   </component>
@@ -47,6 +47,11 @@
       <filter id="db997236-cf4a-400d-a27a-2af507806b58" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />
     </filter-actions>
     <filter-actions connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10" dataset="django_db.auth_group" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10" dataset="django_db.lesson_app_multimedia" active-filter-id="">
+      <filter id="c5c68efe-ff7e-4c69-b8fa-0787eb28fb37" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND">
+        <condition column="media_id" operator="=" value="" active="true" />
+      </filter>
+    </filter-actions>
     <filter-actions connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10" dataset="django_db.auth_group_permissions" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10" dataset="django_db.auth_user" active-filter-id="1fd68b3d-1306-40b7-8bb5-d777a84c023f">
       <filter id="1fd68b3d-1306-40b7-8bb5-d777a84c023f" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />

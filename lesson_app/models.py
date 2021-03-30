@@ -13,7 +13,7 @@ class Lesson(models.Model):
     lessonid = models.AutoField(primary_key=True, help_text='課程ID編號，自動產生')
     name = models.CharField(max_length=45, help_text='課程名稱')
     lessontype = models.CharField(max_length=45, help_text='課程種類')
-    auth = models.IntegerField(help_text='建立者')
+    auth = models.IntegerField(help_text='建立者', default=0)
     situation = models.CharField(max_length=15, help_text='實體、線上或兩者皆有')
     statue = models.BooleanField(default=False)
     annouce_time = models.DateTimeField()

@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.template.defaulttags import register
 from lesson_app import models
+from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django_pandas.io import read_frame
 import pandas as pd
-import re
+import numpy as np
 from distutils.util import strtobool
 from datetime import datetime
 
@@ -29,7 +30,18 @@ def for_index_page():
     media_result = models.Multimedia.objects.filter(lesson_id__in=lesson_result_table['lessonid'], cover=1)
     media_result_table = read_frame(media_result)
 
-    return lesson_result_table, media_result_table
+    # 抽取id
+    key_id = media_result_table['lesson_id'].str.findall('\d+')
+    for i in range(key_id.shape[0]):
+        media_result_table.loc[i, 'key_id'] = int(key_id.iloc[i][0])
+
+    # merge
+    table = pd.merge(lesson_result_table, media_result_table, left_on='lessonid', right_on='key_id', how='left')
+    # 處裡空值
+    table["key_id"] = table["key_id"].fillna(np.iinfo(np.int64).min)
+    table["key_id"] = table["key_id"].astype('int64')
+
+    return table
 
 
 # 詳細資料
@@ -42,11 +54,15 @@ def lesson_info(request):
     info = models.Lesson.objects.get(lessonid=lesson_id)
     table = read_frame(models.LessonTable.objects.filter(lesson_id_id=lesson_id))
     media = read_frame(models.Multimedia.objects.filter(lesson_id_id=lesson_id))
+    cover = read_frame(models.Multimedia.objects.filter(lesson_id_id=lesson_id, cover=1))
+    teacher = auth.models.User.objects.get(id=info.auth)
 
     # 整理輸出
     context['info'] = info
     context['table'] = table
     context['media'] = media
+    context['cover'] = cover
+    context['teacher'] = teacher
 
     return render(request, "lesson/lesson_info.html", context)
 

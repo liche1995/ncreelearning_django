@@ -1,27 +1,101 @@
 {% extends 'MasterPage.html'%}
+{%load static%}
+{% block addition_style%}
+section{
+    background-image: url({{cover.loc.0.image}});
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.8;
+}
+.mark{
+    max-height:30px;
+    width:auto;
+}
+{% endblock %}
 
 {%block content%}
 <section class="py-5 text-center container">
-    <div class="row py-lg-5">
+    <div class="row py-lg-5" >
         <center><h1>{{info.name}}</h1></center>
     </div>
 </section>
 <div class="container">
+    <div class="row p-1">
+        <div class="row">
+            <label>課程資訊：</label>
+            <textarea readonly>{{info.lessoninfo}}</textarea>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>課程種類：</label>
+                <text>{{info.lessontype}}</text>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>開課人：</label>
+                <text>{{teacher.last_name}}{{teacher.first_name}}</text>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>公告時間</label>
+                <text>{{info.annouce_time}}</text>
+            </div>
+            <div class="col">
+                <label>上課時間</label>
+                <text>{{info.start_time}}</text>
+            </div>
+            <div class="col">
+                <label>停止時間</label>
+                <text>{{info.finish_time}}</text>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>上課方式：</label>
+                {%if info.situation is 'online'%}
+                <text>線上教學</text>
+                {%elif info.situation is 'entity'%}
+                <text>實體課程</text>
+                {%else%}
+                <text>線上、實體並行</text>
+                {%endif%}
+                <a class="btn btn-primary" href="/lesson_join?lessonid={{info.lessonid}}">參加</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label>參加條件：</label>
+                {%if info.statue%}
+                <img class="img-responsive mark" src="{% static 'element/x-mark.png'%}">
+                <text style="color:red;">審核參加</text>
+                {%else%}
+                <img class="img-responsive mark" src="{% static 'element/check-mark.png'%}">
+                <text style="color:green;">自由參加</text>
+                {%endif%}
+            </div>
+        </div>
+        <div>
+            <div class="col">
+                <label>有無上課證明：</label>
+                {%if info.certificate%}
+                <img class="img-responsive mark" src="{% static 'element/check-mark.png'%}">
+                <text style="color:green;">有頒發證明</text>
+                {%else%}
+                <img class="img-responsive mark" src="{% static 'element/x-mark.png'%}">
+                <text style="color:red;">無頒發證明</text>
+                {%endif%}
+            </div>
+        </div>
+    </div>
 
 
-
-        lessonid = models.AutoField(primary_key=True, help_text='課程ID編號，自動產生')
-    name = models.CharField(max_length=45, help_text='課程名稱')
-    lessontype = models.CharField(max_length=45, help_text='課程種類')
-    auth = models.IntegerField(help_text='建立者')
-    situation = models.CharField(max_length=15, help_text='實體、線上或兩者皆有')
-    statue = models.BooleanField(default=False)
-    annouce_time = models.DateTimeField()
-    start_time = models.DateTimeField()
-    finish_time = models.DateTimeField(blank=True, null=True)
-    lessoninfo = models.CharField(max_length=300)
-    certificate = models.BooleanField(default=False)
-
+    <div class="row p-1">
+        <label>something</label>
+    </div>
 </div>
 
 {%endblock%}

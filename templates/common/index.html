@@ -2,7 +2,10 @@
 {%load static%}
 
 {% block addition_style%}
-
+.cover-inage{
+    max-height:245px;
+    width:auto;
+}
 {% endblock %}
 
 
@@ -20,9 +23,20 @@
             {% for list in newest_lesson_info.iloc %}
             <div class="col">
                 <div class="card shaow-sm">
-
-                    <div class="row"><img class="img-responsive" src="{% static 'element/empty_lesson_image.jpg'%}"></div>
-
+                    <!-- 確認有無封面 -->
+                    {%if list.key_id < -1024 %}
+                    <div class="row">
+                        <center>
+                            <img class="img-responsive cover-inage" src="{% static 'element/empty_lesson_image.jpg'%}">
+                        </center>
+                    </div>
+                    {%else%}
+                    <div class="row">
+                        <center>
+                            <img class="img-responsive cover-inage" src="{{list.image}}">
+                        </center>
+                    </div>
+                    {%endif%}
                     <!--卡片內文-->
                     <div class="card-body">
                         {%if list.lessoninfo %}
@@ -35,7 +49,7 @@
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
                                 <a type="button" class="btn btn-sm btn-outline-secondary" href="/lesson_info?lessonid={{list.lessonid}}">View</a>
-                                <a type="button" class="btn btn-sm btn-outline-secondary" href="/lesson_info">Join</a>
+                                <a type="button" class="btn btn-sm btn-outline-secondary" href="/lesson_join?lessonid={{list.lessonid}}">Join</a>
                             </div>
                             <small class="text-muted">開放上課日：{{list.start_time}}</small>
                         </div>
