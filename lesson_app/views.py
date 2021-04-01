@@ -153,6 +153,64 @@ def lesson_list(request):
     return render(request, "lesson/lesson_table.html", context)
 
 
+# 參加課程
+@login_required
+def join_lesson(request):
+    context = {}
+    # 資料調閱
+    lessoninfo = models.Lesson.objects.get(lessonid=int(request.GET.get('lessonid')))
+    in_class = _already_in_lesson(int(request.user.id), int(request.GET.get('lessonid')))
+
+    # 判斷參加或退出
+    if in_class:
+        context["situation"] = "in"
+
+    elif request.GET.get('situation') is not None:
+        if request.GET.get('situation') == "online":
+
+
+
+            print("online")
+        else:
+
+
+
+
+            print("entity")
+    else:
+        # 取得授課模式
+        situation = lessoninfo.situation
+        context["situation"] = situation
+        context["lessonid"] = lessoninfo.lessonid
+
+        ## 線上
+        #if situation is 'online':
+        #    models.Studentlist.objects.create(student_id=request.user.id,lesson_id=int(request.GET.get('lessonid')),
+        #                                      first_name=request.user.first_name,last_name=request.user.last_name,
+        #                                      lesson_situation='online')
+        ## 實體
+        #elif situation is 'entity':
+        #    models.Studentlist.objects.create(student_id=request.user.id,lesson_id=int(request.GET.get('lessonid')),
+        #                                      first_name=request.user.first_name,last_name=request.user.last_name,
+        #                                      lesson_situation='entity')
+
+        ## 兩者皆有
+        #else:
+        #    models.Studentlist.objects.create(student_id=request.user.id,lesson_id=int(request.GET.get('lessonid')),
+        #                                      first_name=request.user.first_name,last_name=request.user.last_name,
+        #                                      lesson_situation='both')
+
+
+
+    return render(request, "lesson/joinorquit.html", context)
+
+# 參加或退出
+def join_or_quit(request):
+
+    return
+
+
+
 # inner function
 def _get_teacher_lesson(userid: str = 0):
     if userid != 0:
@@ -163,6 +221,14 @@ def _get_teacher_lesson(userid: str = 0):
     result = read_frame(query)
 
     return result
+
+
+def _already_in_lesson(student_id: int, lesson_id: int):
+    try:
+        query = models.Studentlist.objects.get(student_id=student_id, lesson_id=lesson_id)
+        return True
+    except models.Studentlist.DoesNotExist:
+        return False
 
 
 def _creat_lesson_table(requese, size, count_str):

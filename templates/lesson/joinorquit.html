@@ -1,0 +1,17 @@
+{%extends "MasterPage.html"%}
+
+{%block content%}
+<div class="container text-center">
+    <div class="row p-3">
+        <text>參加或退出選項：</text>
+    </div>
+    <div class="btn-group">
+        {%if situation == 'online' or  situation == 'both'%}
+        <a class="btn btn-primary" href="joinorquit_lesson?lessonid={{lessonid}}&situation=online">參加線上課程</a>
+        {%endif%}
+        {%if situation == 'entity' or  situation == 'both'%}
+        <a class="btn btn-primary" href="joinorquit_lesson?lessonid={{lessonid}}&situation=entity">參加實體課程</a>
+        {%endif%}
+    </div>
+</div>
+{%endblock%}

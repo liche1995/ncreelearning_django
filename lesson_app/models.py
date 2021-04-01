@@ -33,6 +33,7 @@ class Studentlist(models.Model):
     lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name='lesson_id')
     first_name = models.CharField(max_length=150, verbose_name='first_name')
     last_name = models.CharField(max_length=150, verbose_name='last_name')
+    lesson_situation = models.CharField(max_length=150, verbose_name='lesson_situation', null=True)
 
 
 # 多媒體資料

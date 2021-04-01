@@ -75,26 +75,32 @@
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="/my_lesson">訂閱課程</a>
 
-                                {%if perms.lesson_app%}
+                                {%if request.user.groups.all.0.name == 'teacher'%}
+                                <!-- 教師權限區 -->
                                 <hr class="dropdown-divider">
-                                {%endif%}
-                                {%if perms.lesson_app.add_lesson%}
                                 <a class="dropdown-item" href="/new_lesson">新增課程</a>
-                                {%endif%}
-                                {%if perms.lesson_app.change_lesson%}
                                 <a class="dropdown-item" href="/edit_lesson">修改課程</a>
-                                {%endif%}
-                                {%if perms.lesson_app.delete_lesson%}
                                 <a class="dropdown-item" href="/delete_lesson">刪除課程</a>
-                                {%endif%}
-                                {%if perms.lesson_app.view_lesson%}
                                 <a class="dropdown-item" href="/lesson_list">開課清單</a>
+                                {%endif%}
+
+                                <!-- 學生權限區 -->
+                                {%if request.user.groups.all.0.name == 'student'%}
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item" href="">加入、退出課程</a>
+                                <a class="dropdown-item" href="">開始課程</a>
                                 {%endif%}
 
                                 <!-- 帳號設定區 -->
                                 <hr class="dropdown-divider">
                                 <a class="dropdown-item" href="/profileset">個人資料設定</a>
                                 <a class="dropdown-item" href="/change_password">修改密碼</a>
+
+                                {%if request.user.is_superuser%}
+                                <!-- 後台admin -->
+                                <hr class="dropdown-divider">
+                                <a class="dropdown-item" href="/admin">Admin系統</a>
+                                {%endif%}
                             </div>
                         </div>
                         <!-- 未登入狀態 -->

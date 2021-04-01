@@ -62,6 +62,8 @@ urlpatterns = [
     path('lesson_list', lesson_view.lesson_list),
 
     # 學生項目
+    path('joinorquit_lesson', lesson_view.join_lesson),
+
 
     # 系統管理項目
 
