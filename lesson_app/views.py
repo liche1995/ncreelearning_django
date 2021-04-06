@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.template.defaulttags import register
-from lesson_app import models
+from django.http import JsonResponse
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django_pandas.io import read_frame
@@ -8,6 +8,7 @@ import pandas as pd
 import numpy as np
 from distutils.util import strtobool
 from datetime import datetime
+from lesson_app import models
 
 
 # 課程表
@@ -153,63 +154,45 @@ def lesson_list(request):
     return render(request, "lesson/lesson_table.html", context)
 
 
-# 參加課程
+# 參加課程畫面
 @login_required
-def join_lesson(request):
+def joinorquit(request):
     context = {}
     # 資料調閱
     lessoninfo = models.Lesson.objects.get(lessonid=int(request.GET.get('lessonid')))
     in_class = _already_in_lesson(int(request.user.id), int(request.GET.get('lessonid')))
 
-    # 判斷參加或退出
-    if in_class:
-        context["situation"] = "in"
-
-    elif request.GET.get('situation') is not None:
-        if request.GET.get('situation') == "online":
-
-
-
-            print("online")
-        else:
-
-
-
-
-            print("entity")
-    else:
-        # 取得授課模式
-        situation = lessoninfo.situation
-        context["situation"] = situation
-        context["lessonid"] = lessoninfo.lessonid
-
-        ## 線上
-        #if situation is 'online':
-        #    models.Studentlist.objects.create(student_id=request.user.id,lesson_id=int(request.GET.get('lessonid')),
-        #                                      first_name=request.user.first_name,last_name=request.user.last_name,
-        #                                      lesson_situation='online')
-        ## 實體
-        #elif situation is 'entity':
-        #    models.Studentlist.objects.create(student_id=request.user.id,lesson_id=int(request.GET.get('lessonid')),
-        #                                      first_name=request.user.first_name,last_name=request.user.last_name,
-        #                                      lesson_situation='entity')
-
-        ## 兩者皆有
-        #else:
-        #    models.Studentlist.objects.create(student_id=request.user.id,lesson_id=int(request.GET.get('lessonid')),
-        #                                      first_name=request.user.first_name,last_name=request.user.last_name,
-        #                                      lesson_situation='both')
-
-
+    # 整理相關情報
+    context["in_class"] = in_class
+    situation = lessoninfo.situation
+    context["situation"] = situation
+    context["lessonid"] = lessoninfo.lessonid
 
     return render(request, "lesson/joinorquit.html", context)
 
-# 參加或退出
-def join_or_quit(request):
+
+# 參加課程
+def join_lesson(request):
+    context = {}
+    situation = request.GET.get('situation')
+
+    # 線上
+    if situation == 'online':
+        models.Studentlist.objects.create(student_id=request.user.id, lesson_id_id=int(request.GET.get('lessonid')),
+                                          first_name=request.user.first_name, last_name=request.user.last_name,
+                                          lesson_situation='online')
+    # 實體
+    elif situation == 'entity':
+        models.Studentlist.objects.create(student_id=request.user.id, lesson_id_id=int(request.GET.get('lessonid')),
+                                          first_name=request.user.first_name, last_name=request.user.last_name,
+                                          lesson_situation='entity')
+    return JsonResponse(context)
+
+
+# 退出課程
+def quit_lesson(request):
 
     return
-
-
 
 # inner function
 def _get_teacher_lesson(userid: str = 0):

@@ -62,10 +62,15 @@ urlpatterns = [
     path('lesson_list', lesson_view.lesson_list),
 
     # 學生項目
-    path('joinorquit_lesson', lesson_view.join_lesson),
+    path('joinorquit_lesson', lesson_view.joinorquit),
 
 
     # 系統管理項目
+
+    # ajax項目
+    path('ajax_active/join_online', lesson_view.join_lesson),
+    path('ajax_active/join_entity', lesson_view.join_lesson),
+    path('ajax_active/quit_lesson', lesson_view.quit_lesson),
 
     # 測試觸發
     path('test_500', main_view.test_500),

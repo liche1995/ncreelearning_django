@@ -1,5 +1,18 @@
 {%extends "MasterPage.html"%}
 
+{%block script%}
+<script>
+    $(document).ready(function(){
+        $("#online").click(function(){
+            $.get("/ajax_active/join_online",{lessonid:{{lessonid}},situation:'entity'}, function(ret){
+                $("#result").html(ret.active);
+            })
+        });
+    });
+</script>
+{%endblock%}
+
+
 {%block content%}
 <div class="container text-center">
     <div class="row p-3">
@@ -7,11 +20,23 @@
     </div>
     <div class="btn-group">
         {%if situation == 'online' or  situation == 'both'%}
-        <a class="btn btn-primary" href="joinorquit_lesson?lessonid={{lessonid}}&situation=online">參加線上課程</a>
+        <a id="online" class="btn btn-primary">參加線上課程</a>
+        {%else%}
+        <a class="btn btn-primary disabled" aria-disabled="true">參加線上課程</a>
         {%endif%}
         {%if situation == 'entity' or  situation == 'both'%}
-        <a class="btn btn-primary" href="joinorquit_lesson?lessonid={{lessonid}}&situation=entity">參加實體課程</a>
+        <a id="entity" class="btn btn-primary" href="joinorquit_lesson?lessonid={{lessonid}}&situation=entity">參加實體課程</a>
+        {%else%}
+        <a class="btn btn-primary disabled" aria-disabled="true">參加實體課程</a>
+        {%endif%}
+        {%if in_class == False %}
+        <a class="btn btn-danger disabled" aria-disabled="true">離開課程</a>
+        {%else%}
+        <a id="quit" class="btn btn-danger" href="joinorquit_lesson?lessonid={{lessonid}}&situation=entity">離開課程</a>
         {%endif%}
     </div>
+</div>
+<div id="result">
+
 </div>
 {%endblock%}

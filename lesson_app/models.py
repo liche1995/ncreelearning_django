@@ -29,7 +29,8 @@ class Lesson(models.Model):
 
 # 學生清單
 class Studentlist(models.Model):
-    student_id = models.IntegerField(verbose_name='id')
+    inner_id = models.AutoField(primary_key=True, verbose_name='id')
+    student_id = models.IntegerField(verbose_name='student_id')
     lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name='lesson_id')
     first_name = models.CharField(max_length=150, verbose_name='first_name')
     last_name = models.CharField(max_length=150, verbose_name='last_name')
@@ -56,4 +57,5 @@ class LessonTable(models.Model):
 
     class Meta:
         db_table = 'lesson_table'
+
 
