@@ -31,17 +31,25 @@ def for_index_page():
     media_result = models.Multimedia.objects.filter(lesson_id__in=lesson_result_table['lessonid'], cover=1)
     media_result_table = read_frame(media_result)
 
-    # 抽取id
-    key_id = media_result_table['lesson_id'].str.findall('\d+')
-    for i in range(key_id.shape[0]):
-        media_result_table.loc[i, 'key_id'] = int(key_id.iloc[i][0])
+    # 有資料
+    if media_result_table.shape[0] > 0:
+        # 抽取id
+        key_id = media_result_table['lesson_id'].str.findall('\d+')
+        for i in range(key_id.shape[0]):
+            media_result_table.loc[i, 'key_id'] = int(key_id.iloc[i][0])
 
-    # merge
-    table = pd.merge(lesson_result_table, media_result_table, left_on='lessonid', right_on='key_id', how='left')
-    # 處裡空值
-    table["key_id"] = table["key_id"].fillna(np.iinfo(np.int64).min)
-    table["key_id"] = table["key_id"].astype('int64')
-
+        # merge
+        table = pd.merge(lesson_result_table, media_result_table, left_on='lessonid', right_on='key_id', how='left')
+        # 處理空值
+        table["key_id"] = table["key_id"].fillna(np.iinfo(np.int64).min)
+        table["key_id"] = table["key_id"].astype('int64')
+    else:
+        table = lesson_result_table.copy()
+        for i in range(len(media_result_table.columns)):
+            table[media_result_table.columns[i]] = np.iinfo(np.int64).min
+            table[media_result_table.columns[i]] = table[media_result_table.columns[i]].astype('int64')
+        table["key_id"] = np.iinfo(np.int64).min
+        table["key_id"] = table["key_id"].astype('int64')
     return table
 
 
@@ -124,6 +132,7 @@ def edit_lesson(request):
     else:
         table = _get_teacher_lesson(request.user.id)
 
+    context["class_table"] = table
     return render(request, "lesson/lesson_table.html", context)
 
 
@@ -176,23 +185,38 @@ def join_lesson(request):
     context = {}
     situation = request.GET.get('situation')
 
-    # 線上
-    if situation == 'online':
-        models.Studentlist.objects.create(student_id=request.user.id, lesson_id_id=int(request.GET.get('lessonid')),
-                                          first_name=request.user.first_name, last_name=request.user.last_name,
-                                          lesson_situation='online')
-    # 實體
-    elif situation == 'entity':
-        models.Studentlist.objects.create(student_id=request.user.id, lesson_id_id=int(request.GET.get('lessonid')),
-                                          first_name=request.user.first_name, last_name=request.user.last_name,
-                                          lesson_situation='entity')
-    return JsonResponse(context)
+    # 檢查重複參加問題
+    in_class = _already_in_lesson(int(request.user.id), int(request.GET.get('lessonid')))
+    if in_class:
+        context['msg'] = 'alreadyin'
+        return JsonResponse(context)
+    else:
+        # 線上
+        if situation == 'online':
+            models.Studentlist.objects.create(student_id=request.user.id, lesson_id_id=int(request.GET.get('lessonid')),
+                                              first_name=request.user.first_name, last_name=request.user.last_name,
+                                              lesson_situation='online')
+            context['msg'] = "已參加線上課程"
+        # 實體
+        elif situation == 'entity':
+            models.Studentlist.objects.create(student_id=request.user.id, lesson_id_id=int(request.GET.get('lessonid')),
+                                              first_name=request.user.first_name, last_name=request.user.last_name,
+                                              lesson_situation='entity')
+            context['msg'] = "已參加實體課程"
+        return JsonResponse(context)
 
 
 # 退出課程
 def quit_lesson(request):
+    context = {}
+    try:
+        models.Studentlist.objects.get(student_id=request.user.id, lesson_id_id=int(request.GET.get('lessonid'))).delete()
+        context['msg'] = '退出成功'
+        context["situation"] = models.Lesson.objects.get(lessonid=int(request.GET.get('lessonid'))).situation
+    except models.Studentlist.DoesNotExist:
+        context['msg'] = '系統錯誤'
+    return JsonResponse(context)
 
-    return
 
 # inner function
 def _get_teacher_lesson(userid: str = 0):
@@ -208,7 +232,7 @@ def _get_teacher_lesson(userid: str = 0):
 
 def _already_in_lesson(student_id: int, lesson_id: int):
     try:
-        query = models.Studentlist.objects.get(student_id=student_id, lesson_id=lesson_id)
+        query = models.Studentlist.objects.get(student_id=student_id, lesson_id_id=lesson_id)
         return True
     except models.Studentlist.DoesNotExist:
         return False

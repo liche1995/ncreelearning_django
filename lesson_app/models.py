@@ -36,6 +36,9 @@ class Studentlist(models.Model):
     last_name = models.CharField(max_length=150, verbose_name='last_name')
     lesson_situation = models.CharField(max_length=150, verbose_name='lesson_situation', null=True)
 
+    class Meta:
+        db_table = 'lesson_studentlist'
+
 
 # 多媒體資料
 class Multimedia(models.Model):
@@ -46,6 +49,9 @@ class Multimedia(models.Model):
     file = models.FileField(verbose_name='file', upload_to='fileinfo/lesson_info', null=True)
     image = models.ImageField(verbose_name='image', upload_to='fileinfo/lesson_info', null=True)
     filename = models.CharField(max_length=150, verbose_name='filename')
+
+    class Meta:
+        db_table = 'lesson_multimedia'
 
 
 class LessonTable(models.Model):
