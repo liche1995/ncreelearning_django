@@ -75,17 +75,16 @@
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" href="/my_lesson">訂閱課程</a>
 
-                                {%if request.user.groups.all.0.name == 'teacher'%}
+                                {%if request.user.groups.all.0.name == 'teacher' or request.user.is_superuser%}
                                 <!-- 教師權限區 -->
                                 <hr class="dropdown-divider">
                                 <a class="dropdown-item" href="/new_lesson">新增課程</a>
-                                <a class="dropdown-item" href="/edit_lesson">修改課程</a>
-                                <a class="dropdown-item" href="/delete_lesson">刪除課程</a>
-                                <a class="dropdown-item" href="/lesson_list">開課清單</a>
+                                <a class="dropdown-item" href="/edit_lesson_list">課程編輯</a>
+
                                 {%endif%}
 
                                 <!-- 學生權限區 -->
-                                {%if request.user.groups.all.0.name == 'student'%}
+                                {%if request.user.groups.all.0.name == 'student' or request.user.is_superuser%}
                                 <hr class="dropdown-divider">
                                 <a class="dropdown-item" href="">加入、退出課程</a>
                                 <a class="dropdown-item" href="">開始課程</a>

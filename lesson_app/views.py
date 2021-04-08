@@ -95,6 +95,7 @@ def new_lesson(request):
         finish_time = request.POST.get('finish_time', '')
         lessoninfo = request.POST.get('lessoninfo', '')
         certificate = strtobool(request.POST.get('sing_licnese', ''))
+        address = request.POST.get('address', 'online mode')
 
         # 動態變化資料
         lesson_count = int(request.POST.get("lesson_count", ""))
@@ -106,7 +107,7 @@ def new_lesson(request):
         # 基本資料輸入
         new = models.Lesson.objects.create(name=name, lessontype=lessontype, auth=auth, situation=situation, statue=statue,
                                            annouce_time=annouce_time, start_time=start_time, finish_time=finish_time,
-                                           lessoninfo=lessoninfo, certificate=certificate)
+                                           lessoninfo=lessoninfo, certificate=certificate, address=address)
         new.save()
         # 課程表資料輸入
         for i in range(lesson_table.shape[0]):
@@ -122,9 +123,9 @@ def new_lesson(request):
         return render(request, "lesson/created_lesson.html", context)
 
 
-# 修改課程
+# 課程編輯清單
 @login_required
-def edit_lesson(request):
+def edit_lesson_list(request):
     context = {}
     # 調閱資料
     if request.user.is_staff:
@@ -136,31 +137,23 @@ def edit_lesson(request):
     return render(request, "lesson/lesson_table.html", context)
 
 
+@login_required
+def edit_lesson(request):
+
+    return render(request, "lesson/edit_lesson_page.html")
+
+
 # 刪除課程
 @login_required
 def delete_lesson(request):
     context = {}
-    # 調閱資料
-    if request.user.is_staff:
-        table = _get_teacher_lesson()
-    else:
-        table = _get_teacher_lesson(request.user.id)
-
-
-    return render(request, "lesson/lesson_table.html", context)
-
-
-# 開課清單
-@login_required
-def lesson_list(request):
-    context = {}
-    # 調閱資料
-    if request.user.is_staff:
-        table = _get_teacher_lesson()
-    else:
-        table = _get_teacher_lesson(request.user.id)
-
-    return render(request, "lesson/lesson_table.html", context)
+    lesson_id = int(request.GET.get('lessonid'))
+    try:
+        models.Lesson.objects.get(lessonid=lesson_id).delete()
+        context['result'] = True
+    except:
+        context['result'] = False
+    return JsonResponse(context)
 
 
 # 參加課程畫面
@@ -226,6 +219,13 @@ def _get_teacher_lesson(userid: str = 0):
         query = models.Lesson.objects.all()
 
     result = read_frame(query)
+
+    # 翻譯資料
+    result.loc[result["situation"] == "online", "situation"] = "線上"
+    result.loc[result["situation"] == "entity", "situation"] = "實體"
+    result.loc[result["situation"] == "both", "situation"] = "並行"
+
+    result.loc[result["address"] == "online mode", "address"] = "線上課程，無地址"
 
     return result
 

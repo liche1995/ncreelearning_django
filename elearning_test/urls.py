@@ -41,6 +41,7 @@ urlpatterns = [
     # 多媒體設定
     url('static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
     url('fileinfo/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+
     # 帳號控制
     path('login', user_view.login),
     path('logout', user_view.logout),
@@ -57,19 +58,17 @@ urlpatterns = [
 
     # 教師項目
     path('new_lesson', lesson_view.new_lesson),
+    path('edit_lesson_list', lesson_view.edit_lesson_list),
     path('edit_lesson', lesson_view.edit_lesson),
-    path('delete_lesson', lesson_view.delete_lesson),
-    path('lesson_list', lesson_view.lesson_list),
+    path('ajax_active/delete_lesson', lesson_view.delete_lesson),
 
     # 學生項目
     path('joinorquit_lesson', lesson_view.joinorquit),
-
+    path('ajax_active/join_lesson_order', lesson_view.join_lesson),
+    path('ajax_active/quit_lesson', lesson_view.quit_lesson),
 
     # 系統管理項目
 
-    # ajax項目
-    path('ajax_active/join_lesson_order', lesson_view.join_lesson),
-    path('ajax_active/quit_lesson', lesson_view.quit_lesson),
 
     # 測試觸發
     path('test_500', main_view.test_500),
