@@ -137,10 +137,27 @@ def edit_lesson_list(request):
     return render(request, "lesson/lesson_table.html", context)
 
 
+# 課程編輯頁面
 @login_required
 def edit_lesson(request):
-
     return render(request, "lesson/edit_lesson_page.html")
+
+
+def lesson_edit_page(request):
+    request_page = request.GET.get("page","")
+    if request_page == "basic_info":
+        html = "test.html"
+    elif request_page == "class_list":
+        html = "test.html"
+    elif request_page == "student_list":
+        html = "test.html"
+    elif request_page == "homework":
+        html = "test.html"
+    else:
+        html = "test.html"
+
+    return render(request, html)
+
 
 
 # 刪除課程
