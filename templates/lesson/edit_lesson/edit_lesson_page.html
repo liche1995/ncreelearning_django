@@ -1,8 +1,18 @@
 {% extends "MasterPage.html" %}
 
+{%block addition_script%}
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js" integrity="sha256-TAzGN4WNZQPLqSYvi+dXQMKehTYFoVOnveRqbi42frA=" crossorigin="anonymous"></script>
+{%endblock%}
+
 {%block script%}
 <script>
     $(document).ready(function(){
+        /* 基本資料區 */
+        var row_search_value = window.location.search.substring(1);
+
+        /* 預設載入 */
+        $("#form_area").load("ajax_show/lesson_edit_page?page=basic_info&" + row_search_value);
+
         /* 標示變化 */
         function mark_change(target){
             /* 清理屬性 */
@@ -16,29 +26,29 @@
         /*基本資料*/
         $("#basic_info").click(function(){
             mark_change("#basic_info");
-            $("#form_area").load("ajax_show/lesson_edit_page?page=basic_info");
+            $("#form_area").load("ajax_show/lesson_edit_page?page=basic_info&" + row_search_value);
         })
         /*課綱*/
         $("#class_list").click(function(){
             mark_change("#class_list");
-            $("#form_area").load("ajax_show/lesson_edit_page?page=class_list");
+            $("#form_area").load("ajax_show/lesson_edit_page?page=class_list&" + row_search_value);
         })
         /*學生清單*/
         $("#student_list").click(function(){
             mark_change("#student_list");
-            $("#form_area").load("ajax_show/lesson_edit_page?page=student_list");
+            $("#form_area").load("ajax_show/lesson_edit_page?page=student_list&" + row_search_value);
         })
         /*作業清單*/
         $("#homework").click(function(){
             mark_change("#homework");
-            $("#form_area").load("ajax_show/lesson_edit_page?page=homework");
+            $("#form_area").load("ajax_show/lesson_edit_page?page=homework&" + row_search_value);
         })
     ;})
 </script>
 {%endblock%}
 
 {%block content%}
-<div class="contant">
+<div class="container">
     <div class="row">
     <div class="d-flex flex-column p-3 bg-light" style="width: 280px;">
         <ul class="nav nav-pills flex-column mb-auto">

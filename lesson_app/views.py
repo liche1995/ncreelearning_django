@@ -134,30 +134,45 @@ def edit_lesson_list(request):
         table = _get_teacher_lesson(request.user.id)
 
     context["class_table"] = table
-    return render(request, "lesson/lesson_table.html", context)
+    return render(request, "lesson/edit_lesson/lesson_table.html", context)
 
 
 # 課程編輯頁面
 @login_required
 def edit_lesson(request):
-    return render(request, "lesson/edit_lesson_page.html")
+    return render(request, "lesson/edit_lesson/edit_lesson_page.html")
 
 
+# 課程編輯子頁面載入
 def lesson_edit_page(request):
-    request_page = request.GET.get("page","")
+    template = "lesson/edit_lesson/"
+    request_page = request.GET.get("page", "")
+    lessonid = request.GET.get("lessonid", "")
+    info = models.Lesson.objects.get(lessonid=lessonid)
+    media = models.Multimedia.objects.filter(lesson_id_id=lessonid)
+    student = models.Studentlist.objects.filter(lesson_id_id=lessonid)
+    lesson_table = models.LessonTable.objects.filter(lesson_id_id=lessonid)
+
+    context = {"info": info, "media": media, "student": student,
+               "lesson_table": lesson_table, "today": datetime.today()}
     if request_page == "basic_info":
-        html = "test.html"
+        html = "basic_info.html"
     elif request_page == "class_list":
-        html = "test.html"
+        html = "class_list.html"
     elif request_page == "student_list":
-        html = "test.html"
+        html = "student_list.html"
     elif request_page == "homework":
-        html = "test.html"
+        html = "homework.html"
     else:
         html = "test.html"
 
-    return render(request, html)
+    return render(request, template + html, context)
 
+
+# 課程編輯儲存
+def lesson_edit_save(request):
+
+    return render(request)
 
 
 # 刪除課程

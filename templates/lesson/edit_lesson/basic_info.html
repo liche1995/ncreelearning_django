@@ -1,0 +1,168 @@
+<script>
+    $(document).ready(function(){
+        $("#entity_radio,#both_radio").click(function(){
+            var element ="<lable>地址：</lable>\n<input type='text' class='form-control' name='address' id='address' value='{{info.address}}'>";
+            $("#address").html(element);
+        })
+        $("#online_radio").click(function(){
+            $("#address").empty();
+        })
+        $("#form").submit(function(event){
+            alert("active");
+        })
+        /*檢驗區*/
+        $("form").validate({
+            submitHandler:
+            function(form){
+                var checker = false;
+                var start_time = document.getElementById("start_time").value;
+                var finish_time = document.getElementById("finish_time").value;
+                var lesson_name = document.getElementById("lessoname").value;
+
+                if (lesson_name == ""){
+                    alert("課程名稱不可為空白");
+                    return false;
+                }
+                else if(start_time == ""){
+                    alert("上課日不可為空白");
+                    return false;
+                }
+                else if(finish_time == ""){
+                    alert("結束日不可為空白");
+                    return false;
+                }
+                else{
+                    checker = true;
+                };
+
+                /* 檢查日期合理性 */
+                const s_time = new Date(start_time);
+                const f_time = new Date(finish_time);
+
+                if(s_time>f_time){
+                    alert("上課日不可晚於結束日");
+                    return false;
+                }
+                else{
+                    checker = true;
+                };
+
+                if(checker == true){
+                    return true;
+                }
+                else{
+                    return false;
+                };
+            }
+       })
+    })
+</script>
+
+
+<style>
+textarea{
+resize:none;
+}
+</style>
+
+
+<div class="container">
+    <section class="text-center container">
+        <div class="row py-lg-5">
+            <center><h1>基本資料</h1></center>
+        </div>
+    </section>
+    <form id="form">
+        {%csrf_token%}
+        <div class="container">
+            <div class="row p-1">
+                <label>課程名稱：</label>
+                <input type="text" class="form-control" name="lessoname" id="lessoname" value="{{info.name}}">
+            </div>
+            <div class="row p-1">
+                <label>課程種類：</label>
+                <input type="text" class="form-control" name="lessontype" id="lessontype" value="{{info.lessontype}}">
+            </div>
+            <div class="row p-1">
+                <div class="col">
+                    <label>授課模式：</label>
+                    <div class="form-check">
+                        <input id="online_radio" class="form-check-input mt-0" type="radio" value="online" name="lesson_mode" required
+                               {%if info.situation == "online"%}
+                                checked
+                               {%endif%}>
+                        <label>線上課程</label>
+                    </div>
+                    <div class="form-check">
+                        <input id="entity_radio" class="form-check-input mt-0" type="radio" value="entity" name="lesson_mode" required
+                               {%if info.situation == "entity"%}
+                                checked
+                               {%endif%}>
+                        <label>實體課程</label>
+                    </div>
+                    <div class="form-check">
+                        <input id="both_radio" class="form-check-input mt-0" type="radio" value="both" name="lesson_mode" required
+                               {%if info.situation == "both"%}
+                                checked
+                               {%endif%}>
+                        <label>線上、實體並行</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <label>參加身分審核：</label>
+                    <div class="form-check">
+                        <input class="form-check-input mt-0" type="radio" value="False" name="statue" required
+                        {%if info.statue is False%}
+                            checked
+                        {%endif%}>
+                        <label>自由開放</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input mt-0" type="radio" value="True" name="statue" required
+                        {%if info.statue%}
+                            checked
+                        {%endif%}>
+                        <label>審核</label>
+                    </div>
+                </div>
+                <div class="col">
+                    <label>授課證書與否：</label>
+                <div class="form-check">
+                    <input class="form-check-input mt-0" type="radio" value="True" name="sing_licnese" required
+                        {%if info.certificate %}
+                            checked
+                        {%endif%}>
+                        <label>是</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input mt-0" type="radio" value="False" name="sing_licnese" required
+                        {%if info.certificate is False%}
+                            checked
+                        {%endif%}>
+                        <label>否</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row p-1">
+                <label>上課日：</label>
+                <input type="date" class="form-control" name="start_time" id="start_time"
+                       value="{{info.start_time.year|stringformat:'04d'}}-{{info.start_time.month|stringformat:'02d'}}-{{info.start_time.day|stringformat:'02d'}}">
+            </div>
+            <div class="row p-1">
+                <label>結束日：</label>
+                <input type="date" class="form-control" name="finish_time" id="finish_time"
+                       value="{{info.finish_time.year|stringformat:'04d'}}-{{info.finish_time.month|stringformat:'02d'}}-{{info.finish_time.day|stringformat:'02d'}}">
+            </div>
+            <div class="row p-1" id="address">
+            </div>
+            <div class="row p-1">
+                <label>說明：</label>
+                <textarea class="container" rows="5" name="lessoninfo">{{info.lessoninfo}}</textarea>
+            </div>
+        </div>
+        <center>
+            <button type="submit" class="btn btn-success">儲存</button>
+            <button type="button" class="btn btn-danger">取消</button>
+        </center>
+    </form>
+</div>

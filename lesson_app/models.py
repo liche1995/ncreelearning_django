@@ -36,6 +36,7 @@ class Studentlist(models.Model):
     first_name = models.CharField(max_length=150, verbose_name='first_name')
     last_name = models.CharField(max_length=150, verbose_name='last_name')
     lesson_situation = models.CharField(max_length=150, verbose_name='lesson_situation', null=True)
+    agree = models.BooleanField(verbose_name='agree', default=True)
 
     class Meta:
         db_table = 'lesson_studentlist'
