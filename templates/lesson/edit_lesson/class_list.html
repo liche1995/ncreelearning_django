@@ -1,10 +1,94 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<script>
+    var count = 0;
+    var lesson_count = 1;
+    function del(eleid){
+    var tab = document.getElementById(eleid);
+    tab.remove();
+    lesson_count -= 1;
 
-</body>
-</html>
+    /* 輸入隱藏變數 */
+    var hidden = document.getElementById('lesson_count');
+    hidden.value = lesson_count.toString();
+    };
+
+    $(document).ready(function(){
+        $("#addrow").click(function(){
+            /* 計數器 */
+            count += 1;
+            lesson_count += 1;
+            var item = count.toString();
+
+            /* 刪除指令建立 */
+            var del_order= "del('L" + item + "')";
+
+            var row = $("\
+            <tr id='L"+item+"'>\
+            <td><input type='number' name='ch"+item+"' min='0'></td>\
+            <td><input type='number' name='sb"+item+"' min='0'></td>\
+            <td><input type='text' name='title"+item+"' style='width: 100%;'></td>\
+            <td><button type='button' class='btn btn-danger' onclick="+ del_order +">刪除</button></td>\
+            </tr>\
+            ");
+
+            $("#lesson_table > tbody").append(row);
+
+            /* 輸入隱藏變數 */
+            var hidden = document.getElementById('lesson_count');
+            hidden.value = lesson_count.toString();
+            var hidden = document.getElementById('lesson_id_count');
+            hidden.value = count.toString();
+        });
+    })
+
+
+</script>
+
+<style>
+textarea{
+resize:none;
+}
+
+</style>
+
+<div class="container">
+    <section class="text-center container">
+    <div class="row py-lg-5">
+        <center><h1>課綱資料</h1></center>
+    </div>
+    </section>
+    <div id="background_value">
+        <input type="hidden" value="1" name="lesson_count" id="lesson_count">
+        <input type="hidden" value="0" name="lesson_id_count" id="lesson_id_count">
+    </div>
+    <div class="row p-1">
+        <div class="col">
+            <table class="table table-hover" id="lesson_table">
+                <thead>
+                    <tr>
+                        <th scope="col" width="10%">章</th>
+                        <th scope="col" width="10%">節</th>
+                        <th scope="col" width="70%">標題</th>
+                        <th scope="col" width="10%">刪除</th>
+                    </tr>
+                </thead>
+                <tbody id="class_list">
+                    {%for list in lesson_table.iloc%}
+                    <tr id='L{{forloop.counter0}}'>
+                        <td><input type="number" name="ch0" min="0"></td>
+                        <td><input type="number" name="sb0" min="0"></td>
+                        <td><input type="text" name="title0" style="width: 100%;"></td>
+                        {% if forloop.counter0 == 0%}
+                        <td></td>
+                        {% else %}
+                        <td><button type='button' class='btn btn-danger' onclick="del('L{{forloop.counter0}}')">刪除</button></td>
+                        {%endif%}
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+        <center>
+            <button id="addrow" type="button" class="btn btn-primary">新增章節</button>
+        </center>
+    </div>
+</div>

@@ -116,8 +116,9 @@ def new_lesson(request):
                                               sb=int(lesson_table["submit"][i]),
                                               title=lesson_table["title"][i])
         # 課程封面輸入
-        models.Multimedia.objects.create(lesson_id_id=new.lessonid, cover=1,
-                                         media_type=1, image=request.FILES['cover'], filename=request.FILES['cover'].name)
+        if 'cover' in request.FILES:
+            models.Multimedia.objects.create(lesson_id_id=new.lessonid, cover=1,
+                                             media_type=1, image=request.FILES['cover'], filename=request.FILES['cover'].name)
 
         context["lessonid"] = new.lessonid
         return render(request, "lesson/created_lesson.html", context)
@@ -149,9 +150,9 @@ def lesson_edit_page(request):
     request_page = request.GET.get("page", "")
     lessonid = request.GET.get("lessonid", "")
     info = models.Lesson.objects.get(lessonid=lessonid)
-    media = models.Multimedia.objects.filter(lesson_id_id=lessonid)
-    student = models.Studentlist.objects.filter(lesson_id_id=lessonid)
-    lesson_table = models.LessonTable.objects.filter(lesson_id_id=lessonid)
+    media = read_frame(models.Multimedia.objects.filter(lesson_id_id=lessonid))
+    student = read_frame(models.Studentlist.objects.filter(lesson_id_id=lessonid))
+    lesson_table = read_frame(models.LessonTable.objects.filter(lesson_id_id=lessonid))
 
     context = {"info": info, "media": media, "student": student,
                "lesson_table": lesson_table, "today": datetime.today()}
@@ -171,8 +172,37 @@ def lesson_edit_page(request):
 
 # 課程編輯儲存
 def lesson_edit_save(request):
+    context = {}
+    # 禁制非post操作
+    if request.method.lower() != 'post':
+        context["msg"] = "系統錯誤!"
+    else:
+        # 抓取資料
+        lessonid = request.POST.get('lessonid', '')
+        name = request.POST.get('lessoname', '')
+        lessontype = request.POST.get('lessontype', '')
+        situation = request.POST.get('lesson_mode', '')
+        statue = strtobool(request.POST.get('statue', ''))
+        start_time = request.POST.get('start_time', '')
+        finish_time = request.POST.get('finish_time', '')
+        lessoninfo = request.POST.get('lessoninfo', '')
+        certificate = strtobool(request.POST.get('sing_licnese', ''))
+        address = request.POST.get('address', 'online mode')
 
-    return render(request)
+        # 存取資料庫
+        info = models.Lesson.objects.get(lessonid=lessonid)
+        info.name = name
+        info.lessontype = lessontype
+        info.situation = situation
+        info.statue = statue
+        info.start_time = start_time
+        info.finish_time = finish_time
+        info.lessoninfo = lessoninfo
+        info.certificate = certificate
+        info.address = address
+        info.save()
+        context["msg"] = "完成更新"
+    return JsonResponse(context)
 
 
 # 刪除課程

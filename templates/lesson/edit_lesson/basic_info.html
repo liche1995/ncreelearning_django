@@ -7,54 +7,56 @@
         $("#online_radio").click(function(){
             $("#address").empty();
         })
-        $("#form").submit(function(event){
-            alert("active");
-        })
-        /*檢驗區*/
-        $("form").validate({
-            submitHandler:
-            function(form){
-                var checker = false;
-                var start_time = document.getElementById("start_time").value;
-                var finish_time = document.getElementById("finish_time").value;
-                var lesson_name = document.getElementById("lessoname").value;
-
-                if (lesson_name == ""){
-                    alert("課程名稱不可為空白");
-                    return false;
-                }
-                else if(start_time == ""){
-                    alert("上課日不可為空白");
-                    return false;
-                }
-                else if(finish_time == ""){
-                    alert("結束日不可為空白");
-                    return false;
-                }
-                else{
-                    checker = true;
-                };
-
-                /* 檢查日期合理性 */
-                const s_time = new Date(start_time);
-                const f_time = new Date(finish_time);
-
-                if(s_time>f_time){
-                    alert("上課日不可晚於結束日");
-                    return false;
-                }
-                else{
-                    checker = true;
-                };
-
-                if(checker == true){
-                    return true;
-                }
-                else{
-                    return false;
-                };
+        $("#save").click(function(even){
+            /*檢查*/
+            var lesson_name = document.getElementById("lessoname").value;
+            var start_time = document.getElementById("start_time").value;
+            var finish_time = document.getElementById("finish_time").value;
+            const s_time = new Date(start_time);
+            const f_time = new Date(finish_time);
+            /*空白檢查*/
+            if (lesson_name == ""){
+                alert("課程名稱不可為空白");
+                return false;
             }
-       })
+            else if(start_time == ""){
+                alert("上課日不可為空白");
+                return false;
+            }
+            else if(finish_time == ""){
+                alert("結束日不可為空白");
+                return false;
+            }
+
+            /*邏輯檢查*/
+            if(s_time>f_time){
+                alert("結束日不可早於上課日");
+                return false;
+            }
+            /* 繼續傳遞 */
+            even.preventDefault();
+            var form = $("#form")[0];
+            var formdata = new FormData(form);
+            $.ajax({
+                url:"/ajax_active/lesson_edit_save",
+                type: "POST",
+                data: formdata,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success : function(data)
+                {
+                    alert(data["msg"]);
+                },
+                error: function(data)
+                {
+                    alert(data["msg"]);
+                }
+            })
+        })
+        $("#cancel").click(function(even){
+            window.location.href = "/edit_lesson_list";
+        })
     })
 </script>
 
@@ -74,6 +76,9 @@ resize:none;
     </section>
     <form id="form">
         {%csrf_token%}
+        <div id="hidden_data">
+            <input type="hidden" id="lessonid" name="lessonid" value="{{info.lessonid}}">
+        </div>
         <div class="container">
             <div class="row p-1">
                 <label>課程名稱：</label>
@@ -161,8 +166,8 @@ resize:none;
             </div>
         </div>
         <center>
-            <button type="submit" class="btn btn-success">儲存</button>
-            <button type="button" class="btn btn-danger">取消</button>
+            <button id="save" type="submit" class="btn btn-success">儲存</button>
+            <button id="cancel" type="button" class="btn btn-danger">取消</button>
         </center>
     </form>
 </div>
