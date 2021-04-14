@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.template.defaulttags import register
-from django.http import JsonResponse
+from django.http import JsonResponse, Http404
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
 from django_pandas.io import read_frame
@@ -141,7 +141,11 @@ def edit_lesson_list(request):
 # 課程編輯頁面
 @login_required
 def edit_lesson(request):
-    return render(request, "lesson/edit_lesson/edit_lesson_page.html")
+    # 查無參數
+    if "lessonid" not in request.GET:
+        raise Http404
+    else:
+        return render(request, "lesson/edit_lesson/edit_lesson_page.html")
 
 
 # 課程編輯子頁面載入
@@ -153,12 +157,15 @@ def lesson_edit_page(request):
     media = read_frame(models.Multimedia.objects.filter(lesson_id_id=lessonid))
     student = read_frame(models.Studentlist.objects.filter(lesson_id_id=lessonid))
     lesson_table = read_frame(models.LessonTable.objects.filter(lesson_id_id=lessonid))
+    lesson_table = lesson_table.sort_values(by=['ch', 'sb'])
 
     context = {"info": info, "media": media, "student": student,
                "lesson_table": lesson_table, "today": datetime.today()}
     if request_page == "basic_info":
         html = "basic_info.html"
     elif request_page == "class_list":
+        context["lesson_count"] = lesson_table.shape[0]
+        context["lesson_id_count"] = lesson_table.shape[0] - 1
         html = "class_list.html"
     elif request_page == "student_list":
         html = "student_list.html"
@@ -205,6 +212,49 @@ def lesson_edit_save(request):
     return JsonResponse(context)
 
 
+# 課綱編輯儲存
+def lesson_table_edit_save(request):
+    context = {}
+    # 禁制非post操作
+    if request.method.lower() != "post":
+        context["msg"] = "系統錯誤!"
+    else:
+        lessonid = request.POST.get("lessonid", "")
+        # 取得原始課表
+        old_lesson_table = read_frame(models.LessonTable.objects.filter(lesson_id_id=lessonid))
+
+        # 動態變化資料
+        lesson_count = int(request.POST.get("lesson_count", ""))
+        lesson_id_count = int(request.POST.get("lesson_id_count", ""))
+
+        # 產生新課表
+        new_lesson_table = _creat_lesson_table(request, lesson_count, lesson_id_count, True)
+
+        # 移除
+        old_inner_id = old_lesson_table["inner_id"].to_numpy()
+        old_inner_id = old_inner_id.astype(int)
+        new_inner_id = new_lesson_table["inner_id"].to_numpy()
+        new_inner_id = new_inner_id.astype(int)
+        remove_target = np.setdiff1d(old_inner_id, new_inner_id)
+        for i in range(remove_target.shape[0]):
+            models.LessonTable.objects.get(inner_id=remove_target[i]).delete()
+
+        # 更新、新增
+        for i in range(new_lesson_table.shape[0]):
+            # 更新
+            if new_lesson_table["inner_id"][i] != 0:
+                pass
+            # 新增
+            else:
+                models.LessonTable.objects.create(lesson_id_id=lessonid,
+                                                  ch=int(new_lesson_table["chapter"][i]),
+                                                  sb=int(new_lesson_table["submit"][i]),
+                                                  title=new_lesson_table["title"][i])
+
+        context["msg"] = "完成更新"
+    return JsonResponse(context)
+
+
 # 刪除課程
 @login_required
 def delete_lesson(request):
@@ -243,7 +293,7 @@ def join_lesson(request):
     # 檢查重複參加問題
     in_class = _already_in_lesson(int(request.user.id), int(request.GET.get('lessonid')))
     if in_class:
-        context['msg'] = 'alreadyin'
+        context['msg'] = '先前已參加本課程'
         return JsonResponse(context)
     else:
         # 線上
@@ -300,25 +350,54 @@ def _already_in_lesson(student_id: int, lesson_id: int):
         return False
 
 
-def _creat_lesson_table(requese, size, count_str):
-    df = pd.DataFrame(columns=['chapter', 'submit', 'title'])
-    for i in range(count_str+1):
-        ch_index = 'ch' + str(i)
-        sb_index = 'sb' + str(i)
-        title_index = 'title' + str(i)
+def _creat_lesson_table(requese, size, count_str, update: bool = False):
+    # 判斷為建立新課程與否
+    if update is False:
+        df = pd.DataFrame(columns=['chapter', 'submit', 'title'])
+        for i in range(count_str + 1):
+            ch_index = 'ch' + str(i)
+            sb_index = 'sb' + str(i)
+            title_index = 'title' + str(i)
 
-        if requese.POST.get(ch_index) is not None:
-            if requese.POST.get(ch_index) == "":
-                ch = 0
-            else:
-                ch = requese.POST.get(ch_index)
-            if requese.POST.get(sb_index) == "":
-                sb = 0
-            else:
-                sb = requese.POST.get(sb_index)
+            if requese.POST.get(ch_index) is not None:
+                if requese.POST.get(ch_index) == "":
+                    ch = 0
+                else:
+                    ch = requese.POST.get(ch_index)
+                if requese.POST.get(sb_index) == "":
+                    sb = 0
+                else:
+                    sb = requese.POST.get(sb_index)
 
-            title = requese.POST.get(title_index)
-            df = df.append({'chapter': ch, 'submit': sb, 'title': title}, ignore_index=True)
+                title = requese.POST.get(title_index)
+                df = df.append({'chapter': ch, 'submit': sb, 'title': title}, ignore_index=True)
+    else:
+        df = pd.DataFrame(columns=['inner_id', 'chapter', 'submit', 'title'])
+        for i in range(count_str+1):
+            inner_id_index = 'inner' + str(i)
+            ch_index = 'ch' + str(i)
+            sb_index = 'sb' + str(i)
+            title_index = 'title' + str(i)
+
+            if requese.POST.get(ch_index) is not None:
+                # 新增項目 id設置為0
+                if requese.POST.get(inner_id_index) is None:
+                    inner_id = 0
+                else:
+                    inner_id = requese.POST.get(inner_id_index)
+
+                if requese.POST.get(ch_index) == "":
+                    ch = 0
+                else:
+                    ch = requese.POST.get(ch_index)
+
+                if requese.POST.get(sb_index) == "":
+                    sb = 0
+                else:
+                    sb = requese.POST.get(sb_index)
+
+                title = requese.POST.get(title_index)
+                df = df.append({'inner_id':inner_id, 'chapter': ch, 'submit': sb, 'title': title}, ignore_index=True)
 
     # 重新排列
     df = df.sort_values(by=['chapter', 'submit'])

@@ -1,6 +1,7 @@
 <script>
-    var count = 0;
-    var lesson_count = 1;
+    var count = {{lesson_id_count}};
+    var lesson_count = {{lesson_count}};
+
     function del(eleid){
     var tab = document.getElementById(eleid);
     tab.remove();
@@ -38,6 +39,33 @@
             var hidden = document.getElementById('lesson_id_count');
             hidden.value = count.toString();
         });
+
+        $("#save").click(function(even){
+            /* 繼續傳遞 */
+            even.preventDefault();
+            var form = $("#form")[0];
+            var formdata = new FormData(form);
+            $.ajax({
+                url:"/ajax_active/lesson_table_edit_save",
+                type: "POST",
+                data: formdata,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success : function(data)
+                {
+                    alert(data["msg"]);
+                },
+                error: function(data)
+                {
+                    alert(data["msg"]);
+                }
+            })
+        });
+
+        $("#cancel").click(function(even){
+            window.location.href="edit_lesson_list";
+        });
     })
 
 
@@ -56,11 +84,14 @@ resize:none;
         <center><h1>課綱資料</h1></center>
     </div>
     </section>
-    <div id="background_value">
-        <input type="hidden" value="1" name="lesson_count" id="lesson_count">
-        <input type="hidden" value="0" name="lesson_id_count" id="lesson_id_count">
-    </div>
-    <div class="row p-1">
+    <form id="form">
+        {%csrf_token%}
+        <div id="background_value">
+            <input type="hidden" value="{{lesson_count}}" name="lesson_count" id="lesson_count">
+            <input type="hidden" value="{{lesson_id_count}}" name="lesson_id_count" id="lesson_id_count">
+            <input type="hidden" value="{{info.lessonid}}" name="lessonid" id="lessonid">
+        </div>
+        <div class="row p-1">
         <div class="col">
             <table class="table table-hover" id="lesson_table">
                 <thead>
@@ -74,9 +105,10 @@ resize:none;
                 <tbody id="class_list">
                     {%for list in lesson_table.iloc%}
                     <tr id='L{{forloop.counter0}}'>
-                        <td><input type="number" name="ch0" min="0"></td>
-                        <td><input type="number" name="sb0" min="0"></td>
-                        <td><input type="text" name="title0" style="width: 100%;"></td>
+                        <input type="hidden" name="inner{{forloop.counter0}}" min="0" value="{{list.inner_id}}">
+                        <td><input type="number" name="ch{{forloop.counter0}}" min="0" value="{{list.ch}}"></td>
+                        <td><input type="number" name="sb{{forloop.counter0}}" min="0" value="{{list.sb}}"></td>
+                        <td><input type="text" name="title{{forloop.counter0}}" style="width: 100%;" value="{{list.title}}"></td>
                         {% if forloop.counter0 == 0%}
                         <td></td>
                         {% else %}
@@ -87,8 +119,17 @@ resize:none;
                 </tbody>
             </table>
         </div>
-        <center>
-            <button id="addrow" type="button" class="btn btn-primary">新增章節</button>
-        </center>
+        <div class="p-1">
+            <center>
+                <button id="addrow" type="button" class="btn btn-primary">新增章節</button>
+            </center>
+        </div>
+        <div class="p-1">
+            <center>
+                <button id="save" type="submit" class="btn btn-success">儲存</button>
+                <button id="cancel" type="button" class="btn btn-danger">取消</button>
+            </center>
+        </div>
     </div>
+    </form>
 </div>
