@@ -15,8 +15,8 @@
             var lessonid = event.target.value;
             var lesson_name = document.getElementById(lessonid.concat("_name"));
             var msg = "您準備要刪除課程：".concat(lesson_name.innerText);
-            var deside = confirm(msg);
-            if (deside){
+            var decide = confirm(msg);
+            if (decide){
                 $.get("/ajax_active/delete_lesson", {lessonid:lessonid}, function(ret){
                     if (ret.result){
                         var element_name = '#%lessinid%_tr'.replace("%lessinid%",lessonid);

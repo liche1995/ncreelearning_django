@@ -89,7 +89,7 @@ def new_lesson(request):
         lessontype = request.POST.get('lessontype', '')
         auth = request.user.id
         situation = request.POST.get('lesson_mode', '')
-        statue = strtobool(request.POST.get('statue', ''))
+        verify = strtobool(request.POST.get('verify', ''))
         annouce_time = request.POST.get('annouce_time', '')
         start_time = request.POST.get('start_time', '')
         finish_time = request.POST.get('finish_time', '')
@@ -105,7 +105,7 @@ def new_lesson(request):
 
         # 輸入資料庫
         # 基本資料輸入
-        new = models.Lesson.objects.create(name=name, lessontype=lessontype, auth=auth, situation=situation, statue=statue,
+        new = models.Lesson.objects.create(name=name, lessontype=lessontype, auth=auth, situation=situation, verify=verify,
                                            annouce_time=annouce_time, start_time=start_time, finish_time=finish_time,
                                            lessoninfo=lessoninfo, certificate=certificate, address=address)
         new.save()
@@ -168,6 +168,19 @@ def lesson_edit_page(request):
         context["lesson_id_count"] = lesson_table.shape[0] - 1
         html = "class_list.html"
     elif request_page == "student_list":
+        # 調閱使用者詳細資料
+        join_student = student["student_id"].to_list()
+        from users.models import UesrInfo
+        userinfo = read_frame(UesrInfo.objects.filter(id__in=join_student)
+                              .values('id', 'username', 'address', 'email', 'telephone', 'region'))
+
+        # merge
+        context["student"] = pd.merge(context["student"], userinfo, left_on='student_id', right_on='id')
+
+        # 翻譯資料
+        context["student"].loc[context["student"]["lesson_situation"] == "online", "lesson_situation"] = "線上"
+        context["student"].loc[context["student"]["lesson_situation"] == "entity", "lesson_situation"] = "實體"
+        context["student"].loc[context["student"]["lesson_situation"] == "both", "lesson_situation"] = "並行"
         html = "student_list.html"
     elif request_page == "homework":
         html = "homework.html"
@@ -189,7 +202,7 @@ def lesson_edit_save(request):
         name = request.POST.get('lessoname', '')
         lessontype = request.POST.get('lessontype', '')
         situation = request.POST.get('lesson_mode', '')
-        statue = strtobool(request.POST.get('statue', ''))
+        verify = strtobool(request.POST.get('verify', ''))
         start_time = request.POST.get('start_time', '')
         finish_time = request.POST.get('finish_time', '')
         lessoninfo = request.POST.get('lessoninfo', '')
@@ -201,7 +214,7 @@ def lesson_edit_save(request):
         info.name = name
         info.lessontype = lessontype
         info.situation = situation
-        info.statue = statue
+        info.verify = verify
         info.start_time = start_time
         info.finish_time = finish_time
         info.lessoninfo = lessoninfo
@@ -243,7 +256,11 @@ def lesson_table_edit_save(request):
         for i in range(new_lesson_table.shape[0]):
             # 更新
             if new_lesson_table["inner_id"][i] != 0:
-                pass
+                update = models.LessonTable.objects.get(inner_id=new_lesson_table["inner_id"][i])
+                update.ch = new_lesson_table["chapter"][i]
+                update.sb = new_lesson_table["submit"][i]
+                update.title = new_lesson_table["title"][i]
+                update.save()
             # 新增
             else:
                 models.LessonTable.objects.create(lesson_id_id=lessonid,
@@ -252,6 +269,13 @@ def lesson_table_edit_save(request):
                                                   title=new_lesson_table["title"][i])
 
         context["msg"] = "完成更新"
+    return JsonResponse(context)
+
+
+# 學生清單操作
+def student_manage(request):
+    context = {}
+
     return JsonResponse(context)
 
 

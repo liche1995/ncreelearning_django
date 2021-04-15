@@ -80,9 +80,9 @@ resize:none;
 
 <div class="container">
     <section class="text-center container">
-    <div class="row py-lg-5">
-        <center><h1>課綱資料</h1></center>
-    </div>
+        <div class="row py-lg-5">
+            <h1>課綱資料</h1>
+        </div>
     </section>
     <form id="form">
         {%csrf_token%}
@@ -92,39 +92,39 @@ resize:none;
             <input type="hidden" value="{{info.lessonid}}" name="lessonid" id="lessonid">
         </div>
         <div class="row p-1">
-        <div class="col">
-            <table class="table table-hover" id="lesson_table">
-                <thead>
-                    <tr>
-                        <th scope="col" width="10%">章</th>
-                        <th scope="col" width="10%">節</th>
-                        <th scope="col" width="70%">標題</th>
-                        <th scope="col" width="10%">刪除</th>
-                    </tr>
-                </thead>
-                <tbody id="class_list">
-                    {%for list in lesson_table.iloc%}
-                    <tr id='L{{forloop.counter0}}'>
-                        <input type="hidden" name="inner{{forloop.counter0}}" min="0" value="{{list.inner_id}}">
-                        <td><input type="number" name="ch{{forloop.counter0}}" min="0" value="{{list.ch}}"></td>
-                        <td><input type="number" name="sb{{forloop.counter0}}" min="0" value="{{list.sb}}"></td>
-                        <td><input type="text" name="title{{forloop.counter0}}" style="width: 100%;" value="{{list.title}}"></td>
-                        {% if forloop.counter0 == 0%}
-                        <td></td>
-                        {% else %}
-                        <td><button type='button' class='btn btn-danger' onclick="del('L{{forloop.counter0}}')">刪除</button></td>
-                        {%endif%}
-                    </tr>
-                    {%endfor%}
-                </tbody>
-            </table>
-        </div>
-        <div class="p-1">
+            <div class="col">
+                <table class="table table-hover" id="lesson_table">
+                    <thead>
+                        <tr>
+                            <th scope="col" width="10%">章</th>
+                            <th scope="col" width="10%">節</th>
+                            <th scope="col" width="70%">標題</th>
+                            <th scope="col" width="10%">刪除</th>
+                        </tr>
+                    </thead>
+                    <tbody id="class_list">
+                        {%for list in lesson_table.iloc%}
+                        <tr id='L{{forloop.counter0}}'>
+                            <input type="hidden" name="inner{{forloop.counter0}}" min="0" value="{{list.inner_id}}">
+                            <td><input type="number" name="ch{{forloop.counter0}}" min="0" value="{{list.ch}}"></td>
+                            <td><input type="number" name="sb{{forloop.counter0}}" min="0" value="{{list.sb}}"></td>
+                            <td><input type="text" name="title{{forloop.counter0}}" style="width: 100%;" value="{{list.title}}"></td>
+                            {% if forloop.counter0 == 0%}
+                            <td></td>
+                            {% else %}
+                            <td><button type='button' class='btn btn-danger' onclick="del('L{{forloop.counter0}}')">刪除</button></td>
+                            {%endif%}
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+            </div>
+        <div class="row p-1">
             <center>
                 <button id="addrow" type="button" class="btn btn-primary">新增章節</button>
             </center>
         </div>
-        <div class="p-1">
+        <div class="row p-1">
             <center>
                 <button id="save" type="submit" class="btn btn-success">儲存</button>
                 <button id="cancel" type="button" class="btn btn-danger">取消</button>

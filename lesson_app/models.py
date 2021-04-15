@@ -15,7 +15,7 @@ class Lesson(models.Model):
     lessontype = models.CharField(max_length=45, help_text='課程種類')
     auth = models.IntegerField(help_text='建立者', default=0)
     situation = models.CharField(max_length=15, help_text='實體、線上或兩者皆有')
-    statue = models.BooleanField(default=False)
+    verify = models.BooleanField(default=False)
     annouce_time = models.DateTimeField()
     start_time = models.DateTimeField()
     finish_time = models.DateTimeField(blank=True, null=True)
@@ -37,6 +37,7 @@ class Studentlist(models.Model):
     last_name = models.CharField(max_length=150, verbose_name='last_name')
     lesson_situation = models.CharField(max_length=150, verbose_name='lesson_situation', null=True)
     agree = models.BooleanField(verbose_name='agree', default=True)
+    join_reason = models.CharField(max_length=300, verbose_name='join_reason', null=True)
 
     class Meta:
         db_table = 'lesson_studentlist'
@@ -56,6 +57,7 @@ class Multimedia(models.Model):
         db_table = 'lesson_multimedia'
 
 
+# 課綱表
 class LessonTable(models.Model):
     inner_id = models.AutoField(primary_key=True, verbose_name='inner_id')
     lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name='lesson_id')

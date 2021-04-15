@@ -1,10 +1,110 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<script>
+    $(document).ready(function(){
+        /* 刪除 */
+        $(".delete_student").click(function(event){
+            var decide = confirm("是否刪除該學生?");
+        });
+        /* 詳細資料 */
+        $(".detail").click(function(event){
+            var detail_target = "#user_detail_" + event.target.value;
+            if($(detail_target).css("display") == "none"){
+                $(detail_target).show('slow');
+            }
+            else{
+                $(detail_target).hide('slow');
+            }
+        });
+        {%if info.verify%}
+        $(".denied").click(function(){});
+        $(".agree").click(function(){});
+        {%endif%}
+    })
+</script>
 
-</body>
-</html>
+<style>
+textarea{
+resize:none;
+}
+</style>
+
+<div class="container">
+    <section class="container text-center">
+        <div class="row py-lg-5">
+            <h1>學生清單</h1>
+        </div>
+    </section>
+    <div class="row p-1">
+        <div class="col p-1">
+            <table class="table table-hover" id="studen_list">
+                <thead>
+                    <tr>
+                        <th scope="col">姓氏</th>
+                        <th scope="col">名字</th>
+                        <th scope="col">上課模式</th>
+                        <th scope="col">允許參加</th>
+                        <th scope="col" width="12%">刪除</th>
+                        <th scope="col" width="14%">審核或詳細資料</th>
+                    </tr>
+                </thead>
+                <thead>
+                    {%for list in student.iloc%}
+                    <tr id="user_{{list.student_id}}">
+                        <th>{{list.last_name}}</th>
+                        <th>{{list.first_name}}</th>
+                        <th>{{list.lesson_situation}}</th>
+                        {% if list.agree%}
+                        <th style="color:green;">允許參加</th>
+                        {% else %}
+                        <th style="color:red;">未允許參加</th>
+                        {% endif %}
+                        <th><button class="btn btn-danger delete_student" type="button" id="delete"
+                                    value="{{list.student_id}}">刪除</button></th>
+                        <th><button class="btn btn-warning detail" type="button" id="verify"
+                                    value="{{list.student_id}}">展開/收回</button></th>
+                    </tr>
+                    <tr id="user_detail_{{list.student_id}}" style="display:none">
+                        <td colspan="100%">
+                            <div class="container">
+                                <div class="row p-1">
+                                    <label>ID：{{list.username}}</label>
+                                </div>
+                                <div class="row p-1">
+                                    <h5>聯絡資訊</h5>
+                                    <label>地址：{{list.address}}</label>
+                                    <label>電子信箱位置：{{list.email}}</label>
+                                    <label>電話號碼：{{list.telephone}}</label>
+                                    <label>地區：{{list.region}}</label>
+                                </div>
+                                {%if info.verify%}
+                                <div class="row p-1">
+                                    <label>參加理由：</label>
+                                    <textarea rows="3">{{list.join_reason}}</textarea>
+                                </div>
+                                {%endif%}
+                                {%if info.verify%}
+                                <div class="row">
+                                    <center>
+                                        <div class="p-1 btn-group">
+                                            <button type="button" class="btn btn-warning denied" id="denied"
+                                                    value="{{list.student_id}}"
+                                                    {%if list.agree is False%}disabled{%endif%}>拒絕參加</button>
+                                            <button type="button" class="btn btn-success agree" id="agree"
+                                                    value="{{list.student_id}}"
+                                                    {%if list.agree%}disabled{%endif%}>允許參加</button>
+                                        </div>
+                                    </center>
+                                </div>
+                                {%endif%}
+                            </div>
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </thead>
+            </table>
+        </div>
+
+
+
+    </div>
+
+</div>
