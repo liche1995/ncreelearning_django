@@ -41,6 +41,8 @@ def login(request):
 # 建立使用者
 def create_user(request):
     context = {}
+    if 'create_error' in request.session:
+        del request.session['create_error']
     # 建立註冊表單
     if len(request.POST) <= 3 or request.method == 'GET':
         return create_user_form(request)
@@ -49,6 +51,7 @@ def create_user(request):
     elif len(request.POST) > 3:
         username = request.POST.get('username', "")
         password = request.POST.get('password', "")
+        password2 = request.POST.get('password2', "")
         last_name = request.POST.get('last_name', "")
         first_name = request.POST.get('first_name', "")
         address = request.POST.get('address', "")
@@ -57,17 +60,29 @@ def create_user(request):
         region = request.POST.get('region', "")
 
         try:
-            # auth models
-            auth.models.User.objects.create_user(username=username, password=password,
-                                                 first_name=first_name, last_name=last_name,
-                                                 email=email)
-            user = auth.authenticate(username=username, password=password)
-            userid = user.id
-            # users info
-            models.UesrInfo.objects.create(id=userid, username=username, address=address, telephone=telephone,
-                                           first_name=first_name, last_name=last_name, region=region,
-                                           email=email)
-            return render(request, "account/successed_create_account.html", context)
+            # 密碼檢查
+            password_check = _passeword_format(password, password2)
+
+            if password_check:
+                # auth models
+                newuser = auth.models.User.objects.create_user(username=username, password=password,
+                                                               first_name=first_name, last_name=last_name,
+                                                               email=email)
+                userid = newuser.id
+                newuser.save()
+                # users info
+                models.UesrInfo.objects.create(id=userid, username=username, address=address, telephone=telephone,
+                                               first_name=first_name, last_name=last_name, region=region,
+                                               email=email)
+                # user group
+                newuser = auth.models.User.objects.get(id=userid)
+                student_group = auth.models.Group.objects.get(name="student")
+                newuser.groups.add(student_group)
+
+                return render(request, "account/successed_create_account.html", context)
+            else:
+                request.session['create_error'] = 1024
+                return create_user_form(request)
         except Exception as e:
             # 帳號已被建立
             if e.args[0] == 1062:
@@ -190,6 +205,13 @@ def change_password(request):
         # 重新渲染頁面
         return render(request, 'account/change_password.html', context)
 
+# 密碼格式檢查
+def _passeword_format(p1,p2):
+    # 檢查兩次密碼相同
+    if p1 != p2:
+        return False
+    else:
+        return True
 
 # 權限再確認
 def _recheck_password(requese):

@@ -3,6 +3,19 @@
         /* 刪除 */
         $(".delete_student").click(function(event){
             var decide = confirm("是否刪除該學生?");
+            if(decide){
+                var stident_id = event.target.value;
+                $.get("/ajax_active/kick_studnet",{lessonid: {{info.lessonid}},student_id: stident_id},
+                function(rec){
+                    if(rec.result){
+                        $("#user_"+stident_id).remove();
+                        alert(rec.msg);
+                    }
+                    else{
+                        alert(rec.msg);
+                    };
+                ;})
+            }
         });
         /* 詳細資料 */
         $(".detail").click(function(event){
@@ -15,8 +28,38 @@
             }
         });
         {%if info.verify%}
-        $(".denied").click(function(){});
-        $(".agree").click(function(){});
+        $(".denied").click(function(event){
+            var stident_id = event.target.value;
+            $.get("/ajax_active/student_manage",{lessonid: {{info.lessonid}},student_id: stident_id,decide: "denied"},
+            function(rec){
+                if(rec.system){
+                    $("#agree_" + stident_id).removeAttr('disabled');
+                    $("#denied_" + stident_id).attr('disabled', true);
+                    $("#verify_"+stident_id).css('color', 'red');
+                    $("#verify_"+stident_id).html("未允許參加");
+                    alert(rec.msg);
+                }
+                else{
+                    alert(rec.msg);
+                }
+            ;})
+        });
+        $(".agree").click(function(event){
+            var stident_id = event.target.value;
+            $.get("/ajax_active/student_manage",{lessonid: {{info.lessonid}},student_id: stident_id,decide: "agree"},
+            function(rec){
+                if(rec.system){
+                    $("#denied_" + stident_id).removeAttr('disabled');
+                    $("#agree_" + stident_id).attr('disabled', true);
+                    $("#verify_"+stident_id).css('color', 'green');
+                    $("#verify_"+stident_id).html("允許參加");
+                    alert(rec.msg);
+                }
+                else{
+                    alert(rec.msg);
+                }
+            ;})
+        });
         {%endif%}
     })
 </script>
@@ -41,7 +84,7 @@ resize:none;
                         <th scope="col">姓氏</th>
                         <th scope="col">名字</th>
                         <th scope="col">上課模式</th>
-                        <th scope="col">允許參加</th>
+                        <th scope="col" width="16%">允許參加</th>
                         <th scope="col" width="12%">刪除</th>
                         <th scope="col" width="14%">審核或詳細資料</th>
                     </tr>
@@ -53,9 +96,9 @@ resize:none;
                         <th>{{list.first_name}}</th>
                         <th>{{list.lesson_situation}}</th>
                         {% if list.agree%}
-                        <th style="color:green;">允許參加</th>
+                        <th id="verify_{{list.student_id}}" style="color:green;">允許參加</th>
                         {% else %}
-                        <th style="color:red;">未允許參加</th>
+                        <th id="verify_{{list.student_id}}" style="color:red;">未允許參加</th>
                         {% endif %}
                         <th><button class="btn btn-danger delete_student" type="button" id="delete"
                                     value="{{list.student_id}}">刪除</button></th>
@@ -85,11 +128,11 @@ resize:none;
                                 <div class="row">
                                     <center>
                                         <div class="p-1 btn-group">
-                                            <button type="button" class="btn btn-warning denied" id="denied"
-                                                    value="{{list.student_id}}"
-                                                    {%if list.agree is False%}disabled{%endif%}>拒絕參加</button>
-                                            <button type="button" class="btn btn-success agree" id="agree"
-                                                    value="{{list.student_id}}"
+                                            <button type="button" class="btn btn-warning denied"
+                                                    id="denied_{{list.student_id}}" value="{{list.student_id}}"
+                                                    {%if list.agree == False%}disabled{%endif%}>拒絕參加</button>
+                                            <button type="button" class="btn btn-success agree"
+                                                    id="agree_{{list.student_id}}" value="{{list.student_id}}"
                                                     {%if list.agree%}disabled{%endif%}>允許參加</button>
                                         </div>
                                     </center>
@@ -102,9 +145,6 @@ resize:none;
                 </thead>
             </table>
         </div>
-
-
-
     </div>
 
 </div>

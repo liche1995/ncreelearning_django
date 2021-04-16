@@ -275,9 +275,51 @@ def lesson_table_edit_save(request):
 # 學生清單操作
 def student_manage(request):
     context = {}
+    decide = request.GET.get("decide", "")
+    student_id = request.GET.get("student_id", "")
+    lessonid = request.GET.get("lessonid", "")
+    # 拒絕參加
+    if decide == "denied" and student_id != "" and lessonid != "":
+        student_lesson_info = models.Studentlist.objects.get(student_id=student_id, lesson_id_id=lessonid)
+        student_lesson_info.agree = False
+        student_lesson_info.save()
+
+        context["msg"] = "已拒絕參加"
+        context["system"] = True
+
+    # 允許參加
+    elif decide == "agree" and student_id != "" and lessonid != "":
+        student_lesson_info = models.Studentlist.objects.get(student_id=student_id, lesson_id_id=lessonid)
+        student_lesson_info.agree = True
+        student_lesson_info.save()
+
+        context["msg"] = "已允許參加"
+        context["system"] = True
+
+    # 特殊狀況
+    else:
+        context["msg"] = "系統錯誤"
+        context["system"] = False
 
     return JsonResponse(context)
 
+
+# 刪除學生
+def kick_studnet(request):
+    context = {}
+    student_id = request.GET.get("student_id", "")
+    lessonid = request.GET.get("lessonid", "")
+    try:
+        models.Studentlist.objects.get(student_id=student_id, lesson_id_id=lessonid).delete()
+        # 刪除成功
+        context["msg"] = "學生刪除成功"
+        context["result"] = True
+    except Exception as e:
+        # 刪除失敗
+        print(e.__doc__)
+        context["msg"] = "系統錯誤，刪除失敗"
+        context["result"] = False
+    return JsonResponse(context)
 
 # 刪除課程
 @login_required
@@ -287,7 +329,8 @@ def delete_lesson(request):
     try:
         models.Lesson.objects.get(lessonid=lesson_id).delete()
         context['result'] = True
-    except:
+    except Exception as e:
+        print(e.__doc__)
         context['result'] = False
     return JsonResponse(context)
 
