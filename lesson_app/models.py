@@ -69,3 +69,33 @@ class LessonTable(models.Model):
         db_table = 'lesson_table'
 
 
+# 習題列表
+class Homework(models.Model):
+    inner_id = models.AutoField(primary_key=True, verbose_name='inner_id')
+    lessontable_id = models.IntegerField(null=True, verbose_name='lessontable_id')
+    lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name='lesson_id')
+    title = models.CharField(max_length=150, null=False, verbose_name='title')
+    homeworkinfo = models.CharField(max_length=300, null=True, verbose_name='homeworkinfo')
+    attach_file_exist = models.BooleanField(default=False, verbose_name='attach_file_exist')
+    attach_file = models.FileField(upload_to='homework_data', null=True, verbose_name='attach_file')
+    start_time = models.DateField(default='1900-01-01', null=False, verbose_name='start_time')
+    finish_time = models.DateField(default='9999-12-31', verbose_name='finish_time')
+    turn_it_available = models.BooleanField(default=False, verbose_name='turn_it_available')
+
+
+    class Meta:
+        db_table = 'homework'
+
+
+# 習題資料
+class HomeworkSubmit(models.Model):
+    inner_id = models.AutoField(primary_key=True, verbose_name='inner_id')
+    lessontable_id = models.IntegerField(null=True, verbose_name='lessontable_id')
+    lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name='lesson_id')
+    user_id = models.IntegerField(null=False, verbose_name='user_id')
+    submitinfo = models.CharField(max_length=300, null=True,verbose_name='submitinfo')
+    attach_file_exist = models.BooleanField(default=False, verbose_name='attach_file_exist')
+    attach_file = models.FileField(upload_to='homework_data', null=True, verbose_name='attach_file')
+
+    class Meta:
+        db_table = 'homeworksubmit'

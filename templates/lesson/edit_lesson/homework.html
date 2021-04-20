@@ -1,10 +1,41 @@
+<script>
+    var user_id = {{request.user.id}};
+    var lessonid = {{info.lessonid}};
+    $(document).ready(function(){
+        $("#newhomework").click(function(enevt){
+            if($("#newhomework_form").css("display")=="none"){
+                $("#newhomework_form").show("slow");
+            }
+            else{
+                $("#newhomework_form").hide("slow");
+            }
+        ;})
+    })
+
+</script>
+
+
 <div class="container">
     <section class="container text-center">
         <div class="row py-lg-5">
             <h1>習題管理</h1>
         </div>
     </section>
+    <div class="row">
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="button" id="newhomework" class="btn btn-primary">新增作業</button>
+        </div>
+    </div>
+        <div class="row" id="newhomework_form" style="display:none">
 
-    <div class="row"></div>
-    <div class="row"></div>
+            <label>名稱</label>
+            <label>說明</label>
+            <label>有無附檔?</label>
+            <label>開始繳交日期</label>
+            <label>截止日期</label>
+            <label>允許遲交</label>
+
+            <button type="button" class="btn btn-success">建立</button>
+        </div>
+    <di class="row"></div>
 </div>
