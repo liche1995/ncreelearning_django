@@ -149,6 +149,7 @@ def edit_lesson(request):
 
 
 # 課程編輯子頁面載入
+@login_required
 def lesson_edit_page(request):
     template = "lesson/edit_lesson/"
     request_page = request.GET.get("page", "")
@@ -191,6 +192,7 @@ def lesson_edit_page(request):
 
 
 # 課程編輯儲存
+@login_required
 def lesson_edit_save(request):
     context = {}
     # 禁制非post操作
@@ -226,6 +228,7 @@ def lesson_edit_save(request):
 
 
 # 課綱編輯儲存
+@login_required
 def lesson_table_edit_save(request):
     context = {}
     # 禁制非post操作
@@ -273,6 +276,7 @@ def lesson_table_edit_save(request):
 
 
 # 學生清單操作
+@login_required
 def student_manage(request):
     context = {}
     decide = request.GET.get("decide", "")
@@ -304,7 +308,32 @@ def student_manage(request):
     return JsonResponse(context)
 
 
+# 作業操作
+@login_required
+def homework_active(request):
+    context = {}
+    # 抓取資料
+    if request.method.lower() == "get":
+        pass
+    # 新增資料
+    else:
+        # 整理表單資料
+        name = request.POST.get("name", "")
+        attach = request.POST.get("attach", "")
+        trun_it = request.POST.get("trun_it", "")
+        start_date = request.POST.get("start_date", "")
+        finish_date = request.POST.get("finish_date", "")
+        homeworkinfo = request.POST.get("homeworkinfo", "")
+
+        # 輸入資料庫
+
+        # 回傳成果
+        context["msg"] = "新增成功"
+    return JsonResponse(context)
+
+
 # 刪除學生
+@login_required
 def kick_studnet(request):
     context = {}
     student_id = request.GET.get("student_id", "")
@@ -320,6 +349,7 @@ def kick_studnet(request):
         context["msg"] = "系統錯誤，刪除失敗"
         context["result"] = False
     return JsonResponse(context)
+
 
 # 刪除課程
 @login_required
@@ -353,6 +383,7 @@ def joinorquit(request):
 
 
 # 參加課程
+@login_required
 def join_lesson(request):
     context = {}
     situation = request.GET.get('situation')
@@ -379,6 +410,7 @@ def join_lesson(request):
 
 
 # 退出課程
+@login_required
 def quit_lesson(request):
     context = {}
     try:

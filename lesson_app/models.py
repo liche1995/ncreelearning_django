@@ -82,7 +82,6 @@ class Homework(models.Model):
     finish_time = models.DateField(default='9999-12-31', verbose_name='finish_time')
     turn_it_available = models.BooleanField(default=False, verbose_name='turn_it_available')
 
-
     class Meta:
         db_table = 'homework'
 

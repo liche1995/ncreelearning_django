@@ -2,7 +2,8 @@
     var user_id = {{request.user.id}};
     var lessonid = {{info.lessonid}};
     $(document).ready(function(){
-        $("#newhomework").click(function(enevt){
+        /*新增作業表單展開*/
+        $("#newhomework").click(function(evevt){
             if($("#newhomework_form").css("display")=="none"){
                 $("#newhomework_form").show("slow");
             }
@@ -10,6 +11,33 @@
                 $("#newhomework_form").hide("slow");
             }
         ;})
+        /*附檔上傳啟動*/
+
+
+        /*新增送出*/
+        $("#build").click(function(event){
+            var form = $("#newhomework_form")[0];
+            var formdata = new FormData(form);
+            $.ajax({
+                url:"ajax_active/homework_active",
+                type: "POST",
+                data: formdata,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success : function(data)
+                {
+                    alert(data["msg"]);
+                },
+                error: function(data)
+                {
+                    alert(data["msg"]);
+                }
+            })
+
+        ;})
+
+        /*放棄新增*/
     })
 
 </script>
@@ -26,16 +54,61 @@
             <button type="button" id="newhomework" class="btn btn-primary">新增作業</button>
         </div>
     </div>
-        <div class="row" id="newhomework_form" style="display:none">
+        <form id="newhomework_form" style="display:none">
+            <div class="row" >
+                {%csrf_token%}
+                <div class="col p-1">
+                    <label>名稱：</label>
+                    <input type="text" class="form-control" id="name" name="name">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col p-1">
+                    <label>有無附檔?：</label>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" id="attach_false" name="attach" value=Fales checked>
+                        <label class="form-check-lable" for="attach_false">無</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input" id="attach_true" name="attach" value=True>
+                        <label class="form-check-lable" for="attach_true">有</label>
+                    </div>
+                </div>
+                <div class="col p-1">
+                    <label>允許遲交：</label>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input mt-0" id="trun_it_false" name="trun_it" value=False checked>
+                        <label class="form-check-lable" for="trun_it_false">不允許</label>
+                    </div>
+                    <div class="form-check">
+                        <input type="radio" class="form-check-input mt-0" id="trun_it_true" name="trun_it" value=True>
+                        <label class="form-check-lable" for="trun_it_true">允許</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col p-1">
+                    <label>開始繳交日期：</label>
+                    <input type="date" class="form-control" id="start_date" name="start_date">
+                </div>
+                <div class="col p-1">
+                    <label>截止日期：</label>
+                    <input type="date" class="form-control" id="finish_date" name="finish_date">
+                </div>
+            </div>
+            <div class="row">
+                <label class="row">說明：</label>
+                <textarea class="form-control" rows="5" style="width:100%;resize:none;"
+                          id="homeworkinfo" name="homeworkinfo"></textarea>
+            </div>
+            <div class="text-center">
+                <div class="btn-group text-center">
+                    <button id="build" type="button" class="btn btn-success">建立</button>
+                    <button id="giveup" type="button" class="btn btn-danger">放棄</button>
+                </div>
+            </div>
+        </form>
 
-            <label>名稱</label>
-            <label>說明</label>
-            <label>有無附檔?</label>
-            <label>開始繳交日期</label>
-            <label>截止日期</label>
-            <label>允許遲交</label>
 
-            <button type="button" class="btn btn-success">建立</button>
-        </div>
-    <di class="row"></div>
+    <div class="row"></div>
 </div>
