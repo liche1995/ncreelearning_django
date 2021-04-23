@@ -184,6 +184,8 @@ def lesson_edit_page(request):
         context["student"].loc[context["student"]["lesson_situation"] == "both", "lesson_situation"] = "並行"
         html = "student_list.html"
     elif request_page == "homework":
+        homework_info = models.Homework.objects.filter(lesson_id_id=lessonid)
+        context["homework_info"] = read_frame(homework_info)
         html = "homework.html"
     else:
         html = "test.html"
@@ -318,17 +320,28 @@ def homework_active(request):
     # 新增資料
     else:
         # 整理表單資料
+        lessontable_id = int(request.POST.get("lessontable_id", ""))
         name = request.POST.get("name", "")
-        attach = request.POST.get("attach", "")
-        trun_it = request.POST.get("trun_it", "")
+        attach = strtobool(request.POST.get("attach", ""))
+        lessonid = int(request.POST.get("lessonid", ""))
+        turn_it = strtobool(request.POST.get("turn_it", ""))
         start_date = request.POST.get("start_date", "")
         finish_date = request.POST.get("finish_date", "")
         homeworkinfo = request.POST.get("homeworkinfo", "")
 
         # 輸入資料庫
+        try:
+            db = models.Homework.objects.create(lessontable_id=lessontable_id, title=name, homeworkinfo=homeworkinfo,
+                                                attach_file_exist=attach, lesson_id_id=lessonid, finish_time=finish_date,
+                                                start_time=start_date, turn_it_available=turn_it)
 
-        # 回傳成果
-        context["msg"] = "新增成功"
+            # 回傳成果
+            context["msg"] = "新增成功"
+
+        except Exception as e:
+            print(e.__doc__)
+            context["msg"] = "系統錯誤"
+
     return JsonResponse(context)
 
 

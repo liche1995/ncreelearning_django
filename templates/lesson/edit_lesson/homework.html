@@ -12,12 +12,42 @@
             }
         ;})
         /*附檔上傳啟動*/
+        $("#attach_true,#attach_false").click(function(event){
+            if($("#fileupload").css("display")=="none" && $("#attach_true").prop("checked")){
+                $("#fileupload").show("slow");
+            }
+            else{
+                $("#fileupload").hide("slow");
+            }
+        ;})
 
 
         /*新增送出*/
         $("#build").click(function(event){
+            /*抓取表單*/
             var form = $("#newhomework_form")[0];
             var formdata = new FormData(form);
+
+            /*邏輯前端檢查*/
+            /*資料留空*/
+            if(document.getElementById("name").value==""){
+                alert("名稱不可留空");
+                return false;
+            }
+            if(document.getElementById("start_date").value=="" || document.getElementById("finish_date").value==""){
+                alert("時間不可留空");
+                return false;
+            }
+
+            /*截止日不可早於繳交日*/
+            var start_date = new Date(document.getElementById("start_date").value);
+            var finish_date = new Date(document.getElementById("finish_date").value);
+
+            if(start_date>finish_date){
+                alert("截止日不可早於繳交日");
+                return false;
+            ;}
+
             $.ajax({
                 url:"ajax_active/homework_active",
                 type: "POST",
@@ -28,6 +58,10 @@
                 success : function(data)
                 {
                     alert(data["msg"]);
+                    /*收起建立清單*/
+                    $("#newhomework_form").hide("slow");
+                    /*整理清單*/
+
                 },
                 error: function(data)
                 {
@@ -54,61 +88,79 @@
             <button type="button" id="newhomework" class="btn btn-primary">新增作業</button>
         </div>
     </div>
-        <form id="newhomework_form" style="display:none">
-            <div class="row" >
-                {%csrf_token%}
-                <div class="col p-1">
-                    <label>名稱：</label>
-                    <input type="text" class="form-control" id="name" name="name">
+    <form id="newhomework_form" style="display:none">
+        <div id="background_value">
+            <input type="hidden" value="{{info.lessonid}}" name="lessonid" id="lessonid">
+        </div>
+        <div class="row" >
+            {%csrf_token%}
+            <div class="col p-1">
+                <label>名稱：</label>
+                <input type="text" class="form-control" id="name" name="name">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col p-1">
+                <label>相關章節：</label>
+                <select class="form-select" name="lessontable_id">
+                    <option value=-1>不指定</option>
+                    {%for list in lesson_table.iloc%}
+                    <option value="{{list.inner_id}}">{{list.ch}}-{{list.sb}} {{list.title}}</option>
+                    {%endfor%}
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col p-1">
+                <label>有無附檔?：</label>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" id="attach_false" name="attach" value=False checked>
+                    <label class="form-check-lable" for="attach_false">無</label>
+                </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input" id="attach_true" name="attach" value=True>
+                    <label class="form-check-lable" for="attach_true">有</label>
+                </div>
+                <div id="fileupload" style="display:none">
+                    <input type="file" class="form-control">
                 </div>
             </div>
-            <div class="row">
-                <div class="col p-1">
-                    <label>有無附檔?：</label>
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" id="attach_false" name="attach" value=Fales checked>
-                        <label class="form-check-lable" for="attach_false">無</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input" id="attach_true" name="attach" value=True>
-                        <label class="form-check-lable" for="attach_true">有</label>
-                    </div>
+            <div class="col p-1">
+                <label>允許遲交：</label>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input mt-0" id="turn_it_false" name="turn_it" value=False checked>
+                    <label class="form-check-lable" for="turn_it_false">不允許</label>
                 </div>
-                <div class="col p-1">
-                    <label>允許遲交：</label>
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input mt-0" id="trun_it_false" name="trun_it" value=False checked>
-                        <label class="form-check-lable" for="trun_it_false">不允許</label>
-                    </div>
-                    <div class="form-check">
-                        <input type="radio" class="form-check-input mt-0" id="trun_it_true" name="trun_it" value=True>
-                        <label class="form-check-lable" for="trun_it_true">允許</label>
-                    </div>
+                <div class="form-check">
+                    <input type="radio" class="form-check-input mt-0" id="turn_it_true" name="turn_it" value=True>
+                    <label class="form-check-lable" for="turn_it_true">允許</label>
                 </div>
             </div>
-            <div class="row">
-                <div class="col p-1">
-                    <label>開始繳交日期：</label>
-                    <input type="date" class="form-control" id="start_date" name="start_date">
-                </div>
-                <div class="col p-1">
-                    <label>截止日期：</label>
-                    <input type="date" class="form-control" id="finish_date" name="finish_date">
-                </div>
+        </div>
+        <div class="row">
+            <div class="col p-1">
+                <label>開始繳交日期：</label>
+                <input type="date" class="form-control" id="start_date" name="start_date">
             </div>
-            <div class="row">
-                <label class="row">說明：</label>
-                <textarea class="form-control" rows="5" style="width:100%;resize:none;"
-                          id="homeworkinfo" name="homeworkinfo"></textarea>
+            <div class="col p-1">
+                <label>截止日期：</label>
+                <input type="date" class="form-control" id="finish_date" name="finish_date">
             </div>
-            <div class="text-center">
-                <div class="btn-group text-center">
-                    <button id="build" type="button" class="btn btn-success">建立</button>
-                    <button id="giveup" type="button" class="btn btn-danger">放棄</button>
-                </div>
+        </div>
+        <div class="row">
+            <label class="row">說明：</label>
+            <textarea class="form-control" rows="5" style="width:100%;resize:none;"
+                      id="homeworkinfo" name="homeworkinfo"></textarea>
+        </div>
+        <div class="text-center p-1">
+            <div class="btn-group text-center">
+                <button id="build" type="button" class="btn btn-success">建立</button>
+                <button id="giveup" type="button" class="btn btn-danger">放棄</button>
             </div>
-        </form>
-
-
-    <div class="row"></div>
+        </div>
+    </form>
+    <div class="row">
+        {%for list in homework_info.iloc%}
+        {%endfor%}
+    </div>
 </div>

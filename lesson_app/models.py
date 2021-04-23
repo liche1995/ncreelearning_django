@@ -77,7 +77,6 @@ class Homework(models.Model):
     title = models.CharField(max_length=150, null=False, verbose_name='title')
     homeworkinfo = models.CharField(max_length=300, null=True, verbose_name='homeworkinfo')
     attach_file_exist = models.BooleanField(default=False, verbose_name='attach_file_exist')
-    attach_file = models.FileField(upload_to='homework_data', null=True, verbose_name='attach_file')
     start_time = models.DateField(default='1900-01-01', null=False, verbose_name='start_time')
     finish_time = models.DateField(default='9999-12-31', verbose_name='finish_time')
     turn_it_available = models.BooleanField(default=False, verbose_name='turn_it_available')
@@ -94,7 +93,14 @@ class HomeworkSubmit(models.Model):
     user_id = models.IntegerField(null=False, verbose_name='user_id')
     submitinfo = models.CharField(max_length=300, null=True,verbose_name='submitinfo')
     attach_file_exist = models.BooleanField(default=False, verbose_name='attach_file_exist')
-    attach_file = models.FileField(upload_to='homework_data', null=True, verbose_name='attach_file')
 
     class Meta:
         db_table = 'homeworksubmit'
+
+
+# 習題檔案表
+class HomeworkFileTable(models.Model):
+    inner_id = models.AutoField(primary_key=True, verbose_name='inner_id')
+
+    class Meta:
+        db_table = 'homeworkfiletable'
