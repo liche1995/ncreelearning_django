@@ -89,7 +89,7 @@ resize:none;
                         <th scope="col" width="14%">審核或詳細資料</th>
                     </tr>
                 </thead>
-                <thead>
+                <tbody>
                     {%for list in student.iloc%}
                     <tr id="user_{{list.student_id}}">
                         <th>{{list.last_name}}</th>
@@ -142,7 +142,7 @@ resize:none;
                         </td>
                     </tr>
                     {%endfor%}
-                </thead>
+                </tbody>
             </table>
         </div>
     </div>

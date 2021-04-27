@@ -185,7 +185,12 @@ def lesson_edit_page(request):
         html = "student_list.html"
     elif request_page == "homework":
         homework_info = models.Homework.objects.filter(lesson_id_id=lessonid)
-        context["homework_info"] = read_frame(homework_info)
+
+        # merge
+        homework_info = pd.merge(read_frame(homework_info), lesson_table,
+                                 left_on="lessontable_id", right_on="inner_id",
+                                 suffixes=["_hw", "_lt"])
+        context["homework_info"] = homework_info
         html = "homework.html"
     else:
         html = "test.html"
@@ -318,7 +323,7 @@ def homework_active(request):
     if request.method.lower() == "get":
         pass
     # 新增資料
-    else:
+    elif request.method.lower() == "post":
         # 整理表單資料
         lessontable_id = int(request.POST.get("lessontable_id", ""))
         name = request.POST.get("name", "")
@@ -341,6 +346,8 @@ def homework_active(request):
         except Exception as e:
             print(e.__doc__)
             context["msg"] = "系統錯誤"
+    else:
+        pass
 
     return JsonResponse(context)
 
