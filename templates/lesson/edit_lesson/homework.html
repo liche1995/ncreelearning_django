@@ -109,7 +109,7 @@
             ;}
             $.ajax({
                 url:"ajax_active/homework_active",
-                type: "PUT",
+                type: "POST",
                 data: formdata,
                 contentType: false,
                 cache: false,
@@ -124,7 +124,7 @@
                 },
                 error: function(data)
                 {
-                    alert(data["msg"]);
+                    alert("系統錯誤，請聯絡系統管理人");
                 }
             })
         ;})
@@ -262,6 +262,7 @@
                                 {%csrf_token%}
                                 <div id="background_value_{{list.inner_id_hw}}">
                                     <input type="hidden" value="{{info.lessonid}}" name="lessonid" id="lessonid_{{list.inner_id_hw}}">
+                                    <input type="hidden" value="{{iist.inner_id_hw}}" name="homeworkid" id="homeworkid{{list.inner_id_hw}}">
                                 </div>
                                 <div class="row" >
                                     {%csrf_token%}

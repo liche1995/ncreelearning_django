@@ -188,8 +188,21 @@ def lesson_edit_page(request):
 
         # merge
         homework_info = pd.merge(read_frame(homework_info), lesson_table,
-                                 left_on="lessontable_id", right_on="inner_id",
+                                 left_on="lessontable_id", right_on="inner_id", how="left",
                                  suffixes=["_hw", "_lt"])
+        # 無章節修飾
+        homework_info.loc[homework_info["ch"].isnull(), "ch"] = 0
+        homework_info.loc[homework_info["sb"].isnull(), "sb"] = 0
+        homework_info.loc[homework_info["title_lt"].isnull(), "title_lt"] = "未指定章節"
+        homework_info["inner_id_lt"] = homework_info["lessontable_id"]
+
+        change_columns = np.where(homework_info.dtypes == np.float64)
+        change_columns_name = homework_info.columns[change_columns].to_list()
+        homework_info[change_columns_name] = homework_info[change_columns_name].astype(int)
+
+        # sort
+        homework_info = homework_info.sort_values(by=["ch", "sb", "title_hw"])
+
         context["homework_info"] = homework_info
         html = "homework.html"
     else:
@@ -323,7 +336,7 @@ def homework_active(request):
     if request.method.lower() == "get":
         pass
     # 新增資料
-    elif request.method.lower() == "post":
+    elif request.method.lower() == "post" and "homeworkid" in request.POST is False:
         # 整理表單資料
         lessontable_id = int(request.POST.get("lessontable_id", ""))
         name = request.POST.get("name", "")
@@ -346,7 +359,7 @@ def homework_active(request):
         except Exception as e:
             print(e.__doc__)
             context["msg"] = "系統錯誤"
-    else:
+    elif request.method.lower() == "post" and "homeworkid" in request.POST :
         pass
 
     return JsonResponse(context)
