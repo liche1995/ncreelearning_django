@@ -67,6 +67,7 @@ urlpatterns = [
     path('ajax_active/student_manage', lesson_view.student_manage),
     path('ajax_active/kick_studnet', lesson_view.kick_studnet),
     path('ajax_active/homework_active', lesson_view.homework_active),
+    path('ajax_active/delete_homework', lesson_view.delete_homework),
 
     # 學生項目
     path('joinorquit_lesson', lesson_view.joinorquit),

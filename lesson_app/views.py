@@ -3,7 +3,9 @@ from django.template.defaulttags import register
 from django.http import JsonResponse, Http404
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 from django_pandas.io import read_frame
+from rest_framework.decorators import api_view
 import pandas as pd
 import numpy as np
 from distutils.util import strtobool
@@ -359,11 +361,54 @@ def homework_active(request):
         except Exception as e:
             print(e.__doc__)
             context["msg"] = "系統錯誤"
-    elif request.method.lower() == "post" and "homeworkid" in request.POST :
-        pass
+    # 更新作業資料
+    elif request.method.lower() == "post" and "homeworkid" in request.POST:
+        # 整理表單資料
+        homeworkid = int(request.POST.get("homeworkid", ""))
+        lessontable_id = int(request.POST.get("lessontable_id", ""))
+        name = request.POST.get("name", "")
+        attach = strtobool(request.POST.get("attach", ""))
+        lessonid = int(request.POST.get("lessonid", ""))
+        turn_it = strtobool(request.POST.get("turn_it", ""))
+        start_date = request.POST.get("start_date", "")
+        finish_date = request.POST.get("finish_date", "")
+        homeworkinfo = request.POST.get("homeworkinfo", "")
+
+        # 輸入資料庫
+        try:
+            db = models.Homework.objects.get(inner_id=homeworkid)
+            db.lessontable_id = lessontable_id
+            db.name = name
+            db.attach = attach
+            db.lessonid = lessonid
+            db.turn_it_available = turn_it
+            db.start_date = start_date
+            db.finish_date = finish_date
+            db.homeworkinfo = homeworkinfo
+            db.save()
+
+            # 回傳成果
+            context["msg"] = "更新成功"
+
+        except Exception as e:
+            print(e.__doc__)
+            context["msg"] = "系統錯誤"
 
     return JsonResponse(context)
 
+
+# 刪除作業
+@login_required
+def delete_homework(request):
+    context = {}
+    homeworkid = int(request.GET.get("homeworkid", ""))
+    try:
+        models.Homework.objects.get(inner_id=homeworkid)
+        context["result"] = True
+    except Exception as e:
+        print(e.__doc__)
+
+    return JsonResponse(context)
 
 # 刪除學生
 @login_required
