@@ -23,6 +23,24 @@ class Lesson(models.Model):
     certificate = models.BooleanField(default=False)
     address = models.CharField(max_length=300, default='online mode')
 
+    # return dictionary
+    def to_dict(self):
+        return_data = {
+            "lessonid": self.lessonid,
+            "name": self.name,
+            "lessontype": self.lessontype,
+            "auth": self.auth,
+            "situation": self.situation,
+            "verify": self.verify,
+            "annouce_time": self.annouce_time,
+            "start_time": self.start_time,
+            "finish_time": self.finish_time,
+            "lessoninfo": self.lessoninfo,
+            "certificate": self.certificate,
+            "address": self.address,
+        }
+        return return_data
+
     class Meta:
         managed = False
         db_table = 'lesson'

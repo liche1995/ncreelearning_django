@@ -54,7 +54,7 @@ urlpatterns = [
     # 登入後操作項目
     # 共通項目
     path('profileset', user_view.profileset),
-    path('my_lesson', lesson_view.callesson),
+    path('lesson_list', lesson_view.callesson),
 
     # 教師項目
     path('new_lesson', lesson_view.new_lesson),
@@ -71,6 +71,7 @@ urlpatterns = [
 
     # 學生項目
     path('joinorquit_lesson', lesson_view.joinorquit),
+    path("join_lesson_list", lesson_view.join_lesson_list),
     path('ajax_active/join_lesson_order', lesson_view.join_lesson),
     path('ajax_active/quit_lesson', lesson_view.quit_lesson),
 

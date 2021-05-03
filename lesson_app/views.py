@@ -403,12 +403,15 @@ def delete_homework(request):
     context = {}
     homeworkid = int(request.GET.get("homeworkid", ""))
     try:
-        models.Homework.objects.get(inner_id=homeworkid)
+        target = models.Homework.objects.get(inner_id=homeworkid)
+        target.delete()
         context["result"] = True
     except Exception as e:
         print(e.__doc__)
+        context["result"] = False
 
     return JsonResponse(context)
+
 
 # 刪除學生
 @login_required
@@ -485,6 +488,31 @@ def join_lesson(request):
                                               lesson_situation='entity')
             context['msg'] = "已參加實體課程"
         return JsonResponse(context)
+
+
+# 參加訂閱課程清單
+@login_required
+def join_lesson_list(request):
+    context = {}
+    # 已加入課程清單
+    join_list = models.Studentlist.objects.filter(student_id=request.user.id)
+
+    # 加入課程資料解析
+    columns = [fields.name for fields in models.Lesson._meta.fields]
+    lesson = pd.DataFrame(columns=columns)
+    for data in join_list:
+        dict_data = pd.DataFrame(data.lesson_id.to_dict(), index=[0])
+        lesson = lesson.append(dict_data)
+
+    # 開課人資料調閱
+    teacher = read_frame(auth.models.User.objects.filter(id__in=lesson["auth"].to_list()))
+
+    # merge
+    context["result"] = pd.merge(lesson, teacher, left_on="auth", right_on="id")
+
+    # 翻譯資料
+
+    return render(request, "lesson/join_lesson_list.html", context)
 
 
 # 退出課程

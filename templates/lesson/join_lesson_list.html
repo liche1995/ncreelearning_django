@@ -1,0 +1,44 @@
+{%extends 'MasterPage.html'%}
+
+{%block content%}
+<section class="text-center container">
+    <div class="row py-lg-5">
+        <center><h1>訂閱參加課程清單</h1></center>
+    </div>
+</section>
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>課程名</th>
+                <th>課程種類</th>
+                <th>開課人</th>
+                <th>上課時間</th>
+                <th>結束時間</th>
+                <th>上課模式</th>
+                <th>地點</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for list in result.iloc %}
+            <tr>
+                <th>{{list.name}}</th>
+                <th>{{list.lessontype}}</th>
+                <th>{{list.last_name}}{{list.first_name}}</th>
+                <th>{{list.start_time}}</th>
+                <th>{{list.finish_time}}</th>
+                <th>{{list.situation}}</th>
+                <th>{{list.address}}</th>
+                <th><button class="btn btn-primary">詳細</button></th>
+            </tr>
+            <tr style="">
+                <td colspan="100%">
+
+                </td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
+{%endblock%}
