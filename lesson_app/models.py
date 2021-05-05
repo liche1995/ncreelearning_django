@@ -87,6 +87,17 @@ class LessonTable(models.Model):
         db_table = 'lesson_table'
 
 
+# 教材連接表
+class LessonRelatedMedia(models.Model):
+    inner_id = models.AutoField(primary_key=True, null=False)
+    lesson_id = models.IntegerField(null=False)
+    t_id = models.ForeignKey(LessonTable, on_delete=models.CASCADE, null=False)
+    media_id = models.OneToOneField(Multimedia, on_delete=models.CASCADE, null=False)
+
+    class Meta:
+        db_table = "lesson_related_media"
+
+
 # 習題列表
 class Homework(models.Model):
     inner_id = models.AutoField(primary_key=True, verbose_name='inner_id')

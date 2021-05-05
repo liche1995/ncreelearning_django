@@ -72,8 +72,10 @@ urlpatterns = [
     # 學生項目
     path('joinorquit_lesson', lesson_view.joinorquit),
     path("join_lesson_list", lesson_view.join_lesson_list),
+    path("class_room", lesson_view.class_room),
     path('ajax_active/join_lesson_order', lesson_view.join_lesson),
     path('ajax_active/quit_lesson', lesson_view.quit_lesson),
+
 
     # 系統管理項目
 

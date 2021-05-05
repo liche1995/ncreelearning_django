@@ -1,5 +1,12 @@
 {%extends 'MasterPage.html'%}
 
+{% block script%}
+<script>
+    $(document).ready(function(){
+    ;})
+</script>
+{% endblock %}
+
 {%block content%}
 <section class="text-center container">
     <div class="row py-lg-5">
@@ -30,12 +37,15 @@
                 <th>{{list.finish_time}}</th>
                 <th>{{list.situation}}</th>
                 <th>{{list.address}}</th>
-                <th><button class="btn btn-primary">詳細</button></th>
-            </tr>
-            <tr style="">
-                <td colspan="100%">
-
-                </td>
+                <th>
+                    <button class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">操作</button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="/class_room?lessonid={{list.lessonid}}">上課</a>
+                            <a class="dropdown-item" href="/handout_homework?lessonid={{list.lessonid}}">繳交作業</a>
+                            <a class="dropdown-item" href="/">與開課人聯絡</a>
+                            <a class="dropdown-item" href="/joinorquit_lesson?lessonid={{list.lessonid}}">參加或退出選項</a>
+                        </div>
+                </th>
             </tr>
             {%endfor%}
         </tbody>

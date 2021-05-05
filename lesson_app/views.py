@@ -3,9 +3,7 @@ from django.template.defaulttags import register
 from django.http import JsonResponse, Http404
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt
 from django_pandas.io import read_frame
-from rest_framework.decorators import api_view
 import pandas as pd
 import numpy as np
 from distutils.util import strtobool
@@ -515,6 +513,38 @@ def join_lesson_list(request):
     return render(request, "lesson/join_lesson_list.html", context)
 
 
+# 上課
+@login_required
+def class_room(request):
+    context = {}
+    try:
+        # get data
+        lessonid = request.GET.get("lessonid", "")
+        lesson_table_inner_id = request.GET.get("t_id", -1)
+        context["inner_id"] = int(lesson_table_inner_id)
+
+        # 調閱課程資料
+        context["lesson_info"] = models.Lesson.objects.get(lessonid=lessonid)
+
+        # 調閱課綱
+        lesson_table = models.LessonTable.objects.filter(lesson_id_id=lessonid)
+        context["lesson_table"] = read_frame(lesson_table).sort_values(by=['ch', 'sb'])
+
+        # 調閱課程資訊
+        # 教材抓取
+        lesson_media = models.LessonRelatedMedia.objects.filter(t_id_id=lesson_table_inner_id)
+        context["lesson_media"] = lesson_media
+
+        # 作業資訊抓取
+        homework_info = models.Homework.objects.filter(lessontable_id=lesson_table_inner_id)
+        context["homework_info"] = homework_info
+
+    except models.Lesson.DoesNotExist:
+        raise Http404
+
+    return render(request, "lesson/class_room/class_room.html", context)
+
+
 # 退出課程
 @login_required
 def quit_lesson(request):
@@ -602,7 +632,7 @@ def _creat_lesson_table(requese, size, count_str, update: bool = False):
                     sb = requese.POST.get(sb_index)
 
                 title = requese.POST.get(title_index)
-                df = df.append({'inner_id':inner_id, 'chapter': ch, 'submit': sb, 'title': title}, ignore_index=True)
+                df = df.append({'inner_id': inner_id, 'chapter': ch, 'submit': sb, 'title': title}, ignore_index=True)
 
     # 重新排列
     df = df.sort_values(by=['chapter', 'submit'])
