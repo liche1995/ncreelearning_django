@@ -13,6 +13,16 @@
     };
 
     $(document).ready(function(){
+        $(".detail_button").click(function(even){
+            var target_id = even.target.value;
+            if($("#" + target_id).css("display")=="none"){
+                $("#" + target_id).show("slow");
+            }
+            else{
+                $("#" + target_id).hide("slow");
+            }
+        ;})
+
         $("#addrow").click(function(){
             /* 計數器 */
             count += 1;
@@ -63,6 +73,12 @@
             })
         });
 
+        $(".add_file").click(function(even){
+            var target_id="#file_list_" + even.target.value;
+            var input_element = "<input class='form-control' type='file' name='new'>";
+            $(target_id).append(input_element);
+        ;})
+
         $("#cancel").click(function(even){
             window.location.href="edit_lesson_list";
         });
@@ -98,22 +114,42 @@ resize:none;
                         <tr>
                             <th scope="col" width="10%">章</th>
                             <th scope="col" width="10%">節</th>
-                            <th scope="col" width="70%">標題</th>
+                            <th scope="col" width="60%">標題</th>
+                            <th scope="col" width="10%">詳細操作</th>
                             <th scope="col" width="10%">刪除</th>
                         </tr>
                     </thead>
                     <tbody id="class_list">
                         {%for list in lesson_table.iloc%}
-                        <tr id='L{{forloop.counter0}}'>
+                        <tr id="L_{{forloop.counter0}}">
                             <input type="hidden" name="inner{{forloop.counter0}}" min="0" value="{{list.inner_id}}">
-                            <td><input type="number" name="ch{{forloop.counter0}}" min="0" value="{{list.ch}}"></td>
-                            <td><input type="number" name="sb{{forloop.counter0}}" min="0" value="{{list.sb}}"></td>
-                            <td><input type="text" name="title{{forloop.counter0}}" style="width: 100%;" value="{{list.title}}"></td>
-                            {% if forloop.counter0 == 0%}
+                            <td><input class="form-control" type="number" name="ch{{forloop.counter0}}" min="0" value="{{list.ch}}"></td>
+                            <td><input class="form-control" type="number" name="sb{{forloop.counter0}}" min="0" value="{{list.sb}}"></td>
+                            <td><input class="form-control" type="text" name="title{{forloop.counter0}}" style="width: 100%;" value="{{list.title}}"></td>
+                            <td><button type="button" class="btn btn-primary detail_button" value="det_{{forloop.counter0}}">詳細</button></td>
+                            {% if lesson_table.shape.0 == 1%}
                             <td></td>
                             {% else %}
-                            <td><button type='button' class='btn btn-danger' onclick="del('L{{forloop.counter0}}')">刪除</button></td>
+                            <td><button type='button' class='btn btn-danger'
+                                        onclick="del('L_{{forloop.counter0}}');del('det_{{forloop.counter0}}')">刪除</button></td>
                             {%endif%}
+                        </tr>
+                        <tr id="det_{{forloop.counter0}}" style="display:none">
+                            <td colspan="100%">
+                                <div class="row p-1">
+                                    <div class="col">
+                                        <h5>教材：</h5>
+                                    </div>
+                                    <div class="col text-end">
+                                        <button type="button" class="btn btn-sm btn-primary add_file"
+                                                id="add_file_{{forloop.counter0}}" value="{{forloop.counter0}}">增加教材</button>
+                                    </div>
+                                </div>
+                                <div class="row p-1" id="file_list_{{forloop.counter0}}">
+                                    <!-- 增加資料庫讀取結果 -->
+                                    <!-- 增加資料庫讀取結果 -->
+                                </div>
+                            </td>
                         </tr>
                         {%endfor%}
                     </tbody>

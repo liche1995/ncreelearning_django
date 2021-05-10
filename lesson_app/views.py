@@ -266,6 +266,9 @@ def lesson_table_edit_save(request):
         # 產生新課表
         new_lesson_table = _creat_lesson_table(request, lesson_count, lesson_id_count, True)
 
+        # 處理檔案
+
+
         # 移除
         old_inner_id = old_lesson_table["inner_id"].to_numpy()
         old_inner_id = old_inner_id.astype(int)
