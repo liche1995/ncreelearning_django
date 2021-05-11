@@ -1,3 +1,4 @@
+{%load static%}
 <script>
     $(document).ready(function(){
         $("#entity_radio,#both_radio").click(function(){
@@ -81,13 +82,25 @@ resize:none;
         </div>
         <div class="container">
             <div class="row p-1">
-                <label>課程名稱：</label>
-                <input type="text" class="form-control" name="lessoname" id="lessoname" value="{{info.name}}">
+                <div class="col p-1">
+                    <div class="row p-1">
+                        <label>課程名稱：</label>
+                        <input type="text" class="form-control" name="lessoname" id="lessoname" value="{{info.name}}">
+                    </div>
+                    <div class="row p-1">
+                        <label>課程種類：</label>
+                        <input type="text" class="form-control" name="lessontype" id="lessontype" value="{{info.lessontype}}">
+                    </div>
+                </div>
+                <div class="col p-1">
+                    <label>封面：</label>
+                    <img id="preview" class="img-fluid" src="fileinfo/{{cover.image}}">
+                    <input name="cover" type="file" class="form-control" accept="image/*" onchange="preview_img(event)">
+
+                </div>
             </div>
-            <div class="row p-1">
-                <label>課程種類：</label>
-                <input type="text" class="form-control" name="lessontype" id="lessontype" value="{{info.lessontype}}">
-            </div>
+
+
             <div class="row p-1">
                 <div class="col">
                     <label>授課模式：</label>
@@ -148,6 +161,8 @@ resize:none;
                     </div>
                 </div>
             </div>
+            <div class="row p-1" id="address">
+            </div>
             <div class="row p-1">
                 <label>上課日：</label>
                 <input type="date" class="form-control" name="start_time" id="start_time"
@@ -158,8 +173,7 @@ resize:none;
                 <input type="date" class="form-control" name="finish_time" id="finish_time"
                        value="{{info.finish_time.year|stringformat:'04d'}}-{{info.finish_time.month|stringformat:'02d'}}-{{info.finish_time.day|stringformat:'02d'}}">
             </div>
-            <div class="row p-1" id="address">
-            </div>
+
             <div class="row p-1">
                 <label>說明：</label>
                 <textarea class="container" rows="5" name="lessoninfo">{{info.lessoninfo}}</textarea>

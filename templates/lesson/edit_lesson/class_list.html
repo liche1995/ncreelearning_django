@@ -12,14 +12,21 @@
     hidden.value = lesson_count.toString();
     };
 
+    function deltextbook(eleid){
+        var target = document.getElementById(eleid);
+        target.remove();
+    };
+
     $(document).ready(function(){
         $(".detail_button").click(function(even){
             var target_id = even.target.value;
             if($("#" + target_id).css("display")=="none"){
                 $("#" + target_id).show("slow");
+                even.target.innerHTML = "收回";
             }
             else{
                 $("#" + target_id).hide("slow");
+                even.target.innerHTML = "詳細";
             }
         ;})
 
@@ -75,7 +82,23 @@
 
         $(".add_file").click(function(even){
             var target_id="#file_list_" + even.target.value;
-            var input_element = "<input class='form-control' type='file' name='new'>";
+            var lesson_table_inner_id = even.target.dataset.lessonTableId;
+
+            /* 佔編id產生 */
+            var randomid = Math.floor(Math.random()*1001);
+
+            /* 各類與id相關指令*/
+            var tempid = "new_" + randomid;
+            var delete_order = "deltextbook('"+ tempid +"')";
+            var file_input_name = "newfile_" + randomid;
+            var file_input_ = file_input_name + "_lesson_table_id";
+
+            var input_element = "\
+            <div class='row p-1' id='"+ tempid +"'>\
+            <div class='col'><input class='form-control' type='file' name='"+ file_input_name +"'></div>\n\
+            <div class='col'><button type='button' class='btn btn-danger' onclick="+ delete_order +">刪除教材</button></div>\
+            <div class='col' style='display:none'><input class='form-control' type='number' value="+lesson_table_inner_id+" name='"+ file_input_ +"'></div>\
+            </div>";
             $(target_id).append(input_element);
         ;})
 
@@ -141,7 +164,7 @@ resize:none;
                                         <h5>教材：</h5>
                                     </div>
                                     <div class="col text-end">
-                                        <button type="button" class="btn btn-sm btn-primary add_file"
+                                        <button type="button" class="btn btn-sm btn-primary add_file" data-lesson-table-id="{{list.inner_id}}"
                                                 id="add_file_{{forloop.counter0}}" value="{{forloop.counter0}}">增加教材</button>
                                     </div>
                                 </div>

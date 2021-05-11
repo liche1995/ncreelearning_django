@@ -156,18 +156,27 @@ def lesson_edit_page(request):
     lessonid = request.GET.get("lessonid", "")
     info = models.Lesson.objects.get(lessonid=lessonid)
     media = read_frame(models.Multimedia.objects.filter(lesson_id_id=lessonid))
+    cover = read_frame(models.Multimedia.objects.get(lesson_id_id=lessonid, cover=1))#有問題
     student = read_frame(models.Studentlist.objects.filter(lesson_id_id=lessonid))
     lesson_table = read_frame(models.LessonTable.objects.filter(lesson_id_id=lessonid))
     lesson_table = lesson_table.sort_values(by=['ch', 'sb'])
 
-    context = {"info": info, "media": media, "student": student,
+    context = {"info": info, "media": media, "student": student, "cover": cover,
                "lesson_table": lesson_table, "today": datetime.today()}
+
+    # 載入基本資料
     if request_page == "basic_info":
         html = "basic_info.html"
+
+    # 載入課綱資料
     elif request_page == "class_list":
         context["lesson_count"] = lesson_table.shape[0]
         context["lesson_id_count"] = lesson_table.shape[0] - 1
+        context["media_info"] = models.LessonRelatedMedia.objects.filter(lesson_id=lessonid)
+
         html = "class_list.html"
+
+    # 載入學生清單
     elif request_page == "student_list":
         # 調閱使用者詳細資料
         join_student = student["student_id"].to_list()
@@ -183,6 +192,8 @@ def lesson_edit_page(request):
         context["student"].loc[context["student"]["lesson_situation"] == "entity", "lesson_situation"] = "實體"
         context["student"].loc[context["student"]["lesson_situation"] == "both", "lesson_situation"] = "並行"
         html = "student_list.html"
+
+    # 習題管理
     elif request_page == "homework":
         homework_info = models.Homework.objects.filter(lesson_id_id=lessonid)
 
@@ -266,10 +277,7 @@ def lesson_table_edit_save(request):
         # 產生新課表
         new_lesson_table = _creat_lesson_table(request, lesson_count, lesson_id_count, True)
 
-        # 處理檔案
-
-
-        # 移除
+        # 移除課綱
         old_inner_id = old_lesson_table["inner_id"].to_numpy()
         old_inner_id = old_inner_id.astype(int)
         new_inner_id = new_lesson_table["inner_id"].to_numpy()
@@ -278,7 +286,7 @@ def lesson_table_edit_save(request):
         for i in range(remove_target.shape[0]):
             models.LessonTable.objects.get(inner_id=remove_target[i]).delete()
 
-        # 更新、新增
+        # 更新、新增課綱
         for i in range(new_lesson_table.shape[0]):
             # 更新
             if new_lesson_table["inner_id"][i] != 0:
@@ -293,6 +301,23 @@ def lesson_table_edit_save(request):
                                                   ch=int(new_lesson_table["chapter"][i]),
                                                   sb=int(new_lesson_table["submit"][i]),
                                                   title=new_lesson_table["title"][i])
+
+        # 產生檔案清單
+        file_table = _creat_file_table(request)
+
+        # 移除檔案
+
+        # 更新、新增檔案
+        for file_list in file_table.iloc:
+            # 新增檔案
+            # 媒體表新增資料
+            new_media = models.Multimedia.objects.create(lesson_id_id=lessonid, cover=False, textbook=True,
+                                                         media_type=0, file=file_list["FILE"],
+                                                         filename=file_list["FILE"].name)
+            # 教材連接表新增資料
+            models.LessonRelatedMedia.objects.create(lesson_id=lessonid, t_id_id=int(file_list["lesson_table_inner_id"]),
+                                                     media_id_id=new_media.media_id)
+
 
         context["msg"] = "完成更新"
     return JsonResponse(context)
@@ -640,6 +665,26 @@ def _creat_lesson_table(requese, size, count_str, update: bool = False):
     # 重新排列
     df = df.sort_values(by=['chapter', 'submit'])
     return df
+
+
+# 檔案清單
+def _creat_file_table(request):
+    df = pd.DataFrame(columns=["lesson_table_inner_id", "FILE", "neworchange"])
+
+    # 抽取key
+    key = list(request.FILES.keys())
+
+    for i in range(len(key)):
+        # 應對新增檔案
+        if "newfile_" in key[i]:
+            df = df.append({"lesson_table_inner_id": request.POST.get(key[i] + "_lesson_table_id"),
+                            "FILE": request.FILES.get(key[i]), "neworchange": 'new_file'}, ignore_index=True)
+            pass
+        # 應對抽換檔案
+        else:
+            pass
+    return df
+
 
 
 # Django's range

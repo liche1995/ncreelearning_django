@@ -62,13 +62,26 @@ class Studentlist(models.Model):
 
 
 # 多媒體資料
+def path_return(instance, filename):
+    # 針對封面
+    if instance.cover:
+        setting_path = "lesson_info/{0}/cover/{1}".format(str(instance.lesson_id_id), filename)
+    # 針對教材
+    elif instance.textbook:
+        setting_path = "lesson_info/{0}/textbook/{1}".format(str(instance.lesson_id_id), filename)
+    else:
+        setting_path = "lesson_info/{0}".format(filename)
+    return setting_path
+
+
 class Multimedia(models.Model):
     media_id = models.AutoField(primary_key=True, verbose_name="id")
     lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name="lesson_id")
     cover = models.BooleanField(verbose_name='cover', default=False)
+    textbook = models.BooleanField(verbose_name='textbook', default=False)
     media_type = models.IntegerField(verbose_name="media_type", help_text="file:0 picture:1 vided:2")
-    file = models.FileField(verbose_name='file', upload_to='lesson_info', null=True)
-    image = models.ImageField(verbose_name='image', upload_to='lesson_info', null=True)
+    file = models.FileField(verbose_name='file', upload_to=path_return, null=True)
+    image = models.ImageField(verbose_name='image', upload_to=path_return, null=True)
     filename = models.CharField(max_length=150, verbose_name='filename')
 
     class Meta:
