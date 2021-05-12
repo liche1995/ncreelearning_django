@@ -2,7 +2,7 @@
 {%load static%}
 
 {% block addition_style%}
-.cover-inage{
+.cover-image{
     max-height:245px;
     width:auto;
 }
@@ -27,13 +27,13 @@
                     {%if list.key_id < -1024 %}
                     <div class="row">
                         <center>
-                            <img class="img-responsive cover-inage" src="{% static 'element/empty_lesson_image.jpg'%}">
+                            <img class="img-responsive cover-image" src="{% static 'element/empty_lesson_image.jpg'%}">
                         </center>
                     </div>
                     {%else%}
                     <div class="row">
                         <center>
-                            <img class="img-responsive cover-inage" src="fileinfo/{{list.image}}">
+                            <img class="img-responsive cover-image" src="fileinfo/{{list.image}}">
                         </center>
                     </div>
                     {%endif%}

@@ -156,7 +156,7 @@ def lesson_edit_page(request):
     lessonid = request.GET.get("lessonid", "")
     info = models.Lesson.objects.get(lessonid=lessonid)
     media = read_frame(models.Multimedia.objects.filter(lesson_id_id=lessonid))
-    cover = read_frame(models.Multimedia.objects.get(lesson_id_id=lessonid, cover=1))#有問題
+    cover = read_frame(models.Multimedia.objects.filter(lesson_id_id=lessonid, cover=1))
     student = read_frame(models.Studentlist.objects.filter(lesson_id_id=lessonid))
     lesson_table = read_frame(models.LessonTable.objects.filter(lesson_id_id=lessonid))
     lesson_table = lesson_table.sort_values(by=['ch', 'sb'])
