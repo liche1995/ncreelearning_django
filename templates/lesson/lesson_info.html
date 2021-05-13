@@ -2,7 +2,7 @@
 {%load static%}
 {% block addition_style%}
 section{
-    background-image: url({{cover.loc.0.image}});
+    background-image: url(fileinfo/{{cover.loc.0.image}});
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -21,7 +21,9 @@ resize:none;
 {%block content%}
 <section class="py-5 text-center container">
     <div class="row py-lg-5" >
-        <center><h1>{{info.name}}</h1></center>
+        <center>
+            <h1 style="width:fit-content;background-color:#F6F9FF;">{{info.name}}</h1>
+        </center>
     </div>
 </section>
 <div class="container">

@@ -173,7 +173,6 @@ def lesson_edit_page(request):
         context["lesson_count"] = lesson_table.shape[0]
         context["lesson_id_count"] = lesson_table.shape[0] - 1
         context["media_info"] = models.LessonRelatedMedia.objects.filter(lesson_id=lessonid)
-
         html = "class_list.html"
 
     # 載入學生清單
@@ -241,6 +240,7 @@ def lesson_edit_save(request):
         lessoninfo = request.POST.get('lessoninfo', '')
         certificate = strtobool(request.POST.get('sing_licnese', ''))
         address = request.POST.get('address', 'online mode')
+        cover = request.FILES.get("cover", None)
 
         # 存取資料庫
         info = models.Lesson.objects.get(lessonid=lessonid)
@@ -254,6 +254,23 @@ def lesson_edit_save(request):
         info.certificate = certificate
         info.address = address
         info.save()
+
+        # 更新封面
+        # 純更新
+        try:
+            cover_module = models.Multimedia.objects.get(lesson_id_id=lessonid, cover=1, media_type=1)
+            cover_module.image = cover
+            cover_module.filename = cover.name
+            cover.save()
+        # 增加
+        except models.Multimedia.DoesNotExist:
+            models.Multimedia.objects.create(lesson_id_id=lessonid, cover=1, media_type=1,
+                                             image=request.FILES['cover'], filename=request.FILES['cover'].name)
+
+        except Exception as e:
+            print(e.__str__)
+
+
         context["msg"] = "完成更新"
     return JsonResponse(context)
 

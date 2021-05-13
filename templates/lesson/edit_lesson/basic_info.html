@@ -79,7 +79,7 @@
             /*預先建立img元素*/
             var img_element = document.createElement("img");
             img_element.setAttribute("id", "preview");
-            img_element.setAttribute("class", "img-fluid cover-inage");
+            img_element.setAttribute("class", "img-fluid cover-image");
             img_element.setAttribute("src", URL.createObjectURL(event.target.files[0]));
 
             nocoverimage.parentNode.replaceChild(img_element, nocoverimage);
@@ -92,34 +92,23 @@
         }
         /*移除封面*/
         else{
-            /*預先建立svg元素*/
-            var nocoverinage_ele = document.createElement("svg");
-            nocoverinage_ele.setAttribute("class", "cover-image");
+            /*預先建立外框元素*/
+            var nocoverinage_ele = document.createElement("div");
+            nocoverinage_ele.setAttribute("class", "nocover-image");
             nocoverinage_ele.setAttribute("id", "nocoverimage");
 
-            /*預先建立rect元素*/
-            var rect = document.createElement("rect");
-            rect.setAttribute("width", "100%");
-            rect.setAttribute("height", "100%");
-            rect.setAttribute("style", "fill:#4C5663;");
-
-            /*預先建立text元素*/
-            var text_ele = document.createElement("text");
-            text_ele.setAttribute("x", "50%");
-            text_ele.setAttribute("y", "50%");
-            text_ele.setAttribute("fill", "#FFF");
-            text_ele.setAttribute("dy", ".3em");
+            /*預先建立文字元素*/
+            var text_ele = document.createElement("div");
+            text_ele.setAttribute("style", "color:#FFF;position:relative;top:50%")
             text_ele.innerHTML = "未上傳封面";
 
             /*組合元素*/
-            nocoverinage_ele.appendChild(rect);
             nocoverinage_ele.appendChild(text_ele);
 
             /*取代*/
             output.parentNode.replaceChild(nocoverinage_ele, output);
 
             /*show*/
-            nocoverinage_ele.innerHTML.reload;
         };
     }
 </script>
@@ -131,10 +120,18 @@ resize:none;
 }
 
 .cover-image{
-    max-height:245px;
+    max-height:200px;
+    margin:10px;
     width:auto;
-    text-anchor:middle;
 }
+
+.nocover-image{
+    width:300px;
+    height:200px;
+    margin:10px;
+    background-color:#4C5663;
+}
+
 </style>
 
 
@@ -168,13 +165,13 @@ resize:none;
                             {%if cover.shape.0 > 0%}
                             <img id="preview" class="img-fluid cover-image" src="fileinfo/{{cover.iloc.0.image}}">
                             {%else%}
-                            <svg class="cover-image" id="nocoverimage">
-                                <rect width="100%" height="100%" style="fill:#4C5663;"></rect>
-                                <text x="50%" y="50%" fill="#FFF" dy=".3em">未上傳封面</text>
-                            </svg>
+                            <div id="nocoverimage" class="nocover-image">
+                                <div style="color:#FFF;position:relative;top:50%">未上傳封面</div>
+                            </div>
                             {%endif%}
-                            <input name="cover" type="file" class="form-control" accept="image/*" onchange="preview_img(event)">
                         </center>
+                        <label>修改封面：</label>
+                        <input name="cover" type="file" class="form-control" accept="image/*" onchange="preview_img(event)">
                     </div>
                 </div>
             </div>
