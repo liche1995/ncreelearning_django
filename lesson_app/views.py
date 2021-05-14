@@ -241,6 +241,7 @@ def lesson_edit_save(request):
         certificate = strtobool(request.POST.get('sing_licnese', ''))
         address = request.POST.get('address', 'online mode')
         cover = request.FILES.get("cover", None)
+        remove_cover = int(request.POST.get("remove_cover"))
 
         # 存取資料庫
         info = models.Lesson.objects.get(lessonid=lessonid)
@@ -256,22 +257,30 @@ def lesson_edit_save(request):
         info.save()
 
         # 更新封面
-        # 純更新
-        try:
-            cover_module = models.Multimedia.objects.get(lesson_id_id=lessonid, cover=1, media_type=1)
-            cover_module.image = cover
-            cover_module.filename = cover.name
-            cover.save()
-        # 增加
-        except models.Multimedia.DoesNotExist:
-            models.Multimedia.objects.create(lesson_id_id=lessonid, cover=1, media_type=1,
-                                             image=request.FILES['cover'], filename=request.FILES['cover'].name)
+        if cover is not None and remove_cover == False:
+            # 純更新封面
+            try:
+                cover_models = models.Multimedia.objects.get(lesson_id_id=lessonid, cover=1, media_type=1)
+                cover_models.image = cover
+                cover_models.filename = cover.name
+                cover_models.save()
+                context["msg"] = "完成更新"
+            # 補加封面
+            except models.Multimedia.DoesNotExist:
+                models.Multimedia.objects.create(lesson_id_id=lessonid, cover=1, media_type=1,
+                                                 image=request.FILES['cover'], filename=request.FILES['cover'].name)
+                context["msg"] = "完成更新"
+            # 其他例外錯誤
+            except Exception as e:
+                print(e.__str__)
+                context["msg"] = "發生錯誤，請聯絡網站管理人員"
+        # 移除封面
+        elif remove_cover:
+            cover_module = models.Multimedia.objects.get(lesson_id_id=lessonid, cover=1, media_type=1).delete()
+            context["msg"] = "完成更新"
+        else:
+            context["msg"] = "完成更新"
 
-        except Exception as e:
-            print(e.__str__)
-
-
-        context["msg"] = "完成更新"
     return JsonResponse(context)
 
 
@@ -319,22 +328,29 @@ def lesson_table_edit_save(request):
                                                   sb=int(new_lesson_table["submit"][i]),
                                                   title=new_lesson_table["title"][i])
 
-        # 產生檔案清單
+        # 產生檔案操作清單
         file_table = _creat_file_table(request)
 
-        # 移除檔案
-
-        # 更新、新增檔案
+        # 新增或移除檔案
         for file_list in file_table.iloc:
             # 新增檔案
-            # 媒體表新增資料
-            new_media = models.Multimedia.objects.create(lesson_id_id=lessonid, cover=False, textbook=True,
-                                                         media_type=0, file=file_list["FILE"],
-                                                         filename=file_list["FILE"].name)
-            # 教材連接表新增資料
-            models.LessonRelatedMedia.objects.create(lesson_id=lessonid, t_id_id=int(file_list["lesson_table_inner_id"]),
-                                                     media_id_id=new_media.media_id)
+            if file_list.newfile:
+                # 媒體表新增資料
+                new_media = models.Multimedia.objects.create(lesson_id_id=lessonid, cover=False, textbook=True,
+                                                             media_type=0, file=file_list["FILE"],
+                                                             filename=file_list["FILE"].name)
+                # 教材連接表新增資料
+                models.LessonRelatedMedia.objects.create(lesson_id=lessonid, t_id_id=int(file_list["lesson_table_inner_id"]),
+                                                         media_id_id=new_media.media_id)
 
+            # 移除檔案
+            elif file_list.deletefile:
+
+                pass
+            # 特殊狀況
+            else:
+
+                pass
 
         context["msg"] = "完成更新"
     return JsonResponse(context)
@@ -686,20 +702,20 @@ def _creat_lesson_table(requese, size, count_str, update: bool = False):
 
 # 檔案清單
 def _creat_file_table(request):
-    df = pd.DataFrame(columns=["lesson_table_inner_id", "FILE", "neworchange"])
+    df = pd.DataFrame(columns=["lesson_table_inner_id", "FILE", "newfile", "deletefile"])
 
-    # 抽取key
+    # 應對新增檔案
+    # 抽取新增檔案key
     key = list(request.FILES.keys())
 
     for i in range(len(key)):
-        # 應對新增檔案
-        if "newfile_" in key[i]:
-            df = df.append({"lesson_table_inner_id": request.POST.get(key[i] + "_lesson_table_id"),
-                            "FILE": request.FILES.get(key[i]), "neworchange": 'new_file'}, ignore_index=True)
-            pass
-        # 應對抽換檔案
-        else:
-            pass
+        df = df.append({"lesson_table_inner_id": request.POST.get(key[i] + "_lesson_table_id"),
+                        "FILE": request.FILES.get(key[i]), "newfile": True, "deletefile": False}, ignore_index=True)
+
+    # 應對刪除檔案
+    lessonid = request.POST.get("lessonid", "")
+    file_list = models.Multimedia.objects.filter(lesson_id_id=lessonid, cover=False)
+
     return df
 
 

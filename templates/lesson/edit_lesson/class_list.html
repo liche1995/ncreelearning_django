@@ -102,6 +102,16 @@
             $(target_id).append(input_element);
         ;})
 
+        $(".remove_file").click(function(even){
+            var target = even.target.value;
+            /*修改刪除指令數值*/
+            var remove_order = document.getElementById("remove_" + target);
+            remove_order.value = 1;
+            /*隱藏檔案列*/
+            $("#textbook_" + target).hide("slow");
+
+        ;})
+
         $("#cancel").click(function(even){
             window.location.href="edit_lesson_list";
         });
@@ -170,6 +180,17 @@ resize:none;
                                 </div>
                                 <div class="row p-1" id="file_list_{{forloop.counter0}}">
                                     {%for file in media_info%}
+                                    {%if list.inner_id == file.t_id_id%}
+                                    <div class="row p-1" id="textbook_{{file.media_id_id}}">
+                                        <div class="col" id="filename">
+                                            <a href="fileinfo/{{file.media_id.file}}">{{file.media_id.filename}}</a>
+                                        </div>
+                                        <div class="col">
+                                            <button type="button" class="btn btn-danger remove_file" value="{{file.media_id_id}}">刪除教材</button>
+                                        </div>
+                                        <input type='hidden' name='remove_{{file.media_id_id}}' id='remove_{{file.media_id_id}}' value=0>
+                                    </div>
+                                    {%endif%}
                                     {%endfor%}
                                 </div>
                             </td>
