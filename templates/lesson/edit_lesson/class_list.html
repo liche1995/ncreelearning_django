@@ -183,7 +183,7 @@ resize:none;
                                     {%if list.inner_id == file.t_id_id%}
                                     <div class="row p-1" id="textbook_{{file.media_id_id}}">
                                         <div class="col" id="filename">
-                                            <a href="fileinfo/{{file.media_id.file}}">{{file.media_id.filename}}</a>
+                                            <a href="{{file.media_id.file.url}}">{{file.media_id.filename}}</a>
                                         </div>
                                         <div class="col">
                                             <button type="button" class="btn btn-danger remove_file" value="{{file.media_id_id}}">刪除教材</button>

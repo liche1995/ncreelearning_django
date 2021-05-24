@@ -14,10 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from django.views.static import serve
 from django.conf import settings
-from django.conf.urls import handler404, handler500, url
+from django.conf.urls import handler404, handler500
 # 模組引入
 from elearning_test import views as main_view
 from lesson_app import views as lesson_view
@@ -39,8 +39,8 @@ urlpatterns = [
     path('login_page', user_view.callogin),
 
     # 多媒體設定
-    url('static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
-    url('fileinfo/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    re_path('static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
+    re_path('fileinfo/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
 
     # 帳號控制
     path('login', user_view.login),

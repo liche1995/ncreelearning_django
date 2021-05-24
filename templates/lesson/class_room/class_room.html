@@ -6,19 +6,30 @@
 
 {%block content%}
 <div class="container-fluid ps-4 pe-4">
-    <div class="row" id="menu">
-        <div class="list-group list-group-flush border-bottom" style="max-width:300px;">
-            {%for list in lesson_table.iloc%}
-            <a href="?lessonid={{lesson_info.lessonid}}&t_id={{list.inner_id}}"
-               class="list-group-item list-group-item-action p-3 {%if list.inner_id == inner_id%}active{%endif%}">
-                <div class="d-flex w-100 align-items-center justify-content-between">
-                    <strong>{{list.ch}}-{{list.sb}}  {{list.title}}</strong>
-                </div>
-            </a>
-            {%endfor%}
+    <div class="row">
+        <div class="col-auto p-1" id="menu">
+            <div class="list-group list-group-flush border-bottom"
+                 style="width:fit-content;max-width:300px;min-width:100px;">
+                {%for list in lesson_table.iloc%}
+                <a href="?lessonid={{lesson_info.lessonid}}&t_id={{list.inner_id}}"
+                   class="list-group-item list-group-item-action p-3 {%if list.inner_id == inner_id%}active{%endif%}">
+                    <div class="d-flex w-100 align-items-center justify-content-between">
+                        <strong>{{list.ch}}-{{list.sb}}  {{list.title}}</strong>
+                    </div>
+                </a>
+                {%endfor%}
+            </div>
         </div>
-    </div>
-    <div class="row" id="lesson_inner">
+        <div class="col-auto p-1" id="textbook">
+            <div class="d-flex flex-column flex-shrink-0 p-3 bg-light"
+                 style="width:fit-content;max-width:300px;min-width:100px;">
+                {%for textbook_list in lesson_media.all%}
+                    <a href="{{textbook_list.media_id.file.url}}">{{textbook_list.media_id.filename}}</a>
+                {%endfor%}
+            </div>
+        </div>
+        <div class="col" id="lesson_inner">
+        </div>
     </div>
 </div>
 {%endblock%}

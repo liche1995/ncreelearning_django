@@ -66,6 +66,13 @@ def callesson(request):
     return render(request, "common/lesson.html", context)
 
 
+# 多媒體存取檢查
+def request_file_access(request):
+    print("active")
+    w = request
+    return 0
+
+
 # 403錯誤
 # 一般使用
 def situation_403(request, exception):
