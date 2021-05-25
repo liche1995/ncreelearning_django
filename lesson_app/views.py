@@ -9,7 +9,7 @@ import numpy as np
 from distutils.util import strtobool
 from datetime import datetime
 from lesson_app import models
-
+from lesson_app import public_api
 
 # 課程表
 def callesson(request):
@@ -511,7 +511,7 @@ def joinorquit(request):
     context = {}
     # 資料調閱
     lessoninfo = models.Lesson.objects.get(lessonid=int(request.GET.get('lessonid')))
-    in_class = _already_in_lesson(int(request.user.id), int(request.GET.get('lessonid')))
+    in_class = public_api.already_in_lesson(int(request.user.id), int(request.GET.get('lessonid')))
 
     # 整理相關情報
     context["in_class"] = in_class
@@ -529,7 +529,7 @@ def join_lesson(request):
     situation = request.GET.get('situation')
 
     # 檢查重複參加問題
-    in_class = _already_in_lesson(int(request.user.id), int(request.GET.get('lessonid')))
+    in_class = public_api.already_in_lesson(int(request.user.id), int(request.GET.get('lessonid')))
     if in_class:
         context['msg'] = '先前已參加本課程'
         return JsonResponse(context)
@@ -636,14 +636,6 @@ def _get_teacher_lesson(userid: str = 0):
     result.loc[result["address"] == "online mode", "address"] = "線上課程，無地址"
 
     return result
-
-
-def _already_in_lesson(student_id: int, lesson_id: int):
-    try:
-        query = models.Studentlist.objects.get(student_id=student_id, lesson_id_id=lesson_id)
-        return True
-    except models.Studentlist.DoesNotExist:
-        return False
 
 
 def _creat_lesson_table(requese, size, count_str, update: bool = False):

@@ -83,6 +83,8 @@ class Multimedia(models.Model):
     file = models.FileField(verbose_name='file', upload_to=path_return, null=True)
     image = models.ImageField(verbose_name='image', upload_to=path_return, null=True)
     filename = models.CharField(max_length=150, verbose_name='filename')
+    open_access = models.BooleanField(verbose_name="open_access", default=True)
+    only_for_members = models.BooleanField(verbose_name="only_for_members", default=True)
 
     class Meta:
         db_table = 'lesson_multimedia'

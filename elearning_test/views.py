@@ -1,12 +1,13 @@
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect, FileResponse, Http404
+from django.shortcuts import render, get_object_or_404
 from django.views import View
-# from django.contrib import auth
 from django.template.defaulttags import register
 from django_pandas.io import read_frame
-# from users.models import UesrInfo
+from lesson_app.public_api import *
 from lesson_app.views import for_index_page
+from lesson_app.models import Multimedia
 import pandas as pd
+import mimetypes
 
 import os
 import time
@@ -66,11 +67,42 @@ def callesson(request):
     return render(request, "common/lesson.html", context)
 
 
-# 多媒體存取檢查
-def request_file_access(request):
-    print("active")
-    w = request
-    return 0
+# 多媒體存取權限檢查
+def request_file_access(request, path, document_root):
+    # 判斷格式
+    filetype = mimetypes.guess_type(path)
+
+    # 圖片存取，查無檔案 raise 404
+    if "image" in filetype[0]:
+        document = get_object_or_404(Multimedia, image=path)
+        response = FileResponse(document.image)
+    # 其他檔案存取，查無檔案 raise 404
+    else:
+        document = get_object_or_404(Multimedia, file=path)
+        response = FileResponse(document.file)
+
+    # 確認存取權限
+    # 無限制存取
+    if document.open_access:
+        return response
+
+    # 限制會員存取
+    if document.open_access is False and request.user.is_authenticated:
+        # 對參加人員公開
+        if document.only_for_members:
+            # 檢查資格
+            if already_in_lesson(request.user.id, document.lesson_id_id):
+                return response
+            # 不允許
+            else:
+                raise Http404
+        # 對會員公開
+        elif document.only_for_members is False:
+            return response
+        else:
+            raise Http404
+    else:
+        raise Http404
 
 
 # 403錯誤

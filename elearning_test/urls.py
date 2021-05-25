@@ -40,7 +40,7 @@ urlpatterns = [
 
     # 多媒體設定
     re_path('static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
-    re_path('fileinfo/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    re_path('fileinfo/(?P<path>.*)$', main_view.request_file_access, {'document_root': settings.MEDIA_ROOT}),
 
     # 帳號控制
     path('login', user_view.login),
