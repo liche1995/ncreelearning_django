@@ -86,6 +86,11 @@ class Multimedia(models.Model):
     open_access = models.BooleanField(verbose_name="open_access", default=True)
     only_for_members = models.BooleanField(verbose_name="only_for_members", default=True)
 
+    # 回傳一般檔案名稱
+    def filename_without_extension(self):
+        filename = self.filename.split(".")[0]
+        return filename
+
     class Meta:
         db_table = 'lesson_multimedia'
 

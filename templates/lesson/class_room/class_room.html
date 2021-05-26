@@ -23,9 +23,19 @@
         <div class="col-auto p-1" id="textbook">
             <div class="d-flex flex-column flex-shrink-0 p-3 bg-light"
                  style="width:fit-content;max-width:300px;min-width:100px;">
+                <ul class="nav">
+                {%if lesson_media%}
                 {%for textbook_list in lesson_media.all%}
-                    <a href="{{textbook_list.media_id.file.url}}">{{textbook_list.media_id.filename}}</a>
+                    <li class="nav-item ">
+                        <a class="nav-link link-dark" href="{{textbook_list.media_id.file.url}}">{{textbook_list.media_id.filename_without_extension}}</a>
+                    </li>
                 {%endfor%}
+                {%else%}
+                    <li class="nav-item ">
+                        <text>請點選左側章節，開始課程</text>
+                    </li>
+                {%endif%}
+                </ul>
             </div>
         </div>
         <div class="col" id="lesson_inner">
