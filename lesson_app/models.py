@@ -91,6 +91,11 @@ class Multimedia(models.Model):
         filename = self.filename.split(".")[0]
         return filename
 
+    # 回傳副檔名
+    def file_extension(self):
+        extension = self.filename.split(".")[1]
+        return extension
+
     class Meta:
         db_table = 'lesson_multimedia'
 

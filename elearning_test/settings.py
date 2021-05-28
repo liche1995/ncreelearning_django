@@ -156,3 +156,6 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "templates/static")]
 STATIC_ROOT = os.path.join(BASE_DIR, "templates/staticfiles")
 MEDIA_URL = '/fileinfo/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "fileinfo")
+
+# X-Frame-Option
+X_FRAME_OPTIONS = 'SAMEORIGIN'
