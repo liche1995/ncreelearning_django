@@ -126,7 +126,7 @@ class LessonRelatedMedia(models.Model):
 # 習題列表
 class Homework(models.Model):
     inner_id = models.AutoField(primary_key=True, verbose_name='inner_id')
-    lessontable_id = models.IntegerField(null=True, verbose_name='lessontable_id')
+    lessontable_id = models.ForeignKey(LessonTable, on_delete=models.CASCADE, verbose_name='lesson_table_id')
     lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name='lesson_id')
     title = models.CharField(max_length=150, null=False, verbose_name='title')
     homeworkinfo = models.CharField(max_length=300, null=True, verbose_name='homeworkinfo')
@@ -139,10 +139,10 @@ class Homework(models.Model):
         db_table = 'homework'
 
 
-# 習題資料
+# 繳交作業資料
 class HomeworkSubmit(models.Model):
     inner_id = models.AutoField(primary_key=True, verbose_name='inner_id')
-    lessontable_id = models.IntegerField(null=True, verbose_name='lessontable_id')
+    lessontable_id = models.ForeignKey(LessonTable, on_delete=models.CASCADE, verbose_name='lesson_table_id')
     lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name='lesson_id')
     user_id = models.IntegerField(null=False, verbose_name='user_id')
     submitinfo = models.CharField(max_length=300, null=True,verbose_name='submitinfo')
@@ -155,6 +155,10 @@ class HomeworkSubmit(models.Model):
 # 習題檔案表
 class HomeworkFileTable(models.Model):
     inner_id = models.AutoField(primary_key=True, verbose_name='inner_id')
+    lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name='lesson_id',default=0)
+    lessontable_id = models.ForeignKey(LessonTable, on_delete=models.CASCADE, verbose_name='lesson_table_id',default=0)
+    attach_or_submit = models.CharField(verbose_name="attach_or_submit", default="attach", max_length=10)
+    file = models.FileField(verbose_name="file", null=True)
 
     class Meta:
         db_table = 'homeworkfiletable'

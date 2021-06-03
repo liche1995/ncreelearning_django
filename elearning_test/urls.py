@@ -73,6 +73,7 @@ urlpatterns = [
     path('joinorquit_lesson', lesson_view.joinorquit),
     path("join_lesson_list", lesson_view.join_lesson_list),
     path("class_room", lesson_view.class_room),
+    path("handout_homework", lesson_view.handout_homework),
     path('ajax_active/join_lesson_order', lesson_view.join_lesson),
     path('ajax_active/quit_lesson', lesson_view.quit_lesson),
 

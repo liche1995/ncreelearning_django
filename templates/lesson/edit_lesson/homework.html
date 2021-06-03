@@ -272,11 +272,11 @@
                 </tr>
             </thead>
             <tbody>
-                {%for list in homework_info.iloc%}
-                <tr id="hw_info_{{list.inner_id_hw}}">
-                    <td>{{list.ch}}-{{list.sb}}</td>
-                    <td>{{list.title_lt}}</td>
-                    <td>{{list.title_hw}}</td>
+                {%for list in homework_info.all%}
+                <tr id="hw_info_{{list.inner_id}}">
+                    <td>{{list.lessontable_id.ch}}-{{list.lessontable_id.sb}}</td>
+                    <td>{{list.lessontable_id.title}}</td>
+                    <td>{{list.title}}</td>
                     <td>{{list.start_time}}</td>
                     <td>{{list.finish_time}}</td>
                     {%if list.turn_it_available%}
@@ -284,22 +284,22 @@
                     {%else%}
                     <td><img class="img-responsive mark" src="{% static 'element/x-mark.png'%}"></td>
                     {%endif%}
-                    <td><button type="button" class="btn btn-primary edit-btn" value="{{list.inner_id_hw}}">編輯</button></td>
+                    <td><button type="button" class="btn btn-primary edit-btn" value="{{list.inner_id}}">編輯</button></td>
                 </tr>
-                <tr id="hw_edit_{{list.inner_id_hw}}" style="display:none;">
+                <tr id="hw_edit_{{list.inner_id}}" style="display:none;">
                     <td colspan="100%">
                         <div class="container">
-                            <form id="hw_edit_form_{{list.inner_id_hw}}">
+                            <form id="hw_edit_form_{{list.inner_id}}">
                                 {%csrf_token%}
-                                <div id="background_value_{{list.inner_id_hw}}">
-                                    <input type="hidden" value="{{info.lessonid}}" name="lessonid" id="lessonid_{{list.inner_id_hw}}">
-                                    <input type="hidden" value="{{list.inner_id_hw}}" name="homeworkid" id="homeworkid{{list.inner_id_hw}}">
+                                <div id="background_value_{{list.inner_id}}">
+                                    <input type="hidden" value="{{info.lessonid}}" name="lessonid" id="lessonid_{{info.lessonid}}">
+                                    <input type="hidden" value="{{list.inner_id}}" name="homeworkid" id="homeworkid{{list.inner_id}}">
                                 </div>
                                 <div class="row" >
                                     {%csrf_token%}
                                     <div class="col p-1">
                                         <label>名稱：</label>
-                                        <input type="text" class="form-control" id="name_{{list.inner_id_hw}}" name="name" value="{{list.title_hw}}">
+                                        <input type="text" class="form-control" id="name_{{list.inner_id}}" name="name" value="{{list.title}}">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -312,7 +312,7 @@
                                             <option value=-1 >不指定</option>
                                             {%endif%}
                                             {%for lesson in lesson_table.iloc%}
-                                            {%if list.lessontable_id == lesson.inner_id%}
+                                            {%if list.lessontable_id_id == lesson.inner_id%}
                                             <option value="{{lesson.inner_id}}" selected>{{lesson.ch}}-{{lesson.sb}} {{lesson.title}}</option>
                                             {%else%}
                                             <option value="{{lesson.inner_id}}">{{lesson.ch}}-{{lesson.sb}} {{lesson.title}}</option>
@@ -325,16 +325,16 @@
                                     <div class="col p-1">
                                         <label>有無附檔?：</label>
                                         <div class="form-check">
-                                            <input type="radio" class="form-check-input no_attach" id="attach_false_{{list.inner_id_hw}}" name="attach" value=False data-hwid="{{list.inner_id_hw}}"
+                                            <input type="radio" class="form-check-input no_attach" id="attach_false_{{list.inner_id}}" name="attach" value=False data-hwid="{{list.inner_id}}"
                                             {%if list.attach_file_exist == 0%}checked{%endif%}>
                                             <label class="form-check-lable" for="attach_false">無</label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="radio" class="form-check-input with_attach" id="attach_true_{{list.inner_id_hw}}" name="attach" value=True data-hwid="{{list.inner_id_hw}}"
+                                            <input type="radio" class="form-check-input with_attach" id="attach_true_{{list.inner_id}}" name="attach" value=True data-hwid="{{list.inner_id}}"
                                             {%if list.attach_file_exist == 1%}checked{%endif%}>
                                             <label class="form-check-lable" for="attach_true">有</label>
                                         </div>
-                                        <div id="fileupload_{{list.inner_id_hw}}"
+                                        <div id="fileupload_{{list.inner_id}}"
                                         {%if list.attach_file_exist == 0%}
                                         style="display:none"
                                         {%endif%}>
@@ -344,12 +344,12 @@
                                     <div class="col p-1">
                                         <label>允許遲交：</label>
                                         <div class="form-check">
-                                            <input type="radio" class="form-check-input mt-0" id="turn_it_false_{{list.inner_id_hw}}" name="turn_it" value=False
+                                            <input type="radio" class="form-check-input mt-0" id="turn_it_false_{{list.inner_id}}" name="turn_it" value=False
                                             {%if list.turn_it_available == 0%}checked{%endif%}>
                                             <label class="form-check-lable" for="turn_it_false">不允許</label>
                                         </div>
                                         <div class="form-check">
-                                            <input type="radio" class="form-check-input mt-0" id="turn_it_true_{{list.inner_id_hw}}" name="turn_it" value=True
+                                            <input type="radio" class="form-check-input mt-0" id="turn_it_true_{{list.inner_id}}" name="turn_it" value=True
                                             {%if list.turn_it_available == 1%}checked{%endif%}>
                                             <label class="form-check-lable" for="turn_it_true">允許</label>
                                         </div>
@@ -358,24 +358,24 @@
                                 <div class="row">
                                     <div class="col p-1">
                                         <label>開始繳交日期：</label>
-                                        <input type="date" class="form-control" id="start_date_{{list.inner_id_hw}}" name="start_date"
+                                        <input type="date" class="form-control" id="start_date_{{list.inner_id}}" name="start_date"
                                                value="{{list.start_time.year|stringformat:'04d'}}-{{list.start_time.month|stringformat:'02d'}}-{{list.start_time.day|stringformat:'02d'}}">
                                     </div>
                                     <div class="col p-1">
                                         <label>截止日期：</label>
-                                        <input type="date" class="form-control" id="finish_date_{{list.inner_id_hw}}" name="finish_date"
+                                        <input type="date" class="form-control" id="finish_date_{{list.inner_id}}" name="finish_date"
                                         value="{{list.finish_time.year|stringformat:'04d'}}-{{list.finish_time.month|stringformat:'02d'}}-{{list.finish_time.day|stringformat:'02d'}}">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <label class="row">說明：</label>
                                     <textarea class="form-control" rows="5" style="width:100%;resize:none;"
-                                              id="homeworkinfo_{{list.inner_id_hw}}" name="homeworkinfo">{{list.homeworkinfo}}</textarea>
+                                              id="homeworkinfo_{{list.inner_id}}" name="homeworkinfo">{{list.homeworkinfo}}</textarea>
                                 </div>
                                 <div class="text-center p-1">
                                     <div class="btn-group text-center">
-                                        <button id="edit" type="button" class="btn btn-success edit_send" value="{{list.inner_id_hw}}">修改</button>
-                                        <button id="delete" type="button" class="btn btn-danger delete_lesson" value="{{list.inner_id_hw}}">刪除</button>
+                                        <button id="edit" type="button" class="btn btn-success edit_send" value="{{list.inner_id}}">修改</button>
+                                        <button id="delete" type="button" class="btn btn-danger delete_lesson" value="{{list.inner_id}}">刪除</button>
                                     </div>
                                 </div>
                             </form>

@@ -195,24 +195,6 @@ def lesson_edit_page(request):
     # 習題管理
     elif request_page == "homework":
         homework_info = models.Homework.objects.filter(lesson_id_id=lessonid)
-
-        # merge
-        homework_info = pd.merge(read_frame(homework_info), lesson_table,
-                                 left_on="lessontable_id", right_on="inner_id", how="left",
-                                 suffixes=["_hw", "_lt"])
-        # 無章節修飾
-        homework_info.loc[homework_info["ch"].isnull(), "ch"] = 0
-        homework_info.loc[homework_info["sb"].isnull(), "sb"] = 0
-        homework_info.loc[homework_info["title_lt"].isnull(), "title_lt"] = "未指定章節"
-        homework_info["inner_id_lt"] = homework_info["lessontable_id"]
-
-        change_columns = np.where(homework_info.dtypes == np.float64)
-        change_columns_name = homework_info.columns[change_columns].to_list()
-        homework_info[change_columns_name] = homework_info[change_columns_name].astype(int)
-
-        # sort
-        homework_info = homework_info.sort_values(by=["ch", "sb", "title_hw"])
-
         context["homework_info"] = homework_info
         html = "homework.html"
     else:
@@ -389,7 +371,7 @@ def student_manage(request):
     return JsonResponse(context)
 
 
-# 作業操作
+# 教師作業操作
 @login_required
 def homework_active(request):
     context = {}
@@ -397,7 +379,7 @@ def homework_active(request):
     if request.method.lower() == "get":
         pass
     # 新增資料
-    elif request.method.lower() == "post" and "homeworkid" in request.POST is False:
+    elif request.method.lower() == "post" and "homeworkid" not in request.POST:
         # 整理表單資料
         lessontable_id = int(request.POST.get("lessontable_id", ""))
         name = request.POST.get("name", "")
@@ -410,7 +392,7 @@ def homework_active(request):
 
         # 輸入資料庫
         try:
-            db = models.Homework.objects.create(lessontable_id=lessontable_id, title=name, homeworkinfo=homeworkinfo,
+            db = models.Homework.objects.create(lessontable_id_id=lessontable_id, title=name, homeworkinfo=homeworkinfo,
                                                 attach_file_exist=attach, lesson_id_id=lessonid, finish_time=finish_date,
                                                 start_time=start_date, turn_it_available=turn_it)
 
@@ -436,7 +418,7 @@ def homework_active(request):
         # 輸入資料庫
         try:
             db = models.Homework.objects.get(inner_id=homeworkid)
-            db.lessontable_id = lessontable_id
+            db.lessontable_id_id = lessontable_id
             db.name = name
             db.attach = attach
             db.lessonid = lessonid
@@ -565,7 +547,7 @@ def join_lesson_list(request):
 
     # 開課人資料調閱
     teacher = read_frame(auth.models.User.objects.filter(id__in=lesson["auth"].to_list()))
-
+    teacher = teacher[['id', 'first_name','last_name','email']]
     # merge
     context["result"] = pd.merge(lesson, teacher, left_on="auth", right_on="id")
 
@@ -604,6 +586,22 @@ def class_room(request):
         raise Http404
 
     return render(request, "lesson/class_room/class_room.html", context)
+
+
+# 繳交作業
+@login_required
+def handout_homework(request):
+    context = {}
+    # 抓取資料
+    if request.method.lower() == "get":
+        join_list = models.Studentlist.objects.filter(student_id=request.user.id)
+        homework_data = models.Homework.objects.filter()
+    # 編輯資料
+    else:
+
+        pass
+
+    return render(request, "lesson/handout_homework/homework_index.html", context)
 
 
 # 退出課程
