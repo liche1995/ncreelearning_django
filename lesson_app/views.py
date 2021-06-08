@@ -595,7 +595,10 @@ def handout_homework(request):
     # 抓取資料
     if request.method.lower() == "get":
         join_list = models.Studentlist.objects.filter(student_id=request.user.id)
-        homework_data = models.Homework.objects.filter()
+        lessonid = request.GET.get("lessonid", -1)
+        homework_data = models.Homework.objects.filter(lesson_id=lessonid)
+        context["lessonid"] = lessonid
+        context["homework_data"] = homework_data
     # 編輯資料
     else:
 
@@ -707,7 +710,6 @@ def _creat_file_table(request):
     file_list = models.Multimedia.objects.filter(lesson_id_id=lessonid, cover=False)
 
     return df
-
 
 
 # Django's range

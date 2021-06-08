@@ -1,5 +1,121 @@
 {%extends "MasterPage.html"%}
+{%load static%}
+
+{%block script%}
+<script>
+    $(document).ready(function(){
+        /*展開或收縮*/
+        $(".submit-btn").click(function(even){
+            var target_id = even.target.value;
+            if($("#"+target_id).css("display")=="none"){
+                $("#" + target_id).show("slow");
+            ;}
+            else{
+                $("#" + target_id).hide("slow");
+            ;}
+        ;})
+        $(".add-file-btn").click(function(even){
+            alert("clicked");
+        ;})
+    ;})
+</script>
+{%endblock%}
+
+{%block addition_style%}
+.mark{
+    max-height:30px;
+    width:auto;
+}
+.btn-primary.submit-btn{
+    background-color:#20B2AA;
+    border-color:#20B2AA;
+}
+.btn-primary.download-btn{
+    background-color:#F6BB43;
+    border-color:#F6BB43;
+}
+.btn-primary.add-file-btn{
+    background-color:#8CC051;
+    border-color:#8CC051;
+}
+
+{%endblock%}
 
 {%block content%}
+<section class="text-center container ">
+    <div class="row py-lg-5">
+        <center><h1>作業清單</h1></center>
+    </div>
+</section>
+
+<div class="container">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>章節</th>
+                <th>名稱</th>
+                <th>說明</th>
+                <th>繳交開始時間</th>
+                <th>截止時間</th>
+                <th>允許遲交?</th>
+                <th>附檔下載</th>
+                <th>繳交作業</th>
+            </tr>
+        </thead>
+        {%for item in homework_data.all%}
+            <tr id="hw_info_{{item.inner_id}}">
+                <td>{{item.lessontable_id.ch}}-{{item.lessontable_id.sb}} {{item.lessontable_id.title}}</td>
+                <td>{{item.title}}</td>
+                <td>{{item.homeworkinfo}}</td>
+                <td>{{item.start_time}}</td>
+                <td>{{item.finish_time}}</td>
+                {%if item.turn_it_available%}
+                <td><img class="img-responsive mark" src="{% static 'element/check-mark.png'%}"></td>
+                {%else%}
+                <td><img class="img-responsive mark" src="{% static 'element/x-mark.png'%}"></td>
+                {%endif%}
+                {%if item.attach_file_exist%}
+                <td><a type="button" class="btn btn-primary download-btn" href="">下載</a></td>
+                {%else%}
+                <td></td>
+                {%endif%}
+                <td><button type="button" class="btn btn-primary submit-btn" value="hw_submit_{{item.inner_id}}">開始繳交</button></td>
+            </tr>
+            <tr id="hw_submit_{{item.inner_id}}" style="display:none">
+                <td colspan="100%">
+                    <form method="post">
+                        {%csrf_token%}
+                        <div id="background_value_{{list.inner_id}}">
+                            <input type="hidden" value="{{lessonid}}" name="lessonid" id="lessonid_{{lessonid}}">
+                            <input type="hidden" value="{{item.inner_id}}" name="homeworkid" id="homeworkid_{{item.inner_id}}">
+                        </div>
+                        <div class="row">
+                            <div class="col text-end">
+                                <button type="button" class="btn btn-primary add-file-btn">增加檔案</button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6" id="file_{{item.inner_id}}">
+                                <input type="file" class="form-control">
+                            </div>
+                            <div class="col">
+                                <button type="button" class="btn btn-danger">刪除</button>
+                            </div>
+                        </div>
+                        <div class="row p-3">
+                            <div class="col text-end">
+                                <button type="submit" class="btn btn-primary">儲存</button>
+                            </div>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+        {%endfor%}
+    </table>
+</div>
+
+
+
 
 {%endblock%}

@@ -5,6 +5,7 @@
 .cover-image{
     max-height:245px;
     width:auto;
+    max-width:;
 }
 {% endblock %}
 
@@ -22,7 +23,7 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             {% for list in newest_lesson_info.iloc %}
             <div class="col">
-                <div class="card shaow-sm">
+                <div class="card shadow-sm">
                     <!-- 確認有無封面 -->
                     {%if list.key_id < -1024 %}
                     <div class="row">

@@ -203,7 +203,6 @@
             <div class="col p-1">
                 <label>相關章節：</label>
                 <select class="form-select" name="lessontable_id">
-                    <option value=-1>不指定</option>
                     {%for list in lesson_table.iloc%}
                     <option value="{{list.inner_id}}">{{list.ch}}-{{list.sb}} {{list.title}}</option>
                     {%endfor%}
@@ -306,11 +305,6 @@
                                     <div class="col p-1">
                                         <label>相關章節：</label>
                                         <select class="form-select" name="lessontable_id">
-                                            {%if list.lessontable_id == -1%}
-                                            <option value=-1 selected>不指定</option>
-                                            {%else%}
-                                            <option value=-1 >不指定</option>
-                                            {%endif%}
                                             {%for lesson in lesson_table.iloc%}
                                             {%if list.lessontable_id_id == lesson.inner_id%}
                                             <option value="{{lesson.inner_id}}" selected>{{lesson.ch}}-{{lesson.sb}} {{lesson.title}}</option>
