@@ -15,9 +15,29 @@
             ;}
         ;})
         $(".add-file-btn").click(function(even){
-            alert("clicked");
+            var target_id = "#" + even.target.value;
+            var newfile_id = "newfile_" + Math.floor(Math.random()*1001);
+            var delete_order = "delete_file('" + newfile_id + "')";
+
+            var append_element = "\
+                <div class='row p-1' id='"+newfile_id+"'>\
+                    <div class='col-6'>\
+                        <input type='file' class='form-control' name=''>\
+                    </div>\
+                    <div class='col'>\
+                        <button type='button' class='btn btn-danger' onclick="+ delete_order +">刪除</button>\
+                    </div>\
+                </div>";
+
+            $(target_id).append(append_element);
         ;})
     ;})
+
+    /*刪除檔案*/
+    function delete_file(ele){
+        alert("active");
+    ;}
+
 </script>
 {%endblock%}
 
@@ -91,18 +111,10 @@
                         </div>
                         <div class="row">
                             <div class="col text-end">
-                                <button type="button" class="btn btn-primary add-file-btn">增加檔案</button>
+                                <button type="button" class="btn btn-primary add-file-btn" value="file_{{item.inner_id}}_row">增加檔案</button>
                             </div>
                         </div>
-
-                        <div class="row">
-                            <div class="col-6" id="file_{{item.inner_id}}">
-                                <input type="file" class="form-control">
-                            </div>
-                            <div class="col">
-                                <button type="button" class="btn btn-danger">刪除</button>
-                            </div>
-                        </div>
+                        <div class="row" id="file_{{item.inner_id}}_row"></div>
                         <div class="row p-3">
                             <div class="col text-end">
                                 <button type="submit" class="btn btn-primary">儲存</button>
