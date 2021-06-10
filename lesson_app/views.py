@@ -588,7 +588,7 @@ def class_room(request):
     return render(request, "lesson/class_room/class_room.html", context)
 
 
-# 繳交作業
+# 調閱可繳交作業
 @login_required
 def handout_homework(request):
     context = {}
@@ -599,13 +599,18 @@ def handout_homework(request):
         homework_data = models.Homework.objects.filter(lesson_id=lessonid)
         context["lessonid"] = lessonid
         context["homework_data"] = homework_data
-    # 編輯資料
-    else:
-
-        pass
-
     return render(request, "lesson/handout_homework/homework_index.html", context)
 
+
+# 繳交作業編輯
+@login_required
+def homework_submit_edit_save(request):
+    context = {}
+    # 禁制非post操作
+    if request.method.lower() != "post":
+        context["msg"] = "系統錯誤!"
+
+    return JsonResponse(context)
 
 # 退出課程
 @login_required

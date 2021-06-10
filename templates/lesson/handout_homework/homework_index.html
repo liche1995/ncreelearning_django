@@ -16,13 +16,15 @@
         ;})
         $(".add-file-btn").click(function(even){
             var target_id = "#" + even.target.value;
-            var newfile_id = "newfile_" + Math.floor(Math.random()*1001);
+            var newfile_key = Math.floor(Math.random()*1001);
+            var newfile_id = "newfile_row_" + newfile_key;
+            var newfile_input_id = "newfile_" + newfile_key;
             var delete_order = "delete_file('" + newfile_id + "')";
 
             var append_element = "\
                 <div class='row p-1' id='"+newfile_id+"'>\
                     <div class='col-6'>\
-                        <input type='file' class='form-control' name=''>\
+                        <input type='file' class='form-control' name='"+ newfile_input_id +"'>\
                     </div>\
                     <div class='col'>\
                         <button type='button' class='btn btn-danger' onclick="+ delete_order +">刪除</button>\
@@ -31,11 +33,35 @@
 
             $(target_id).append(append_element);
         ;})
+        $(".save-btn").click(function(even){
+            /* 繼續傳遞 */
+            even.preventDefault();
+            var form = $("#form")[0];
+            var formdata = new FormData(form);
+            $.ajax({
+                url:"/ajax_active/homework_submit_edit_save",
+                type: "POST",
+                data: formdata,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success : function(data)
+                {
+                    alert(data["msg"]);
+                },
+                error: function(data)
+                {
+                    alert(data["msg"]);
+                }
+            })
+
+        ;})
     ;})
 
     /*刪除檔案*/
-    function delete_file(ele){
-        alert("active");
+    function delete_file(eleid){
+        var tab = document.getElementById(eleid);
+        tab.remove();
     ;}
 
 </script>
@@ -103,7 +129,7 @@
             </tr>
             <tr id="hw_submit_{{item.inner_id}}" style="display:none">
                 <td colspan="100%">
-                    <form method="post">
+                    <form method="post" id="homework_upload_form_{{item.inner_id}}">
                         {%csrf_token%}
                         <div id="background_value_{{list.inner_id}}">
                             <input type="hidden" value="{{lessonid}}" name="lessonid" id="lessonid_{{lessonid}}">
@@ -117,7 +143,7 @@
                         <div class="row" id="file_{{item.inner_id}}_row"></div>
                         <div class="row p-3">
                             <div class="col text-end">
-                                <button type="submit" class="btn btn-primary">儲存</button>
+                                <button type="submit" class="btn btn-primary save-btn">儲存</button>
                             </div>
                         </div>
                     </form>
