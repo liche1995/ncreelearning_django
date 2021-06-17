@@ -609,6 +609,23 @@ def homework_submit_edit_save(request):
     # 禁制非post操作
     if request.method.lower() != "post":
         context["msg"] = "系統錯誤!"
+    else:
+        lessonid = request.POST.get("lessonid", "")
+        homeworkid = request.POST.get("homeworkid", "")
+        lesson_table_id = request.POST.get("lesson_table_id", "")
+        # 檔案狀況整理
+        # 抽取key
+        file_key_list = list(request.FILES.keys())
+        for file_key in file_key_list:
+            # 更新檔案
+            if "submit_" in file_key:
+                print(file_key)
+            # 新增檔案
+            elif "newfile_" in file_key:
+                file = request.FILES.get(file_key)
+                #models.HomeworkSubmit.objects.create(lessontable_id=lesson_table_id, lesson_id=lessonid,
+                #                                     homework_id=homeworkid, user_id=request.user.id,
+                #                                     submitinfo=file.name, attach_file_exist=True)
 
     return JsonResponse(context)
 

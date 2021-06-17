@@ -36,7 +36,8 @@
         $(".save-btn").click(function(even){
             /* 繼續傳遞 */
             even.preventDefault();
-            var form = $("#form")[0];
+            var form_id = even.target.form.id;
+            var form = $("#" + form_id)[0];
             var formdata = new FormData(form);
             $.ajax({
                 url:"/ajax_active/homework_submit_edit_save",
@@ -133,7 +134,11 @@
                         {%csrf_token%}
                         <div id="background_value_{{list.inner_id}}">
                             <input type="hidden" value="{{lessonid}}" name="lessonid" id="lessonid_{{lessonid}}">
+                            <input type="hidden" value="{{item.lessontable_id_id}}" name="lesson_table_id" id="lesson_table_id_{{item.lessontable_id_id}}">
                             <input type="hidden" value="{{item.inner_id}}" name="homeworkid" id="homeworkid_{{item.inner_id}}">
+                        </div>
+                        <div class="row p-3">
+                            <textarea name=""></textarea>
                         </div>
                         <div class="row">
                             <div class="col text-end">
