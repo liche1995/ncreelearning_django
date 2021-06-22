@@ -396,6 +396,8 @@ def homework_active(request):
                                                 attach_file_exist=attach, lesson_id_id=lessonid, finish_time=finish_date,
                                                 start_time=start_date, turn_it_available=turn_it)
 
+            # 附檔應對
+
             # 回傳成果
             context["msg"] = "新增成功"
 
@@ -417,18 +419,40 @@ def homework_active(request):
 
         # 輸入資料庫
         try:
+            # 抽取作業資料
             db = models.Homework.objects.get(inner_id=homeworkid)
             db.lessontable_id_id = lessontable_id
             db.name = name
-            db.attach = attach
             db.lessonid = lessonid
             db.turn_it_available = turn_it
             db.start_date = start_date
             db.finish_date = finish_date
             db.homeworkinfo = homeworkinfo
-            db.save()
 
-            # 回傳成果
+            db.attach_file_exist = attach
+
+            # 附檔應對
+            # 抽取附檔資料
+            try:
+                file_db = models.HomeworkAttachFile.objects.get(homeworkid=homeworkid)
+            except models.HomeworkAttachFile.DoesNotExist:
+                file_db = None
+            file = request.FILES.get("attach_file", "")
+
+            # 追加
+            if attach == 1 and file != "" and file_db is None:
+                models.HomeworkAttachFile.objects.create(homeworkid_id=homeworkid, file=file)
+
+            # 抽換
+            if attach == 1 and file != "" and file_db is not None and file_db.file.filename == file.name:
+                file_db.save()
+
+            # 刪除
+            if attach == 0 and file_db is not None:
+                file_db.delete()
+
+            # 收尾，回傳成果
+            db.save()
             context["msg"] = "更新成功"
 
         except Exception as e:
@@ -613,6 +637,7 @@ def homework_submit_edit_save(request):
         lessonid = request.POST.get("lessonid", "")
         homeworkid = request.POST.get("homeworkid", "")
         lesson_table_id = request.POST.get("lesson_table_id", "")
+        textraea = request.POST.get("textraea", "")
         # 檔案狀況整理
         # 抽取key
         file_key_list = list(request.FILES.keys())

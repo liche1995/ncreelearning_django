@@ -139,6 +139,21 @@ class Homework(models.Model):
         db_table = 'homework'
 
 
+# 習題附檔
+def homework_file_path_return(instance, filename):
+    filepath = "lesson_homework_file/{0}/{1}".format(str(instance.homeworkid_id), filename)
+    return filepath
+
+
+class HomeworkAttachFile(models.Model):
+    inner_id = models.AutoField(primary_key=True, verbose_name="inner_id")
+    homeworkid = models.ForeignKey(Homework, on_delete=models.CASCADE, verbose_name="homework_id")
+    file = models.FileField(verbose_name='file', upload_to=homework_file_path_return, null=True)
+
+    class Meta:
+        db_table = "homework_attach_file"
+
+
 # 繳交作業資料
 class HomeworkSubmit(models.Model):
     inner_id = models.AutoField(primary_key=True, verbose_name='inner_id')
@@ -158,8 +173,8 @@ class HomeworkFileTable(models.Model):
     inner_id = models.AutoField(primary_key=True, verbose_name='inner_id')
     lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name='lesson_id', default=0)
     lessontable_id = models.ForeignKey(LessonTable, on_delete=models.CASCADE, verbose_name='lesson_table_id', default=0)
-    homeworksubmit_id = models.ForeignKey(HomeworkSubmit, on_delete=models.CASCADE, verbose_name='homeworksubmit_id', null=True)
-    attach_or_submit = models.CharField(verbose_name="attach_or_submit", default="attach", max_length=10)
+    homeworksubmit_id = models.ForeignKey(HomeworkSubmit,
+                                          on_delete=models.CASCADE, verbose_name='homeworksubmit_id', null=True)
     file = models.FileField(verbose_name="file", null=True)
 
     class Meta:
