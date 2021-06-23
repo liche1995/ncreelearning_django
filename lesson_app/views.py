@@ -195,7 +195,10 @@ def lesson_edit_page(request):
     # 習題管理
     elif request_page == "homework":
         homework_info = models.Homework.objects.filter(lesson_id_id=lessonid)
+        hwid = tuple([item.inner_id for item in homework_info.all()])
+        homework_attach = models.HomeworkAttachFile.objects.filter(homeworkid_id=hwid)
         context["homework_info"] = homework_info
+        context["homework_attach"] = homework_attach
         html = "homework.html"
     else:
         html = "test.html"

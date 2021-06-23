@@ -149,6 +149,8 @@ class HomeworkAttachFile(models.Model):
     inner_id = models.AutoField(primary_key=True, verbose_name="inner_id")
     homeworkid = models.ForeignKey(Homework, on_delete=models.CASCADE, verbose_name="homework_id")
     file = models.FileField(verbose_name='file', upload_to=homework_file_path_return, null=True)
+    open_access = models.BooleanField(verbose_name="open_access", default=False)
+    only_for_members = models.BooleanField(verbose_name="only_for_members", default=False)
 
     class Meta:
         db_table = "homework_attach_file"

@@ -5,7 +5,7 @@ from django.template.defaulttags import register
 from django_pandas.io import read_frame
 from lesson_app.public_api import *
 from lesson_app.views import for_index_page
-from lesson_app.models import Multimedia
+from lesson_app.models import Multimedia, HomeworkAttachFile
 import pandas as pd
 import mimetypes
 
@@ -69,16 +69,27 @@ def callesson(request):
 
 # 多媒體存取權限檢查
 def request_file_access(request, path, document_root):
+    # 回傳存取資料表
+    def media_table():
+        access_path = path.split("/")[0]
+        if access_path == "lesson_homework_file":
+            tb = HomeworkAttachFile
+        else:
+            tb = Multimedia
+        return tb
+
     # 判斷格式
     filetype = mimetypes.guess_type(path)
+    # 判斷存取資料表
+    table = media_table()
 
     # 圖片存取，查無檔案 raise 404
     if "image" in filetype[0]:
-        document = get_object_or_404(Multimedia, image=path)
+        document = get_object_or_404(table, image=path)
         response = FileResponse(document.image)
     # 其他檔案存取，查無檔案 raise 404
     else:
-        document = get_object_or_404(Multimedia, file=path)
+        document = get_object_or_404(table, file=path)
         response = FileResponse(document.file)
 
     # 確認存取權限
@@ -87,7 +98,7 @@ def request_file_access(request, path, document_root):
         return response
 
     # 限制會員存取
-    if document.open_access is False and request.user.is_authenticated:
+    elif document.open_access is False and request.user.is_authenticated:
         # 對參加人員公開
         if document.only_for_members:
             # 檢查資格

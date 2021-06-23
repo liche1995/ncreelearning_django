@@ -318,21 +318,30 @@
                                 <div class="row">
                                     <div class="col p-1">
                                         <label>有無附檔?：</label>
-                                        <div class="form-check">
-                                            <input type="radio" class="form-check-input no_attach" id="attach_false_{{list.inner_id}}" name="attach" value=False data-hwid="{{list.inner_id}}"
-                                            {%if list.attach_file_exist == 0%}checked{%endif%}>
-                                            <label class="form-check-lable" for="attach_false">無</label>
-                                        </div>
-                                        <div class="form-check">
-                                            <input type="radio" class="form-check-input with_attach" id="attach_true_{{list.inner_id}}" name="attach" value=True data-hwid="{{list.inner_id}}"
-                                            {%if list.attach_file_exist == 1%}checked{%endif%}>
-                                            <label class="form-check-lable" for="attach_true">有</label>
-                                        </div>
-                                        <div id="fileupload_{{list.inner_id}}"
-                                        {%if list.attach_file_exist == 0%}
-                                        style="display:none"
-                                        {%endif%}>
+                                        <div class="row p-1">
+                                            <div class="col p-1">
+                                                <div class="form-check">
+                                                    <input type="radio" class="form-check-input no_attach" id="attach_false_{{list.inner_id}}" name="attach" value=False data-hwid="{{list.inner_id}}" {%if list.attach_file_exist == 0%}checked{%endif%}>
+                                                    <label class="form-check-lable" for="attach_false">無</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input type="radio" class="form-check-input with_attach" id="attach_true_{{list.inner_id}}" name="attach" value=True data-hwid="{{list.inner_id}}" {%if list.attach_file_exist == 1%}checked{%endif%}>
+                                                    <label class="form-check-lable" for="attach_true">有</label>
+                                                </div>
+                                            </div>
+                                            {%if list.attach_file_exist == 1%}
+                                            <div class="col p-1">
+                                                <label>目前檔案：</label>
+                                                {%for attach_item in homework_attach.all%}
+                                                {%if attach_item.homeworkid_id == list.inner_id%}
+                                                {{attach_item.file.url}}
+                                                {%endif%}
+                                                {%endfor%}
+                                            </div>
+                                            {%endif%}
+                                            <div id="fileupload_{{list.inner_id}}" {%if list.attach_file_exist == 0%} style="display:none" {%endif%}>
                                             <input type="file" class="form-control" name="attach_file">
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col p-1">
