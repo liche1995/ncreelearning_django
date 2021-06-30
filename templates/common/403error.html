@@ -1,0 +1,23 @@
+{% extends 'MasterPage.html'%}
+{% block addition_style%}
+.container.display-container-style{
+    max-width: 600px;
+}
+{% endblock %}
+
+{% block content %}
+{%load static%}
+<div class="container display-container-style">
+    <div class="row"><img class="img-responsive" src="{% static 'element/undraw_cancel_u1it.png'%}"></div>
+    <div class="row"><center class="display-2">Oops!不能看這個玩意兒</center></div>
+    <div class="row">
+        <blockquote class="blockquote text-center">
+            <p class="mb-0">頁面不見了</p>
+            <p class="mb-0">你可以...</p>
+            <a type="button" class="btn btn-outline-primary" href="/">回首頁</a>
+            <a type="button" class="btn btn-outline-primary" href="javascript:history.back()">回上一頁</a>
+            <a type="button" class="btn btn-outline-primary" href="/login_page">登入</a>
+        </blockquote>
+    </div>
+</div>
+{% endblock%}

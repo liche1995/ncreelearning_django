@@ -334,7 +334,7 @@
                                                 <label>目前檔案：</label>
                                                 {%for attach_item in homework_attach.all%}
                                                 {%if attach_item.homeworkid_id == list.inner_id%}
-                                                {{attach_item.file.url}}
+                                                <a href="{{attach_item.file.url}}">Link</a>
                                                 {%endif%}
                                                 {%endfor%}
                                             </div>

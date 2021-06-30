@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, re_path
 from django.views.static import serve
 from django.conf import settings
-from django.conf.urls import handler404, handler500
+from django.conf.urls import handler404, handler403, handler500
 # 模組引入
 from elearning_test import views as main_view
 from lesson_app import views as lesson_view
@@ -84,6 +84,7 @@ urlpatterns = [
 
     # 測試觸發
     path('test_500', main_view.test_500),
+    path('test_403', main_view.test_403),
     #path('', core.as_view()),
     #path('time', time_core.as_view()),
     #path('test', attest.as_view()),
@@ -91,4 +92,5 @@ urlpatterns = [
 
 # 錯誤頁面指定
 handler404 = main_view.situation_404
+handler403 = main_view.situation_403
 handler500 = main_view.situation_500

@@ -1,8 +1,8 @@
 from django.http import HttpResponse, HttpResponseRedirect, FileResponse, Http404
+from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.template.defaulttags import register
-from django_pandas.io import read_frame
 from lesson_app.public_api import *
 from lesson_app.views import for_index_page
 from lesson_app.models import Multimedia, HomeworkAttachFile
@@ -106,27 +106,26 @@ def request_file_access(request, path, document_root):
                 return response
             # 不允許
             else:
-                raise Http404
+                raise PermissionDenied
         # 對會員公開
         elif document.only_for_members is False:
             return response
         else:
-            raise Http404
+            raise PermissionDenied
     else:
-        raise Http404
+        raise PermissionDenied
 
 
 # 403錯誤
 # 一般使用
 def situation_403(request, exception):
-
-    return
+    response = render(request, "common/403error.html", status=403)
+    return response
 
 
 # 測試使用
 def test_403(request):
-
-    return
+    return HttpResponse(status=403)
 
 
 # 404錯誤
