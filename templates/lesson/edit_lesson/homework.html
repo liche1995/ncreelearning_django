@@ -95,6 +95,23 @@
             }
         ;})
 
+        /*追加或抽換資訊顯示*/
+        $(":file").on("change", function(even){
+            /*預備抽取資料*/
+            var inner_id = even.target.dataset.innerId;
+            if (even.target.files.length > 0){
+                var filename = even.target.files[0].name;
+                document.getElementById("attach_TorF_"+inner_id).value = "True";
+            }
+            else{
+                var filename = "(無)";
+            }
+            /*更改提示與attach數值*/
+            document.getElementById("preupload_filename_"+inner_id).innerHTML = filename;
+
+        ;})
+        /*移除附件*/
+
         /*修改作業送出*/
         $(".edit_send").click(function(event){
             /*抓取表單*/
@@ -317,30 +334,31 @@
                                 </div>
                                 <div class="row">
                                     <div class="col p-1">
-                                        <label>有無附檔?：</label>
-                                        <div class="row p-1">
-                                            <div class="col p-1">
-                                                <div class="form-check">
-                                                    <input type="radio" class="form-check-input no_attach" id="attach_false_{{list.inner_id}}" name="attach" value=False data-hwid="{{list.inner_id}}" {%if list.attach_file_exist == 0%}checked{%endif%}>
-                                                    <label class="form-check-lable" for="attach_false">無</label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input type="radio" class="form-check-input with_attach" id="attach_true_{{list.inner_id}}" name="attach" value=True data-hwid="{{list.inner_id}}" {%if list.attach_file_exist == 1%}checked{%endif%}>
-                                                    <label class="form-check-lable" for="attach_true">有</label>
-                                                </div>
-                                            </div>
+                                        <div class="col p-1">
+                                            <label>目前檔案：</label>
                                             {%if list.attach_file_exist == 1%}
-                                            <div class="col p-1">
-                                                <label>目前檔案：</label>
-                                                {%for attach_item in homework_attach.all%}
-                                                {%if attach_item.homeworkid_id == list.inner_id%}
-                                                <a href="{{attach_item.file.url}}">Link</a>
-                                                {%endif%}
-                                                {%endfor%}
-                                            </div>
+                                            {%for attach_item in homework_attach.all%}
+                                            {%if attach_item.homeworkid_id == list.inner_id%}
+                                            <a href="{{attach_item.file.url}}">{{attach_item.filename_without_extension}}</a>
                                             {%endif%}
-                                            <div id="fileupload_{{list.inner_id}}" {%if list.attach_file_exist == 0%} style="display:none" {%endif%}>
-                                            <input type="file" class="form-control" name="attach_file">
+                                            {%endfor%}
+                                            {%else%}
+                                            <text>無</text>
+                                            {%endif%}
+                                        </div>
+                                        <div class="col p-1">
+                                            <label>準備上傳：</label>
+                                            <text id="preupload_filename_{{list.inner_id}}">(無)</text>
+                                        </div>
+                                        <div class="col p-1">
+                                            <input type="hidden" class="form-check-input" id="attach_TorF_{{list.inner_id}}" name="attach"
+                                                   value={%if list.attach_file_exist == 1%}True{%else%}False{%endif%}>
+                                            <div class="btn-group">
+                                                <label class="btn btn-primary">
+                                                    <text>新增/更換</text>
+                                                    <input name="attach_file" id="attach_file_{{list.inner_id}}" style="display:none;" type="file" data-inner-id="{{list.inner_id}}">
+                                                </label>
+                                                <button type="button" class="btn btn-danger" onclick="">移除</button>
                                             </div>
                                         </div>
                                     </div>

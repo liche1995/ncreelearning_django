@@ -195,8 +195,8 @@ def lesson_edit_page(request):
     # 習題管理
     elif request_page == "homework":
         homework_info = models.Homework.objects.filter(lesson_id_id=lessonid)
-        hwid = tuple([item.inner_id for item in homework_info.all()])
-        homework_attach = models.HomeworkAttachFile.objects.filter(homeworkid_id=hwid)
+        hwid = [item.inner_id for item in homework_info.all()]
+        homework_attach = models.HomeworkAttachFile.objects.filter(homeworkid_id__in=hwid)
         context["homework_info"] = homework_info
         context["homework_attach"] = homework_attach
         html = "homework.html"
@@ -447,7 +447,7 @@ def homework_active(request):
                 models.HomeworkAttachFile.objects.create(homeworkid_id=homeworkid, file=file)
 
             # 抽換
-            if attach == 1 and file != "" and file_db is not None and file_db.file.filename == file.name:
+            if attach == 1 and file != "" and file_db is not None and file_db.filename() != file.name:
                 file_db.save()
 
             # 刪除
