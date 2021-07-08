@@ -448,7 +448,10 @@ def homework_active(request):
 
             # 抽換
             if attach == 1 and file != "" and file_db is not None and file_db.filename() != file.name:
-                file_db.save()
+                # 刪除原本檔案
+                file_db.delete()
+                # 重新增加檔案
+                models.HomeworkAttachFile.objects.create(homeworkid_id=homeworkid, file=file)
 
             # 刪除
             if attach == 0 and file_db is not None:
