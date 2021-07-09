@@ -74,8 +74,10 @@
                 <td>{{list.start_time}}</td>
                 <td>{{list.finish_time}}</td>
                 <td>
-                    <a class="btn btn-primary" href="edit_lesson?lessonid={{list.lessonid}}">詳細操作</a>
-                    <button id="{{list.lessonid}}_dlt_button" class="btn btn-danger delete_lesson" value="{{list.lessonid}}">刪除</button>
+                    <div id="{{list.lessonid}}_btngroup">
+                        <a class="btn btn-primary p-2 m-1" href="edit_lesson?lessonid={{list.lessonid}}">詳細操作</a>
+                        <button id="{{list.lessonid}}_dlt_button" class="btn btn-danger delete_lesson p-2 m-1" value="{{list.lessonid}}">刪除</button>
+                    </div>
                 </td>
 
             </tr>

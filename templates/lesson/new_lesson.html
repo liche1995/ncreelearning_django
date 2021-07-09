@@ -167,12 +167,12 @@ td > input {
         <div class="row p-1">
             <div class="col">
                 <label>課程名稱：</label>
-                <input type="text" class="form-control" name="lessoname" id="lessoname">
+                <input type="text" style="min-width:310px" class="form-control" name="lessoname" id="lessoname">
             </div>
             <div class="col">
+                <label>課程封面：</label>
                 <center>
-                    <label>課程封面：</label>
-                    <img id="preview" class="img-fluid" src="">
+                    <img id="preview" class="img-fluid p-1" src="">
                     <input name="cover" type="file" class="form-control" accept="image/*" onchange="preview_img(event)">
                 </center>
             </div>
