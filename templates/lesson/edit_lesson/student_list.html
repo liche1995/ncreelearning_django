@@ -1,5 +1,7 @@
 <script>
     $(document).ready(function(){
+        /* 基本資料區 */
+        var row_search_value = window.location.search.substring(1);
         /* 刪除 */
         $(".delete_student").click(function(event){
             var decide = confirm("是否刪除該學生?");
@@ -8,8 +10,8 @@
                 $.get("/ajax_active/kick_studnet",{lessonid: {{info.lessonid}},student_id: stident_id},
                 function(rec){
                     if(rec.result){
-                        $("#user_"+stident_id).remove();
                         alert(rec.msg);
+                        refresh();
                     }
                     else{
                         alert(rec.msg);
@@ -27,17 +29,21 @@
                 $(detail_target).hide('slow');
             }
         });
+        /*整理清單*/
+        function refresh(){
+            setTimeout(
+                function(){$("#form_area").load("ajax_show/lesson_edit_page?page=student_list&" + row_search_value)
+                ;},700)
+            ;}
+
         {%if info.verify%}
         $(".denied").click(function(event){
             var stident_id = event.target.value;
             $.get("/ajax_active/student_manage",{lessonid: {{info.lessonid}},student_id: stident_id,decide: "denied"},
             function(rec){
                 if(rec.system){
-                    $("#agree_" + stident_id).removeAttr('disabled');
-                    $("#denied_" + stident_id).attr('disabled', true);
-                    $("#verify_"+stident_id).css('color', 'red');
-                    $("#verify_"+stident_id).html("未允許參加");
                     alert(rec.msg);
+                    refresh();
                 }
                 else{
                     alert(rec.msg);
@@ -49,11 +55,8 @@
             $.get("/ajax_active/student_manage",{lessonid: {{info.lessonid}},student_id: stident_id,decide: "agree"},
             function(rec){
                 if(rec.system){
-                    $("#denied_" + stident_id).removeAttr('disabled');
-                    $("#agree_" + stident_id).attr('disabled', true);
-                    $("#verify_"+stident_id).css('color', 'green');
-                    $("#verify_"+stident_id).html("允許參加");
                     alert(rec.msg);
+                    refresh();
                 }
                 else{
                     alert(rec.msg);
