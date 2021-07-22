@@ -17,7 +17,24 @@
         target.remove();
     };
 
+    function change_textbooktype(eleid){
+        var target = document.getElementById(eleid);
+        var file_upload = "<input class='form-control' type='file' name='"+ eleid +"'>";
+        var external_source ="<textarea class='form-control' name='"+ eleid +"'></textarea>";
+        console.log(target.innerHTML);
+        console.log(file_upload);
+        if(target.innerHTML.includes("<input")){
+            target.innerHTML = external_source;
+        ;}
+        else{
+            target.innerHTML = file_upload;
+        ;}
+    };
+
     $(document).ready(function(){
+        /* 基本資料區 */
+        var row_search_value = window.location.search.substring(1);
+
         $(".detail_button").click(function(even){
             var target_id = even.target.value;
             if($("#" + target_id).css("display")=="none"){
@@ -63,7 +80,7 @@
             var form = $("#form")[0];
             var formdata = new FormData(form);
             $.ajax({
-                url:"/ajax_active/lesson_table_edit_save",
+                url:"/ajax_active/course_outline_edit_save",
                 type: "POST",
                 data: formdata,
                 contentType: false,
@@ -72,16 +89,17 @@
                 success : function(data)
                 {
                     alert(data["msg"]);
+                    refresh();
                 },
                 error: function(data)
                 {
-                    alert(data["msg"]);
+                    alert("系統錯誤，請稍後再試");
                 }
             })
         });
 
-        $(".add_file").click(function(even){
-            var target_id="#file_list_" + even.target.value;
+        $(".add_textbook").click(function(even){
+            var target_id="#textbook_list_" + even.target.value;
             var lesson_table_inner_id = even.target.dataset.lessonTableId;
 
             /* 佔編id產生 */
@@ -90,14 +108,16 @@
             /* 各類與id相關指令*/
             var tempid = "new_" + randomid;
             var delete_order = "deltextbook('"+ tempid +"')";
-            var file_input_name = "newfile_" + randomid;
-            var file_input_ = file_input_name + "_lesson_table_id";
+            var textbook_name = "newtextbook_" + randomid;
+            var changetype = "change_textbooktype('"+ textbook_name +"')";
+            var textbook_ = textbook_name + "_lesson_table_id";
 
             var input_element = "\
             <div class='row p-1' id='"+ tempid +"'>\
-            <div class='col'><input class='form-control' type='file' name='"+ file_input_name +"'></div>\n\
-            <div class='col'><button type='button' class='btn btn-danger' onclick="+ delete_order +">刪除教材</button></div>\
-            <div class='col' style='display:none'><input class='form-control' type='number' value="+lesson_table_inner_id+" name='"+ file_input_ +"'></div>\
+            <div class='col' id='"+ textbook_name +"'><input class='form-control' type='file' name='"+ textbook_name +"'></div>\n\
+            <div class='col'><button type='button' class='btn btn-warning' onclick="+ delete_order +">放棄新增</button>\
+            <button type='button' class='btn btn-primary change-btn' onclick="+ changetype +">更換教材種類</button></div>\
+            <div class='col' style='display:none'><input class='form-control' type='number' value="+lesson_table_inner_id+" name='"+ textbook_ +"'></div>\
             </div>";
             $(target_id).append(input_element);
         ;})
@@ -115,6 +135,13 @@
         $("#cancel").click(function(even){
             window.location.href="edit_lesson_list";
         });
+
+        /*整理清單*/
+        function refresh(){
+            setTimeout(
+                function(){$("#form_area").load("ajax_show/lesson_edit_page?page=class_list&" + row_search_value)
+            ;},700)
+        ;}
     })
 
 
@@ -124,7 +151,10 @@
 textarea{
 resize:none;
 }
-
+.btn-primary.change-btn{
+    background-color:#20B2AA;
+    border-color:#20B2AA;
+}
 </style>
 
 <div class="container">
@@ -174,11 +204,11 @@ resize:none;
                                         <h5>教材：</h5>
                                     </div>
                                     <div class="col text-end">
-                                        <button type="button" class="btn btn-sm btn-primary add_file" data-lesson-table-id="{{list.inner_id}}"
-                                                id="add_file_{{forloop.counter0}}" value="{{forloop.counter0}}">增加教材</button>
+                                        <button type="button" class="btn btn-sm btn-primary add_textbook" data-lesson-table-id="{{list.inner_id}}"
+                                                id="add_textbook_{{forloop.counter0}}" value="{{forloop.counter0}}">增加教材</button>
                                     </div>
                                 </div>
-                                <div class="row p-1" id="file_list_{{forloop.counter0}}">
+                                <div class="row p-1" id="textbook_list_{{forloop.counter0}}">
                                     {%for file in media_info%}
                                     {%if list.inner_id == file.t_id_id%}
                                     <div class="row p-1" id="textbook_{{file.media_id_id}}">

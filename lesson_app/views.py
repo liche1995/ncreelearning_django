@@ -173,7 +173,7 @@ def lesson_edit_page(request):
         context["lesson_count"] = lesson_table.shape[0]
         context["lesson_id_count"] = lesson_table.shape[0] - 1
         context["media_info"] = models.LessonRelatedMedia.objects.filter(lesson_id=lessonid)
-        html = "class_list.html"
+        html = "course_outline.html"
 
     # 載入學生清單
     elif request_page == "student_list":
@@ -271,7 +271,7 @@ def lesson_edit_save(request):
 
 # 課綱編輯儲存
 @login_required
-def lesson_table_edit_save(request):
+def course_outline_edit_save(request):
     context = {}
     # 禁制非post操作
     if request.method.lower() != "post":
@@ -330,11 +330,10 @@ def lesson_table_edit_save(request):
 
             # 移除檔案
             elif file_list.deletefile:
-
-                pass
+                # 註銷資料
+                models.Multimedia.objects.get(file=file_list.FILE).delete()
             # 特殊狀況
             else:
-
                 pass
 
         context["msg"] = "完成更新"
@@ -660,6 +659,7 @@ def homework_submit_edit_save(request):
 
     return JsonResponse(context)
 
+
 # 退出課程
 @login_required
 def quit_lesson(request):
@@ -762,6 +762,12 @@ def _creat_file_table(request):
     lessonid = request.POST.get("lessonid", "")
     file_list = models.Multimedia.objects.filter(lesson_id_id=lessonid, cover=False)
 
+    for item in file_list.all():
+        name = "remove_%d" % item.media_id
+        related1 = models.LessonRelatedMedia.objects.get(media_id=item.media_id)
+        if strtobool(request.POST.get(name)):
+            df = df.append({"lesson_table_inner_id": related1.t_id_id,
+                            "FILE": related1.media_id.file, "newfile": False, "deletefile": True}, ignore_index=True)
     return df
 
 

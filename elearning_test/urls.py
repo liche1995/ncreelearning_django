@@ -63,7 +63,7 @@ urlpatterns = [
     path('ajax_active/delete_lesson', lesson_view.delete_lesson),
     path('ajax_show/lesson_edit_page', lesson_view.lesson_edit_page),
     path('ajax_active/lesson_edit_save', lesson_view.lesson_edit_save),
-    path('ajax_active/lesson_table_edit_save', lesson_view.lesson_table_edit_save),
+    path('ajax_active/course_outline_edit_save', lesson_view.course_outline_edit_save),
     path('ajax_active/student_manage', lesson_view.student_manage),
     path('ajax_active/kick_studnet', lesson_view.kick_studnet),
     path('ajax_active/homework_active', lesson_view.homework_active),
