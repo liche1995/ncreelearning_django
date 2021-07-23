@@ -5,7 +5,7 @@
     $(document).ready(function(){
         /* 線上參加動作 */
         $("#online").click(function(){
-            $.get("/ajax_active/join_lesson_order",{lessonid:{{lessonid}},situation:'online'}, function(ret){
+            $.get("/ajax_active/join_lesson_order",{lessonid:{{lessoninfo.lessonid}},situation:'online'}, function(ret){
                 $("#online").addClass("disabled");
                 $("#online").attr("aria-disabled='true'");
                 $("#quit").removeClass("disabled");
@@ -17,7 +17,7 @@
         });
         /* 實體參加動作 */
         $("#entity").click(function(){
-            $.get("/ajax_active/join_lesson_order",{lessonid:{{lessonid}},situation:'online'}, function(ret){
+            $.get("/ajax_active/join_lesson_order",{lessonid:{{lessoninfo.lessonid}},situation:'online'}, function(ret){
                 $("#entity").addClass("disabled");
                 $("#entity").attr("aria-disabled='true'");
                 $("#quit").removeClass("disabled");
@@ -29,7 +29,7 @@
         });
         /* 退出參加動作 */
         $("#quit").click(function(){
-            $.get("/ajax_active/quit_lesson",{lessonid:{{lessonid}}}, function(ret){
+            $.get("/ajax_active/quit_lesson",{lessonid:{{lessoninfo.lessonid}}}, function(ret){
                 if(ret.situation == 'online' | ret.situation == 'both'){
                     $("#online").removeClass("disabled");
                     $("#online").removeAttr("aria-disabled='true'");
@@ -52,6 +52,17 @@
 
 {%block content%}
 <div class="container text-center">
+    <section>
+        <div class="row py-lg-5">
+            <h1>課程參加退出</h1>
+            <h3>{{lessoninfo.name}}</h3>
+        </div>
+    </section>
+    {%if lessoninfo.verify%}
+    <div class="row p-3">
+        <textarea class="form-control" id="join_reason" name="join_reason"></textarea>
+    </div>
+    {%endif%}
     <div class="row p-3">
         <text>參加或退出選項：</text>
     </div>
@@ -62,13 +73,13 @@
             <a id="quit" class="btn btn-danger">離開課程</a>
         {%else%}
             <!--實體課程-->
-            {%if situation == 'online' or situation == 'both'%}
+            {%if lessoninfo.situation == 'online' or lessoninfo.situation == 'both'%}
             <a id="online" class="btn btn-primary">參加線上課程</a>
             {%else%}
             <a id="online" class="btn btn-primary disabled" aria-disabled="true">參加線上課程</a>
             {%endif%}
             <!--線上課程-->
-            {%if situation == 'entity' or situation == 'both'%}
+            {%if lessoninfo.situation == 'entity' or lessoninfo.situation == 'both'%}
             <a id="entity" class="btn btn-primary">參加實體課程</a>
             {%else%}
             <a id="entity" class="btn btn-primary disabled" aria-disabled="true">參加實體課程</a>

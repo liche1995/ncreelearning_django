@@ -11,13 +11,19 @@ from datetime import datetime
 from lesson_app import models
 from lesson_app import public_api
 
+
 # 課程表
 def callesson(request):
-    # 查詢最新10筆資料
-    lesson_result = models.Lesson.objects.all().order_by('-annouce_time')[:10]
-    result_table = read_frame(lesson_result)
+    if int(request.GET.get("more", "0")):
+        lesson_result = models.Lesson.objects.all().order_by('-annouce_time')
+    else:
+        # 查詢最新10筆資料
+        lesson_result = models.Lesson.objects.all().order_by('-annouce_time')[:10]
 
-    context = {'result_table': result_table}
+    lessonid = [lid.lessonid for lid in lesson_result.all()]
+    cover = models.Multimedia.objects.filter(lesson_id__in=lessonid, cover=1)
+
+    context = {'result_table': lesson_result, "cover": cover}
     return render(request, "common/lesson.html", context)
 
 
@@ -64,7 +70,10 @@ def lesson_info(request):
     table = read_frame(models.LessonTable.objects.filter(lesson_id_id=lesson_id))
     media = read_frame(models.Multimedia.objects.filter(lesson_id_id=lesson_id))
     cover = read_frame(models.Multimedia.objects.filter(lesson_id_id=lesson_id, cover=1))
-    teacher = auth.models.User.objects.get(id=info.auth)
+    try:
+        teacher = auth.models.User.objects.get(id=info.auth)
+    except Exception as e:
+        teacher = {"last_name": "unknow"}
 
     # 整理輸出
     context['info'] = info
@@ -526,9 +535,7 @@ def joinorquit(request):
 
     # 整理相關情報
     context["in_class"] = in_class
-    situation = lessoninfo.situation
-    context["situation"] = situation
-    context["lessonid"] = lessoninfo.lessonid
+    context["lessoninfo"] = lessoninfo
 
     return render(request, "lesson/joinorquit.html", context)
 
@@ -545,17 +552,22 @@ def join_lesson(request):
         context['msg'] = '先前已參加本課程'
         return JsonResponse(context)
     else:
+        lessoninfo = models.Lesson.objects.get(lessonid=int(request.GET.get('lessonid')))
+        if lessoninfo.verify:
+            agree = False
+        else:
+            agree = True
         # 線上
         if situation == 'online':
             models.Studentlist.objects.create(student_id=request.user.id, lesson_id_id=int(request.GET.get('lessonid')),
                                               first_name=request.user.first_name, last_name=request.user.last_name,
-                                              lesson_situation='online')
+                                              lesson_situation='online', agree=agree)
             context['msg'] = "已參加線上課程"
         # 實體
         elif situation == 'entity':
             models.Studentlist.objects.create(student_id=request.user.id, lesson_id_id=int(request.GET.get('lessonid')),
                                               first_name=request.user.first_name, last_name=request.user.last_name,
-                                              lesson_situation='entity')
+                                              lesson_situation='entity', agree=agree)
             context['msg'] = "已參加實體課程"
         return JsonResponse(context)
 
@@ -576,7 +588,7 @@ def join_lesson_list(request):
 
     # 開課人資料調閱
     teacher = read_frame(auth.models.User.objects.filter(id__in=lesson["auth"].to_list()))
-    teacher = teacher[['id', 'first_name','last_name','email']]
+    teacher = teacher[['id', 'first_name', 'last_name', 'email']]
     # merge
     context["result"] = pd.merge(lesson, teacher, left_on="auth", right_on="id")
 

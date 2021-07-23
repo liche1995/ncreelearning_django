@@ -2,7 +2,9 @@
 {%load static%}
 {% block addition_style%}
 section{
+    {%if cover.shape.0 != 0%}
     background-image: url(fileinfo/{{cover.loc.0.image}});
+    {%endif%}
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
