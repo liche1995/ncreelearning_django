@@ -31,32 +31,12 @@ def callesson(request):
 def for_index_page():
     # 取得資最新課程資料
     lesson_result = models.Lesson.objects.all().order_by('-annouce_time')[:6]
-    lesson_result_table = read_frame(lesson_result)
+    lesson_id_list = [item.lessonid for item in lesson_result.all()]
 
     # 找尋對應封面照
-    media_result = models.Multimedia.objects.filter(lesson_id__in=lesson_result_table['lessonid'], cover=1)
-    media_result_table = read_frame(media_result)
+    cover = models.Multimedia.objects.filter(lesson_id__in=lesson_id_list, cover=1)
 
-    # 有資料
-    if media_result_table.shape[0] > 0:
-        # 抽取id
-        key_id = media_result_table['lesson_id'].str.findall('\d+')
-        for i in range(key_id.shape[0]):
-            media_result_table.loc[i, 'key_id'] = int(key_id.iloc[i][0])
-
-        # merge
-        table = pd.merge(lesson_result_table, media_result_table, left_on='lessonid', right_on='key_id', how='left')
-        # 處理空值
-        table["key_id"] = table["key_id"].fillna(np.iinfo(np.int64).min)
-        table["key_id"] = table["key_id"].astype('int64')
-    else:
-        table = lesson_result_table.copy()
-        for i in range(len(media_result_table.columns)):
-            table[media_result_table.columns[i]] = np.iinfo(np.int64).min
-            table[media_result_table.columns[i]] = table[media_result_table.columns[i]].astype('int64')
-        table["key_id"] = np.iinfo(np.int64).min
-        table["key_id"] = table["key_id"].astype('int64')
-    return table
+    return lesson_result, cover
 
 
 # 詳細資料
