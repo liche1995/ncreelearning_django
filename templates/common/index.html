@@ -23,22 +23,12 @@
             {% for list in newest_lesson_info.all %}
             <div class="col">
                 <div class="card shadow-sm">
-                    <!-- 確認有無封面 -->
-                    {%for cover_image in cover%}
-                    {%if cover.lesson_id_id == list.lessonid%}
+                    <!-- 封面讀取請求 -->
                     <div class="row">
                         <center>
-                            <img class="img-responsive cover-image" src="fileinfo/{{cover.image}}">
+                            <img class="img-responsive cover-image p-2" src="{{element|cover_id:list.lessonid}}">
                         </center>
                     </div>
-                    {%else%}
-                    <div class="row">
-                        <center>
-                            <img class="img-responsive cover-image" src="{% static 'element/empty_lesson_image.jpg'%}">
-                        </center>
-                    </div>
-                        {%endif%}
-                    {%endfor%}
                     <!--卡片內文-->
                     <div class="card-body">
                         {%if list.lessoninfo %}

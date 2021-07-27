@@ -118,7 +118,7 @@
         var remove_cover = document.getElementById("remove_cover");
         var output = document.getElementById("preview");
         if (remove == true && output != null){
-            remove_cover.value = 1;
+            remove_cover.value = "True";
             /*預先建立外框元素*/
             var nocoverinage_ele = document.createElement("div");
             nocoverinage_ele.setAttribute("class", "nocover-image");
@@ -137,7 +137,7 @@
 
         }
         else{
-            remove_cover.value = 0;
+            remove_cover.value = "False";
         }
     }
 
@@ -206,7 +206,7 @@ resize:none;
                                    onchange="preview_img(event)">
                         </div>
                         <div class="col col-3 p-1">
-                            <input id="remove_cover" name="remove_cover" type="hidden" value=0>
+                            <input id="remove_cover" name="remove_cover" type="hidden" value=False>
                             <button type="button" class="btn btn-primary" onclick="request_remove_cover(true)">移除封面</button>
                         </div>
                     </div>

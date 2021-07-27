@@ -22,6 +22,7 @@ class Lesson(models.Model):
     lessoninfo = models.CharField(max_length=300)
     certificate = models.BooleanField(default=False)
     address = models.CharField(max_length=300, default='online mode')
+    objects = models.Manager()
 
     # return dictionary
     def to_dict(self):
@@ -56,6 +57,7 @@ class Studentlist(models.Model):
     lesson_situation = models.CharField(max_length=150, verbose_name='lesson_situation', null=True)
     agree = models.BooleanField(verbose_name='agree', default=True)
     join_reason = models.CharField(max_length=300, verbose_name='join_reason', null=True)
+    objects = models.Manager()
 
     class Meta:
         db_table = 'lesson_studentlist'
@@ -86,6 +88,7 @@ class Multimedia(models.Model):
     filename = models.CharField(max_length=150, verbose_name='filename')
     open_access = models.BooleanField(verbose_name="open_access", default=True)
     only_for_members = models.BooleanField(verbose_name="only_for_members", default=True)
+    objects = models.Manager()
 
     # 回傳一般檔案名稱
     def filename_without_extension(self):
@@ -108,6 +111,7 @@ class LessonTable(models.Model):
     ch = models.IntegerField(default=0)
     sb = models.IntegerField(default=0)
     title = models.CharField(max_length=150, null=True)
+    objects = models.Manager()
 
     class Meta:
         db_table = 'lesson_table'
@@ -119,6 +123,7 @@ class LessonRelatedMedia(models.Model):
     lesson_id = models.IntegerField(null=False)
     t_id = models.ForeignKey(LessonTable, on_delete=models.CASCADE, null=False)
     media_id = models.OneToOneField(Multimedia, on_delete=models.CASCADE, null=False)
+    objects = models.Manager()
 
     class Meta:
         db_table = "lesson_related_media"
@@ -135,6 +140,7 @@ class Homework(models.Model):
     start_time = models.DateField(default='1900-01-01', null=False, verbose_name='start_time')
     finish_time = models.DateField(default='9999-12-31', verbose_name='finish_time')
     turn_it_available = models.BooleanField(default=False, verbose_name='turn_it_available')
+    objects = models.Manager()
 
     class Meta:
         db_table = 'homework'
@@ -152,6 +158,7 @@ class HomeworkAttachFile(models.Model):
     file = models.FileField(verbose_name='file', upload_to=homework_file_path_return, null=True)
     open_access = models.BooleanField(verbose_name="open_access", default=False)
     only_for_members = models.BooleanField(verbose_name="only_for_members", default=False)
+    objects = models.Manager()
 
     # 回傳一般檔案名稱
     def filename_without_extension(self):
@@ -177,6 +184,7 @@ class HomeworkSubmit(models.Model):
     user_id = models.IntegerField(null=False, verbose_name='user_id')
     submitinfo = models.CharField(max_length=300, null=True,verbose_name='submitinfo')
     attach_file_exist = models.BooleanField(default=False, verbose_name='attach_file_exist')
+    objects = models.Manager()
 
     class Meta:
         db_table = 'homeworksubmit'
@@ -190,6 +198,7 @@ class HomeworkFileTable(models.Model):
     homeworksubmit_id = models.ForeignKey(HomeworkSubmit,
                                           on_delete=models.CASCADE, verbose_name='homeworksubmit_id', null=True)
     file = models.FileField(verbose_name="file", null=True)
+    objects = models.Manager()
 
     class Meta:
         db_table = 'homeworkfiletable'

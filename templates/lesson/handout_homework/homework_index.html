@@ -122,7 +122,9 @@
                 <td><img class="img-responsive mark" src="{% static 'element/x-mark.png'%}"></td>
                 {%endif%}
                 {%if item.attach_file_exist%}
-                <td><a type="button" class="btn btn-primary download-btn" href="">下載</a></td>
+                {%for attach_file in db|hw_attach_file:item.inner_id%}
+                <td><a type="button" class="btn btn-primary download-btn" href="{{attach_file.file.url}}">下載</a></td>
+                {%endfor%}
                 {%else%}
                 <td></td>
                 {%endif%}

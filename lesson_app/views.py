@@ -20,11 +20,19 @@ def callesson(request):
         # 查詢最新10筆資料
         lesson_result = models.Lesson.objects.all().order_by('-annouce_time')[:10]
 
-    lessonid = [lid.lessonid for lid in lesson_result.all()]
-    cover = models.Multimedia.objects.filter(lesson_id__in=lessonid, cover=1)
-
-    context = {'result_table': lesson_result, "cover": cover}
+    context = {'result_table': lesson_result}
     return render(request, "common/lesson.html", context)
+
+
+# 讀取封面
+@register.filter
+def cover_id(item, lid):
+    # 嘗試找尋
+    try:
+        return models.Multimedia.objects.get(lesson_id_id=lid, cover=1).image.url
+    # 找不到 載入預設圖片
+    except models.Multimedia.DoesNotExist:
+        return "static/element/empty_lesson_image.jpg"
 
 
 # 首頁存取
@@ -53,6 +61,7 @@ def lesson_info(request):
     try:
         teacher = auth.models.User.objects.get(id=info.auth)
     except Exception as e:
+        print(e)
         teacher = {"last_name": "unknow"}
 
     # 整理輸出
@@ -76,7 +85,7 @@ def new_lesson(request):
         # 固定資料
         name = request.POST.get('lessoname', '')
         lessontype = request.POST.get('lessontype', '')
-        auth = request.user.id
+        authid = request.user.id
         situation = request.POST.get('lesson_mode', '')
         verify = strtobool(request.POST.get('verify', ''))
         annouce_time = request.POST.get('annouce_time', '')
@@ -94,8 +103,9 @@ def new_lesson(request):
 
         # 輸入資料庫
         # 基本資料輸入
-        new = models.Lesson.objects.create(name=name, lessontype=lessontype, auth=auth, situation=situation, verify=verify,
-                                           annouce_time=annouce_time, start_time=start_time, finish_time=finish_time,
+        new = models.Lesson.objects.create(name=name, lessontype=lessontype, auth=authid, situation=situation,
+                                           verify=verify, annouce_time=annouce_time,
+                                           start_time=start_time, finish_time=finish_time,
                                            lessoninfo=lessoninfo, certificate=certificate, address=address)
         new.save()
         # 課程表資料輸入
@@ -106,8 +116,8 @@ def new_lesson(request):
                                               title=lesson_table["title"][i])
         # 課程封面輸入
         if 'cover' in request.FILES:
-            models.Multimedia.objects.create(lesson_id_id=new.lessonid, cover=1,
-                                             media_type=1, image=request.FILES['cover'], filename=request.FILES['cover'].name)
+            models.Multimedia.objects.create(lesson_id_id=new.lessonid, cover=1, media_type=1,
+                                             image=request.FILES['cover'], filename=request.FILES['cover'].name)
 
         context["lessonid"] = new.lessonid
         return render(request, "lesson/created_lesson.html", context)
@@ -215,7 +225,7 @@ def lesson_edit_save(request):
         certificate = strtobool(request.POST.get('sing_licnese', ''))
         address = request.POST.get('address', 'online mode')
         cover = request.FILES.get("cover", None)
-        remove_cover = int(request.POST.get("remove_cover"))
+        remove_cover = bool(strtobool(request.POST.get("remove_cover", "")))
 
         # 存取資料庫
         info = models.Lesson.objects.get(lessonid=lessonid)
@@ -231,7 +241,7 @@ def lesson_edit_save(request):
         info.save()
 
         # 更新封面
-        if cover is not None and remove_cover == False:
+        if cover is not None and remove_cover is False:
             # 純更新封面
             try:
                 cover_models = models.Multimedia.objects.get(lesson_id_id=lessonid, cover=1, media_type=1)
@@ -250,7 +260,7 @@ def lesson_edit_save(request):
                 context["msg"] = "發生錯誤，請聯絡網站管理人員"
         # 移除封面
         elif remove_cover:
-            cover_module = models.Multimedia.objects.get(lesson_id_id=lessonid, cover=1, media_type=1).delete()
+            models.Multimedia.objects.get(lesson_id_id=lessonid, cover=1, media_type=1).delete()
             context["msg"] = "完成更新"
         else:
             context["msg"] = "完成更新"
@@ -314,7 +324,8 @@ def course_outline_edit_save(request):
                                                              media_type=0, file=file_list["FILE"],
                                                              filename=file_list["FILE"].name)
                 # 教材連接表新增資料
-                models.LessonRelatedMedia.objects.create(lesson_id=lessonid, t_id_id=int(file_list["lesson_table_inner_id"]),
+                models.LessonRelatedMedia.objects.create(lesson_id=lessonid,
+                                                         t_id_id=int(file_list["lesson_table_inner_id"]),
                                                          media_id_id=new_media.media_id)
 
             # 移除檔案
@@ -383,9 +394,9 @@ def homework_active(request):
 
         # 輸入資料庫
         try:
-            db = models.Homework.objects.create(lessontable_id_id=lessontable_id, title=name, homeworkinfo=homeworkinfo,
-                                                attach_file_exist=attach, lesson_id_id=lessonid, finish_time=finish_date,
-                                                start_time=start_date, turn_it_available=turn_it)
+            models.Homework.objects.create(lessontable_id_id=lessontable_id, title=name, homeworkinfo=homeworkinfo,
+                                           attach_file_exist=attach, lesson_id_id=lessonid,
+                                           finish_time=finish_date, start_time=start_date, turn_it_available=turn_it)
 
             # 附檔應對
 
@@ -560,7 +571,7 @@ def join_lesson_list(request):
     join_list = models.Studentlist.objects.filter(student_id=request.user.id)
 
     # 加入課程資料解析
-    columns = [fields.name for fields in models.Lesson._meta.fields]
+    columns = [fields.name for fields in models.Lesson._meta.get_fields(include_hidden=False)]
     lesson = pd.DataFrame(columns=columns)
     for data in join_list:
         dict_data = pd.DataFrame(data.lesson_id.to_dict(), index=[0])
@@ -623,6 +634,11 @@ def handout_homework(request):
     return render(request, "lesson/handout_homework/homework_index.html", context)
 
 
+@register.filter
+def hw_attach_file(item, hwid):
+    return models.HomeworkAttachFile.objects.filter(homeworkid_id=hwid)
+
+
 # 繳交作業編輯
 @login_required
 def homework_submit_edit_save(request):
@@ -631,23 +647,30 @@ def homework_submit_edit_save(request):
     if request.method.lower() != "post":
         context["msg"] = "系統錯誤!"
     else:
-        lessonid = request.POST.get("lessonid", "")
-        homeworkid = request.POST.get("homeworkid", "")
-        lesson_table_id = request.POST.get("lesson_table_id", "")
+        lessonid = int(request.POST.get("lessonid", ""))
+        homeworkid = int(request.POST.get("homeworkid", ""))
+        lesson_table_id = int(request.POST.get("lesson_table_id", ""))
         textraea = request.POST.get("textraea", "")
-        # 檔案狀況整理
-        # 抽取key
-        file_key_list = list(request.FILES.keys())
-        for file_key in file_key_list:
-            # 更新檔案
-            if "submit_" in file_key:
-                print(file_key)
-            # 新增檔案
-            elif "newfile_" in file_key:
-                file = request.FILES.get(file_key)
-                #models.HomeworkSubmit.objects.create(lessontable_id=lesson_table_id, lesson_id=lessonid,
-                #                                     homework_id=homeworkid, user_id=request.user.id,
-                #                                     submitinfo=file.name, attach_file_exist=True)
+        # 無附檔
+        if len(list(request.FILES.keys())) <= 0:
+            models.HomeworkSubmit.objects.create(lessontable_id_id=lesson_table_id, lesson_id_id=lessonid,
+                                                 homework_id_id=homeworkid, user_id=request.user.id,
+                                                 submitinfo=textraea, attach_file_exist=False)
+        # 有附檔
+        else:
+            # 檔案狀況整理
+            # 抽取key
+            file_key_list = list(request.FILES.keys())
+            for file_key in file_key_list:
+                # 更新檔案
+                if "submit_" in file_key:
+                    print(file_key)
+                # 新增檔案
+                elif "newfile_" in file_key:
+                    file = request.FILES.get(file_key)
+                    models.HomeworkSubmit.objects.create(lessontable_id=lesson_table_id, lesson_id=lessonid,
+                                                         homework_id=homeworkid, user_id=request.user.id,
+                                                         submitinfo=textraea, attach_file_exist=True)
 
     return JsonResponse(context)
 
