@@ -26,7 +26,8 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10">
-        <schema name="django_db" object-types="table, view" />
+        <schema name="django_db" object-types="table, index, constraint, dataset trigger, procedure, view, function, column" />
+        <schema name="sakila" object-types="table, index, constraint, dataset trigger, procedure, view, function, column" />
       </connection>
     </loaded-nodes>
   </component>
@@ -42,23 +43,27 @@
     <connection id="afcd0252-d864-419e-8fd5-ae8bad70ca10" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10" dataset="django_db.lesson_studentlist" active-filter-id="631f129d-8fc2-4461-8d55-4ed39906a69c">
-      <filter id="631f129d-8fc2-4461-8d55-4ed39906a69c" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />
-    </filter-actions>
-    <filter-actions connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10" dataset="django_db.lesson_table" active-filter-id="3a42d140-e5c1-41aa-96bf-3ba6e39fbcf5">
-      <filter id="3a42d140-e5c1-41aa-96bf-3ba6e39fbcf5" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND" />
-    </filter-actions>
     <filter-actions connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10" dataset="django_db.django_session" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10" dataset="django_db.users_uesrinfo" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10" dataset="django_db.lesson" active-filter-id="db997236-cf4a-400d-a27a-2af507806b58">
       <filter id="db997236-cf4a-400d-a27a-2af507806b58" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />
     </filter-actions>
+    <filter-actions connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10" dataset="django_db.homeworksubmit" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10" dataset="django_db.auth_group" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10" dataset="django_db.lesson_app_multimedia" active-filter-id="">
       <filter id="c5c68efe-ff7e-4c69-b8fa-0787eb28fb37" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND">
         <condition column="media_id" operator="=" value="" active="true" />
       </filter>
     </filter-actions>
+    <filter-actions connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10" dataset="django_db.lesson_studentlist" active-filter-id="631f129d-8fc2-4461-8d55-4ed39906a69c">
+      <filter id="631f129d-8fc2-4461-8d55-4ed39906a69c" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />
+    </filter-actions>
+    <filter-actions connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10" dataset="django_db.lesson_table" active-filter-id="3a42d140-e5c1-41aa-96bf-3ba6e39fbcf5">
+      <filter id="3a42d140-e5c1-41aa-96bf-3ba6e39fbcf5" name="Filter" temporary="false" custom-name="false" type="basic" join-type="AND" />
+    </filter-actions>
+    <filter-actions connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10" dataset="django_db.homework" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10" dataset="django_db.homeworkfiletable" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10" dataset="django_db.homework_attach_file" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10" dataset="django_db.auth_group_permissions" active-filter-id="EMPTY_FILTER" />
     <filter-actions connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10" dataset="django_db.auth_user" active-filter-id="1fd68b3d-1306-40b7-8bb5-d777a84c023f">
       <filter id="1fd68b3d-1306-40b7-8bb5-d777a84c023f" name="Filter 1" temporary="false" custom-name="false" type="basic" join-type="AND" />

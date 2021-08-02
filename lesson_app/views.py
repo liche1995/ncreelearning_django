@@ -626,9 +626,9 @@ def handout_homework(request):
     context = {}
     # 抓取資料
     if request.method.lower() == "get":
-        join_list = models.Studentlist.objects.filter(student_id=request.user.id)
         lessonid = request.GET.get("lessonid", -1)
-        homework_data = models.Homework.objects.filter(lesson_id=lessonid)
+        homework_data = models.Homework.objects.filter(lesson_id=lessonid).\
+            order_by("lessontable_id__ch", "lessontable_id__sb")
         context["lessonid"] = lessonid
         context["homework_data"] = homework_data
     return render(request, "lesson/handout_homework/homework_index.html", context)
@@ -637,6 +637,15 @@ def handout_homework(request):
 @register.filter
 def hw_attach_file(item, hwid):
     return models.HomeworkAttachFile.objects.filter(homeworkid_id=hwid)
+
+
+@register.filter
+def hw_submit_info(item, hwid):
+    query = models.HomeworkSubmit.objects.filter(homework_id_id=hwid)
+    if len(query) > 0:
+        return query
+    else:
+        return {None}
 
 
 # 繳交作業編輯
@@ -651,26 +660,38 @@ def homework_submit_edit_save(request):
         homeworkid = int(request.POST.get("homeworkid", ""))
         lesson_table_id = int(request.POST.get("lesson_table_id", ""))
         textraea = request.POST.get("textraea", "")
-        # 無附檔
-        if len(list(request.FILES.keys())) <= 0:
-            models.HomeworkSubmit.objects.create(lessontable_id_id=lesson_table_id, lesson_id_id=lessonid,
-                                                 homework_id_id=homeworkid, user_id=request.user.id,
-                                                 submitinfo=textraea, attach_file_exist=False)
-        # 有附檔
-        else:
-            # 檔案狀況整理
-            # 抽取key
-            file_key_list = list(request.FILES.keys())
-            for file_key in file_key_list:
-                # 更新檔案
-                if "submit_" in file_key:
-                    print(file_key)
+        already_submit = public_api.already_submit_hw(request.user.id, homeworkid)
+        # 新建
+        if already_submit is False:
+            # 無附檔
+            if len(list(request.FILES.keys())) <= 0:
+                models.HomeworkSubmit.objects.create(lessontable_id_id=lesson_table_id, lesson_id_id=lessonid,
+                                                     homework_id_id=homeworkid, user_id=request.user.id,
+                                                     submitinfo=textraea, attach_file_exist=False)
+            # 有附檔
+            else:
+                # 抽取key
+                file_key_list = list(request.FILES.keys())
                 # 新增檔案
-                elif "newfile_" in file_key:
+                for file_key in file_key_list:
                     file = request.FILES.get(file_key)
                     models.HomeworkSubmit.objects.create(lessontable_id=lesson_table_id, lesson_id=lessonid,
                                                          homework_id=homeworkid, user_id=request.user.id,
                                                          submitinfo=textraea, attach_file_exist=True)
+        # 更新
+        else:
+            submitinfo_db = models.HomeworkSubmit.objects.get(user_id=request.user.id,homework_id_id=homeworkid)
+            submitinfo_db.submitinfo = textraea
+            submitinfo_db.save()
+
+            # 抽取key
+            file_key_list = list(request.FILES.keys())
+
+            # 追加附檔
+            # 移除附檔
+            # 附檔不更動
+
+        # 刪除
 
     return JsonResponse(context)
 

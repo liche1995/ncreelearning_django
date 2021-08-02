@@ -191,13 +191,18 @@ class HomeworkSubmit(models.Model):
 
 
 # 習題檔案表
+def homework_submit_file_path_return(instance, filename):
+    filepath = "lesson_homework_submit_file/{0}/{1}".format(str(instance.homeworkid_id), filename)
+    return filepath
+
+
 class HomeworkFileTable(models.Model):
     inner_id = models.AutoField(primary_key=True, verbose_name='inner_id')
     lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name='lesson_id', default=0)
     lessontable_id = models.ForeignKey(LessonTable, on_delete=models.CASCADE, verbose_name='lesson_table_id', default=0)
     homeworksubmit_id = models.ForeignKey(HomeworkSubmit,
                                           on_delete=models.CASCADE, verbose_name='homeworksubmit_id', null=True)
-    file = models.FileField(verbose_name="file", null=True)
+    file = models.FileField(verbose_name="file", null=True, upload_to=homework_submit_file_path_return)
     objects = models.Manager()
 
     class Meta:

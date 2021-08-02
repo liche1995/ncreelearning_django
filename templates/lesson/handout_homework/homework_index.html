@@ -122,15 +122,23 @@
                 <td><img class="img-responsive mark" src="{% static 'element/x-mark.png'%}"></td>
                 {%endif%}
                 {%if item.attach_file_exist%}
-                {%for attach_file in db|hw_attach_file:item.inner_id%}
-                <td><a type="button" class="btn btn-primary download-btn" href="{{attach_file.file.url}}">下載</a></td>
-                {%endfor%}
+                <td>
+                    <button class="btn btn btn-primary download-btn" data-bs-toggle="dropdown">下載</button>
+                    <div class="dropdown-menu">
+                    {%for attach_file in db|hw_attach_file:item.inner_id%}
+                        <a class="dropdown-item" href="{{attach_file.file.url}}">
+                            {{attach_file.filename_without_extension}}
+                        </a>
+                    {%endfor%}
+                    </div>
+                </td>
                 {%else%}
                 <td></td>
                 {%endif%}
                 <td><button type="button" class="btn btn-primary submit-btn" value="hw_submit_{{item.inner_id}}">開始繳交</button></td>
             </tr>
             <tr id="hw_submit_{{item.inner_id}}" style="display:none">
+                {%for submit in db|hw_submit_info:item.inner_id%}
                 <td colspan="100%">
                     <form method="post" id="homework_upload_form_{{item.inner_id}}">
                         {%csrf_token%}
@@ -141,7 +149,7 @@
                         </div>
                         <div class="row p-3">
                             <label class="p-2">繳交說明：</label>
-                            <textarea name="textraea" rows="5" style="resize:none"></textarea>
+                            <textarea name="textraea" rows="5" style="resize:none">{{submit.submitinfo}}</textarea>
                         </div>
                         <div class="row">
                             <div class="col text-end">
@@ -156,6 +164,7 @@
                         </div>
                     </form>
                 </td>
+                {%endfor%}
             </tr>
         {%endfor%}
     </table>
