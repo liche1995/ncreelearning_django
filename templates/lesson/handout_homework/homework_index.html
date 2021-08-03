@@ -105,6 +105,7 @@
                 <th>繳交開始時間</th>
                 <th>截止時間</th>
                 <th>允許遲交?</th>
+                <th>繳交狀況</th>
                 <th>附檔下載</th>
                 <th>繳交作業</th>
             </tr>
@@ -117,6 +118,11 @@
                 <td>{{item.start_time}}</td>
                 <td>{{item.finish_time}}</td>
                 {%if item.turn_it_available%}
+                <td><img class="img-responsive mark" src="{% static 'element/check-mark.png'%}"></td>
+                {%else%}
+                <td><img class="img-responsive mark" src="{% static 'element/x-mark.png'%}"></td>
+                {%endif%}
+                {%if request.user.id|hw_hand_in:item.inner_id%}
                 <td><img class="img-responsive mark" src="{% static 'element/check-mark.png'%}"></td>
                 {%else%}
                 <td><img class="img-responsive mark" src="{% static 'element/x-mark.png'%}"></td>
@@ -138,7 +144,7 @@
                 <td><button type="button" class="btn btn-primary submit-btn" value="hw_submit_{{item.inner_id}}">開始繳交</button></td>
             </tr>
             <tr id="hw_submit_{{item.inner_id}}" style="display:none">
-                {%for submit in db|hw_submit_info:item.inner_id%}
+                {%for submit in request.user.id|hw_submit_info:item.inner_id%}
                 <td colspan="100%">
                     <form method="post" id="homework_upload_form_{{item.inner_id}}">
                         {%csrf_token%}

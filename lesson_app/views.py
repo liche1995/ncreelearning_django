@@ -640,12 +640,21 @@ def hw_attach_file(item, hwid):
 
 
 @register.filter
-def hw_submit_info(item, hwid):
-    query = models.HomeworkSubmit.objects.filter(homework_id_id=hwid)
+def hw_submit_info(user_id, hwid):
+    query = models.HomeworkSubmit.objects.filter(user_id=user_id, homework_id_id=hwid)
     if len(query) > 0:
         return query
     else:
         return {None}
+
+
+@register.filter
+def hw_hand_in(user_id, hwid):
+    try:
+        query = models.HomeworkSubmit.objects.get(user_id=user_id, homework_id_id=hwid)
+        return True
+    except models.HomeworkSubmit.DoesNotExist:
+        return False
 
 
 # 繳交作業編輯
@@ -675,22 +684,36 @@ def homework_submit_edit_save(request):
                 # 新增檔案
                 for file_key in file_key_list:
                     file = request.FILES.get(file_key)
-                    models.HomeworkSubmit.objects.create(lessontable_id=lesson_table_id, lesson_id=lessonid,
+                    models.HomeworkSubmit.objects.create(lessontable_id_id=lesson_table_id, lesson_id_id=lessonid,
                                                          homework_id=homeworkid, user_id=request.user.id,
                                                          submitinfo=textraea, attach_file_exist=True)
+            context["msg"] = "上傳成功"
         # 更新
         else:
-            submitinfo_db = models.HomeworkSubmit.objects.get(user_id=request.user.id,homework_id_id=homeworkid)
+            submitinfo_db = models.HomeworkSubmit.objects.get(user_id=request.user.id, homework_id_id=homeworkid)
             submitinfo_db.submitinfo = textraea
-            submitinfo_db.save()
 
             # 抽取key
             file_key_list = list(request.FILES.keys())
 
-            # 追加附檔
-            # 移除附檔
-            # 附檔不更動
+            for file_key in file_key_list:
+                # 追加附檔
+                if "newfile_" in file_key:
+                    file = request.FILES.get(file_key)
+                    models.HomeworkFileTable.objects.create(file=file,
+                                                            homeworksubmit_id_id=submitinfo_db.inner_id,
+                                                            lesson_id_id=lessonid, lessontable_id_id=lesson_table_id)
+                    submitinfo_db.attach_file_exist = True
 
+                # 移除附檔
+                elif "remove_" in file_key:
+                    submitinfo_db.attach_file_exist = False
+
+                # 附檔不更動
+                else:
+                    pass
+            submitinfo_db.save()
+            context["msg"] = "上傳成功"
         # 刪除
 
     return JsonResponse(context)
