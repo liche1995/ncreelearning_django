@@ -49,6 +49,7 @@
                 success : function(data)
                 {
                     alert(data["msg"]);
+                    location.reload();
                 },
                 error: function(data)
                 {
@@ -162,7 +163,13 @@
                                 <button type="button" class="btn btn-primary add-file-btn" value="file_{{item.inner_id}}_row">增加檔案</button>
                             </div>
                         </div>
-                        <div class="row" id="file_{{item.inner_id}}_row"></div>
+                        <div class="row" id="file_{{item.inner_id}}_row">
+                            {%if submit.inner_id%}
+                            {%for submitfile in db|hw_submit_file:submit.inner_id%}
+                            {{submitfile}}
+                            {%endfor%}
+                            {%endif%}
+                        </div>
                         <div class="row p-3">
                             <div class="col text-end">
                                 <button type="submit" class="btn btn-primary save-btn">儲存</button>

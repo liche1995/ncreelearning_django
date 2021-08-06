@@ -192,7 +192,8 @@ class HomeworkSubmit(models.Model):
 
 # 習題檔案表
 def homework_submit_file_path_return(instance, filename):
-    filepath = "lesson_homework_submit_file/{0}/{1}".format(str(instance.homeworkid_id), filename)
+    filepath = "lesson_homework_submit_file/{0}/{1}/{2}".\
+        format(str(instance.homeworksubmit_id.homework_id_id), str(instance.homeworksubmit_id.user_id), filename)
     return filepath
 
 

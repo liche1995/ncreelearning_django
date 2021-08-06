@@ -649,6 +649,12 @@ def hw_submit_info(user_id, hwid):
 
 
 @register.filter
+def hw_submit_file(empty, hwsubmit_id):
+    if type(hwsubmit_id) is int:
+        return models.HomeworkFileTable.objects.filter(homeworksubmit_id_id=hwsubmit_id)
+
+
+@register.filter
 def hw_hand_in(user_id, hwid):
     try:
         query = models.HomeworkSubmit.objects.get(user_id=user_id, homework_id_id=hwid)

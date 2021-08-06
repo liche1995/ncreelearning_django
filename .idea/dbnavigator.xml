@@ -26,7 +26,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10">
-        <schema name="django_db" object-types="index, function, view, table, procedure, column, constraint, dataset trigger" />
+        <schema name="django_db" object-types="function, constraint, table, dataset trigger, index, column, procedure, view" />
       </connection>
     </loaded-nodes>
   </component>
@@ -36,9 +36,7 @@
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10" object-ref="schemas/django_db/tables/homeworkfiletable" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="afcd0252-d864-419e-8fd5-ae8bad70ca10" />
