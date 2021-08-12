@@ -668,59 +668,76 @@ def hw_hand_in(user_id, hwid):
 def homework_submit_edit_save(request):
     context = {}
     # 禁制非post操作
-    if request.method.lower() != "post":
-        context["msg"] = "系統錯誤!"
-    else:
+    if request.method.lower() == "post":
         lessonid = int(request.POST.get("lessonid", ""))
         homeworkid = int(request.POST.get("homeworkid", ""))
         lesson_table_id = int(request.POST.get("lesson_table_id", ""))
         textraea = request.POST.get("textraea", "")
         already_submit = public_api.already_submit_hw(request.user.id, homeworkid)
+
         # 新建
         if already_submit is False:
-            # 無附檔
-            if len(list(request.FILES.keys())) <= 0:
-                models.HomeworkSubmit.objects.create(lessontable_id_id=lesson_table_id, lesson_id_id=lessonid,
-                                                     homework_id_id=homeworkid, user_id=request.user.id,
-                                                     submitinfo=textraea, attach_file_exist=False)
-            # 有附檔
-            else:
-                # 抽取key
-                file_key_list = list(request.FILES.keys())
-                # 新增檔案
-                for file_key in file_key_list:
-                    file = request.FILES.get(file_key)
-                    models.HomeworkSubmit.objects.create(lessontable_id_id=lesson_table_id, lesson_id_id=lessonid,
-                                                         homework_id=homeworkid, user_id=request.user.id,
-                                                         submitinfo=textraea, attach_file_exist=True)
-            context["msg"] = "上傳成功"
+            submitinfo_db = models.HomeworkSubmit.objects.create(lessontable_id_id=lesson_table_id, lesson_id_id=lessonid,
+                                                                 homework_id_id=homeworkid, user_id=request.user.id,
+                                                                 submitinfo=textraea, attach_file_exist=False)
+
         # 更新
         else:
             submitinfo_db = models.HomeworkSubmit.objects.get(user_id=request.user.id, homework_id_id=homeworkid)
             submitinfo_db.submitinfo = textraea
 
-            # 抽取key
-            file_key_list = list(request.FILES.keys())
+        # 增加檔案
+        # 抽取key
+        file_key_list = list(request.FILES.keys())
 
-            for file_key in file_key_list:
-                # 追加附檔
-                if "newfile_" in file_key:
-                    file = request.FILES.get(file_key)
-                    models.HomeworkFileTable.objects.create(file=file,
-                                                            homeworksubmit_id_id=submitinfo_db.inner_id,
-                                                            lesson_id_id=lessonid, lessontable_id_id=lesson_table_id)
-                    submitinfo_db.attach_file_exist = True
+        for file_key in file_key_list:
+            file = request.FILES.get(file_key)
+            models.HomeworkFileTable.objects.create(file=file,
+                                                    homeworksubmit_id_id=submitinfo_db.inner_id,
+                                                    lesson_id_id=lessonid, lessontable_id_id=lesson_table_id)
 
-                # 移除附檔
-                elif "remove_" in file_key:
-                    submitinfo_db.attach_file_exist = False
+        # 刪除檔案
+        # 抽取key
+        delete_key = np.array(list(request.POST.keys()))
+        delete_key_index = np.where(np.char.find(delete_key, "delete_") == 0)[0]
+        for i in delete_key_index:
+            delete_order = request.POST.get(delete_key[i])
+            # 要求刪除
+            if strtobool(delete_order):
+                inner_id = int(delete_key[i].split("_")[-1])
+                models.HomeworkFileTable.objects.get(inner_id=inner_id).delete()
 
-                # 附檔不更動
-                else:
-                    pass
-            submitinfo_db.save()
-            context["msg"] = "上傳成功"
-        # 刪除
+        # 附檔有無最後檢查
+        if len(models.HomeworkFileTable.objects.filter(homeworksubmit_id=submitinfo_db.inner_id)) > 0:
+            submitinfo_db.attach_file_exist = True
+        else:
+            submitinfo_db.attach_file_exist = False
+
+        submitinfo_db.save()
+
+        context["msg"] = "上傳成功"
+
+    # 非POST request
+    else:
+        context["msg"] = "系統錯誤!"
+
+    return JsonResponse(context)
+
+
+# 刪除作業
+def student_delete_homework(request):
+    context = {}
+    if request.method.lower() == "post":
+        homeworkid = int(request.POST.get("homeworkid", ""))
+        already_submit = public_api.already_submit_hw(request.user.id, homeworkid)
+
+        if already_submit:
+            taget = models.HomeworkSubmit.objects.get(user_id=request.user.id, homework_id_id=homeworkid)
+            taget.delete()
+            context["msg"] = "已刪除"
+
+        else:
+            context["msg"] = "作業不存在"
 
     return JsonResponse(context)
 

@@ -14,12 +14,13 @@
                 $("#" + target_id).hide("slow");
             ;}
         ;})
+
         $(".add-file-btn").click(function(even){
             var target_id = "#" + even.target.value;
             var newfile_key = Math.floor(Math.random()*1001);
             var newfile_id = "newfile_row_" + newfile_key;
             var newfile_input_id = "newfile_" + newfile_key;
-            var delete_order = "delete_file('" + newfile_id + "')";
+            var delete_order = "delete_preupload_file('" + newfile_id + "')";
 
             var append_element = "\
                 <div class='row p-1' id='"+newfile_id+"'>\
@@ -33,6 +34,7 @@
 
             $(target_id).append(append_element);
         ;})
+
         $(".save-btn").click(function(even){
             /* 繼續傳遞 */
             even.preventDefault();
@@ -56,12 +58,53 @@
                     alert(data["msg"]);
                 }
             })
+        ;})
+
+        /*刪除既有檔案*/
+        $(".delete_file").click(function(even){
+            /* 收起段落 */
+            var divid = even.target.dataset.divid;
+            $("#" + divid).hide("slow");
+
+            /* 修改刪除係數 */
+            var delete_input = document.getElementById(even.target.dataset.deleteid);
+            delete_input.value = "True";
 
         ;})
+
+        /*刪除繳交作業*/
+        $(".delethw-btn").click(function(even){
+            /* 詢問刪除? */
+            if(confirm("確定要刪除繳交作業?")){
+                /* 繼續傳遞 */
+                even.preventDefault();
+                var form_id = even.target.form.id;
+                var form = $("#" + form_id)[0];
+                var formdata = new FormData(form);
+                $.ajax({
+                    url:"/ajax_active/student_delete_homework",
+                    type: "POST",
+                    data: formdata,
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success : function(data)
+                    {
+                        alert(data["msg"]);
+                        location.reload();
+                    },
+                    error: function(data)
+                    {
+                        alert(data["msg"]);
+                    }
+                })
+            }
+        ;})
+
     ;})
 
-    /*刪除檔案*/
-    function delete_file(eleid){
+    /*刪除預備檔案*/
+    function delete_preupload_file(eleid){
         var tab = document.getElementById(eleid);
         tab.remove();
     ;}
@@ -109,6 +152,7 @@
                 <th>繳交狀況</th>
                 <th>附檔下載</th>
                 <th>繳交作業</th>
+                <th>分數</th>
             </tr>
         </thead>
         {%for item in homework_data.all%}
@@ -143,6 +187,7 @@
                 <td></td>
                 {%endif%}
                 <td><button type="button" class="btn btn-primary submit-btn" value="hw_submit_{{item.inner_id}}">開始繳交</button></td>
+                <td></td>
             </tr>
             <tr id="hw_submit_{{item.inner_id}}" style="display:none">
                 {%for submit in request.user.id|hw_submit_info:item.inner_id%}
@@ -166,13 +211,24 @@
                         <div class="row" id="file_{{item.inner_id}}_row">
                             {%if submit.inner_id%}
                             {%for submitfile in db|hw_submit_file:submit.inner_id%}
-                            {{submitfile}}
+                            <div class="row py-1" id="submit_{{submitfile.inner_id}}">
+                                <input type="hidden" name="delete_{{submitfile.inner_id}}" id="delete_{{submitfile.inner_id}}" value="False">
+                                <div class="col-3">
+                                    <a href="{{submitfile.file.url}}">{{submitfile.filename_without_extension}}</a>
+                                </div>
+                                <div class="col-auto">
+                                    <button type="button" class="btn btn-danger delete_file" data-divid='submit_{{submitfile.inner_id}}' data-deleteid='delete_{{submitfile.inner_id}}'>刪除</button>
+                                </div>
+                            </div>
                             {%endfor%}
                             {%endif%}
                         </div>
                         <div class="row p-3">
                             <div class="col text-end">
-                                <button type="submit" class="btn btn-primary save-btn">儲存</button>
+                                <button type="submit" class="btn btn-primary save-btn">儲存作業</button>
+                                {%if request.user.id|hw_hand_in:item.inner_id%}
+                                <button type="button" class="btn btn-danger delethw-btn">刪除繳交作業</button>
+                                {%endif%}
                             </div>
                         </div>
                     </form>

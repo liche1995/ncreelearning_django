@@ -204,7 +204,20 @@ class HomeworkFileTable(models.Model):
     homeworksubmit_id = models.ForeignKey(HomeworkSubmit,
                                           on_delete=models.CASCADE, verbose_name='homeworksubmit_id', null=True)
     file = models.FileField(verbose_name="file", null=True, upload_to=homework_submit_file_path_return)
+    open_access = models.BooleanField(verbose_name="open_access", default=False)
+    only_for_members = models.BooleanField(verbose_name="only_for_members", default=False)
     objects = models.Manager()
+
+    # 回傳一般檔案名稱
+    def filename_without_extension(self):
+        import re
+        filename = re.split("[/.]", self.file.name)[-2]
+        return filename
+
+    # 回傳檔案名稱
+    def filename(self):
+        filename = self.file.name.split("/")[-1]
+        return filename
 
     class Meta:
         db_table = 'homeworkfiletable'

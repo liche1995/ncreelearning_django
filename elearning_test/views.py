@@ -5,7 +5,7 @@ from django.views import View
 from django.template.defaulttags import register
 from lesson_app.public_api import *
 from lesson_app.views import for_index_page
-from lesson_app.models import Multimedia, HomeworkAttachFile
+from lesson_app.models import Multimedia, HomeworkAttachFile, HomeworkFileTable
 import pandas as pd
 import mimetypes
 
@@ -75,6 +75,8 @@ def request_file_access(request, path, document_root):
         access_path = path.split("/")[0]
         if access_path == "lesson_homework_file":
             tb = HomeworkAttachFile
+        elif access_path == "lesson_homework_submit_file":
+            tb = HomeworkFileTable
         else:
             tb = Multimedia
         return tb

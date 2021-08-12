@@ -77,6 +77,7 @@ urlpatterns = [
     path('ajax_active/join_lesson_order', lesson_view.join_lesson),
     path('ajax_active/quit_lesson', lesson_view.quit_lesson),
     path('ajax_active/homework_submit_edit_save', lesson_view.homework_submit_edit_save),
+    path('ajax_active/student_delete_homework', lesson_view.student_delete_homework),
 
 
     # 系統管理項目
