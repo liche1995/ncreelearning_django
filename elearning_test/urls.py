@@ -21,6 +21,7 @@ from django.conf.urls import handler404, handler403, handler500
 # 模組引入
 from elearning_test import views as main_view
 from lesson_app import views as lesson_view
+from lesson_app import ajax_active as lesson_ajax_active
 from users import views as user_view
 from schedule_work.models import runtask
 
@@ -60,9 +61,10 @@ urlpatterns = [
     path('new_lesson', lesson_view.new_lesson),
     path('edit_lesson_list', lesson_view.edit_lesson_list),
     path('edit_lesson', lesson_view.edit_lesson),
+    path('homework_mark', lesson_view.homework_mark),
     path('ajax_active/delete_lesson', lesson_view.delete_lesson),
     path('ajax_show/lesson_edit_page', lesson_view.lesson_edit_page),
-    path('ajax_active/lesson_edit_save', lesson_view.lesson_edit_save),
+    path('ajax_active/lesson_edit_save', lesson_ajax_active.lesson_edit_save),
     path('ajax_active/course_outline_edit_save', lesson_view.course_outline_edit_save),
     path('ajax_active/student_manage', lesson_view.student_manage),
     path('ajax_active/kick_studnet', lesson_view.kick_studnet),
@@ -74,8 +76,8 @@ urlpatterns = [
     path("join_lesson_list", lesson_view.join_lesson_list),
     path("class_room", lesson_view.class_room),
     path("handout_homework", lesson_view.handout_homework),
-    path('ajax_active/join_lesson_order', lesson_view.join_lesson),
-    path('ajax_active/quit_lesson', lesson_view.quit_lesson),
+    path('ajax_active/join_lesson_order', lesson_ajax_active.join_lesson),
+    path('ajax_active/quit_lesson', lesson_ajax_active.quit_lesson),
     path('ajax_active/homework_submit_edit_save', lesson_view.homework_submit_edit_save),
     path('ajax_active/student_delete_homework', lesson_view.student_delete_homework),
 

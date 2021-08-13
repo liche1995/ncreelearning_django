@@ -77,6 +77,7 @@
                             <hr class="dropdown-divider">
                             <a class="dropdown-item" href="/new_lesson">新增課程</a>
                             <a class="dropdown-item" href="/edit_lesson_list">課程編輯</a>
+                            <a class="dropdown-item" href="/homework_mark">作業評分</a>
                             {%endif%}
                             <!-- 學生權限區 -->
                             {%if request.user.groups.all.0.name == 'student' or request.user.is_superuser%}
