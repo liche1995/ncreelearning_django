@@ -62,14 +62,14 @@ urlpatterns = [
     path('edit_lesson_list', lesson_view.edit_lesson_list),
     path('edit_lesson', lesson_view.edit_lesson),
     path('homework_mark', lesson_view.homework_mark),
-    path('ajax_active/delete_lesson', lesson_view.delete_lesson),
+    path('ajax_active/delete_lesson', lesson_ajax_active.delete_lesson),
     path('ajax_show/lesson_edit_page', lesson_view.lesson_edit_page),
     path('ajax_active/lesson_edit_save', lesson_ajax_active.lesson_edit_save),
-    path('ajax_active/course_outline_edit_save', lesson_view.course_outline_edit_save),
-    path('ajax_active/student_manage', lesson_view.student_manage),
-    path('ajax_active/kick_studnet', lesson_view.kick_studnet),
-    path('ajax_active/homework_active', lesson_view.homework_active),
-    path('ajax_active/delete_homework', lesson_view.delete_homework),
+    path('ajax_active/course_outline_edit_save', lesson_ajax_active.course_outline_edit_save),
+    path('ajax_active/student_manage', lesson_ajax_active.student_manage),
+    path('ajax_active/kick_studnet', lesson_ajax_active.kick_studnet),
+    path('ajax_active/homework_active', lesson_ajax_active.homework_active),
+    path('ajax_active/delete_homework', lesson_ajax_active.delete_homework),
 
     # 學生項目
     path('joinorquit_lesson', lesson_view.joinorquit),
@@ -78,8 +78,8 @@ urlpatterns = [
     path("handout_homework", lesson_view.handout_homework),
     path('ajax_active/join_lesson_order', lesson_ajax_active.join_lesson),
     path('ajax_active/quit_lesson', lesson_ajax_active.quit_lesson),
-    path('ajax_active/homework_submit_edit_save', lesson_view.homework_submit_edit_save),
-    path('ajax_active/student_delete_homework', lesson_view.student_delete_homework),
+    path('ajax_active/homework_submit_edit_save', lesson_ajax_active.homework_submit_edit_save),
+    path('ajax_active/student_delete_homework', lesson_ajax_active.student_delete_homework),
 
 
     # 系統管理項目
