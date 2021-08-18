@@ -212,11 +212,13 @@ def homework_mark(request):
     if request.user.is_staff:
         lesson = models.Lesson.objects.all()
         subject = models.LessonTable.objects.all()
+
     else:
         lesson = models.Lesson.objects.filter(auth=request.user.id)
         lessonid = [item.lessonid for item in lesson.all()]
         subject = models.LessonTable.objects.filter(lesson_id_id__in=lessonid)
 
+    context["lesson"] = lesson
     return render(request, "lesson/handout_homework/homework_mark_index.html", context)
 
 
