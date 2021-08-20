@@ -222,6 +222,16 @@ def homework_mark(request):
     return render(request, "lesson/handout_homework/homework_mark_index.html", context)
 
 
+# 有作業課綱調閱
+@register.filter
+def course_homework(data, lessonid):
+    hwinfo = models.Homework.objects.filter(lesson_id_id=lessonid).order_by("lessontable_id__ch", "lessontable_id__sb")
+    if hwinfo.count() > 0:
+        return hwinfo
+    else:
+        return [False]
+
+
 # 刪除作業
 @login_required
 def delete_homework(request):
