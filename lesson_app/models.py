@@ -184,6 +184,7 @@ class HomeworkSubmit(models.Model):
     user_id = models.IntegerField(null=False, verbose_name='user_id')
     submitinfo = models.CharField(max_length=300, null=True,verbose_name='submitinfo')
     attach_file_exist = models.BooleanField(default=False, verbose_name='attach_file_exist')
+    score = models.IntegerField(null=True, verbose_name="score")
     objects = models.Manager()
 
     class Meta:

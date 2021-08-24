@@ -44,14 +44,25 @@ li{list-style-type: none;}
     background-color: #d2f4ea;
 }
 
+.btn-hwitem{
+    display: inline-flex;
+    align-items: center;
+    padding: .25rem .5rem;
+    font-weight: 600;
+    color: rgba(0, 0, 0, .65);
+    background-color: transparent;
+}
+
 {%endblock%}
 
 {%block script%}
 <script>
     $(document).ready(function(){
-        /*基本資料*/
-        $(".hwitem").click(function(){
-            alert("click");
+        /* 調閱繳交狀況 */
+        $(".hwitem").click(function(even){
+            var hwid = even.target.value;
+            console.log(hwid);
+            $("#score").load("ajax_show/homework_submit_query?hwid=" + hwid);
         })
     ;})
 </script>
@@ -79,11 +90,11 @@ li{list-style-type: none;}
                                 {%for item in data|course_homework:item.lessonid%}
                                 {%if item != False%}
                                 <li class="p-1">
-                                    <a href="#" class="hwitem link-dark">{{item.lessontable_id.ch}}-{{item.lessontable_id.sb}} {{item.lessontable_id.title}}</a>
+                                    <button class="btn btn-hwitem hwitem link-dark" value="{{item.inner_id}}">{{item.lessontable_id.ch}}-{{item.lessontable_id.sb}} {{item.lessontable_id.title}}</button>
                                 </li>
                                 {%else%}
                                 <li>
-                                    <a>無作業</a>
+                                    <a class="hwitem link-dark">無作業</a>
                                 </li>
                                 {%endif%}
                                 {%endfor%}
@@ -94,7 +105,7 @@ li{list-style-type: none;}
                 </ul>
             </div>
         </div>
-        <div class="col"></div>
+        <div class="col" id="score"></div>
     </div>
 </div>
 {%endblock%}

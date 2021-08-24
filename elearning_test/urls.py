@@ -70,6 +70,7 @@ urlpatterns = [
     path('ajax_active/kick_studnet', lesson_ajax_active.kick_studnet),
     path('ajax_active/homework_active', lesson_ajax_active.homework_active),
     path('ajax_active/delete_homework', lesson_ajax_active.delete_homework),
+    path('ajax_show/homework_submit_query', lesson_view.homework_submit_query),
 
     # 學生項目
     path('joinorquit_lesson', lesson_view.joinorquit),
