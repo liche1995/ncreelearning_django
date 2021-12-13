@@ -4,9 +4,46 @@
     ;})
 </script>
 
-<form>
-    {%for item in hw_submit_info.all%}
-    {{item}}
-    {%endfor%}
+<style>
+    .attach_file_box{
+        position: absolute;
+        z-index: 1;
+        background: #434A54;
+        opacity: 0.9;
+        display:block;
+    ;}
+</style>
 
+<div class="attach_file_box">123456</div>
+<form>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th width="10%">繳交人</th>
+                <th width="20%">最後繳交時間</th>
+                <th>說明</th>
+                <th width="10%">附檔</th>
+                <th width="10%">評分</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for item in hw_submit_info%}
+            <tr>
+                <th>{{item.last_name}}{{item.first_name}}</th>
+                <th>{{item.submit_time}}</th>
+                <th>{{item.submitinfo}}</th>
+                <th>
+                    {%if item.attach_file_exist%}
+                    <button class="btn btn-primary" type="button">展開</button>
+                    {%endif%}
+                    <div>
+                    {%for attach_file in db|hw_submit_file:item.inner_id%}
+                    {%endfor%}
+                    </div>
+                </th>
+                <th><input name="score" type="number" min="0" max="100" class="form-control"></th>
+            </tr>
+        {%endfor%}
+        </tbody>
+    </table>
 </form>

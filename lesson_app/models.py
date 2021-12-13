@@ -180,10 +180,12 @@ class HomeworkSubmit(models.Model):
     inner_id = models.AutoField(primary_key=True, verbose_name='inner_id')
     lessontable_id = models.ForeignKey(LessonTable, on_delete=models.CASCADE, verbose_name='lesson_table_id')
     lesson_id = models.ForeignKey(Lesson, on_delete=models.CASCADE, verbose_name='lesson_id')
-    homework_id = models.ForeignKey(Homework, on_delete=models.CASCADE, verbose_name='homework_id', null=False, default=-9)
+    homework_id = models.ForeignKey(Homework,
+                                    on_delete=models.CASCADE, verbose_name='homework_id', null=False, default=-9)
     user_id = models.IntegerField(null=False, verbose_name='user_id')
-    submitinfo = models.CharField(max_length=300, null=True,verbose_name='submitinfo')
+    submitinfo = models.CharField(max_length=300, null=True, verbose_name='submitinfo')
     attach_file_exist = models.BooleanField(default=False, verbose_name='attach_file_exist')
+    submit_time = models.DateTimeField("submit_time", auto_now_add=True)
     score = models.IntegerField(null=True, verbose_name="score")
     objects = models.Manager()
 

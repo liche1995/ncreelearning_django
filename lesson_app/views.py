@@ -206,6 +206,7 @@ def lesson_edit_page(request):
 
 
 # 教師作業評分畫面
+@login_required
 def homework_mark(request):
     context = {}
     # 教師開課資料
@@ -223,17 +224,15 @@ def homework_mark(request):
 
 
 # 作業評分頁面
+@login_required
 def homework_submit_query(request):
     context = {}
     homeworkid = request.GET.get('hwid', '')
-    query = models.HomeworkSubmit.objects.filter(homework_id_id=int(homeworkid))
-    # 查詢繳交資料
-    #order = "SELECT * FROM homeworksubmit as sm " \
-    #        "LEFT OUTER JOIN homeworkfiletable as ft " \
-    #        "ON sm.inner_id=ft.homeworksubmit_id_id " \
-    #        "WHERE sm.homework_id_id=" + str(homeworkid)
-    #query = models.HomeworkSubmit.objects.raw(order)
-
+    order = "SELECT * FROM homeworksubmit AS hm " \
+            "LEFT OUTER JOIN lesson_studentlist AS stlt " \
+            "ON hm.user_id = stlt.student_id AND hm.lesson_id_id = stlt.lesson_id_id " \
+            "WHERE hm.homework_id_id=" + homeworkid
+    query = models.HomeworkSubmit.objects.raw(order)
     context["hw_submit_info"] = query
 
     return render(request, "lesson/handout_homework/homework_mark_query.html", context)
