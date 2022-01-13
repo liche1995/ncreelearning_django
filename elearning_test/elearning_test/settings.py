@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_apscheduler',
     'rest_framework',
+    'elearning_test',
     'schedule_work',
     'lesson_app',
     'users',

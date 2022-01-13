@@ -1,0 +1,450 @@
+Starting the 'Apache2.4' service
+(OS 5)存取被拒。  : AH10012: Failed to open the 'Apache2.4' service
+Starting the 'Apache2.4' service
+(OS 5)存取被拒。  : AH10012: Failed to open the 'Apache2.4' service
+Starting the 'Apache2.4' service
+(OS 5)存取被拒。  : AH10012: Failed to open the 'Apache2.4' service
+[Thu Jan 13 11:55:58.937585 2022] [mpm_winnt:notice] [pid 24548:tid 712] AH00455: Apache/2.4.52 (Win64) configured -- resuming normal operations
+[Thu Jan 13 11:55:58.938583 2022] [mpm_winnt:notice] [pid 24548:tid 712] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 11:55:58.938583 2022] [core:notice] [pid 24548:tid 712] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 11:55:58.945576 2022] [mpm_winnt:notice] [pid 24548:tid 712] AH00418: Parent: Created child process 1424
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 1424:tid 712] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 11:56:12.122882 2022] [authz_core:error] [pid 1424:tid 1240] [client 127.0.0.1:8536] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 11:56:12.234170 2022] [authz_core:error] [pid 1424:tid 1240] [client 127.0.0.1:8536] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/favicon.ico, referer: http://127.0.0.1/
+[Thu Jan 13 11:56:25.609943 2022] [authz_core:error] [pid 1424:tid 1224] [client 127.0.0.1:8537] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 11:56:25.722850 2022] [authz_core:error] [pid 1424:tid 1224] [client 127.0.0.1:8537] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/favicon.ico, referer: http://127.0.0.1/
+[Thu Jan 13 11:59:44.160867 2022] [mpm_winnt:notice] [pid 24548:tid 712] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 11:59:46.175907 2022] [mpm_winnt:notice] [pid 1424:tid 712] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 11:59:46.197828 2022] [mpm_winnt:notice] [pid 24548:tid 712] AH00430: Parent: Child process 1424 exited successfully.
+[Thu Jan 13 12:04:02.914665 2022] [mpm_winnt:notice] [pid 8860:tid 696] AH00455: Apache/2.4.52 (Win64) configured -- resuming normal operations
+[Thu Jan 13 12:04:02.915696 2022] [mpm_winnt:notice] [pid 8860:tid 696] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 12:04:02.915696 2022] [core:notice] [pid 8860:tid 696] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 12:04:02.921676 2022] [mpm_winnt:notice] [pid 8860:tid 696] AH00418: Parent: Created child process 20376
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 20376:tid 720] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 12:04:15.986483 2022] [authz_core:error] [pid 20376:tid 1240] [client 127.0.0.1:8788] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 12:04:16.091481 2022] [authz_core:error] [pid 20376:tid 1240] [client 127.0.0.1:8788] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/favicon.ico, referer: http://127.0.0.1/
+[Thu Jan 13 12:06:39.009302 2022] [authz_core:error] [pid 20376:tid 1224] [client 127.0.0.1:8816] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 12:06:39.054184 2022] [authz_core:error] [pid 20376:tid 1224] [client 127.0.0.1:8816] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/favicon.ico, referer: http://127.0.0.1/
+[Thu Jan 13 12:07:19.164142 2022] [authz_core:error] [pid 20376:tid 1240] [client 127.0.0.1:8817] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/htdocs
+[Thu Jan 13 12:07:19.244589 2022] [authz_core:error] [pid 20376:tid 1240] [client 127.0.0.1:8817] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/favicon.ico, referer: http://127.0.0.1/htdocs
+[Thu Jan 13 12:07:28.005483 2022] [authz_core:error] [pid 20376:tid 1224] [client 127.0.0.1:8819] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/favicon.ico, referer: http://127.0.0.1/
+[Thu Jan 13 12:11:27.605294 2022] [mpm_winnt:notice] [pid 8860:tid 696] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 12:11:29.630103 2022] [mpm_winnt:notice] [pid 20376:tid 720] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 12:11:29.654259 2022] [mpm_winnt:notice] [pid 8860:tid 696] AH00430: Parent: Child process 20376 exited successfully.
+[Thu Jan 13 13:55:41.411454 2022] [mpm_winnt:notice] [pid 22276:tid 724] AH00455: Apache/2.4.52 (Win64) configured -- resuming normal operations
+[Thu Jan 13 13:55:41.412448 2022] [mpm_winnt:notice] [pid 22276:tid 724] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 13:55:41.412448 2022] [core:notice] [pid 22276:tid 724] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 13:55:41.419432 2022] [mpm_winnt:notice] [pid 22276:tid 724] AH00418: Parent: Created child process 5216
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 5216:tid 724] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 13:55:57.425481 2022] [authz_core:error] [pid 5216:tid 1248] [client 127.0.0.1:9825] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 13:57:06.187004 2022] [mpm_winnt:notice] [pid 22276:tid 724] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 13:57:08.203168 2022] [mpm_winnt:notice] [pid 5216:tid 724] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 13:57:08.225816 2022] [mpm_winnt:notice] [pid 22276:tid 724] AH00430: Parent: Child process 5216 exited successfully.
+[Thu Jan 13 14:01:13.697575 2022] [mpm_winnt:notice] [pid 16648:tid 684] AH00455: Apache/2.4.52 (Win64) configured -- resuming normal operations
+[Thu Jan 13 14:01:13.698572 2022] [mpm_winnt:notice] [pid 16648:tid 684] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 14:01:13.698572 2022] [core:notice] [pid 16648:tid 684] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 14:01:13.704555 2022] [mpm_winnt:notice] [pid 16648:tid 684] AH00418: Parent: Created child process 13504
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 13504:tid 732] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 14:01:18.560471 2022] [authz_core:error] [pid 13504:tid 1228] [client 127.0.0.1:9834] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 14:01:23.040145 2022] [authz_core:error] [pid 13504:tid 1228] [client 127.0.0.1:9834] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 14:02:24.900205 2022] [authz_core:error] [pid 13504:tid 1224] [client 127.0.0.1:9838] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 14:06:11.617218 2022] [authz_core:error] [pid 13504:tid 1228] [client 127.0.0.1:9925] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 14:08:00.148773 2022] [authz_core:error] [pid 13504:tid 1224] [client 127.0.0.1:9932] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 14:10:02.263796 2022] [mpm_winnt:notice] [pid 16648:tid 684] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 14:10:04.311841 2022] [mpm_winnt:notice] [pid 13504:tid 732] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 14:10:04.334866 2022] [mpm_winnt:notice] [pid 16648:tid 684] AH00430: Parent: Child process 13504 exited successfully.
+[Thu Jan 13 14:16:08.855391 2022] [mpm_winnt:notice] [pid 6440:tid 728] AH00455: Apache/2.4.52 (Win64) configured -- resuming normal operations
+[Thu Jan 13 14:16:08.856389 2022] [mpm_winnt:notice] [pid 6440:tid 728] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 14:16:08.856389 2022] [core:notice] [pid 6440:tid 728] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 14:16:08.866100 2022] [mpm_winnt:notice] [pid 6440:tid 728] AH00418: Parent: Created child process 1996
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 1996:tid 4] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 14:16:29.479686 2022] [mpm_winnt:notice] [pid 6440:tid 728] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 14:16:31.489775 2022] [mpm_winnt:notice] [pid 1996:tid 4] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 14:16:31.525315 2022] [mpm_winnt:notice] [pid 6440:tid 728] AH00430: Parent: Child process 1996 exited successfully.
+[Thu Jan 13 14:16:41.117234 2022] [mpm_winnt:notice] [pid 22104:tid 704] AH00455: Apache/2.4.52 (Win64) configured -- resuming normal operations
+[Thu Jan 13 14:16:41.117234 2022] [mpm_winnt:notice] [pid 22104:tid 704] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 14:16:41.117234 2022] [core:notice] [pid 22104:tid 704] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 14:16:41.123422 2022] [mpm_winnt:notice] [pid 22104:tid 704] AH00418: Parent: Created child process 3408
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 3408:tid 720] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 14:16:50.038120 2022] [authz_core:error] [pid 3408:tid 1240] [client 127.0.0.1:10139] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 14:18:09.560951 2022] [mpm_winnt:notice] [pid 22104:tid 704] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 14:18:11.584692 2022] [mpm_winnt:notice] [pid 3408:tid 720] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 14:18:11.606966 2022] [mpm_winnt:notice] [pid 22104:tid 704] AH00430: Parent: Child process 3408 exited successfully.
+[Thu Jan 13 14:18:23.776943 2022] [mpm_winnt:notice] [pid 17352:tid 740] AH00455: Apache/2.4.52 (Win64) configured -- resuming normal operations
+[Thu Jan 13 14:18:23.777939 2022] [mpm_winnt:notice] [pid 17352:tid 740] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 14:18:23.777939 2022] [core:notice] [pid 17352:tid 740] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 14:18:23.784568 2022] [mpm_winnt:notice] [pid 17352:tid 740] AH00418: Parent: Created child process 17820
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 17820:tid 4] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 14:20:13.572327 2022] [mpm_winnt:notice] [pid 17352:tid 740] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 14:20:15.586919 2022] [mpm_winnt:notice] [pid 17820:tid 4] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 14:20:15.611535 2022] [mpm_winnt:notice] [pid 17352:tid 740] AH00430: Parent: Child process 17820 exited successfully.
+[Thu Jan 13 14:21:32.291282 2022] [mpm_winnt:notice] [pid 15960:tid 712] AH00455: Apache/2.4.52 (Win64) configured -- resuming normal operations
+[Thu Jan 13 14:21:32.291282 2022] [mpm_winnt:notice] [pid 15960:tid 712] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 14:21:32.291282 2022] [core:notice] [pid 15960:tid 712] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 14:21:32.297561 2022] [mpm_winnt:notice] [pid 15960:tid 712] AH00418: Parent: Created child process 14388
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 14388:tid 708] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 14:21:38.549034 2022] [authz_core:error] [pid 14388:tid 1244] [client 127.0.0.1:10154] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 14:21:43.897196 2022] [mpm_winnt:notice] [pid 15960:tid 712] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 14:22:18.461262 2022] [mpm_winnt:notice] [pid 14388:tid 708] AH00362: Child: Waiting 30 more seconds for 1 worker threads to finish.
+[Thu Jan 13 14:22:40.575038 2022] [mpm_winnt:notice] [pid 14388:tid 708] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 14:32:38.520138 2022] [core:warn] [pid 1168:tid 716] AH00098: pid file D:/code/djg_test/apache2.4.52_server/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Jan 13 14:32:38.523047 2022] [mpm_winnt:notice] [pid 1168:tid 716] AH00455: Apache/2.4.52 (Win64) configured -- resuming normal operations
+[Thu Jan 13 14:32:38.523047 2022] [mpm_winnt:notice] [pid 1168:tid 716] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 14:32:38.523047 2022] [core:notice] [pid 1168:tid 716] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 14:32:38.531055 2022] [mpm_winnt:notice] [pid 1168:tid 716] AH00418: Parent: Created child process 10164
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 10164:tid 716] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 14:32:43.862116 2022] [authz_core:error] [pid 10164:tid 1228] [client 127.0.0.1:10235] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 14:33:01.799172 2022] [mpm_winnt:notice] [pid 1168:tid 716] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 14:33:31.046159 2022] [core:warn] [pid 4384:tid 680] AH00098: pid file D:/code/djg_test/apache2.4.52_server/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Jan 13 14:33:31.049153 2022] [mpm_winnt:notice] [pid 4384:tid 680] AH00455: Apache/2.4.52 (Win64) configured -- resuming normal operations
+[Thu Jan 13 14:33:31.049153 2022] [mpm_winnt:notice] [pid 4384:tid 680] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 14:33:31.049153 2022] [core:notice] [pid 4384:tid 680] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 14:33:31.055641 2022] [mpm_winnt:notice] [pid 4384:tid 680] AH00418: Parent: Created child process 23892
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 23892:tid 4] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 14:33:35.125679 2022] [authz_core:error] [pid 10164:tid 1224] [client 127.0.0.1:10236] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 14:33:35.215555 2022] [mpm_winnt:notice] [pid 10164:tid 716] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 14:33:39.485111 2022] [authz_core:error] [pid 23892:tid 1260] [client 127.0.0.1:10243] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 14:34:13.679854 2022] [mpm_winnt:notice] [pid 4384:tid 680] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 14:34:41.544788 2022] [mpm_winnt:notice] [pid 23892:tid 4] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 14:35:30.903867 2022] [core:warn] [pid 2524:tid 676] AH00098: pid file D:/code/djg_test/apache2.4.52_server/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Jan 13 14:35:30.906859 2022] [mpm_winnt:notice] [pid 2524:tid 676] AH00455: Apache/2.4.52 (Win64) configured -- resuming normal operations
+[Thu Jan 13 14:35:30.906859 2022] [mpm_winnt:notice] [pid 2524:tid 676] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 14:35:30.906859 2022] [core:notice] [pid 2524:tid 676] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 14:35:30.912864 2022] [mpm_winnt:notice] [pid 2524:tid 676] AH00418: Parent: Created child process 1424
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 1424:tid 716] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 14:35:34.045078 2022] [authz_core:error] [pid 1424:tid 1224] [client 127.0.0.1:10251] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 14:36:39.484238 2022] [mpm_winnt:notice] [pid 2524:tid 676] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 14:36:41.498897 2022] [mpm_winnt:notice] [pid 1424:tid 716] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 14:36:41.525530 2022] [mpm_winnt:notice] [pid 2524:tid 676] AH00430: Parent: Child process 1424 exited successfully.
+[Thu Jan 13 14:37:29.274640 2022] [mpm_winnt:notice] [pid 3416:tid 692] AH00455: Apache/2.4.52 (Win64) configured -- resuming normal operations
+[Thu Jan 13 14:37:29.275637 2022] [mpm_winnt:notice] [pid 3416:tid 692] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 14:37:29.275637 2022] [core:notice] [pid 3416:tid 692] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 14:37:29.280652 2022] [mpm_winnt:notice] [pid 3416:tid 692] AH00418: Parent: Created child process 16684
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 16684:tid 728] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 14:37:54.652686 2022] [mpm_winnt:notice] [pid 3416:tid 692] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 14:38:15.693329 2022] [core:warn] [pid 14752:tid 684] AH00098: pid file D:/code/djg_test/apache2.4.52_server/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Jan 13 14:38:15.696343 2022] [mpm_winnt:notice] [pid 14752:tid 684] AH00455: Apache/2.4.52 (Win64) configured -- resuming normal operations
+[Thu Jan 13 14:38:15.696343 2022] [mpm_winnt:notice] [pid 14752:tid 684] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 14:38:15.696343 2022] [core:notice] [pid 14752:tid 684] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 14:38:15.702428 2022] [mpm_winnt:notice] [pid 14752:tid 684] AH00418: Parent: Created child process 4028
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 4028:tid 720] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 14:38:18.239639 2022] [mpm_winnt:notice] [pid 16684:tid 728] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 14:38:21.713939 2022] [authz_core:error] [pid 4028:tid 1260] [client 127.0.0.1:10259] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 14:39:23.068711 2022] [mpm_winnt:notice] [pid 14752:tid 684] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 14:39:25.083284 2022] [mpm_winnt:notice] [pid 4028:tid 720] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 14:39:25.116533 2022] [mpm_winnt:notice] [pid 14752:tid 684] AH00430: Parent: Child process 4028 exited successfully.
+[Thu Jan 13 14:39:28.916176 2022] [mpm_winnt:notice] [pid 23688:tid 700] AH00455: Apache/2.4.52 (Win64) configured -- resuming normal operations
+[Thu Jan 13 14:39:28.917170 2022] [mpm_winnt:notice] [pid 23688:tid 700] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 14:39:28.917170 2022] [core:notice] [pid 23688:tid 700] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 14:39:28.924081 2022] [mpm_winnt:notice] [pid 23688:tid 700] AH00418: Parent: Created child process 9548
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 9548:tid 136] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 14:39:32.639184 2022] [authz_core:error] [pid 9548:tid 1244] [client 127.0.0.1:10383] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 14:39:37.230544 2022] [authz_core:error] [pid 9548:tid 1244] [client 127.0.0.1:10383] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 14:39:40.019306 2022] [authz_core:error] [pid 9548:tid 1244] [client 127.0.0.1:10383] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 14:39:40.609442 2022] [authz_core:error] [pid 9548:tid 1244] [client 127.0.0.1:10383] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 14:39:43.872215 2022] [authz_core:error] [pid 9548:tid 1244] [client 127.0.0.1:10383] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 14:39:46.540539 2022] [mpm_winnt:notice] [pid 23688:tid 700] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 14:40:21.121251 2022] [mpm_winnt:notice] [pid 9548:tid 136] AH00362: Child: Waiting 30 more seconds for 1 worker threads to finish.
+[Thu Jan 13 14:40:34.732138 2022] [mpm_winnt:notice] [pid 9548:tid 136] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 14:42:03.872568 2022] [core:warn] [pid 14936:tid 676] AH00098: pid file D:/code/djg_test/apache2.4.52_server/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Jan 13 14:42:03.875560 2022] [mpm_winnt:notice] [pid 14936:tid 676] AH00455: Apache/2.4.52 (Win64) configured -- resuming normal operations
+[Thu Jan 13 14:42:03.875560 2022] [mpm_winnt:notice] [pid 14936:tid 676] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 14:42:03.875560 2022] [core:notice] [pid 14936:tid 676] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 14:42:03.881544 2022] [mpm_winnt:notice] [pid 14936:tid 676] AH00418: Parent: Created child process 8372
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 8372:tid 712] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 14:42:28.236703 2022] [mpm_winnt:notice] [pid 14936:tid 676] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 14:43:02.869903 2022] [mpm_winnt:notice] [pid 8372:tid 712] AH00362: Child: Waiting 30 more seconds for 1 worker threads to finish.
+[Thu Jan 13 14:43:09.846719 2022] [mpm_winnt:notice] [pid 8372:tid 712] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 14:43:47.588327 2022] [core:warn] [pid 7448:tid 700] AH00098: pid file D:/code/djg_test/apache2.4.52_server/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Jan 13 14:43:47.591319 2022] [mpm_winnt:notice] [pid 7448:tid 700] AH00455: Apache/2.4.52 (Win64) configured -- resuming normal operations
+[Thu Jan 13 14:43:47.591319 2022] [mpm_winnt:notice] [pid 7448:tid 700] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 14:43:47.591319 2022] [core:notice] [pid 7448:tid 700] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 14:43:47.601322 2022] [mpm_winnt:notice] [pid 7448:tid 700] AH00418: Parent: Created child process 13904
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 13904:tid 740] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 14:43:50.999832 2022] [authz_core:error] [pid 13904:tid 1224] [client 127.0.0.1:10419] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 14:44:14.328458 2022] [authz_core:error] [pid 13904:tid 1216] [client 127.0.0.1:10420] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 14:45:05.033132 2022] [authz_core:error] [pid 13904:tid 1224] [client 127.0.0.1:10427] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 14:45:08.247333 2022] [authz_core:error] [pid 13904:tid 1224] [client 127.0.0.1:10427] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 14:45:32.307510 2022] [authz_core:error] [pid 13904:tid 1216] [client 127.0.0.1:10431] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/htdocs
+[Thu Jan 13 14:45:45.409956 2022] [authz_core:error] [pid 13904:tid 1224] [client 127.0.0.1:10433] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/cgi-bin
+[Thu Jan 13 14:46:18.359560 2022] [authz_core:error] [pid 13904:tid 1216] [client 127.0.0.1:10434] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/cgi-bin
+[Thu Jan 13 14:50:10.515456 2022] [mpm_winnt:notice] [pid 7448:tid 700] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 14:50:12.538253 2022] [mpm_winnt:notice] [pid 13904:tid 740] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 14:50:12.558725 2022] [mpm_winnt:notice] [pid 7448:tid 700] AH00430: Parent: Child process 13904 exited successfully.
+[Thu Jan 13 14:55:52.200920 2022] [mpm_winnt:notice] [pid 10912:tid 712] AH00455: Apache/2.4.52 (Win64) configured -- resuming normal operations
+[Thu Jan 13 14:55:52.202918 2022] [mpm_winnt:notice] [pid 10912:tid 712] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 14:55:52.202918 2022] [core:notice] [pid 10912:tid 712] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 14:55:52.211655 2022] [mpm_winnt:notice] [pid 10912:tid 712] AH00418: Parent: Created child process 19444
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 19444:tid 732] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 14:55:55.632290 2022] [authz_core:error] [pid 19444:tid 1220] [client 127.0.0.1:10581] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 14:58:01.964094 2022] [mpm_winnt:notice] [pid 10912:tid 712] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 14:58:03.976733 2022] [mpm_winnt:notice] [pid 19444:tid 732] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 14:58:03.994879 2022] [mpm_winnt:notice] [pid 10912:tid 712] AH00430: Parent: Child process 19444 exited successfully.
+[Thu Jan 13 14:58:05.773940 2022] [mpm_winnt:notice] [pid 10060:tid 704] AH00455: Apache/2.4.52 (Win64) configured -- resuming normal operations
+[Thu Jan 13 14:58:05.774937 2022] [mpm_winnt:notice] [pid 10060:tid 704] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 14:58:05.774937 2022] [core:notice] [pid 10060:tid 704] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 14:58:05.780924 2022] [mpm_winnt:notice] [pid 10060:tid 704] AH00418: Parent: Created child process 1748
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 1748:tid 488] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 14:58:07.247801 2022] [authz_core:error] [pid 1748:tid 1252] [client 127.0.0.1:10589] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 15:00:25.197489 2022] [mpm_winnt:notice] [pid 10060:tid 704] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 15:00:27.208320 2022] [mpm_winnt:notice] [pid 1748:tid 488] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 15:00:27.226027 2022] [mpm_winnt:notice] [pid 10060:tid 704] AH00430: Parent: Child process 1748 exited successfully.
+[Thu Jan 13 15:00:45.191560 2022] [mpm_winnt:notice] [pid 19700:tid 696] AH00455: Apache/2.4.52 (Win64) configured -- resuming normal operations
+[Thu Jan 13 15:00:45.192555 2022] [mpm_winnt:notice] [pid 19700:tid 696] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 15:00:45.192555 2022] [core:notice] [pid 19700:tid 696] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 15:00:45.198372 2022] [mpm_winnt:notice] [pid 19700:tid 696] AH00418: Parent: Created child process 18600
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 18600:tid 720] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 15:00:46.837092 2022] [authz_core:error] [pid 18600:tid 1260] [client 127.0.0.1:10596] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 15:01:50.953254 2022] [authz_core:error] [pid 18600:tid 1256] [client 127.0.0.1:10601] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 15:01:51.815722 2022] [authz_core:error] [pid 18600:tid 1256] [client 127.0.0.1:10601] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 15:01:52.826435 2022] [authz_core:error] [pid 18600:tid 1256] [client 127.0.0.1:10601] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 15:01:59.550613 2022] [mpm_winnt:notice] [pid 19700:tid 696] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 15:02:04.719358 2022] [core:warn] [pid 12668:tid 704] AH00098: pid file D:/code/djg_test/apache2.4.52_server/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Jan 13 15:02:04.728230 2022] [mpm_winnt:notice] [pid 12668:tid 704] AH00455: Apache/2.4.52 (Win64) configured -- resuming normal operations
+[Thu Jan 13 15:02:04.728230 2022] [mpm_winnt:notice] [pid 12668:tid 704] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 15:02:04.728230 2022] [core:notice] [pid 12668:tid 704] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 15:02:04.740202 2022] [mpm_winnt:notice] [pid 12668:tid 704] AH00418: Parent: Created child process 12300
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 12300:tid 716] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 15:02:06.963552 2022] [authz_core:error] [pid 18600:tid 1260] [client 127.0.0.1:10602] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 15:02:07.022309 2022] [mpm_winnt:notice] [pid 18600:tid 720] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 15:06:25.541836 2022] [mpm_winnt:notice] [pid 12668:tid 704] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 15:06:32.061910 2022] [core:warn] [pid 18528:tid 684] AH00098: pid file D:/code/djg_test/apache2.4.52_server/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Jan 13 15:06:32.068885 2022] [mpm_winnt:notice] [pid 18528:tid 684] AH00455: Apache/2.4.52 (Win64) configured -- resuming normal operations
+[Thu Jan 13 15:06:32.068885 2022] [mpm_winnt:notice] [pid 18528:tid 684] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 15:06:32.068885 2022] [core:notice] [pid 18528:tid 684] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 15:06:32.082371 2022] [mpm_winnt:notice] [pid 18528:tid 684] AH00418: Parent: Created child process 9372
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 9372:tid 500] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 15:06:33.560914 2022] [mpm_winnt:notice] [pid 12300:tid 716] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 15:06:37.367815 2022] [authz_core:error] [pid 9372:tid 1260] [client 127.0.0.1:9621] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 15:06:42.783798 2022] [authz_core:error] [pid 9372:tid 1240] [client 127.0.0.1:9622] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 15:10:09.182780 2022] [authz_core:error] [pid 9372:tid 1260] [client 127.0.0.1:9792] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 15:10:15.354924 2022] [authz_core:error] [pid 9372:tid 1240] [client 127.0.0.1:9793] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/test
+[Thu Jan 13 15:10:25.137837 2022] [authz_core:error] [pid 9372:tid 1260] [client 127.0.0.1:9796] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 15:11:08.385370 2022] [mpm_winnt:notice] [pid 18528:tid 684] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 15:11:27.194873 2022] [mpm_winnt:notice] [pid 9372:tid 500] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 15:13:24.169797 2022] [core:warn] [pid 24344:tid 688] AH00098: pid file D:/code/djg_test/apache2.4.52_server/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Jan 13 15:13:24.172811 2022] [mpm_winnt:notice] [pid 24344:tid 688] AH00455: Apache/2.4.52 (Win64) configured -- resuming normal operations
+[Thu Jan 13 15:13:24.172811 2022] [mpm_winnt:notice] [pid 24344:tid 688] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 15:13:24.172811 2022] [core:notice] [pid 24344:tid 688] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 15:13:24.178448 2022] [mpm_winnt:notice] [pid 24344:tid 688] AH00418: Parent: Created child process 7412
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 7412:tid 724] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 15:13:29.172927 2022] [authz_core:error] [pid 7412:tid 1260] [client 127.0.0.1:9825] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 15:14:08.014677 2022] [authz_core:error] [pid 7412:tid 1252] [client 127.0.0.1:9826] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 15:16:38.783905 2022] [authz_core:error] [pid 7412:tid 1260] [client 127.0.0.1:9934] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/Apache24/htdocs/
+[Thu Jan 13 15:21:38.773698 2022] [mpm_winnt:notice] [pid 24344:tid 688] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 15:21:40.796096 2022] [mpm_winnt:notice] [pid 7412:tid 724] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 15:21:40.821191 2022] [mpm_winnt:notice] [pid 24344:tid 688] AH00430: Parent: Child process 7412 exited successfully.
+[Thu Jan 13 15:23:35.066867 2022] [mpm_winnt:notice] [pid 9356:tid 696] AH00455: Apache/2.4.52 (Win64) configured -- resuming normal operations
+[Thu Jan 13 15:23:35.067892 2022] [mpm_winnt:notice] [pid 9356:tid 696] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 15:23:35.067892 2022] [core:notice] [pid 9356:tid 696] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 15:23:35.073849 2022] [mpm_winnt:notice] [pid 9356:tid 696] AH00418: Parent: Created child process 20252
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 20252:tid 720] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 15:23:43.339675 2022] [mpm_winnt:notice] [pid 9356:tid 696] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 15:24:17.935860 2022] [mpm_winnt:notice] [pid 20252:tid 720] AH00362: Child: Waiting 30 more seconds for 1 worker threads to finish.
+[Thu Jan 13 15:24:41.664841 2022] [mpm_winnt:notice] [pid 20252:tid 720] AH00364: Child: All worker threads have exited.
+AH00112: Warning: DocumentRoot [D:/code/elearning_test/elearning_test] does not exist
+[Thu Jan 13 15:57:22.572248 2022] [core:warn] [pid 13116:tid 744] AH00098: pid file D:/code/djg_test/apache2.4.52_server/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Jan 13 15:57:22.576237 2022] [mpm_winnt:notice] [pid 13116:tid 744] AH00455: Apache/2.4.52 (Win64) mod_wsgi/4.9.0 Python/3.8 configured -- resuming normal operations
+[Thu Jan 13 15:57:22.576237 2022] [mpm_winnt:notice] [pid 13116:tid 744] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 15:57:22.576237 2022] [core:notice] [pid 13116:tid 744] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 15:57:22.584897 2022] [mpm_winnt:notice] [pid 13116:tid 744] AH00418: Parent: Created child process 21816
+AH00112: Warning: DocumentRoot [D:/code/elearning_test/elearning_test] does not exist
+Apache server shutdown initiated...
+ode/elearning_test/elearning_test] does not exist
+[Thu Jan 13 15:57:23.292633 2022] [mpm_winnt:notice] [pid 21816:tid 804] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 15:57:50.009212 2022] [wsgi:error] [pid 21816:tid 1352] The web is at DEBUG mode\r
+[Thu Jan 13 16:00:53.228984 2022] [mpm_winnt:notice] [pid 13116:tid 744] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+AH00112: Warning: DocumentRoot [D:/code/elearning_test/elearning_test/elearning_test] does not exist
+[Thu Jan 13 16:01:12.958842 2022] [core:warn] [pid 11736:tid 732] AH00098: pid file D:/code/djg_test/apache2.4.52_server/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Jan 13 16:01:12.962266 2022] [mpm_winnt:notice] [pid 11736:tid 732] AH00455: Apache/2.4.52 (Win64) mod_wsgi/4.9.0 Python/3.8 configured -- resuming normal operations
+[Thu Jan 13 16:01:12.962266 2022] [mpm_winnt:notice] [pid 11736:tid 732] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 16:01:12.963264 2022] [core:notice] [pid 11736:tid 732] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 16:01:12.971242 2022] [mpm_winnt:notice] [pid 11736:tid 732] AH00418: Parent: Created child process 22548
+AH00112: Warning: DocumentRoot [D:/code/elearning_test/elearning_test/elearning_test] does not exist
+Apache server shutdown initiated...
+ode/elearning_test/elearning_test/elearning_test] does not exist
+[Thu Jan 13 16:01:13.524733 2022] [mpm_winnt:notice] [pid 22548:tid 816] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 16:01:27.845491 2022] [mpm_winnt:notice] [pid 21816:tid 804] AH00362: Child: Waiting 30 more seconds for 5 worker threads to finish.
+[Thu Jan 13 16:01:50.146647 2022] [wsgi:error] [pid 22548:tid 1352] The web is at DEBUG mode\r
+[Thu Jan 13 16:02:00.523819 2022] [mpm_winnt:notice] [pid 21816:tid 804] AH00362: Child: Waiting 0 more seconds for 4 worker threads to finish.
+[Thu Jan 13 16:02:00.632188 2022] [mpm_winnt:notice] [pid 21816:tid 804] AH00363: Child: Terminating 4 threads that failed to exit.
+[Thu Jan 13 16:02:00.632284 2022] [mpm_winnt:notice] [pid 21816:tid 804] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 16:02:50.931887 2022] [mpm_winnt:notice] [pid 11736:tid 732] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 16:03:25.551274 2022] [mpm_winnt:notice] [pid 22548:tid 816] AH00362: Child: Waiting 30 more seconds for 1 worker threads to finish.
+[Thu Jan 13 16:03:58.222341 2022] [mpm_winnt:notice] [pid 22548:tid 816] AH00362: Child: Waiting 0 more seconds for 1 worker threads to finish.
+[Thu Jan 13 16:03:58.331346 2022] [mpm_winnt:notice] [pid 22548:tid 816] AH00363: Child: Terminating 1 threads that failed to exit.
+[Thu Jan 13 16:03:58.331346 2022] [mpm_winnt:notice] [pid 22548:tid 816] AH00364: Child: All worker threads have exited.
+AH00112: Warning: DocumentRoot [D:/code/elearning_test/elearning_test/elearning_test] does not exist
+[Thu Jan 13 16:08:55.112219 2022] [core:warn] [pid 22444:tid 720] AH00098: pid file D:/code/djg_test/apache2.4.52_server/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Jan 13 16:08:55.116182 2022] [mpm_winnt:notice] [pid 22444:tid 720] AH00455: Apache/2.4.52 (Win64) mod_wsgi/4.9.0 Python/3.8 configured -- resuming normal operations
+[Thu Jan 13 16:08:55.116182 2022] [mpm_winnt:notice] [pid 22444:tid 720] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 16:08:55.116182 2022] [core:notice] [pid 22444:tid 720] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 16:08:55.122166 2022] [mpm_winnt:notice] [pid 22444:tid 720] AH00418: Parent: Created child process 23380
+AH00112: Warning: DocumentRoot [D:/code/elearning_test/elearning_test/elearning_test] does not exist
+Apache server shutdown initiated...
+ode/elearning_test/elearning_test/elearning_test] does not exist
+[Thu Jan 13 16:08:55.780075 2022] [mpm_winnt:notice] [pid 23380:tid 828] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 16:09:16.499147 2022] [wsgi:error] [pid 23380:tid 1384] The web is at DEBUG mode\r
+[Thu Jan 13 16:10:50.185044 2022] [mpm_winnt:notice] [pid 22444:tid 720] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+AH00112: Warning: DocumentRoot [D:/code/elearning_test/elearning_test] does not exist
+[Thu Jan 13 16:11:21.676000 2022] [core:warn] [pid 17552:tid 732] AH00098: pid file D:/code/djg_test/apache2.4.52_server/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Jan 13 16:11:21.678995 2022] [mpm_winnt:notice] [pid 17552:tid 732] AH00455: Apache/2.4.52 (Win64) mod_wsgi/4.9.0 Python/3.8 configured -- resuming normal operations
+[Thu Jan 13 16:11:21.678995 2022] [mpm_winnt:notice] [pid 17552:tid 732] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 16:11:21.678995 2022] [core:notice] [pid 17552:tid 732] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 16:11:21.685008 2022] [mpm_winnt:notice] [pid 17552:tid 732] AH00418: Parent: Created child process 4528
+AH00112: Warning: DocumentRoot [D:/code/elearning_test/elearning_test] does not exist
+Apache server shutdown initiated...
+ode/elearning_test/elearning_test] does not exist
+[Thu Jan 13 16:11:22.239492 2022] [mpm_winnt:notice] [pid 4528:tid 800] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 16:11:24.775535 2022] [mpm_winnt:notice] [pid 23380:tid 828] AH00362: Child: Waiting 30 more seconds for 3 worker threads to finish.
+[Thu Jan 13 16:11:57.449575 2022] [mpm_winnt:notice] [pid 23380:tid 828] AH00362: Child: Waiting 0 more seconds for 3 worker threads to finish.
+[Thu Jan 13 16:11:57.558277 2022] [mpm_winnt:notice] [pid 23380:tid 828] AH00363: Child: Terminating 3 threads that failed to exit.
+[Thu Jan 13 16:11:57.558277 2022] [mpm_winnt:notice] [pid 23380:tid 828] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 16:11:57.926635 2022] [wsgi:error] [pid 4528:tid 1380] The web is at DEBUG mode\r
+[Thu Jan 13 16:18:05.132498 2022] [mpm_winnt:notice] [pid 17552:tid 732] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+AH00112: Warning: DocumentRoot [D:/code/elearning_test/elearning_test/elearning_test] does not exist
+[Thu Jan 13 16:18:16.363570 2022] [core:warn] [pid 10296:tid 732] AH00098: pid file D:/code/djg_test/apache2.4.52_server/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Jan 13 16:18:16.366563 2022] [mpm_winnt:notice] [pid 10296:tid 732] AH00455: Apache/2.4.52 (Win64) mod_wsgi/4.9.0 Python/3.8 configured -- resuming normal operations
+[Thu Jan 13 16:18:16.366563 2022] [mpm_winnt:notice] [pid 10296:tid 732] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 16:18:16.366563 2022] [core:notice] [pid 10296:tid 732] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 16:18:16.373346 2022] [mpm_winnt:notice] [pid 10296:tid 732] AH00418: Parent: Created child process 12940
+AH00112: Warning: DocumentRoot [D:/code/elearning_test/elearning_test/elearning_test] does not exist
+Apache server shutdown initiated...
+ode/elearning_test/elearning_test/elearning_test] does not exist
+[Thu Jan 13 16:18:16.990809 2022] [mpm_winnt:notice] [pid 12940:tid 816] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 16:18:39.732537 2022] [mpm_winnt:notice] [pid 4528:tid 800] AH00362: Child: Waiting 30 more seconds for 4 worker threads to finish.
+[Thu Jan 13 16:18:46.214070 2022] [mpm_winnt:notice] [pid 10296:tid 732] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 16:18:48.235094 2022] [mpm_winnt:notice] [pid 12940:tid 816] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 16:18:48.273090 2022] [mpm_winnt:notice] [pid 10296:tid 732] AH00430: Parent: Child process 12940 exited successfully.
+AH00112: Warning: DocumentRoot [D:/code/elearning_test/elearning_test] does not exist
+[Thu Jan 13 16:18:51.845269 2022] [mpm_winnt:notice] [pid 16956:tid 740] AH00455: Apache/2.4.52 (Win64) mod_wsgi/4.9.0 Python/3.8 configured -- resuming normal operations
+[Thu Jan 13 16:18:51.846291 2022] [mpm_winnt:notice] [pid 16956:tid 740] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 16:18:51.846291 2022] [core:notice] [pid 16956:tid 740] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 16:18:51.854245 2022] [mpm_winnt:notice] [pid 16956:tid 740] AH00418: Parent: Created child process 3620
+AH00112: Warning: DocumentRoot [D:/code/elearning_test/elearning_test] does not exist
+Apache server shutdown initiated...
+ode/elearning_test/elearning_test] does not exist
+[Thu Jan 13 16:18:52.399369 2022] [mpm_winnt:notice] [pid 3620:tid 144] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 16:19:12.406908 2022] [mpm_winnt:notice] [pid 4528:tid 800] AH00362: Child: Waiting 0 more seconds for 3 worker threads to finish.
+[Thu Jan 13 16:19:12.516777 2022] [mpm_winnt:notice] [pid 4528:tid 800] AH00363: Child: Terminating 3 threads that failed to exit.
+[Thu Jan 13 16:19:12.516777 2022] [mpm_winnt:notice] [pid 4528:tid 800] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 16:19:26.498760 2022] [mpm_winnt:notice] [pid 16956:tid 740] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 16:19:28.516781 2022] [mpm_winnt:notice] [pid 3620:tid 144] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 16:19:28.538622 2022] [mpm_winnt:notice] [pid 16956:tid 740] AH00430: Parent: Child process 3620 exited successfully.
+[Thu Jan 13 16:19:30.487398 2022] [mpm_winnt:notice] [pid 13164:tid 752] AH00455: Apache/2.4.52 (Win64) mod_wsgi/4.9.0 Python/3.8 configured -- resuming normal operations
+[Thu Jan 13 16:19:30.488396 2022] [mpm_winnt:notice] [pid 13164:tid 752] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 16:19:30.488396 2022] [core:notice] [pid 13164:tid 752] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 16:19:30.494666 2022] [mpm_winnt:notice] [pid 13164:tid 752] AH00418: Parent: Created child process 7872
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 7872:tid 832] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 16:19:39.061745 2022] [authz_core:error] [pid 7872:tid 1368] [client 127.0.0.1:11299] AH01630: client denied by server configuration: D:/code/djg_test/apache2.4.52_server/elearning_test
+[Thu Jan 13 16:20:20.577756 2022] [mpm_winnt:notice] [pid 13164:tid 752] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 16:20:41.115965 2022] [mpm_winnt:notice] [pid 7872:tid 832] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 16:22:26.480438 2022] [core:warn] [pid 1928:tid 732] AH00098: pid file D:/code/djg_test/apache2.4.52_server/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Jan 13 16:22:26.483430 2022] [mpm_winnt:notice] [pid 1928:tid 732] AH00455: Apache/2.4.52 (Win64) mod_wsgi/4.9.0 Python/3.8 configured -- resuming normal operations
+[Thu Jan 13 16:22:26.483430 2022] [mpm_winnt:notice] [pid 1928:tid 732] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Jan 13 16:22:26.483430 2022] [core:notice] [pid 1928:tid 732] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Jan 13 16:22:26.490412 2022] [mpm_winnt:notice] [pid 1928:tid 732] AH00418: Parent: Created child process 16500
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 16500:tid 836] AH00354: Child: Starting 64 worker threads.
+[Thu Jan 13 16:22:33.533826 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:11383] mod_wsgi (pid=16500): Failed to exec Python script file 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'.
+[Thu Jan 13 16:22:33.533826 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:11383] mod_wsgi (pid=16500): Exception occurred processing WSGI script 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'.
+[Thu Jan 13 16:22:33.580660 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:11383] Traceback (most recent call last):\r
+[Thu Jan 13 16:22:33.580660 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:11383]   File "D:/code/djg_test/elearning_test/elearning_test/wsgi.py", line 16, in <module>\r
+[Thu Jan 13 16:22:33.580660 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:11383]     application = get_wsgi_application()\r
+[Thu Jan 13 16:22:33.580660 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:11383]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\core\\wsgi.py", line 12, in get_wsgi_application\r
+[Thu Jan 13 16:22:33.580660 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:11383]     django.setup(set_prefix=False)\r
+[Thu Jan 13 16:22:33.580660 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:11383]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\__init__.py", line 19, in setup\r
+[Thu Jan 13 16:22:33.580660 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:11383]     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)\r
+[Thu Jan 13 16:22:33.580660 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:11383]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 83, in __getattr__\r
+[Thu Jan 13 16:22:33.580660 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:11383]     self._setup(name)\r
+[Thu Jan 13 16:22:33.580660 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:11383]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 70, in _setup\r
+[Thu Jan 13 16:22:33.580660 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:11383]     self._wrapped = Settings(settings_module)\r
+[Thu Jan 13 16:22:33.580660 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:11383]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 177, in __init__\r
+[Thu Jan 13 16:22:33.580660 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:11383]     mod = importlib.import_module(self.SETTINGS_MODULE)\r
+[Thu Jan 13 16:22:33.580660 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:11383]   File "C:\\Program Files\\Python38\\Lib\\importlib\\__init__.py", line 127, in import_module\r
+[Thu Jan 13 16:22:33.580660 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:11383]     return _bootstrap._gcd_import(name[level:], package, level)\r
+[Thu Jan 13 16:22:33.580660 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:11383]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r
+[Thu Jan 13 16:22:33.580660 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:11383]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r
+[Thu Jan 13 16:22:33.580660 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:11383]   File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked\r
+[Thu Jan 13 16:22:33.580660 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:11383]   File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed\r
+[Thu Jan 13 16:22:33.580660 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:11383]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r
+[Thu Jan 13 16:22:33.580660 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:11383]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r
+[Thu Jan 13 16:22:33.580660 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:11383]   File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked\r
+[Thu Jan 13 16:22:33.580660 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:11383] ModuleNotFoundError: No module named 'elearning_test'\r
+[Thu Jan 13 16:28:33.700705 2022] [wsgi:error] [pid 16500:tid 1348] [client 127.0.0.1:11617] mod_wsgi (pid=16500): Failed to exec Python script file 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'.
+[Thu Jan 13 16:28:33.700705 2022] [wsgi:error] [pid 16500:tid 1348] [client 127.0.0.1:11617] mod_wsgi (pid=16500): Exception occurred processing WSGI script 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'.
+[Thu Jan 13 16:28:33.701694 2022] [wsgi:error] [pid 16500:tid 1348] [client 127.0.0.1:11617] Traceback (most recent call last):\r
+[Thu Jan 13 16:28:33.701694 2022] [wsgi:error] [pid 16500:tid 1348] [client 127.0.0.1:11617]   File "D:/code/djg_test/elearning_test/elearning_test/wsgi.py", line 16, in <module>\r
+[Thu Jan 13 16:28:33.701694 2022] [wsgi:error] [pid 16500:tid 1348] [client 127.0.0.1:11617]     application = get_wsgi_application()\r
+[Thu Jan 13 16:28:33.701694 2022] [wsgi:error] [pid 16500:tid 1348] [client 127.0.0.1:11617]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\core\\wsgi.py", line 12, in get_wsgi_application\r
+[Thu Jan 13 16:28:33.701694 2022] [wsgi:error] [pid 16500:tid 1348] [client 127.0.0.1:11617]     django.setup(set_prefix=False)\r
+[Thu Jan 13 16:28:33.701694 2022] [wsgi:error] [pid 16500:tid 1348] [client 127.0.0.1:11617]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\__init__.py", line 19, in setup\r
+[Thu Jan 13 16:28:33.701694 2022] [wsgi:error] [pid 16500:tid 1348] [client 127.0.0.1:11617]     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)\r
+[Thu Jan 13 16:28:33.701694 2022] [wsgi:error] [pid 16500:tid 1348] [client 127.0.0.1:11617]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 83, in __getattr__\r
+[Thu Jan 13 16:28:33.701694 2022] [wsgi:error] [pid 16500:tid 1348] [client 127.0.0.1:11617]     self._setup(name)\r
+[Thu Jan 13 16:28:33.701694 2022] [wsgi:error] [pid 16500:tid 1348] [client 127.0.0.1:11617]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 70, in _setup\r
+[Thu Jan 13 16:28:33.701694 2022] [wsgi:error] [pid 16500:tid 1348] [client 127.0.0.1:11617]     self._wrapped = Settings(settings_module)\r
+[Thu Jan 13 16:28:33.701694 2022] [wsgi:error] [pid 16500:tid 1348] [client 127.0.0.1:11617]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 177, in __init__\r
+[Thu Jan 13 16:28:33.701694 2022] [wsgi:error] [pid 16500:tid 1348] [client 127.0.0.1:11617]     mod = importlib.import_module(self.SETTINGS_MODULE)\r
+[Thu Jan 13 16:28:33.701694 2022] [wsgi:error] [pid 16500:tid 1348] [client 127.0.0.1:11617]   File "C:\\Program Files\\Python38\\Lib\\importlib\\__init__.py", line 127, in import_module\r
+[Thu Jan 13 16:28:33.701694 2022] [wsgi:error] [pid 16500:tid 1348] [client 127.0.0.1:11617]     return _bootstrap._gcd_import(name[level:], package, level)\r
+[Thu Jan 13 16:28:33.701694 2022] [wsgi:error] [pid 16500:tid 1348] [client 127.0.0.1:11617]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r
+[Thu Jan 13 16:28:33.701694 2022] [wsgi:error] [pid 16500:tid 1348] [client 127.0.0.1:11617]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r
+[Thu Jan 13 16:28:33.701694 2022] [wsgi:error] [pid 16500:tid 1348] [client 127.0.0.1:11617]   File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked\r
+[Thu Jan 13 16:28:33.701694 2022] [wsgi:error] [pid 16500:tid 1348] [client 127.0.0.1:11617]   File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed\r
+[Thu Jan 13 16:28:33.701694 2022] [wsgi:error] [pid 16500:tid 1348] [client 127.0.0.1:11617]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r
+[Thu Jan 13 16:28:33.701694 2022] [wsgi:error] [pid 16500:tid 1348] [client 127.0.0.1:11617]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r
+[Thu Jan 13 16:28:33.701694 2022] [wsgi:error] [pid 16500:tid 1348] [client 127.0.0.1:11617]   File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked\r
+[Thu Jan 13 16:28:33.701694 2022] [wsgi:error] [pid 16500:tid 1348] [client 127.0.0.1:11617] ModuleNotFoundError: No module named 'elearning_test'\r
+[Thu Jan 13 16:43:31.287290 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:12201] mod_wsgi (pid=16500): Failed to exec Python script file 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'.
+[Thu Jan 13 16:43:31.288288 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:12201] mod_wsgi (pid=16500): Exception occurred processing WSGI script 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'.
+[Thu Jan 13 16:43:31.288288 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:12201] Traceback (most recent call last):\r
+[Thu Jan 13 16:43:31.288288 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:12201]   File "D:/code/djg_test/elearning_test/elearning_test/wsgi.py", line 16, in <module>\r
+[Thu Jan 13 16:43:31.288288 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:12201]     application = get_wsgi_application()\r
+[Thu Jan 13 16:43:31.288288 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:12201]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\core\\wsgi.py", line 12, in get_wsgi_application\r
+[Thu Jan 13 16:43:31.288288 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:12201]     django.setup(set_prefix=False)\r
+[Thu Jan 13 16:43:31.288288 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:12201]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\__init__.py", line 19, in setup\r
+[Thu Jan 13 16:43:31.288288 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:12201]     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)\r
+[Thu Jan 13 16:43:31.288288 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:12201]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 83, in __getattr__\r
+[Thu Jan 13 16:43:31.288288 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:12201]     self._setup(name)\r
+[Thu Jan 13 16:43:31.288288 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:12201]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 70, in _setup\r
+[Thu Jan 13 16:43:31.288288 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:12201]     self._wrapped = Settings(settings_module)\r
+[Thu Jan 13 16:43:31.288288 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:12201]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 177, in __init__\r
+[Thu Jan 13 16:43:31.288288 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:12201]     mod = importlib.import_module(self.SETTINGS_MODULE)\r
+[Thu Jan 13 16:43:31.288288 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:12201]   File "C:\\Program Files\\Python38\\Lib\\importlib\\__init__.py", line 127, in import_module\r
+[Thu Jan 13 16:43:31.288288 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:12201]     return _bootstrap._gcd_import(name[level:], package, level)\r
+[Thu Jan 13 16:43:31.288288 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:12201]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r
+[Thu Jan 13 16:43:31.288288 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:12201]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r
+[Thu Jan 13 16:43:31.288288 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:12201]   File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked\r
+[Thu Jan 13 16:43:31.288288 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:12201]   File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed\r
+[Thu Jan 13 16:43:31.288288 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:12201]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r
+[Thu Jan 13 16:43:31.288288 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:12201]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r
+[Thu Jan 13 16:43:31.289291 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:12201]   File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked\r
+[Thu Jan 13 16:43:31.289291 2022] [wsgi:error] [pid 16500:tid 1352] [client 127.0.0.1:12201] ModuleNotFoundError: No module named 'elearning_test'\r
+[Thu Jan 13 16:46:06.846440 2022] [mpm_winnt:notice] [pid 1928:tid 732] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Jan 13 16:46:08.872066 2022] [mpm_winnt:notice] [pid 16500:tid 836] AH00364: Child: All worker threads have exited.
+[Thu Jan 13 16:46:08.949615 2022] [mpm_winnt:notice] [pid 1928:tid 732] AH00430: Parent: Child process 16500 exited successfully.
