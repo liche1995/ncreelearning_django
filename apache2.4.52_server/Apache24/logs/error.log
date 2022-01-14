@@ -448,3 +448,363 @@ pm_winnt:notice] [pid 16500:tid 836] AH00354: Child: Starting 64 worker threads.
 [Thu Jan 13 16:46:06.846440 2022] [mpm_winnt:notice] [pid 1928:tid 732] AH00422: Parent: Received shutdown signal -- Shutting down the server.
 [Thu Jan 13 16:46:08.872066 2022] [mpm_winnt:notice] [pid 16500:tid 836] AH00364: Child: All worker threads have exited.
 [Thu Jan 13 16:46:08.949615 2022] [mpm_winnt:notice] [pid 1928:tid 732] AH00430: Parent: Child process 16500 exited successfully.
+[Fri Jan 14 10:11:53.493649 2022] [mpm_winnt:notice] [pid 19528:tid 724] AH00455: Apache/2.4.52 (Win64) mod_wsgi/4.9.0 Python/3.8 configured -- resuming normal operations
+[Fri Jan 14 10:11:53.493649 2022] [mpm_winnt:notice] [pid 19528:tid 724] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Fri Jan 14 10:11:53.493649 2022] [core:notice] [pid 19528:tid 724] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Fri Jan 14 10:11:53.499658 2022] [mpm_winnt:notice] [pid 19528:tid 724] AH00418: Parent: Created child process 9516
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 9516:tid 884] AH00354: Child: Starting 64 worker threads.
+[Fri Jan 14 10:11:58.038349 2022] [wsgi:error] [pid 9516:tid 1360] [client 127.0.0.1:3456] mod_wsgi (pid=9516): Failed to exec Python script file 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'.
+[Fri Jan 14 10:11:58.038349 2022] [wsgi:error] [pid 9516:tid 1360] [client 127.0.0.1:3456] mod_wsgi (pid=9516): Exception occurred processing WSGI script 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'.
+[Fri Jan 14 10:11:58.081606 2022] [wsgi:error] [pid 9516:tid 1360] [client 127.0.0.1:3456] Traceback (most recent call last):\r
+[Fri Jan 14 10:11:58.081606 2022] [wsgi:error] [pid 9516:tid 1360] [client 127.0.0.1:3456]   File "D:/code/djg_test/elearning_test/elearning_test/wsgi.py", line 16, in <module>\r
+[Fri Jan 14 10:11:58.081606 2022] [wsgi:error] [pid 9516:tid 1360] [client 127.0.0.1:3456]     application = get_wsgi_application()\r
+[Fri Jan 14 10:11:58.081606 2022] [wsgi:error] [pid 9516:tid 1360] [client 127.0.0.1:3456]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\core\\wsgi.py", line 12, in get_wsgi_application\r
+[Fri Jan 14 10:11:58.081606 2022] [wsgi:error] [pid 9516:tid 1360] [client 127.0.0.1:3456]     django.setup(set_prefix=False)\r
+[Fri Jan 14 10:11:58.081606 2022] [wsgi:error] [pid 9516:tid 1360] [client 127.0.0.1:3456]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\__init__.py", line 19, in setup\r
+[Fri Jan 14 10:11:58.081606 2022] [wsgi:error] [pid 9516:tid 1360] [client 127.0.0.1:3456]     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)\r
+[Fri Jan 14 10:11:58.081606 2022] [wsgi:error] [pid 9516:tid 1360] [client 127.0.0.1:3456]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 83, in __getattr__\r
+[Fri Jan 14 10:11:58.081606 2022] [wsgi:error] [pid 9516:tid 1360] [client 127.0.0.1:3456]     self._setup(name)\r
+[Fri Jan 14 10:11:58.081606 2022] [wsgi:error] [pid 9516:tid 1360] [client 127.0.0.1:3456]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 70, in _setup\r
+[Fri Jan 14 10:11:58.081606 2022] [wsgi:error] [pid 9516:tid 1360] [client 127.0.0.1:3456]     self._wrapped = Settings(settings_module)\r
+[Fri Jan 14 10:11:58.081606 2022] [wsgi:error] [pid 9516:tid 1360] [client 127.0.0.1:3456]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 177, in __init__\r
+[Fri Jan 14 10:11:58.081606 2022] [wsgi:error] [pid 9516:tid 1360] [client 127.0.0.1:3456]     mod = importlib.import_module(self.SETTINGS_MODULE)\r
+[Fri Jan 14 10:11:58.081606 2022] [wsgi:error] [pid 9516:tid 1360] [client 127.0.0.1:3456]   File "C:\\Program Files\\Python38\\Lib\\importlib\\__init__.py", line 127, in import_module\r
+[Fri Jan 14 10:11:58.081606 2022] [wsgi:error] [pid 9516:tid 1360] [client 127.0.0.1:3456]     return _bootstrap._gcd_import(name[level:], package, level)\r
+[Fri Jan 14 10:11:58.081606 2022] [wsgi:error] [pid 9516:tid 1360] [client 127.0.0.1:3456]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r
+[Fri Jan 14 10:11:58.081606 2022] [wsgi:error] [pid 9516:tid 1360] [client 127.0.0.1:3456]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r
+[Fri Jan 14 10:11:58.081606 2022] [wsgi:error] [pid 9516:tid 1360] [client 127.0.0.1:3456]   File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked\r
+[Fri Jan 14 10:11:58.081606 2022] [wsgi:error] [pid 9516:tid 1360] [client 127.0.0.1:3456]   File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed\r
+[Fri Jan 14 10:11:58.081606 2022] [wsgi:error] [pid 9516:tid 1360] [client 127.0.0.1:3456]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r
+[Fri Jan 14 10:11:58.081606 2022] [wsgi:error] [pid 9516:tid 1360] [client 127.0.0.1:3456]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r
+[Fri Jan 14 10:11:58.081606 2022] [wsgi:error] [pid 9516:tid 1360] [client 127.0.0.1:3456]   File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked\r
+[Fri Jan 14 10:11:58.081606 2022] [wsgi:error] [pid 9516:tid 1360] [client 127.0.0.1:3456] ModuleNotFoundError: No module named 'elearning_test'\r
+[Fri Jan 14 10:11:58.181457 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:3457] mod_wsgi (pid=9516): Failed to exec Python script file 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'., referer: http://127.0.0.1/
+[Fri Jan 14 10:11:58.181457 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:3457] mod_wsgi (pid=9516): Exception occurred processing WSGI script 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'., referer: http://127.0.0.1/
+[Fri Jan 14 10:11:58.181457 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:3457] Traceback (most recent call last):\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:11:58.181457 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:3457]   File "D:/code/djg_test/elearning_test/elearning_test/wsgi.py", line 16, in <module>\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:11:58.181457 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:3457]     application = get_wsgi_application()\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:11:58.181457 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:3457]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\core\\wsgi.py", line 12, in get_wsgi_application\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:11:58.181457 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:3457]     django.setup(set_prefix=False)\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:11:58.181457 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:3457]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\__init__.py", line 19, in setup\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:11:58.181457 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:3457]     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:11:58.182454 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:3457]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 83, in __getattr__\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:11:58.182454 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:3457]     self._setup(name)\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:11:58.182454 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:3457]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 70, in _setup\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:11:58.182454 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:3457]     self._wrapped = Settings(settings_module)\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:11:58.182454 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:3457]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 177, in __init__\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:11:58.182454 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:3457]     mod = importlib.import_module(self.SETTINGS_MODULE)\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:11:58.182454 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:3457]   File "C:\\Program Files\\Python38\\Lib\\importlib\\__init__.py", line 127, in import_module\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:11:58.182454 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:3457]     return _bootstrap._gcd_import(name[level:], package, level)\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:11:58.182454 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:3457]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:11:58.182454 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:3457]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:11:58.182454 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:3457]   File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:11:58.182454 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:3457]   File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:11:58.182454 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:3457]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:11:58.182454 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:3457]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:11:58.182454 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:3457]   File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:11:58.182454 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:3457] ModuleNotFoundError: No module named 'elearning_test'\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:27:59.136627 2022] [wsgi:error] [pid 9516:tid 1344] [client 127.0.0.1:12085] mod_wsgi (pid=9516): Failed to exec Python script file 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'.
+[Fri Jan 14 10:27:59.136627 2022] [wsgi:error] [pid 9516:tid 1344] [client 127.0.0.1:12085] mod_wsgi (pid=9516): Exception occurred processing WSGI script 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'.
+[Fri Jan 14 10:27:59.137637 2022] [wsgi:error] [pid 9516:tid 1344] [client 127.0.0.1:12085] Traceback (most recent call last):\r
+[Fri Jan 14 10:27:59.137637 2022] [wsgi:error] [pid 9516:tid 1344] [client 127.0.0.1:12085]   File "D:/code/djg_test/elearning_test/elearning_test/wsgi.py", line 16, in <module>\r
+[Fri Jan 14 10:27:59.137637 2022] [wsgi:error] [pid 9516:tid 1344] [client 127.0.0.1:12085]     application = get_wsgi_application()\r
+[Fri Jan 14 10:27:59.137637 2022] [wsgi:error] [pid 9516:tid 1344] [client 127.0.0.1:12085]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\core\\wsgi.py", line 12, in get_wsgi_application\r
+[Fri Jan 14 10:27:59.137637 2022] [wsgi:error] [pid 9516:tid 1344] [client 127.0.0.1:12085]     django.setup(set_prefix=False)\r
+[Fri Jan 14 10:27:59.137637 2022] [wsgi:error] [pid 9516:tid 1344] [client 127.0.0.1:12085]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\__init__.py", line 19, in setup\r
+[Fri Jan 14 10:27:59.137637 2022] [wsgi:error] [pid 9516:tid 1344] [client 127.0.0.1:12085]     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)\r
+[Fri Jan 14 10:27:59.137637 2022] [wsgi:error] [pid 9516:tid 1344] [client 127.0.0.1:12085]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 83, in __getattr__\r
+[Fri Jan 14 10:27:59.137637 2022] [wsgi:error] [pid 9516:tid 1344] [client 127.0.0.1:12085]     self._setup(name)\r
+[Fri Jan 14 10:27:59.137637 2022] [wsgi:error] [pid 9516:tid 1344] [client 127.0.0.1:12085]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 70, in _setup\r
+[Fri Jan 14 10:27:59.137637 2022] [wsgi:error] [pid 9516:tid 1344] [client 127.0.0.1:12085]     self._wrapped = Settings(settings_module)\r
+[Fri Jan 14 10:27:59.137637 2022] [wsgi:error] [pid 9516:tid 1344] [client 127.0.0.1:12085]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 177, in __init__\r
+[Fri Jan 14 10:27:59.137637 2022] [wsgi:error] [pid 9516:tid 1344] [client 127.0.0.1:12085]     mod = importlib.import_module(self.SETTINGS_MODULE)\r
+[Fri Jan 14 10:27:59.137637 2022] [wsgi:error] [pid 9516:tid 1344] [client 127.0.0.1:12085]   File "C:\\Program Files\\Python38\\Lib\\importlib\\__init__.py", line 127, in import_module\r
+[Fri Jan 14 10:27:59.137637 2022] [wsgi:error] [pid 9516:tid 1344] [client 127.0.0.1:12085]     return _bootstrap._gcd_import(name[level:], package, level)\r
+[Fri Jan 14 10:27:59.137637 2022] [wsgi:error] [pid 9516:tid 1344] [client 127.0.0.1:12085]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r
+[Fri Jan 14 10:27:59.137637 2022] [wsgi:error] [pid 9516:tid 1344] [client 127.0.0.1:12085]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r
+[Fri Jan 14 10:27:59.137637 2022] [wsgi:error] [pid 9516:tid 1344] [client 127.0.0.1:12085]   File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked\r
+[Fri Jan 14 10:27:59.137637 2022] [wsgi:error] [pid 9516:tid 1344] [client 127.0.0.1:12085]   File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed\r
+[Fri Jan 14 10:27:59.137637 2022] [wsgi:error] [pid 9516:tid 1344] [client 127.0.0.1:12085]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r
+[Fri Jan 14 10:27:59.137637 2022] [wsgi:error] [pid 9516:tid 1344] [client 127.0.0.1:12085]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r
+[Fri Jan 14 10:27:59.137637 2022] [wsgi:error] [pid 9516:tid 1344] [client 127.0.0.1:12085]   File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked\r
+[Fri Jan 14 10:27:59.137637 2022] [wsgi:error] [pid 9516:tid 1344] [client 127.0.0.1:12085] ModuleNotFoundError: No module named 'elearning_test'\r
+[Fri Jan 14 10:27:59.214536 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:12086] mod_wsgi (pid=9516): Failed to exec Python script file 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'., referer: http://127.0.0.1/
+[Fri Jan 14 10:27:59.214536 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:12086] mod_wsgi (pid=9516): Exception occurred processing WSGI script 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'., referer: http://127.0.0.1/
+[Fri Jan 14 10:27:59.214536 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:12086] Traceback (most recent call last):\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:27:59.214536 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:12086]   File "D:/code/djg_test/elearning_test/elearning_test/wsgi.py", line 16, in <module>\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:27:59.214536 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:12086]     application = get_wsgi_application()\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:27:59.214536 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:12086]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\core\\wsgi.py", line 12, in get_wsgi_application\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:27:59.214536 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:12086]     django.setup(set_prefix=False)\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:27:59.214536 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:12086]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\__init__.py", line 19, in setup\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:27:59.214536 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:12086]     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:27:59.214536 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:12086]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 83, in __getattr__\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:27:59.214536 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:12086]     self._setup(name)\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:27:59.215533 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:12086]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 70, in _setup\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:27:59.215533 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:12086]     self._wrapped = Settings(settings_module)\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:27:59.215533 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:12086]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 177, in __init__\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:27:59.215533 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:12086]     mod = importlib.import_module(self.SETTINGS_MODULE)\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:27:59.215533 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:12086]   File "C:\\Program Files\\Python38\\Lib\\importlib\\__init__.py", line 127, in import_module\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:27:59.215533 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:12086]     return _bootstrap._gcd_import(name[level:], package, level)\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:27:59.215533 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:12086]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:27:59.215533 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:12086]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:27:59.215533 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:12086]   File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:27:59.215533 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:12086]   File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:27:59.215533 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:12086]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:27:59.215533 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:12086]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:27:59.215533 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:12086]   File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:27:59.215533 2022] [wsgi:error] [pid 9516:tid 1348] [client 127.0.0.1:12086] ModuleNotFoundError: No module named 'elearning_test'\r, referer: http://127.0.0.1/
+[Fri Jan 14 10:35:24.335404 2022] [mpm_winnt:notice] [pid 19528:tid 724] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Fri Jan 14 10:35:26.348296 2022] [mpm_winnt:notice] [pid 9516:tid 884] AH00364: Child: All worker threads have exited.
+[Fri Jan 14 10:35:26.404217 2022] [mpm_winnt:notice] [pid 19528:tid 724] AH00430: Parent: Child process 9516 exited successfully.
+[Fri Jan 14 16:33:24.432508 2022] [mpm_winnt:notice] [pid 23760:tid 724] AH00455: Apache/2.4.52 (Win64) mod_wsgi/4.9.0 Python/3.8 configured -- resuming normal operations
+[Fri Jan 14 16:33:24.432508 2022] [mpm_winnt:notice] [pid 23760:tid 724] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Fri Jan 14 16:33:24.432508 2022] [core:notice] [pid 23760:tid 724] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Fri Jan 14 16:33:24.439488 2022] [mpm_winnt:notice] [pid 23760:tid 724] AH00418: Parent: Created child process 22396
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 22396:tid 872] AH00354: Child: Starting 64 worker threads.
+[Fri Jan 14 16:33:33.691201 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1979] mod_wsgi (pid=22396): Failed to exec Python script file 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'.
+[Fri Jan 14 16:33:33.691201 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1979] mod_wsgi (pid=22396): Exception occurred processing WSGI script 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'.
+[Fri Jan 14 16:33:33.727539 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1979] Traceback (most recent call last):\r
+[Fri Jan 14 16:33:33.727539 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1979]   File "D:/code/djg_test/elearning_test/elearning_test/wsgi.py", line 16, in <module>\r
+[Fri Jan 14 16:33:33.727539 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1979]     application = get_wsgi_application()\r
+[Fri Jan 14 16:33:33.727539 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1979]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\core\\wsgi.py", line 12, in get_wsgi_application\r
+[Fri Jan 14 16:33:33.727539 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1979]     django.setup(set_prefix=False)\r
+[Fri Jan 14 16:33:33.727539 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1979]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\__init__.py", line 19, in setup\r
+[Fri Jan 14 16:33:33.727539 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1979]     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)\r
+[Fri Jan 14 16:33:33.727539 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1979]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 83, in __getattr__\r
+[Fri Jan 14 16:33:33.727539 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1979]     self._setup(name)\r
+[Fri Jan 14 16:33:33.727539 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1979]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 70, in _setup\r
+[Fri Jan 14 16:33:33.727539 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1979]     self._wrapped = Settings(settings_module)\r
+[Fri Jan 14 16:33:33.727539 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1979]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 177, in __init__\r
+[Fri Jan 14 16:33:33.727539 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1979]     mod = importlib.import_module(self.SETTINGS_MODULE)\r
+[Fri Jan 14 16:33:33.728507 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1979]   File "C:\\Program Files\\Python38\\Lib\\importlib\\__init__.py", line 127, in import_module\r
+[Fri Jan 14 16:33:33.728507 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1979]     return _bootstrap._gcd_import(name[level:], package, level)\r
+[Fri Jan 14 16:33:33.728507 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1979]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r
+[Fri Jan 14 16:33:33.728507 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1979]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r
+[Fri Jan 14 16:33:33.728507 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1979]   File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked\r
+[Fri Jan 14 16:33:33.728507 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1979]   File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed\r
+[Fri Jan 14 16:33:33.728507 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1979]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r
+[Fri Jan 14 16:33:33.728507 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1979]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r
+[Fri Jan 14 16:33:33.728507 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1979]   File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked\r
+[Fri Jan 14 16:33:33.728507 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1979] ModuleNotFoundError: No module named 'elearning_test'\r
+[Fri Jan 14 16:33:33.851274 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1980] mod_wsgi (pid=22396): Failed to exec Python script file 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'., referer: http://127.0.0.1/
+[Fri Jan 14 16:33:33.851274 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1980] mod_wsgi (pid=22396): Exception occurred processing WSGI script 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'., referer: http://127.0.0.1/
+[Fri Jan 14 16:33:33.851274 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1980] Traceback (most recent call last):\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:33:33.852269 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1980]   File "D:/code/djg_test/elearning_test/elearning_test/wsgi.py", line 16, in <module>\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:33:33.852269 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1980]     application = get_wsgi_application()\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:33:33.852269 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1980]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\core\\wsgi.py", line 12, in get_wsgi_application\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:33:33.852269 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1980]     django.setup(set_prefix=False)\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:33:33.852269 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1980]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\__init__.py", line 19, in setup\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:33:33.852269 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1980]     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:33:33.852269 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1980]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 83, in __getattr__\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:33:33.852269 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1980]     self._setup(name)\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:33:33.852269 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1980]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 70, in _setup\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:33:33.852269 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1980]     self._wrapped = Settings(settings_module)\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:33:33.852269 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1980]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 177, in __init__\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:33:33.852269 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1980]     mod = importlib.import_module(self.SETTINGS_MODULE)\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:33:33.852269 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1980]   File "C:\\Program Files\\Python38\\Lib\\importlib\\__init__.py", line 127, in import_module\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:33:33.852269 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1980]     return _bootstrap._gcd_import(name[level:], package, level)\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:33:33.852269 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1980]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:33:33.852269 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1980]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:33:33.852269 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1980]   File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:33:33.852269 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1980]   File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:33:33.852269 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1980]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:33:33.852269 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1980]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:33:33.852269 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1980]   File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:33:33.852269 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1980] ModuleNotFoundError: No module named 'elearning_test'\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:34:51.612592 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1986] mod_wsgi (pid=22396): Failed to exec Python script file 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'.
+[Fri Jan 14 16:34:51.612592 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1986] mod_wsgi (pid=22396): Exception occurred processing WSGI script 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'.
+[Fri Jan 14 16:34:51.612592 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1986] Traceback (most recent call last):\r
+[Fri Jan 14 16:34:51.612592 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1986]   File "D:/code/djg_test/elearning_test/elearning_test/wsgi.py", line 16, in <module>\r
+[Fri Jan 14 16:34:51.612592 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1986]     application = get_wsgi_application()\r
+[Fri Jan 14 16:34:51.612592 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1986]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\core\\wsgi.py", line 12, in get_wsgi_application\r
+[Fri Jan 14 16:34:51.612592 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1986]     django.setup(set_prefix=False)\r
+[Fri Jan 14 16:34:51.612592 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1986]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\__init__.py", line 19, in setup\r
+[Fri Jan 14 16:34:51.612592 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1986]     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)\r
+[Fri Jan 14 16:34:51.612592 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1986]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 83, in __getattr__\r
+[Fri Jan 14 16:34:51.612592 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1986]     self._setup(name)\r
+[Fri Jan 14 16:34:51.612592 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1986]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 70, in _setup\r
+[Fri Jan 14 16:34:51.612592 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1986]     self._wrapped = Settings(settings_module)\r
+[Fri Jan 14 16:34:51.612592 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1986]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 177, in __init__\r
+[Fri Jan 14 16:34:51.612592 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1986]     mod = importlib.import_module(self.SETTINGS_MODULE)\r
+[Fri Jan 14 16:34:51.612592 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1986]   File "C:\\Program Files\\Python38\\Lib\\importlib\\__init__.py", line 127, in import_module\r
+[Fri Jan 14 16:34:51.612592 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1986]     return _bootstrap._gcd_import(name[level:], package, level)\r
+[Fri Jan 14 16:34:51.612592 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1986]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r
+[Fri Jan 14 16:34:51.613617 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1986]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r
+[Fri Jan 14 16:34:51.613617 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1986]   File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked\r
+[Fri Jan 14 16:34:51.613617 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1986]   File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed\r
+[Fri Jan 14 16:34:51.613617 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1986]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r
+[Fri Jan 14 16:34:51.613617 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1986]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r
+[Fri Jan 14 16:34:51.613617 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1986]   File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked\r
+[Fri Jan 14 16:34:51.613617 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:1986] ModuleNotFoundError: No module named 'elearning_test'\r
+[Fri Jan 14 16:34:51.660151 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1987] mod_wsgi (pid=22396): Failed to exec Python script file 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'., referer: http://127.0.0.1/
+[Fri Jan 14 16:34:51.660151 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1987] mod_wsgi (pid=22396): Exception occurred processing WSGI script 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'., referer: http://127.0.0.1/
+[Fri Jan 14 16:34:51.661159 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1987] Traceback (most recent call last):\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:34:51.661159 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1987]   File "D:/code/djg_test/elearning_test/elearning_test/wsgi.py", line 16, in <module>\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:34:51.661159 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1987]     application = get_wsgi_application()\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:34:51.661159 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1987]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\core\\wsgi.py", line 12, in get_wsgi_application\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:34:51.661159 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1987]     django.setup(set_prefix=False)\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:34:51.661159 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1987]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\__init__.py", line 19, in setup\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:34:51.661159 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1987]     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:34:51.661159 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1987]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 83, in __getattr__\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:34:51.661159 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1987]     self._setup(name)\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:34:51.661159 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1987]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 70, in _setup\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:34:51.661159 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1987]     self._wrapped = Settings(settings_module)\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:34:51.661159 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1987]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 177, in __init__\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:34:51.661159 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1987]     mod = importlib.import_module(self.SETTINGS_MODULE)\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:34:51.661159 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1987]   File "C:\\Program Files\\Python38\\Lib\\importlib\\__init__.py", line 127, in import_module\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:34:51.661159 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1987]     return _bootstrap._gcd_import(name[level:], package, level)\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:34:51.661159 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1987]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:34:51.661159 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1987]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:34:51.661159 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1987]   File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:34:51.661159 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1987]   File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:34:51.661159 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1987]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:34:51.661159 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1987]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:34:51.661159 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1987]   File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:34:51.661159 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:1987] ModuleNotFoundError: No module named 'elearning_test'\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:39:23.974113 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2176] mod_wsgi (pid=22396): Failed to exec Python script file 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'.
+[Fri Jan 14 16:39:23.974113 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2176] mod_wsgi (pid=22396): Exception occurred processing WSGI script 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'.
+[Fri Jan 14 16:39:23.975145 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2176] Traceback (most recent call last):\r
+[Fri Jan 14 16:39:23.975145 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2176]   File "D:/code/djg_test/elearning_test/elearning_test/wsgi.py", line 17, in <module>\r
+[Fri Jan 14 16:39:23.975145 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2176]     application = get_wsgi_application()\r
+[Fri Jan 14 16:39:23.975145 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2176]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\core\\wsgi.py", line 12, in get_wsgi_application\r
+[Fri Jan 14 16:39:23.975145 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2176]     django.setup(set_prefix=False)\r
+[Fri Jan 14 16:39:23.975145 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2176]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\__init__.py", line 19, in setup\r
+[Fri Jan 14 16:39:23.975145 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2176]     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)\r
+[Fri Jan 14 16:39:23.975145 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2176]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 83, in __getattr__\r
+[Fri Jan 14 16:39:23.975145 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2176]     self._setup(name)\r
+[Fri Jan 14 16:39:23.975145 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2176]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 70, in _setup\r
+[Fri Jan 14 16:39:23.975145 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2176]     self._wrapped = Settings(settings_module)\r
+[Fri Jan 14 16:39:23.975145 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2176]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 177, in __init__\r
+[Fri Jan 14 16:39:23.975145 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2176]     mod = importlib.import_module(self.SETTINGS_MODULE)\r
+[Fri Jan 14 16:39:23.975145 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2176]   File "C:\\Program Files\\Python38\\Lib\\importlib\\__init__.py", line 127, in import_module\r
+[Fri Jan 14 16:39:23.976137 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2176]     return _bootstrap._gcd_import(name[level:], package, level)\r
+[Fri Jan 14 16:39:23.976137 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2176]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r
+[Fri Jan 14 16:39:23.976137 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2176]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r
+[Fri Jan 14 16:39:23.976137 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2176]   File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked\r
+[Fri Jan 14 16:39:23.976137 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2176]   File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed\r
+[Fri Jan 14 16:39:23.976137 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2176]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r
+[Fri Jan 14 16:39:23.976137 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2176]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r
+[Fri Jan 14 16:39:23.976137 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2176]   File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked\r
+[Fri Jan 14 16:39:23.976137 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2176] ModuleNotFoundError: No module named 'elearning_test'\r
+[Fri Jan 14 16:39:24.026596 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2177] mod_wsgi (pid=22396): Failed to exec Python script file 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'., referer: http://127.0.0.1/
+[Fri Jan 14 16:39:24.026596 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2177] mod_wsgi (pid=22396): Exception occurred processing WSGI script 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'., referer: http://127.0.0.1/
+[Fri Jan 14 16:39:24.027593 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2177] Traceback (most recent call last):\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:39:24.027593 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2177]   File "D:/code/djg_test/elearning_test/elearning_test/wsgi.py", line 17, in <module>\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:39:24.027593 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2177]     application = get_wsgi_application()\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:39:24.027593 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2177]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\core\\wsgi.py", line 12, in get_wsgi_application\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:39:24.027593 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2177]     django.setup(set_prefix=False)\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:39:24.027593 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2177]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\__init__.py", line 19, in setup\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:39:24.027593 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2177]     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:39:24.027593 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2177]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 83, in __getattr__\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:39:24.027593 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2177]     self._setup(name)\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:39:24.027593 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2177]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 70, in _setup\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:39:24.027593 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2177]     self._wrapped = Settings(settings_module)\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:39:24.027593 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2177]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 177, in __init__\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:39:24.027593 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2177]     mod = importlib.import_module(self.SETTINGS_MODULE)\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:39:24.027593 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2177]   File "C:\\Program Files\\Python38\\Lib\\importlib\\__init__.py", line 127, in import_module\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:39:24.027593 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2177]     return _bootstrap._gcd_import(name[level:], package, level)\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:39:24.027593 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2177]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:39:24.027593 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2177]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:39:24.027593 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2177]   File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:39:24.027593 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2177]   File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:39:24.027593 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2177]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:39:24.027593 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2177]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:39:24.027593 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2177]   File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:39:24.027593 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2177] ModuleNotFoundError: No module named 'elearning_test'\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:40:06.660621 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2188] mod_wsgi (pid=22396): Failed to exec Python script file 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'.
+[Fri Jan 14 16:40:06.660621 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2188] mod_wsgi (pid=22396): Exception occurred processing WSGI script 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'.
+[Fri Jan 14 16:40:06.661615 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2188] Traceback (most recent call last):\r
+[Fri Jan 14 16:40:06.661615 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2188]   File "D:/code/djg_test/elearning_test/elearning_test/wsgi.py", line 17, in <module>\r
+[Fri Jan 14 16:40:06.661615 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2188]     application = get_wsgi_application()\r
+[Fri Jan 14 16:40:06.661615 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2188]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\core\\wsgi.py", line 12, in get_wsgi_application\r
+[Fri Jan 14 16:40:06.661615 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2188]     django.setup(set_prefix=False)\r
+[Fri Jan 14 16:40:06.661615 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2188]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\__init__.py", line 19, in setup\r
+[Fri Jan 14 16:40:06.661615 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2188]     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)\r
+[Fri Jan 14 16:40:06.661615 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2188]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 83, in __getattr__\r
+[Fri Jan 14 16:40:06.661615 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2188]     self._setup(name)\r
+[Fri Jan 14 16:40:06.661615 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2188]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 70, in _setup\r
+[Fri Jan 14 16:40:06.661615 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2188]     self._wrapped = Settings(settings_module)\r
+[Fri Jan 14 16:40:06.661615 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2188]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 177, in __init__\r
+[Fri Jan 14 16:40:06.661615 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2188]     mod = importlib.import_module(self.SETTINGS_MODULE)\r
+[Fri Jan 14 16:40:06.661615 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2188]   File "C:\\Program Files\\Python38\\Lib\\importlib\\__init__.py", line 127, in import_module\r
+[Fri Jan 14 16:40:06.661615 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2188]     return _bootstrap._gcd_import(name[level:], package, level)\r
+[Fri Jan 14 16:40:06.661615 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2188]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r
+[Fri Jan 14 16:40:06.661615 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2188]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r
+[Fri Jan 14 16:40:06.661615 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2188]   File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked\r
+[Fri Jan 14 16:40:06.661615 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2188]   File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed\r
+[Fri Jan 14 16:40:06.661615 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2188]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r
+[Fri Jan 14 16:40:06.661615 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2188]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r
+[Fri Jan 14 16:40:06.661615 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2188]   File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked\r
+[Fri Jan 14 16:40:06.661615 2022] [wsgi:error] [pid 22396:tid 1340] [client 127.0.0.1:2188] ModuleNotFoundError: No module named 'elearning_test'\r
+[Fri Jan 14 16:40:06.730847 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2189] mod_wsgi (pid=22396): Failed to exec Python script file 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'., referer: http://127.0.0.1/
+[Fri Jan 14 16:40:06.730847 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2189] mod_wsgi (pid=22396): Exception occurred processing WSGI script 'D:/code/djg_test/elearning_test/elearning_test/wsgi.py'., referer: http://127.0.0.1/
+[Fri Jan 14 16:40:06.730847 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2189] Traceback (most recent call last):\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:40:06.730847 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2189]   File "D:/code/djg_test/elearning_test/elearning_test/wsgi.py", line 17, in <module>\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:40:06.730847 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2189]     application = get_wsgi_application()\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:40:06.730847 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2189]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\core\\wsgi.py", line 12, in get_wsgi_application\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:40:06.730847 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2189]     django.setup(set_prefix=False)\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:40:06.730847 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2189]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\__init__.py", line 19, in setup\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:40:06.730847 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2189]     configure_logging(settings.LOGGING_CONFIG, settings.LOGGING)\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:40:06.730847 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2189]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 83, in __getattr__\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:40:06.730847 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2189]     self._setup(name)\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:40:06.730847 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2189]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 70, in _setup\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:40:06.730847 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2189]     self._wrapped = Settings(settings_module)\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:40:06.730847 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2189]   File "D:\\code\\djg_test\\django_venu\\Lib\\site-packages\\django\\conf\\__init__.py", line 177, in __init__\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:40:06.730847 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2189]     mod = importlib.import_module(self.SETTINGS_MODULE)\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:40:06.730847 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2189]   File "C:\\Program Files\\Python38\\Lib\\importlib\\__init__.py", line 127, in import_module\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:40:06.730847 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2189]     return _bootstrap._gcd_import(name[level:], package, level)\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:40:06.730847 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2189]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:40:06.731844 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2189]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:40:06.731844 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2189]   File "<frozen importlib._bootstrap>", line 961, in _find_and_load_unlocked\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:40:06.731844 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2189]   File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:40:06.731844 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2189]   File "<frozen importlib._bootstrap>", line 1014, in _gcd_import\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:40:06.731844 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2189]   File "<frozen importlib._bootstrap>", line 991, in _find_and_load\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:40:06.731844 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2189]   File "<frozen importlib._bootstrap>", line 973, in _find_and_load_unlocked\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:40:06.731844 2022] [wsgi:error] [pid 22396:tid 1348] [client 127.0.0.1:2189] ModuleNotFoundError: No module named 'elearning_test'\r, referer: http://127.0.0.1/
+[Fri Jan 14 16:42:06.984322 2022] [wsgi:error] [pid 22396:tid 1348] The web is at DEBUG mode\r
+[Fri Jan 14 16:43:34.766743 2022] [mpm_winnt:notice] [pid 23760:tid 724] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Fri Jan 14 16:44:09.377974 2022] [mpm_winnt:notice] [pid 22396:tid 872] AH00362: Child: Waiting 30 more seconds for 2 worker threads to finish.
+[Fri Jan 14 16:44:18.875530 2022] [core:warn] [pid 17896:tid 76] AH00098: pid file D:/code/djg_test/apache2.4.52_server/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Fri Jan 14 16:44:18.885740 2022] [mpm_winnt:notice] [pid 17896:tid 76] AH00455: Apache/2.4.52 (Win64) mod_wsgi/4.9.0 Python/3.8 configured -- resuming normal operations
+[Fri Jan 14 16:44:18.885740 2022] [mpm_winnt:notice] [pid 17896:tid 76] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Fri Jan 14 16:44:18.885740 2022] [core:notice] [pid 17896:tid 76] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Fri Jan 14 16:44:18.905730 2022] [mpm_winnt:notice] [pid 17896:tid 76] AH00418: Parent: Created child process 22276
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 22276:tid 824] AH00354: Child: Starting 64 worker threads.
+[Fri Jan 14 16:44:42.103512 2022] [mpm_winnt:notice] [pid 22396:tid 872] AH00362: Child: Waiting 0 more seconds for 2 worker threads to finish.
+[Fri Jan 14 16:44:42.211677 2022] [mpm_winnt:notice] [pid 22396:tid 872] AH00363: Child: Terminating 2 threads that failed to exit.
+[Fri Jan 14 16:44:42.211677 2022] [mpm_winnt:notice] [pid 22396:tid 872] AH00364: Child: All worker threads have exited.
+[Fri Jan 14 16:44:56.573239 2022] [wsgi:error] [pid 22276:tid 1384] The web is at DEBUG mode\r
+[Fri Jan 14 16:56:15.469708 2022] [mpm_winnt:notice] [pid 17896:tid 76] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Fri Jan 14 16:56:29.046529 2022] [core:warn] [pid 18752:tid 472] AH00098: pid file D:/code/djg_test/apache2.4.52_server/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Fri Jan 14 16:56:29.050294 2022] [mpm_winnt:notice] [pid 18752:tid 472] AH00455: Apache/2.4.52 (Win64) mod_wsgi/4.9.0 Python/3.8 configured -- resuming normal operations
+[Fri Jan 14 16:56:29.050294 2022] [mpm_winnt:notice] [pid 18752:tid 472] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Fri Jan 14 16:56:29.050294 2022] [core:notice] [pid 18752:tid 472] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Fri Jan 14 16:56:29.057868 2022] [mpm_winnt:notice] [pid 18752:tid 472] AH00418: Parent: Created child process 368
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 368:tid 872] AH00354: Child: Starting 64 worker threads.
+[Fri Jan 14 16:56:48.893328 2022] [wsgi:error] [pid 368:tid 1376] The web is at DEBUG mode\r
+[Fri Jan 14 16:56:50.100886 2022] [mpm_winnt:notice] [pid 22276:tid 824] AH00362: Child: Waiting 30 more seconds for 3 worker threads to finish.
+[Fri Jan 14 16:57:22.795257 2022] [mpm_winnt:notice] [pid 22276:tid 824] AH00362: Child: Waiting 0 more seconds for 3 worker threads to finish.
+[Fri Jan 14 16:57:22.903471 2022] [mpm_winnt:notice] [pid 22276:tid 824] AH00363: Child: Terminating 3 threads that failed to exit.
+[Fri Jan 14 16:57:22.903471 2022] [mpm_winnt:notice] [pid 22276:tid 824] AH00364: Child: All worker threads have exited.
+[Fri Jan 14 16:57:59.939846 2022] [mpm_winnt:notice] [pid 18752:tid 472] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Fri Jan 14 16:58:34.546265 2022] [mpm_winnt:notice] [pid 368:tid 872] AH00362: Child: Waiting 30 more seconds for 2 worker threads to finish.
+[Fri Jan 14 16:59:07.254171 2022] [mpm_winnt:notice] [pid 368:tid 872] AH00362: Child: Waiting 0 more seconds for 2 worker threads to finish.
+[Fri Jan 14 16:59:07.364166 2022] [mpm_winnt:notice] [pid 368:tid 872] AH00363: Child: Terminating 2 threads that failed to exit.
+[Fri Jan 14 16:59:07.364166 2022] [mpm_winnt:notice] [pid 368:tid 872] AH00364: Child: All worker threads have exited.
+[Fri Jan 14 17:03:50.747028 2022] [core:warn] [pid 8784:tid 728] AH00098: pid file D:/code/djg_test/apache2.4.52_server/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Fri Jan 14 17:03:50.750024 2022] [mpm_winnt:notice] [pid 8784:tid 728] AH00455: Apache/2.4.52 (Win64) mod_wsgi/4.9.0 Python/3.8 configured -- resuming normal operations
+[Fri Jan 14 17:03:50.750024 2022] [mpm_winnt:notice] [pid 8784:tid 728] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Fri Jan 14 17:03:50.750024 2022] [core:notice] [pid 8784:tid 728] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Fri Jan 14 17:03:50.756596 2022] [mpm_winnt:notice] [pid 8784:tid 728] AH00418: Parent: Created child process 7380
+Apache server shutdown initiated...
+pm_winnt:notice] [pid 7380:tid 860] AH00354: Child: Starting 64 worker threads.
+[Fri Jan 14 17:04:12.504596 2022] [wsgi:error] [pid 7380:tid 1368] The web is at DEBUG mode\r
+[Fri Jan 14 17:06:10.433665 2022] [mpm_winnt:notice] [pid 8784:tid 728] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Fri Jan 14 17:06:45.063845 2022] [mpm_winnt:notice] [pid 7380:tid 860] AH00362: Child: Waiting 30 more seconds for 2 worker threads to finish.
+[Fri Jan 14 17:07:17.790168 2022] [mpm_winnt:notice] [pid 7380:tid 860] AH00362: Child: Waiting 0 more seconds for 2 worker threads to finish.
+[Fri Jan 14 17:07:17.899921 2022] [mpm_winnt:notice] [pid 7380:tid 860] AH00363: Child: Terminating 2 threads that failed to exit.
+[Fri Jan 14 17:07:17.899921 2022] [mpm_winnt:notice] [pid 7380:tid 860] AH00364: Child: All worker threads have exited.
