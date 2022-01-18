@@ -1,21 +1,18 @@
 <script>
     $(document).ready(function(){
-
+        /* 展開附檔清單 */
+        $(".attach_file_open").click(function(even){
+            /* 抓取資料 */
+            var query_id = even.target.value;
+            $("#mask").load("ajax_show/homework_attachfile_query?hw_submit_id=" + query_id);
+            /* 展開遮罩 */
+            $("#mask").show("slow");
+        ;})
     ;})
 </script>
 
-<style>
-    .attach_file_box{
-        position: absolute;
-        z-index: 1;
-        background: #434A54;
-        opacity: 0.9;
-        display:block;
-    ;}
-</style>
-
-<div class="attach_file_box">123456</div>
 <form>
+    {%if query_success%}
     <table class="table table-hover">
         <thead>
             <tr>
@@ -34,7 +31,7 @@
                 <th>{{item.submitinfo}}</th>
                 <th>
                     {%if item.attach_file_exist%}
-                    <button class="btn btn-primary" type="button">展開</button>
+                    <button class="btn btn-primary attach_file_open" type="button" value="{{item.inner_id}}">展開</button>
                     {%endif%}
                     <div>
                     {%for attach_file in db|hw_submit_file:item.inner_id%}
@@ -46,4 +43,7 @@
         {%endfor%}
         </tbody>
     </table>
+    {%else%}
+    <h4>查無作業</h4>
+    {%endif%}
 </form>

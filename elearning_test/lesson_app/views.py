@@ -228,14 +228,31 @@ def homework_mark(request):
 def homework_submit_query(request):
     context = {}
     homeworkid = request.GET.get('hwid', '')
-    order = "SELECT * FROM homeworksubmit AS hm " \
-            "LEFT OUTER JOIN lesson_studentlist AS stlt " \
-            "ON hm.user_id = stlt.student_id AND hm.lesson_id_id = stlt.lesson_id_id " \
-            "WHERE hm.homework_id_id=" + homeworkid
-    query = models.HomeworkSubmit.objects.raw(order)
-    context["hw_submit_info"] = query
+    if homeworkid != 'undefined':
+        order = "SELECT * FROM homeworksubmit AS hm " \
+                "LEFT OUTER JOIN lesson_studentlist AS stlt " \
+                "ON hm.user_id = stlt.student_id AND hm.lesson_id_id = stlt.lesson_id_id " \
+                "WHERE hm.homework_id_id=" + homeworkid
+        query = models.HomeworkSubmit.objects.raw(order)
+        context["hw_submit_info"] = query
+        if len(query) > 0:
+            context["query_success"] = True
+        else:
+            context["query_success"] = False
+    else:
+        context["query_success"] = False
 
     return render(request, "lesson/handout_homework/homework_mark_query.html", context)
+
+
+# 調閱附檔
+@login_required
+def homework_attachfile_query(request):
+    query = int(request.GET.get("hw_submit_id", "-1"))
+    context = {}
+    attach_result = models.HomeworkFileTable.objects.filter(homeworksubmit_id_id=query)
+    context["attach_result"] = attach_result
+    return render(request, "lesson/handout_homework/homework_attachfile_query.html", context)
 
 
 # 有作業課綱調閱

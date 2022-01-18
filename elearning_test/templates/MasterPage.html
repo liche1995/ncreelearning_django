@@ -36,10 +36,29 @@
                 font-size: 3.5rem;
             }
         }
+
+        #mask{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity:0.5;
+            display: none;
+            background-color: #000;
+        }
         {% block addition_style%}
         {% endblock %}
 
         </style>
+
+        <script>
+            $(document).ready(function(){
+                $("#mask").click(function(even){
+                    if($("#mask").css("display")){$("#mask").hide("slow");}
+                ;})
+            ;})
+        </script>
 
         <!-- addition script -->
         {%block script%}
@@ -118,6 +137,12 @@
 
         <!-- 內文區域 -->
         <main>
+            <!-- mask -->
+            <div id="mask">
+                {%block mask_info%}
+                {%endblock%}
+            </div>
+
             {%block content%}
             {%endblock%}
         </main>
