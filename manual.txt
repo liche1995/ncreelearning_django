@@ -1,0 +1,10 @@
+Apache mode
+	Prepare：
+	Apache@apachelounge
+	mod_wsgi@https://www.lfd.uci.edu/~gohlke/pythonlibs/ (IF system is MS windows)
+	virtualenv
+	1.download Apache
+	2.download mod_wsgi and install on virtualenv
+	3.commend "mod_wsgi-express module-config" in virtualenv environment, and paste on Apache's httpd.conf
+	4.setting web document root address in httpd.conf
+	5.excute apache

@@ -1,0 +1,1 @@
+2022/01/18 17:08:42 [error] 20556#16572: *1 CreateFile() "D:\code\djg_test\nginx-1.20.2/html/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "127.0.0.1", referrer: "http://127.0.0.1/"
