@@ -43,9 +43,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            opacity:0.5;
             display: none;
-            background-color: #000;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
         }
         {% block addition_style%}
         {% endblock %}
@@ -53,6 +53,7 @@
         </style>
 
         <script>
+            /* mask close control */
             $(document).ready(function(){
                 $("#mask").click(function(even){
                     if($("#mask").css("display")){$("#mask").hide("slow");}

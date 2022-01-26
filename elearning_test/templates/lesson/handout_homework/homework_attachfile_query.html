@@ -1,5 +1,14 @@
 {%block mask_info%}
-{%for item in attach_result%}
-{{item}}
-{%endfor%}
+<div class="container" style="position:relative;top:50%">
+    <div class="col-auto">
+        {%for item in attach_result%}
+        <div class="row p-1">
+            <div class="col-8 text-center" style="font-size:18pt">{{item.filename}}</div>
+            <div class="col-2">
+                <a class="btn btn-primary" href="{{item.file.url}}">下載</a>
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+</div>
 {%endblock%}

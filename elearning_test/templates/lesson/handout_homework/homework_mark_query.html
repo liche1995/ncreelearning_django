@@ -1,5 +1,11 @@
 <script>
     $(document).ready(function(){
+        /* 儲存與送出分數 */
+        $(".submit_score").click(function(even){
+            console.log(even.target.value);
+
+        ;})
+
         /* 展開附檔清單 */
         $(".attach_file_open").click(function(even){
             /* 抓取資料 */
@@ -21,6 +27,7 @@
                 <th>說明</th>
                 <th width="10%">附檔</th>
                 <th width="10%">評分</th>
+                <th width="15%"></th>
             </tr>
         </thead>
         <tbody>
@@ -38,7 +45,8 @@
                     {%endfor%}
                     </div>
                 </th>
-                <th><input name="score" type="number" min="0" max="100" class="form-control"></th>
+                <th><input name="{{item.inner_id}}_score" type="number" min="0" max="100" class="form-control"></th>
+                <th><button class="submit_score btn btn-success" type="button">送出分數</button></th>
             </tr>
         {%endfor%}
         </tbody>
