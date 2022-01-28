@@ -3,10 +3,25 @@
         /* 儲存與送出分數 */
         $(".submit_score").click(function(even){
             even.preventDefault();
-            var form = $("#form")[0];
+            var form = $("#" + even.target.value)[0];
             var formdata = new FormData(form);
-            $.ajax({})
-
+            $.ajax({
+                url: "/ajax_active/submit_homework_score",
+                type: "POST",
+                data: formdata,
+                contentType: false, /* 傳送表單需要設置false */
+                cache: false,
+                processData: false,
+                success: function(data)
+                {
+                    alert(data["msg"]);
+                    refresh();
+                },
+                error: function(data)
+                {
+                    alert("系統錯誤，請稍後再試");
+                }
+            })
         ;})
 
         /* 展開附檔清單 */
@@ -50,8 +65,9 @@
                 <form id="{{item.inner_id}}_score_form" method="post">
                     {%csrf_token%}
                     <div class="row">
-                        <input name="{{item.inner_id}}_score" type="number" min="0" max="100" class="form-control col mx-1">
-                        <button class="submit_score btn btn-success col-6 mx-1" type="submit">送出分數</button>
+                        <input name="submit_id" type="hidden" value="{{item.inner_id}}">
+                        <input name="score" type="number" min="0" max="100" class="form-control col mx-1" value="{{item.score}}">
+                        <button class="submit_score btn btn-success col-6 mx-1" type="submit" value="{{item.inner_id}}_score_form">送出分數</button>
                     </div>
                 </form>
             </td>

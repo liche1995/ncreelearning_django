@@ -394,6 +394,21 @@ def homework_active(request):
     return JsonResponse(context)
 
 
+# 送出評分
+@login_required
+def submit_homework_score(request):
+    context = {}
+    if request.method.lower() != "post":
+        context["msg"] = "系統錯誤"
+    else:
+        inner_id = request.POST.get("submit_id", "")
+        target = models.HomeworkSubmit.objects.get(inner_id=inner_id)
+        target.score = int(request.POST.get("score", ""))
+        target.save()
+        context["msg"] = "送出成功！"
+    return JsonResponse(context)
+
+
 # 刪除作業
 @login_required
 def delete_homework(request):
