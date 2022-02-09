@@ -103,7 +103,7 @@
                             {%if request.user.groups.all.0.name == 'student' or request.user.is_superuser%}
                             <hr class="dropdown-divider">
                             <a class="dropdown-item" href="/join_lesson_list">訂閱課程清單</a>
-                            <a class="dropdown-item" href="">開始課程</a>
+                            <a class="dropdown-item" href="/hallway">開始課程</a>
                             {%endif%}
                             <!-- 帳號設定區 -->
                             <hr class="dropdown-divider">

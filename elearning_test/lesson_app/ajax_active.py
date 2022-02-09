@@ -401,10 +401,11 @@ def submit_homework_score(request):
     if request.method.lower() != "post":
         context["msg"] = "系統錯誤"
     else:
-        inner_id = request.POST.get("submit_id", "")
-        target = models.HomeworkSubmit.objects.get(inner_id=inner_id)
-        target.score = int(request.POST.get("score", ""))
-        target.save()
+        hwid = int(request.POST.get("homework_id", ""))
+        hw_info = models.HomeworkSubmit.objects.filter(homework_id_id=hwid)
+        for item in hw_info:
+            item.score = int(request.POST.get(str(item.inner_id) + "_score", ""))
+            item.save()
         context["msg"] = "送出成功！"
     return JsonResponse(context)
 

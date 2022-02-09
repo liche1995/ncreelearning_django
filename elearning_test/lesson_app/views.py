@@ -14,13 +14,18 @@ from lesson_app import public_api
 
 # 課程表
 def callesson(request):
+    # 基本資料調閱
     if int(request.GET.get("more", "0")):
         lesson_result = models.Lesson.objects.all().order_by('-annouce_time')
     else:
         # 查詢最新10筆資料
         lesson_result = models.Lesson.objects.all().order_by('-annouce_time')[:10]
 
-    context = {'result_table': lesson_result}
+    # 抓取封面資料
+    id_list = [lid["lessonid"] for lid in lesson_result.values("lessonid")]
+    cover = models.Multimedia.objects.filter(lesson_id__in=id_list, cover=1)
+
+    context = {'result_table': lesson_result, "cover": cover}
     return render(request, "common/lesson.html", context)
 
 
@@ -237,6 +242,7 @@ def homework_submit_query(request):
         context["hw_submit_info"] = query
         if len(query) > 0:
             context["query_success"] = True
+            context["hwid"] = homeworkid
         else:
             context["query_success"] = False
     else:
@@ -333,6 +339,14 @@ def join_lesson_list(request):
     # 翻譯資料
 
     return render(request, "lesson/join_lesson_list.html", context)
+
+
+# 訂閱課程清單
+@login_required
+def hallway(request):
+    context = {}
+
+    return render(request, "lesson/class_room/hallway.html", context)
 
 
 # 上課
