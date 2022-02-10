@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'schedule_work',
     'lesson_app',
     'users',
+    'rollcall_app',
 ]
 
 

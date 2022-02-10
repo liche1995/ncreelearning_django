@@ -267,3 +267,13 @@
 127.0.0.1 - - [18/Jan/2022:11:08:57 +0800] "GET /lesson_info?lessonid=66 HTTP/1.1" 200 7630
 127.0.0.1 - - [18/Jan/2022:11:09:00 +0800] "GET / HTTP/1.1" 200 13150
 127.0.0.1 - - [18/Jan/2022:11:09:26 +0800] "GET /lesson?more=1 HTTP/1.1" 200 14775
+127.0.0.1 - - [10/Feb/2022:09:28:28 +0800] "GET / HTTP/1.1" 200 13202
+127.0.0.1 - - [10/Feb/2022:09:28:37 +0800] "GET /static/element/empty_lesson_image.jpg HTTP/1.1" 200 94191
+127.0.0.1 - - [10/Feb/2022:09:28:37 +0800] "GET /fileinfo/lesson_info/66/cover/66229306_p0.png HTTP/1.1" 200 706464
+127.0.0.1 - - [10/Feb/2022:09:28:37 +0800] "GET /static/element/favicon.ico HTTP/1.1" 200 20250062
+127.0.0.1 - - [10/Feb/2022:09:28:42 +0800] "GET /lesson?more=1 HTTP/1.1" 200 15797
+127.0.0.1 - - [10/Feb/2022:09:28:46 +0800] "GET /login_page HTTP/1.1" 200 5918
+127.0.0.1 - - [10/Feb/2022:09:29:45 +0800] "-" 408 -
+127.0.0.1 - - [10/Feb/2022:09:30:00 +0800] "GET /lesson_info?lessonid=67 HTTP/1.1" 200 7630
+127.0.0.1 - - [10/Feb/2022:09:30:01 +0800] "GET /static/element/x-mark.png HTTP/1.1" 200 2180
+127.0.0.1 - - [10/Feb/2022:09:30:01 +0800] "GET /static/element/check-mark.png HTTP/1.1" 200 2798

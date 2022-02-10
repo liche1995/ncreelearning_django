@@ -26,7 +26,7 @@
     <show-object-properties value="true" />
     <loaded-nodes>
       <connection connection-id="afcd0252-d864-419e-8fd5-ae8bad70ca10">
-        <schema name="django_db" object-types="view, table" />
+        <schema name="django_db" object-types="function, view, table, index, procedure, column, dataset trigger, constraint" />
       </connection>
     </loaded-nodes>
   </component>

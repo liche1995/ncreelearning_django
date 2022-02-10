@@ -3379,3 +3379,36 @@ sgi:error] [pid 9564:tid 720] The web is at DEBUG mode\r
 [Tue Jan 18 11:12:13.864445 2022] [mpm_winnt:notice] [pid 2984:tid 728] AH00422: Parent: Received shutdown signal -- Shutting down the server.
 [Tue Jan 18 11:12:15.889117 2022] [mpm_winnt:notice] [pid 9564:tid 720] AH00364: Child: All worker threads have exited.
 [Tue Jan 18 11:12:16.044196 2022] [mpm_winnt:notice] [pid 2984:tid 728] AH00430: Parent: Child process 9564 exited successfully.
+[Thu Feb 10 09:26:45.371051 2022] [mpm_winnt:notice] [pid 11916:tid 740] AH00455: Apache/2.4.52 (Win64) mod_wsgi/4.9.0 Python/3.8 configured -- resuming normal operations
+[Thu Feb 10 09:26:45.371051 2022] [mpm_winnt:notice] [pid 11916:tid 740] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Feb 10 09:26:45.380722 2022] [core:notice] [pid 11916:tid 740] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Feb 10 09:26:45.386856 2022] [mpm_winnt:notice] [pid 11916:tid 740] AH00418: Parent: Created child process 9188
+Apache server shutdown initiated...
+sgi:error] [pid 9188:tid 996] The web is at DEBUG mode\r
+[Thu Feb 10 09:26:51.045139 2022] [mpm_winnt:notice] [pid 9188:tid 996] AH00354: Child: Starting 64 worker threads.
+[Thu Feb 10 09:26:56.835170 2022] [mpm_winnt:notice] [pid 11916:tid 740] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Feb 10 09:26:58.860610 2022] [mpm_winnt:notice] [pid 9188:tid 996] AH00364: Child: All worker threads have exited.
+[Thu Feb 10 09:26:58.964827 2022] [mpm_winnt:notice] [pid 11916:tid 740] AH00430: Parent: Child process 9188 exited successfully.
+Starting the 'Apache2.4' service
+(OS 5)¦s¨ú³Q©Ú¡C  : AH10012: Failed to open the 'Apache2.4' service
+[Thu Feb 10 09:28:18.215871 2022] [mpm_winnt:notice] [pid 21816:tid 740] AH00455: Apache/2.4.52 (Win64) mod_wsgi/4.9.0 Python/3.8 configured -- resuming normal operations
+[Thu Feb 10 09:28:18.215871 2022] [mpm_winnt:notice] [pid 21816:tid 740] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Feb 10 09:28:18.215871 2022] [core:notice] [pid 21816:tid 740] AH00094: Command line: 'httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Feb 10 09:28:18.222839 2022] [mpm_winnt:notice] [pid 21816:tid 740] AH00418: Parent: Created child process 21652
+Apache server shutdown initiated...
+sgi:error] [pid 21652:tid 912] The web is at DEBUG mode\r
+[Thu Feb 10 09:28:19.503043 2022] [mpm_winnt:notice] [pid 21652:tid 912] AH00354: Child: Starting 64 worker threads.
+[Thu Feb 10 09:28:50.883842 2022] [mpm_winnt:notice] [pid 21816:tid 740] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Feb 10 09:29:25.459470 2022] [mpm_winnt:notice] [pid 21652:tid 912] AH00362: Child: Waiting 30 more seconds for 1 worker threads to finish.
+[Thu Feb 10 09:29:40.553664 2022] [core:warn] [pid 10652:tid 740] AH00098: pid file D:/code/djg_test/apache2.4.52_server/Apache24/logs/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+[Thu Feb 10 09:29:40.556660 2022] [mpm_winnt:notice] [pid 10652:tid 740] AH00455: Apache/2.4.52 (Win64) mod_wsgi/4.9.0 Python/3.8 configured -- resuming normal operations
+[Thu Feb 10 09:29:40.556660 2022] [mpm_winnt:notice] [pid 10652:tid 740] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Thu Feb 10 09:29:40.556660 2022] [core:notice] [pid 10652:tid 740] AH00094: Command line: 'D:\\code\\djg_test\\apache2.4.52_server\\Apache24\\bin\\httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Thu Feb 10 09:29:40.563670 2022] [mpm_winnt:notice] [pid 10652:tid 740] AH00418: Parent: Created child process 23476
+Apache server shutdown initiated...
+sgi:error] [pid 23476:tid 812] The web is at DEBUG mode\r
+[Thu Feb 10 09:29:41.929740 2022] [mpm_winnt:notice] [pid 23476:tid 812] AH00354: Child: Starting 64 worker threads.
+[Thu Feb 10 09:29:47.131774 2022] [mpm_winnt:notice] [pid 21652:tid 912] AH00364: Child: All worker threads have exited.
+[Thu Feb 10 09:30:05.637618 2022] [mpm_winnt:notice] [pid 10652:tid 740] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Thu Feb 10 09:30:07.658868 2022] [mpm_winnt:notice] [pid 23476:tid 812] AH00364: Child: All worker threads have exited.
+[Thu Feb 10 09:30:07.842481 2022] [mpm_winnt:notice] [pid 10652:tid 740] AH00430: Parent: Child process 23476 exited successfully.

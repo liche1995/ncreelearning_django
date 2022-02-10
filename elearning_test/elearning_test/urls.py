@@ -23,6 +23,7 @@ from elearning_test import views as main_view
 from lesson_app import views as lesson_view
 from lesson_app import ajax_active as lesson_ajax_active
 from users import views as user_view
+from rollcall_app import views as rollcall_view
 from schedule_work.models import runtask
 
 core = main_view.WebCore
@@ -62,6 +63,7 @@ urlpatterns = [
     path('edit_lesson_list', lesson_view.edit_lesson_list),
     path('edit_lesson', lesson_view.edit_lesson),
     path('homework_mark', lesson_view.homework_mark),
+    path('rollcall', rollcall_view.info),
     path('ajax_active/delete_lesson', lesson_ajax_active.delete_lesson),
     path('ajax_show/lesson_edit_page', lesson_view.lesson_edit_page),
     path('ajax_active/lesson_edit_save', lesson_ajax_active.lesson_edit_save),
@@ -83,7 +85,6 @@ urlpatterns = [
     path('ajax_active/quit_lesson', lesson_ajax_active.quit_lesson),
     path('ajax_active/homework_submit_edit_save', lesson_ajax_active.homework_submit_edit_save),
     path('ajax_active/student_delete_homework', lesson_ajax_active.student_delete_homework),
-    path("hallway", lesson_view.hallway),
 
 
     # 系統管理項目

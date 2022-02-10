@@ -341,14 +341,6 @@ def join_lesson_list(request):
     return render(request, "lesson/join_lesson_list.html", context)
 
 
-# 訂閱課程清單
-@login_required
-def hallway(request):
-    context = {}
-
-    return render(request, "lesson/class_room/hallway.html", context)
-
-
 # 上課
 @login_required
 def class_room(request):
@@ -374,6 +366,8 @@ def class_room(request):
         # 作業資訊抓取
         homework_info = models.Homework.objects.filter(lessontable_id=lesson_table_inner_id)
         context["homework_info"] = homework_info
+
+        # 點名操作
 
     except models.Lesson.DoesNotExist:
         raise Http404
