@@ -78,7 +78,7 @@ li{list-style-type: none;}
         <div class="col-3" id="lesson_nav_bar" style="width:fit-cotent;height:50vh;overflow:auto;">
             <div class="d-flex flex-column p-3 bg-light" style="width:300px">
                 <ul class="nav nav-pills flex-column mb-auto">
-                    {%for item in lesson.all%}
+                    {%for item in lesson%}
                     <li class="nav-item p-1">
                         <button class="btn btn-toggle align-items-center rounded collapsed"
                                 data-bs-toggle="collapse" data-bs-target="#subject_{{item.lessonid}}" aria-expanded="false">

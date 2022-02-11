@@ -1,1 +1,39 @@
 {% extends "MasterPage.html"%}
+
+{%block script%}
+<script>
+    $(document).ready(function(){
+        /* 調閱清單 */
+        $(".lesson_item").click(function(event){
+            $("#subject_" + event.target.value).load("ajax_active/rollcall_query?lessonid=" + event.target.value)
+        ;})
+    ;})
+</script>
+{%endblock%}
+
+{%block content%}
+<section class="py-5 text-center container">
+    <div class="row py-lg-5" >
+        <center>
+            <h1 style="width:fit-content">簽到點名調閱</h1>
+        </center>
+    </div>
+</section>
+<div class="container">
+    <div class="row">
+        <div class="col-3" id="lesson_table">
+            <ul class="list list-group">
+                {%for lesson in lesson_info%}
+                <li class="nav-item">
+                    <button class="btn btn-toggle coallpsed lesson_item" value="{{lesson.lessonid}}" data-bs-target="#subject_{{lesson.lessonid}}" data-bs-toggle="collapse">
+                        {{lesson.name}}
+                    </button>
+                    <div id="subject_{{lesson.lessonid}}" class="collapse">empty</div>
+                </li>
+                {%endfor%}
+            </ul>
+        </div>
+        <div class="col" id="rollcall_table"></div>
+    </div>
+</div>
+{%endblock%}
