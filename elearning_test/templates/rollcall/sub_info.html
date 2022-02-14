@@ -1,5 +1,25 @@
+<script>
+$(document).ready(function(){
+    $(".call_bysub").click(function(event){
+        $("#rollcall_table").load("ajax_show/call_rollcall_table?subject_id=" + event.target.value);
+    ;})
+    $(".call_bylesid").click(function(event){
+        $("#rollcall_table").load("ajax_show/call_rollcall_table?lesson_id=" + event.target.value);
+    ;})
+;})
+
+</script>
+
 <ul class="btn-toggle-nav">
+    {%if subject_lesson.count > 0%}
     {%for sub in subject_lesson%}
-    <li>{{sub.title}}</li>
+    <li>
+        <button class="btn call_bysub" value="{{sub.inner_id}}">{{sub.title}}</button>
+    </li>
     {%endfor%}
+    {%else%}
+    <li>
+        <button class="btn call_bylesid" value="{{lessonid}}">單一課程</button>
+    </li>
+    {%endif%}
 </ul>

@@ -65,6 +65,7 @@ urlpatterns = [
     path('homework_mark', lesson_view.homework_mark),
     path('rollcall', rollcall_view.view_init),
     path('ajax_active/rollcall_query', rollcall_view.lesson_sub_info),
+    path('ajax_show/call_rollcall_table', rollcall_view.call_table),
     path('ajax_active/delete_lesson', lesson_ajax_active.delete_lesson),
     path('ajax_show/lesson_edit_page', lesson_view.lesson_edit_page),
     path('ajax_active/lesson_edit_save', lesson_ajax_active.lesson_edit_save),

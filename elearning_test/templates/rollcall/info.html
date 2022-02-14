@@ -5,7 +5,16 @@
     $(document).ready(function(){
         /* 調閱清單 */
         $(".lesson_item").click(function(event){
-            $("#subject_" + event.target.value).load("ajax_active/rollcall_query?lessonid=" + event.target.value)
+            /* 載入資料並展開 */
+            if($("#subject_" + event.target.value).css("display") == "none"){
+                $("#subject_" + event.target.value).load("ajax_active/rollcall_query?lessonid=" + event.target.value,
+                function(){$("#subject_" + event.target.value).collapse("show");});
+            ;}
+            /* 收回並清理資料 */
+            else{
+                $("#subject_" + event.target.value).collapse("hide");
+                $("#subject_" + event.target.value).empty();
+            ;}
         ;})
     ;})
 </script>
@@ -25,10 +34,10 @@
             <ul class="list list-group">
                 {%for lesson in lesson_info%}
                 <li class="nav-item">
-                    <button class="btn btn-toggle coallpsed lesson_item" value="{{lesson.lessonid}}" data-bs-target="#subject_{{lesson.lessonid}}" data-bs-toggle="collapse">
+                    <button class="btn btn-toggle lesson_item" value="{{lesson.lessonid}}">
                         {{lesson.name}}
                     </button>
-                    <div id="subject_{{lesson.lessonid}}" class="collapse">empty</div>
+                    <div id="subject_{{lesson.lessonid}}" class="collapse"></div>
                 </li>
                 {%endfor%}
             </ul>
