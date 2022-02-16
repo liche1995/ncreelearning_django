@@ -26,16 +26,20 @@ def lesson_sub_info(request):
 
 def call_table(request):
     context = {}
-    subject_id = int(request.GET.get("subject_id", -9))
-    lessonid = int(request.GET.get("lesson_id", -9))
+    subject_id = request.GET.get("subject_id", -9)
 
-    if subject_id != -9:
-        subject_object = lesson_models.LessonTable.objects.get(inner_id=subject_id)
-        lesson_object = subject_object.lesson_id
-    elif lessonid != -9:
-        lesson_object = lesson_models.Lesson.objects.get(lessonid=lessonid)
-    else:
-        lesson_object = lesson_models.Lesson.objects.none()
+    subject_object = lesson_models.LessonTable.objects.get(inner_id=int(subject_id))
 
-    temp = lesson_models.Studentlist.objects.filter(lesson_id=lesson_object)
+    # rollcall = lesson_models.Studentlist.objects.filter(lesson_id=lesson_object)
+    order = "select * from  rollcall as r " \
+            "right outer join lesson_studentlist as s " \
+            "on r.user_id = s.student_id " \
+            "where lessontableid_id = " + subject_id + " or lesson_id_id = " + str(subject_object.lesson_id.lessonid)
+
+    context["rollcall"] = rollcall_models.Rollcall.objects.raw(order)
     return render(request, "rollcall/table.html", context)
+
+
+def submit_rollcall(request):
+    context = {}
+    JsonResponse(context)

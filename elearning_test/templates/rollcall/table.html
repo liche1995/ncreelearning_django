@@ -1,1 +1,68 @@
-123
+<script>
+    $(document).ready(function(){
+        /* 手動點名簽到 */
+        $(".manual_rollcall").click(function(event){
+            if($("#" + event.target.id).prop("checked")){
+                $("#manual_rollcall_time_" + event.target.id).val(Date.now());
+            ;}
+            else{
+                $("#manual_rollcall_time_" + event.target.id).val("");
+            ;}
+        ;});
+        /* 送出資料 */
+        $("#submit").click(function(event){
+            /* 設定外力取消 */
+            event.preventDefault();
+            /* 轉換成表單 */
+            var data = $("#rollcall_table")[0];
+            var form = new FormData(data);
+            $.ajax({
+                url: "/ajax_active/submit_rollcall",
+                type: "POST",
+                data: form,
+                contentType: false, /* 傳送表單需要設置false */
+                cache: false,
+                processData: false,
+                success:function(data){;},
+                error:function(data){;}
+            })
+
+        ;});
+
+
+    ;})
+</script>
+
+<div class="conatiner">
+    <form id="rollcall_table" method="post">
+        {%csrf_token%}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>簽到/點名日期</th>
+                    <th>手動簽到</th>
+                </tr>
+            </thead>
+            <tbody>
+            {%for item in rollcall%}
+                <tr>
+                    <td>{{item.last_name}}{{item.first_name}}</td>
+                    <td>{{item.sign_in_time}}</td>
+                    <td>
+                        <input type="checkbox" class="form-check-input manual_rollcall" id="{{item.student_id}}"
+                            {%if item.inner_id is not None%}
+                               checked
+                            {%endif%}
+                        >
+                        <input type="hidden" value="" id="manual_rollcall_time_{{item.student_id}}">
+                    </td>
+                </tr>
+            {%endfor%}
+            </tbody>
+        </table>
+    </form>
+    <button type="button" class="btn btn-success" id="submit">送出</button>
+</div>
+
+

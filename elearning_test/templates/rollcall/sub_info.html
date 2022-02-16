@@ -11,15 +11,9 @@ $(document).ready(function(){
 </script>
 
 <ul class="btn-toggle-nav">
-    {%if subject_lesson.count > 0%}
     {%for sub in subject_lesson%}
     <li>
         <button class="btn call_bysub" value="{{sub.inner_id}}">{{sub.title}}</button>
     </li>
     {%endfor%}
-    {%else%}
-    <li>
-        <button class="btn call_bylesid" value="{{lessonid}}">單一課程</button>
-    </li>
-    {%endif%}
 </ul>
