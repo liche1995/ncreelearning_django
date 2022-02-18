@@ -11,31 +11,35 @@
         ;});
         /* 送出資料 */
         $("#submit").click(function(event){
-            /* 設定外力取消 */
-            event.preventDefault();
-            /* 轉換成表單 */
-            var data = $("#rollcall_table")[0];
-            var form = new FormData(data);
-            $.ajax({
-                url: "/ajax_active/submit_rollcall",
-                type: "POST",
-                data: form,
-                contentType: false, /* 傳送表單需要設置false */
-                cache: false,
-                processData: false,
-                success:function(data){;},
-                error:function(data){;}
-            })
-
+            /* 再詢問 */
+            var ask = confirm("您即將送出手動簽到資料\n是否繼續?");
+            if(ask){
+                /* 設定外力取消 */
+                event.preventDefault();
+                /* 轉換成表單 */
+                var form = new FormData($("#table_form")[0]);
+                $.ajax({
+                    url: "/ajax_active/submit_rollcall",
+                    type: "POST",
+                    data: form,
+                    contentType: false, /* 傳送表單需要設置false */
+                    cache: false,
+                    processData: false,
+                    success:function(data){
+                    console.log(data["msg"]);
+                    ;},
+                    error:function(data){
+                    ;}
+                })
+            };
         ;});
-
-
     ;})
 </script>
 
 <div class="conatiner">
-    <form id="rollcall_table" method="post">
+    <form id="table_form" method="post">
         {%csrf_token%}
+        <input type="hidden" value="{{subject_id}}" name="subject_id" id="subject_id">
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -50,12 +54,13 @@
                     <td>{{item.last_name}}{{item.first_name}}</td>
                     <td>{{item.sign_in_time}}</td>
                     <td>
-                        <input type="checkbox" class="form-check-input manual_rollcall" id="{{item.student_id}}"
+                        <input type="checkbox" class="form-check-input manual_rollcall" id="{{item.student_id}}" name="{{item.student_id}}"
                             {%if item.inner_id is not None%}
                                checked
                             {%endif%}
                         >
-                        <input type="hidden" value="" id="manual_rollcall_time_{{item.student_id}}">
+                        <input type="hidden" value="{{item.student_id}}" name="student_id">
+                        <input type="hidden" value="" id="manual_rollcall_time_{{item.student_id}}" name="manual_rollcall_time">
                     </td>
                 </tr>
             {%endfor%}

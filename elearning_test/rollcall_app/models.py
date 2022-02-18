@@ -8,6 +8,7 @@ class Rollcall(models.Model):
     lessontableid = models.ForeignKey(LessonTable, on_delete=models.CASCADE, verbose_name='lessontable_id', default=0)
     user_id = models.IntegerField(null=False, verbose_name='user_id')
     sign_in_time = models.DateTimeField(verbose_name='sign_in_time')
+    objects = models.Manager()
 
     class Meta:
         db_table = 'rollcall'
