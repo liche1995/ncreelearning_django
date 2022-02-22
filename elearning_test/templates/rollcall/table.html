@@ -3,10 +3,12 @@
         /* 手動點名簽到 */
         $(".manual_rollcall").click(function(event){
             if($("#" + event.target.id).prop("checked")){
-                $("#manual_rollcall_time_" + event.target.id).val(Date.now());
+                $("#manual_rollcall_time_" + event.target.dataset.studentId).val(Date.now()/1000);
+                $("#manual_enable_" + event.target.dataset.studentId).val("True");
             ;}
             else{
-                $("#manual_rollcall_time_" + event.target.id).val("");
+                $("#manual_rollcall_time_" + event.target.dataset.studentId).val("");
+                $("#manual_enable_" + event.target.dataset.studentId).val("False");
             ;}
         ;});
         /* 送出資料 */
@@ -14,6 +16,8 @@
             /* 再詢問 */
             var ask = confirm("您即將送出手動簽到資料\n是否繼續?");
             if(ask){
+                /**/
+                var subject_id = $("#subject_id").attr("value");
                 /* 設定外力取消 */
                 event.preventDefault();
                 /* 轉換成表單 */
@@ -26,9 +30,12 @@
                     cache: false,
                     processData: false,
                     success:function(data){
-                    console.log(data["msg"]);
+                        alert(data["msg"]);
+                        /* 重載入資料 */
+                        $("#rollcall_table").load("ajax_show/call_rollcall_table?subject_id=" + subject_id);
                     ;},
                     error:function(data){
+                        alert(data["msg"]);
                     ;}
                 })
             };
@@ -54,11 +61,8 @@
                     <td>{{item.last_name}}{{item.first_name}}</td>
                     <td>{{item.sign_in_time}}</td>
                     <td>
-                        <input type="checkbox" class="form-check-input manual_rollcall" id="{{item.student_id}}" name="{{item.student_id}}"
-                            {%if item.inner_id is not None%}
-                               checked
-                            {%endif%}
-                        >
+                        <input type="checkbox" class="form-check-input manual_rollcall" id="manual_enable_{{item.student_id}}" name="manual_enable"
+                               data-student-id="{{item.student_id}}" value="False">
                         <input type="hidden" value="{{item.student_id}}" name="student_id">
                         <input type="hidden" value="" id="manual_rollcall_time_{{item.student_id}}" name="manual_rollcall_time">
                     </td>
