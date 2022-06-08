@@ -3412,3 +3412,22 @@ sgi:error] [pid 23476:tid 812] The web is at DEBUG mode\r
 [Thu Feb 10 09:30:05.637618 2022] [mpm_winnt:notice] [pid 10652:tid 740] AH00422: Parent: Received shutdown signal -- Shutting down the server.
 [Thu Feb 10 09:30:07.658868 2022] [mpm_winnt:notice] [pid 23476:tid 812] AH00364: Child: All worker threads have exited.
 [Thu Feb 10 09:30:07.842481 2022] [mpm_winnt:notice] [pid 10652:tid 740] AH00430: Parent: Child process 23476 exited successfully.
+Starting the 'Apache2.4' service
+(OS 5)存取被拒。  : AH10012: Failed to open the 'Apache2.4' service
+[Tue Apr 26 10:53:08.337431 2022] [mpm_winnt:notice] [pid 21712:tid 752] AH00455: Apache/2.4.52 (Win64) mod_wsgi/4.9.0 Python/3.8 configured -- resuming normal operations
+[Tue Apr 26 10:53:08.338433 2022] [mpm_winnt:notice] [pid 21712:tid 752] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Tue Apr 26 10:53:08.340429 2022] [core:notice] [pid 21712:tid 752] AH00094: Command line: 'httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Tue Apr 26 10:53:08.348279 2022] [mpm_winnt:notice] [pid 21712:tid 752] AH00418: Parent: Created child process 4700
+[Tue Apr 26 10:53:13.927971 2022] [wsgi:error] [pid 4700:tid 1132] The web is at DEBUG mode\r
+[Tue Apr 26 10:53:17.864955 2022] [mpm_winnt:notice] [pid 4700:tid 1132] AH00354: Child: Starting 64 worker threads.
+[Tue Apr 26 10:53:42.249022 2022] [mpm_winnt:notice] [pid 21712:tid 752] AH00428: Parent: child process 4700 exited with status 1 -- Restarting.
+[Tue Apr 26 10:53:42.350908 2022] [mpm_winnt:notice] [pid 21712:tid 752] AH00455: Apache/2.4.52 (Win64) mod_wsgi/4.9.0 Python/3.8 configured -- resuming normal operations
+[Tue Apr 26 10:53:42.350908 2022] [mpm_winnt:notice] [pid 21712:tid 752] AH00456: Apache Lounge VS16 Server built: Dec 17 2021 10:17:38
+[Tue Apr 26 10:53:42.350908 2022] [core:notice] [pid 21712:tid 752] AH00094: Command line: 'httpd.exe -d D:/code/djg_test/apache2.4.52_server/Apache24'
+[Tue Apr 26 10:53:42.368923 2022] [mpm_winnt:notice] [pid 21712:tid 752] AH00418: Parent: Created child process 24528
+[Tue Apr 26 10:53:43.430870 2022] [wsgi:error] [pid 24528:tid 508] The web is at DEBUG mode\r
+[Tue Apr 26 10:53:44.034721 2022] [mpm_winnt:notice] [pid 24528:tid 508] AH00354: Child: Starting 64 worker threads.
+[Tue Apr 26 10:53:45.692021 2022] [mpm_winnt:crit] [pid 24528:tid 508] AH02538: Child: Parent process exited abruptly. Child process is ending
+[Tue Apr 26 10:53:45.692021 2022] [mpm_winnt:warn] [pid 24528:tid 1204] (OS 995)因為執行緒結束或應用程式要求，所以已中止 I/O 操作。  : AH00341: winnt_accept: Asynchronous AcceptEx failed.
+[Tue Apr 26 10:53:45.692021 2022] [mpm_winnt:warn] [pid 24528:tid 1208] (OS 995)因為執行緒結束或應用程式要求，所以已中止 I/O 操作。  : AH00341: winnt_accept: Asynchronous AcceptEx failed.
+[Tue Apr 26 10:53:47.709749 2022] [mpm_winnt:notice] [pid 24528:tid 508] AH00364: Child: All worker threads have exited.
