@@ -8,3 +8,5 @@ Apache mode
 	3.commend "mod_wsgi-express module-config" in virtualenv environment, and paste on Apache's httpd.conf
 	4.setting web document root address in httpd.conf
 	5.excute apache
+reference：https://dotblogs.com.tw/defaultzlq/2017/04/08/151149
+https://pythonmana.com/2022/02/202202280455126938.html
